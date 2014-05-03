@@ -1,0 +1,1406 @@
+[
+    {
+        "ascent": 1239.0,
+        "date": 1333207749000,
+        "descent": 1013.0,
+        "distance": 26960.96282730125,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.905472,
+                    -105.789886
+                ],
+                [
+                    39.868843,
+                    -105.765106
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3311.0,
+        "numPoints": 3299,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1333207749000,
+        "trackId": "5300e4fbaec0858466a69b3f",
+        "trackName": "2012-03-31_19-41-17",
+        "verticalDescent": 1013.0
+    },
+    {
+        "ascent": 963.57568359375,
+        "date": 1387837388357,
+        "descent": 1450.725341796875,
+        "distance": 11401.96052539702,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88693630326529,
+                    -105.7791690063717
+                ],
+                [
+                    39.85859021548168,
+                    -105.7584781945737
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3416.237878799438,
+        "numPoints": 867,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1387837388357,
+        "trackId": "5300e4fbaec0858466a69b40",
+        "trackName": "/Track_2013-12-23 22:23:07 +0000",
+        "verticalDescent": 1450.725341796875
+    },
+    {
+        "ascent": 778.0,
+        "date": 1335611859000,
+        "descent": 0.0,
+        "distance": 12196.32632924094,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.067841,
+                    -106.434318
+                ],
+                [
+                    39.027072,
+                    -106.388504
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3609.0,
+        "numPoints": 3109,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 0,
+        "startTime": 1335611859000,
+        "trackId": "5300e4fdaec0858466a69b41",
+        "trackName": "BigWillis",
+        "verticalDescent": 0.0
+    },
+    {
+        "ascent": 152.0,
+        "date": 1336927563000,
+        "descent": 1236.568359,
+        "distance": 14011.19305298027,
+        "geojson": {
+            "coordinates": [
+                [
+                    40.013886,
+                    -105.391442
+                ],
+                [
+                    39.999049,
+                    -105.310559
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 2799.568359,
+        "numPoints": 659,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 4,
+        "startTime": 1336927563000,
+        "trackId": "5300e4feaec0858466a69b42",
+        "trackName": "Blob_Rock",
+        "verticalDescent": 1236.568359
+    },
+    {
+        "ascent": 146.0,
+        "date": 1335109803000,
+        "descent": 141.0,
+        "distance": 3707.191911829683,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.768612,
+                    -105.224474
+                ],
+                [
+                    39.76549,
+                    -105.212904
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 1953.0,
+        "numPoints": 333,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 1,
+        "startTime": 1335109803000,
+        "trackId": "5300e4feaec0858466a69b43",
+        "trackName": "GoldenClimb_04.22.12",
+        "verticalDescent": 141.0
+    },
+    {
+        "ascent": 365.0,
+        "date": 1336692492000,
+        "descent": 365.0,
+        "distance": 14628.50851173111,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.796602,
+                    -105.230054
+                ],
+                [
+                    39.769862,
+                    -105.195005
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 1988.0,
+        "numPoints": 1203,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1336692492000,
+        "trackId": "5300e4feaec0858466a69b44",
+        "trackName": "NorthTableBike",
+        "verticalDescent": 365.0
+    },
+    {
+        "ascent": 710.0,
+        "date": 1335014897000,
+        "descent": 743.0,
+        "distance": 12453.43221313768,
+        "geojson": {
+            "coordinates": [
+                [
+                    40.317455,
+                    -105.676376
+                ],
+                [
+                    40.308701,
+                    -105.640083
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3625.0,
+        "numPoints": 1109,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 1,
+        "startTime": 1335014897000,
+        "trackId": "5300e4ffaec0858466a69b45",
+        "trackName": "RMNP_04.21.12",
+        "verticalDescent": 743.0
+    },
+    {
+        "ascent": 1239.0,
+        "date": 1333207749000,
+        "descent": 1013.0,
+        "distance": 26960.96282730125,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.905472,
+                    -105.789886
+                ],
+                [
+                    39.868843,
+                    -105.765106
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3311.0,
+        "numPoints": 3299,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1333207749000,
+        "trackId": "5300e501aec0858466a69b46",
+        "trackName": "Track_2012-03-31 19:41:17 +0000",
+        "verticalDescent": 1013.0
+    },
+    {
+        "ascent": 801.65478515625,
+        "date": 1388079374205,
+        "descent": 794.01904296875,
+        "distance": 12700.05829828378,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89113940861066,
+                    -105.7895016298683
+                ],
+                [
+                    39.85876983966665,
+                    -105.7625651267411
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3423.939294815063,
+        "numPoints": 1019,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1388079374205,
+        "trackId": "5300e502aec0858466a69b48",
+        "trackName": "/Track_2013-12-26 17:36:11 +0000",
+        "verticalDescent": 794.01904296875
+    },
+    {
+        "ascent": 135.736083984375,
+        "date": 1388177827019,
+        "descent": 118.938232421875,
+        "distance": 3735.831978256507,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.92061315573744,
+                    -105.8484234754982
+                ],
+                [
+                    39.91452638529233,
+                    -105.8324131184312
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 2842.505701065063,
+        "numPoints": 320,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 1,
+        "startTime": 1388177827019,
+        "trackId": "5300e502aec0858466a69b49",
+        "trackName": "/Track_2013-12-27 20:57:05 +0000",
+        "verticalDescent": 118.938232421875
+    },
+    {
+        "ascent": 64.24755859375,
+        "date": 1388265188261,
+        "descent": 266.815185546875,
+        "distance": 5580.566693633365,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.92058285515748,
+                    -105.8632720110563
+                ],
+                [
+                    39.90762254692606,
+                    -105.8325486538055
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 2910.397790908813,
+        "numPoints": 448,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 2,
+        "startTime": 1388265188261,
+        "trackId": "5300e502aec0858466a69b4a",
+        "trackName": "/Track_2013-12-28 21:13:12 +0000",
+        "verticalDescent": 266.815185546875
+    },
+    {
+        "ascent": 3162.70556640625,
+        "date": 1388334202792,
+        "descent": 3567.714111328125,
+        "distance": 36701.58437519571,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.8911897419392,
+                    -105.7962276880683
+                ],
+                [
+                    39.85335081353769,
+                    -105.7542509493472
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3415.476160049438,
+        "numPoints": 2909,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 8,
+        "startTime": 1388334202792,
+        "trackId": "5300e503aec0858466a69b4b",
+        "trackName": "/Track_2013-12-29 16:23:21 +0000",
+        "verticalDescent": 3567.714111328125
+    },
+    {
+        "ascent": 1019.588134765625,
+        "date": 1388430667037,
+        "descent": 1020.441162109375,
+        "distance": 15861.10711409762,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89109637961496,
+                    -105.7895779890062
+                ],
+                [
+                    39.85872948080288,
+                    -105.7629884966703
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3410.551355361938,
+        "numPoints": 1310,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 4,
+        "startTime": 1388430667037,
+        "trackId": "5300e504aec0858466a69b4c",
+        "trackName": "/Track_2013-12-30 19:10:58 +0000",
+        "verticalDescent": 1020.441162109375
+    },
+    {
+        "ascent": 1493.212890625,
+        "date": 1388523751983,
+        "descent": 1598.677734375,
+        "distance": 17445.92065247513,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89081367016136,
+                    -105.7895432041081
+                ],
+                [
+                    39.85855320937918,
+                    -105.7603628655018
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3411.703454971313,
+        "numPoints": 1382,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 4,
+        "startTime": 1388523751983,
+        "trackId": "5300e505aec0858466a69b4d",
+        "trackName": "/Track_2013-12-31 21:02:27 +0000",
+        "verticalDescent": 1598.677734375
+    },
+    {
+        "ascent": 77.2158203125,
+        "date": 1388872184031,
+        "descent": 665.588623046875,
+        "distance": 9333.335948504466,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.86583397511018,
+                    -105.7766541839631
+                ],
+                [
+                    39.79689136151205,
+                    -105.7500967803718
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3563.969568252563,
+        "numPoints": 687,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 1,
+        "startTime": 1388872184031,
+        "trackId": "5300e505aec0858466a69b4e",
+        "trackName": "/Track_2014-01-04 21:49:43 +0000",
+        "verticalDescent": 665.588623046875
+    },
+    {
+        "ascent": 62.726806640625,
+        "date": 1389459431196,
+        "descent": 0.0,
+        "distance": 312.5313345071183,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88708822526027,
+                    -105.7666699961813
+                ],
+                [
+                    39.885829514861,
+                    -105.7638080791624
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 2834.755456924438,
+        "numPoints": 31,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 0,
+        "startTime": 1389459431196,
+        "trackId": "5300e505aec0858466a69b4f",
+        "trackName": "/Track_2014-01-11 16:57:11 +0000",
+        "verticalDescent": 0.0
+    },
+    {
+        "ascent": 673.31396484375,
+        "date": 1389459431196,
+        "descent": 666.503662109375,
+        "distance": 6782.734725961607,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88794481385489,
+                    -105.7827676088603
+                ],
+                [
+                    39.87534656193095,
+                    -105.7637484000118
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3265.425378799438,
+        "numPoints": 1545,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 2,
+        "startTime": 1389459431196,
+        "trackId": "5300e506aec0858466a69b50",
+        "trackName": "/Track_2014-01-11 17:06:46 +0000",
+        "verticalDescent": 666.503662109375
+    },
+    {
+        "ascent": 502.7470703125,
+        "date": 1389466793710,
+        "descent": 634.826171875,
+        "distance": 10882.61079953595,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.8910823315933,
+                    -105.7844982204081
+                ],
+                [
+                    39.88159904260177,
+                    -105.7647952158989
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3098.025964736938,
+        "numPoints": 835,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 4,
+        "startTime": 1389466793710,
+        "trackId": "5300e506aec0858466a69b51",
+        "trackName": "/Track_2014-01-11 18:58:46 +0000",
+        "verticalDescent": 634.826171875
+    },
+    {
+        "ascent": 1149.41357421875,
+        "date": 1389544779145,
+        "descent": 1153.39013671875,
+        "distance": 16849.43741247568,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89076645582904,
+                    -105.7962438651414
+                ],
+                [
+                    39.86878868661808,
+                    -105.7625047770382
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3289.351160049438,
+        "numPoints": 1331,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1389544779145,
+        "trackId": "5300e507aec0858466a69b52",
+        "trackName": "/Track_2014-01-12 16:38:50 +0000",
+        "verticalDescent": 1153.39013671875
+    },
+    {
+        "ascent": 1933.4326171875,
+        "date": 1390076439571,
+        "descent": 1931.2080078125,
+        "distance": 26203.42383622417,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.889645795375,
+                    -105.7963876147808
+                ],
+                [
+                    39.85411666803049,
+                    -105.754298223281
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3417.947839736938,
+        "numPoints": 2027,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 5,
+        "startTime": 1390076439571,
+        "trackId": "5300e508aec0858466a69b53",
+        "trackName": "/Track_2014-01-18 20:20:39 +0000",
+        "verticalDescent": 1931.2080078125
+    },
+    {
+        "ascent": 1754.941162109375,
+        "date": 1390153838672,
+        "descent": 1819.77099609375,
+        "distance": 28739.60569146529,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89086409349864,
+                    -105.7962723636122
+                ],
+                [
+                    39.85872348774211,
+                    -105.7626432460786
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3417.811609268188,
+        "numPoints": 2281,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 7,
+        "startTime": 1390153838672,
+        "trackId": "5300e509aec0858466a69b54",
+        "trackName": "/Track_2014-01-19 17:50:34 +0000",
+        "verticalDescent": 1819.77099609375
+    },
+    {
+        "ascent": 1653.901611328125,
+        "date": 1390674085584,
+        "descent": 1648.5537109375,
+        "distance": 23405.82008784595,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89078678194423,
+                    -105.7868632157488
+                ],
+                [
+                    39.84401752244666,
+                    -105.7597077359499
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3653.098474502563,
+        "numPoints": 1784,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 5,
+        "startTime": 1390674085584,
+        "trackId": "5300e50aaec0858466a69b55",
+        "trackName": "/Track_2014-01-25 18:21:22 +0000",
+        "verticalDescent": 1648.5537109375
+    },
+    {
+        "ascent": 1312.891357421875,
+        "date": 1391871822101,
+        "descent": 1315.240966796875,
+        "distance": 11229.02826990193,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88797653935839,
+                    -105.779444770986
+                ],
+                [
+                    39.87360481504031,
+                    -105.7631046929964
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3267.564783096313,
+        "numPoints": 859,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1391871822101,
+        "trackId": "5300e50baec0858466a69b58",
+        "trackName": "Track_2014-02-08 15:03:38 +0000.json",
+        "verticalDescent": 1315.240966796875
+    },
+    {
+        "ascent": 1431.42724609375,
+        "date": 1391871822101,
+        "descent": 1322.6181640625,
+        "distance": 12922.72070143426,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89111531063904,
+                    -105.779444770986
+                ],
+                [
+                    39.87360481504031,
+                    -105.7631046929964
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3267.564783096313,
+        "numPoints": 968,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1391871822101,
+        "trackId": "5300e50baec0858466a69b59",
+        "trackName": "Track_2014-02-08 20:51:45 +0000.json",
+        "verticalDescent": 1322.6181640625
+    },
+    {
+        "ascent": 1239.0,
+        "date": 1333207749000,
+        "descent": 1013.0,
+        "distance": 26960.96282730125,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.905472,
+                    -105.789886
+                ],
+                [
+                    39.868843,
+                    -105.765106
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3311.0,
+        "numPoints": 3299,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1333207749000,
+        "trackId": "5300e50daec0858466a69b5b",
+        "trackName": "WP_03.31.12",
+        "verticalDescent": 1013.0
+    },
+    {
+        "ascent": 4249.142578000001,
+        "date": 1385925413000,
+        "descent": 4251.546143,
+        "distance": 47299.51493605824,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.888032,
+                    -105.789748
+                ],
+                [
+                    39.858565,
+                    -105.76022
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3418.702234,
+        "numPoints": 2893,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 11,
+        "startTime": 1385925413000,
+        "trackId": "5300e50faec0858466a69b5c",
+        "trackName": "WinterPark_01-DEC-2013",
+        "verticalDescent": 4251.546143
+    },
+    {
+        "ascent": 143.0,
+        "date": 1337525899000,
+        "descent": 150.0,
+        "distance": 8862.514413389905,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.93944,
+                    -105.778889
+                ],
+                [
+                    39.926617,
+                    -105.762795
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 2824.0,
+        "numPoints": 827,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 2,
+        "startTime": 1337525899000,
+        "trackId": "5300e510aec0858466a69b5d",
+        "trackName": "three-bad-points",
+        "verticalDescent": 150.0
+    },
+    {
+        "ascent": 76.861083984375,
+        "date": 1392576106266,
+        "descent": 72.088134765625,
+        "distance": 4199.120646450343,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.92690138522529,
+                    -105.8427479212227
+                ],
+                [
+                    39.91870271045707,
+                    -105.8277959470691
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 2795.370447158813,
+        "numPoints": 396,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 1,
+        "startTime": 1392576106266,
+        "trackId": "530130d7aec0858466a69b65",
+        "trackName": "Track_2014-02-16 18:41:43 +0000",
+        "verticalDescent": 72.088134765625
+    },
+    {
+        "ascent": 1769.453369140625,
+        "date": 1393699026932,
+        "descent": 1788.849035263062,
+        "distance": 24030.92353347743,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89113789986808,
+                    -105.7897309587391
+                ],
+                [
+                    39.85857433177517,
+                    -105.7603735943378
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3420.18310546875,
+        "numPoints": 1594,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 5,
+        "startTime": 1393699026932,
+        "trackId": "531372f7aec0903dc9c8536a",
+        "trackName": "Track_2014-03-01 18:37:03 +0000",
+        "verticalDescent": 1788.849035263062
+    },
+    {
+        "ascent": 1326.37890625,
+        "date": 1393793086388,
+        "descent": 1844.587890625,
+        "distance": 18852.17787566704,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88688651476045,
+                    -105.7818778698386
+                ],
+                [
+                    39.84390147499725,
+                    -105.7543551364036
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3653.824060440063,
+        "numPoints": 1358,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1393793086388,
+        "trackId": "5313b136aec0903dc9c85388",
+        "trackName": "Track_2014-03-02 20:44:43 +0000",
+        "verticalDescent": 1844.587890625
+    },
+    {
+        "ascent": 1326.37890625,
+        "date": 1393793086388,
+        "descent": 1844.587890625,
+        "distance": 18852.17787566704,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88688651476045,
+                    -105.7818778698386
+                ],
+                [
+                    39.84390147499725,
+                    -105.7543551364036
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3653.824060440063,
+        "numPoints": 1358,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1393793086388,
+        "trackId": "5313dcbbaec0903dc9c8538b",
+        "trackName": "Track_2014-03-02 20:44:43 +0000",
+        "verticalDescent": 1844.587890625
+    },
+    {
+        "ascent": 938.798095703125,
+        "date": 1394396376295,
+        "descent": 940.212646484375,
+        "distance": 15163.70738243866,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.8907312099262,
+                    -105.7868472296832
+                ],
+                [
+                    39.85873409084962,
+                    -105.7626306732239
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3423.484460830688,
+        "numPoints": 1190,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1394396376295,
+        "trackId": "53259808aec0348c1782d08b",
+        "trackName": "Track_2014-03-09 20:19:23 +0000",
+        "verticalDescent": 940.212646484375
+    },
+    {
+        "ascent": 4727.005859375,
+        "date": 1394895553784,
+        "descent": 4728.53076171875,
+        "distance": 58020.18658035538,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89109639920984,
+                    -105.7963834238293
+                ],
+                [
+                    39.85378097280847,
+                    -105.754387909645
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3420.251306533813,
+        "numPoints": 4408,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 13,
+        "startTime": 1394895553784,
+        "trackId": "5325980caec0348c1782d08c",
+        "trackName": "Track_2014-03-15 14:58:54 +0000",
+        "verticalDescent": 4728.53076171875
+    },
+    {
+        "ascent": 1030.697021484375,
+        "date": 1394986429246,
+        "descent": 544.48974609375,
+        "distance": 9001.053114890812,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88816094122816,
+                    -105.7962437813224
+                ],
+                [
+                    39.87053346358228,
+                    -105.7630257961394
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3264.563806533813,
+        "numPoints": 692,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 2,
+        "startTime": 1394986429246,
+        "trackId": "5325dad2aec047961f05734d",
+        "trackName": "Track_2014-03-16 16:13:45 +0000",
+        "verticalDescent": 544.48974609375
+    },
+    {
+        "ascent": 2256.158203125,
+        "date": 1394986429246,
+        "descent": 2135.026453018188,
+        "distance": 25291.42825387061,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88816094122816,
+                    -105.7962437813224
+                ],
+                [
+                    39.84367063738391,
+                    -105.754208201641
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3670.6953125,
+        "numPoints": 1930,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 6,
+        "startTime": 1394986429246,
+        "trackId": "5325f38caec047961f05734e",
+        "trackName": "Track_2014-03-16 16:13:45 +0000",
+        "verticalDescent": 2135.026453018188
+    },
+    {
+        "ascent": 2168.650129318237,
+        "date": 1395971501823,
+        "descent": 1120.002416610718,
+        "distance": 137127.5336509733,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.94667294267249,
+                    -105.8155126032474
+                ],
+                [
+                    39.69543391376705,
+                    -104.8029411491983
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3450.588457107544,
+        "numPoints": 6149,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 4,
+        "startTime": 1395971501823,
+        "trackId": "5334f262aec0d3d59f6a3a36",
+        "trackName": "Track_2014-03-28 01:51:17 +0000",
+        "verticalDescent": 1120.002416610718
+    },
+    {
+        "ascent": 854.429931640625,
+        "date": 1396109979890,
+        "descent": 673.87353515625,
+        "distance": 7671.780086390335,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88790265288193,
+                    -105.7801765949519
+                ],
+                [
+                    39.87359745905521,
+                    -105.7629900892319
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3261.828943252563,
+        "numPoints": 579,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 2,
+        "startTime": 1396109979890,
+        "trackId": "5336f4fcaec0d3d59f6a3a40",
+        "trackName": "Track_2014-03-29 16:19:39 +0000",
+        "verticalDescent": 673.87353515625
+    },
+    {
+        "ascent": 1701.251708984375,
+        "date": 1396115564825,
+        "descent": 1369.474609375,
+        "distance": 13891.42671051687,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88790265288193,
+                    -105.7801765949519
+                ],
+                [
+                    39.85378097280847,
+                    -105.7568583079667
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3420.251306533813,
+        "numPoints": 1054,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 4,
+        "startTime": 1396115564825,
+        "trackId": "53370af4aec0d3d59f6a3a42",
+        "trackName": "Track_2014-03-29 17:52:44 +0000",
+        "verticalDescent": 1369.474609375
+    },
+    {
+        "ascent": 937.084228515625,
+        "date": 1396200336658,
+        "descent": 328.08837890625,
+        "distance": 8807.321532859269,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88638070881356,
+                    -105.7834390536415
+                ],
+                [
+                    39.85865182246999,
+                    -105.7628399693461
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3423.658777236938,
+        "numPoints": 640,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1396200336658,
+        "trackId": "533863c6aec0d3d59f6a3a59",
+        "trackName": "Track_2014-03-30 17:25:35 +0000",
+        "verticalDescent": 328.08837890625
+    },
+    {
+        "ascent": 1043.232666015625,
+        "date": 1396207003564,
+        "descent": 1041.518310546875,
+        "distance": 14571.17539154096,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88964328080405,
+                    -105.7896637358757
+                ],
+                [
+                    39.85871330372976,
+                    -105.7627679687978
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3420.198328018188,
+        "numPoints": 1095,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 3,
+        "startTime": 1396207003564,
+        "trackId": "5338808aaec0d3d59f6a3a5b",
+        "trackName": "Track_2014-03-30 19:15:47 +0000",
+        "verticalDescent": 1041.518310546875
+    },
+    {
+        "ascent": 2248.003173828125,
+        "date": 1396798950877,
+        "descent": 2399.047607421875,
+        "distance": 29601.74598520262,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89105106335123,
+                    -105.7999652625115
+                ],
+                [
+                    39.83670938298091,
+                    -105.7596450393142
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3665.695154190063,
+        "numPoints": 2280,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 6,
+        "startTime": 1396798950877,
+        "trackId": "5341b0baaec0da5518f0a101",
+        "trackName": "Track_2014-04-06 15:42:13 +0000",
+        "verticalDescent": 2399.047607421875
+    },
+    {
+        "ascent": 0.385498046875,
+        "date": 1397255124613,
+        "descent": 0.0,
+        "distance": 266.5735898635853,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.74050001244968,
+                    -105.4150585458664
+                ],
+                [
+                    39.73883415110384,
+                    -105.4139489495246
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 2160.935888290405,
+        "numPoints": 26,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 0,
+        "startTime": 1397255124613,
+        "trackId": "53487648aec08557fd841b66",
+        "trackName": "Track_2014-04-11 22:24:06 +0000",
+        "verticalDescent": 0.0
+    },
+    {
+        "ascent": 314.2890987396238,
+        "date": 1397317413610,
+        "descent": 307.3662109375,
+        "distance": 3466.230194986257,
+        "geojson": {
+            "coordinates": [
+                [
+                    40.00007271770388,
+                    -105.2925707773355
+                ],
+                [
+                    39.99034556098281,
+                    -105.2837168891963
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 2039.368970870972,
+        "numPoints": 271,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 1,
+        "startTime": 1397317413610,
+        "trackId": "53499d9eaec08557fd841b6c",
+        "trackName": "Track_2014-04-12 15:42:32 +0000",
+        "verticalDescent": 307.3662109375
+    },
+    {
+        "ascent": 217.467041015625,
+        "date": 1397862591275,
+        "descent": 215.5625,
+        "distance": 2312.592709743735,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.79843124285321,
+                    -105.7766234223785
+                ],
+                [
+                    39.79703963737916,
+                    -105.7710454334559
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3578.311609268188,
+        "numPoints": 187,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 2,
+        "startTime": 1397862591275,
+        "trackId": "5351f1adaec08f100e9e0591",
+        "trackName": "Track_2014-04-18 23:09:16 +0000",
+        "verticalDescent": 215.5625
+    },
+    {
+        "ascent": 655.714599609375,
+        "date": 1397935867176,
+        "descent": 662.0068359375,
+        "distance": 8274.522294034728,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.89096525760003,
+                    -105.784331336716
+                ],
+                [
+                    39.87359242942446,
+                    -105.7628408075364
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3256.899744033813,
+        "numPoints": 650,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 2,
+        "startTime": 1397935867176,
+        "trackId": "5352e1ceaec08f100e9e059c",
+        "trackName": "Track_2014-04-19 19:30:53 +0000",
+        "verticalDescent": 662.0068359375
+    },
+    {
+        "ascent": 1.006103515625,
+        "date": 1397940097736,
+        "descent": 0.0,
+        "distance": 42.15225472847264,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88623385787,
+                    -105.7633005549254
+                ],
+                [
+                    39.88610750067969,
+                    -105.7630724833401
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 2766.345544815063,
+        "numPoints": 5,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 0,
+        "startTime": 1397940097736,
+        "trackId": "5352e262aec08f100e9e059d",
+        "trackName": "Track_2014-04-19 20:41:23 +0000",
+        "verticalDescent": 0.0
+    },
+    {
+        "ascent": 2835.657958984375,
+        "date": 1398295475766,
+        "descent": 2594.872802734375,
+        "distance": 30584.72879576086,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88797490488727,
+                    -105.789709501067
+                ],
+                [
+                    39.85378097280847,
+                    -105.754387909645
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3420.251306533813,
+        "numPoints": 2249,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 7,
+        "startTime": 1398295475766,
+        "trackId": "53584fe0aec08f100e9e05ab",
+        "trackName": "Track_2014-04-23 23:24:35 +0000",
+        "verticalDescent": 2594.872802734375
+    },
+    {
+        "ascent": 2835.657958984375,
+        "date": 1398295475766,
+        "descent": 2594.872802734375,
+        "distance": 30584.72879576086,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88797490488727,
+                    -105.789709501067
+                ],
+                [
+                    39.85378097280847,
+                    -105.754387909645
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3420.251306533813,
+        "numPoints": 2249,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 7,
+        "startTime": 1398295475766,
+        "trackId": "53584ff3aec08f100e9e05ac",
+        "trackName": "Track_2014-04-23 23:24:35 +0000",
+        "verticalDescent": 2594.872802734375
+    },
+    {
+        "ascent": 1701.251708984375,
+        "date": 1398295864309,
+        "descent": 1288.272216796875,
+        "distance": 13282.01401903504,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88790265288193,
+                    -105.7801765949519
+                ],
+                [
+                    39.85378097280847,
+                    -105.760331684822
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3420.251306533813,
+        "numPoints": 1010,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 4,
+        "startTime": 1398295864309,
+        "trackId": "53585051aec08f100e9e05ad",
+        "trackName": "Track_2014-04-23 23:31:04 +0000",
+        "verticalDescent": 1288.272216796875
+    },
+    {
+        "ascent": 475.006103515625,
+        "date": 1398296380724,
+        "descent": 355.543701171875,
+        "distance": 3832.858845080235,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88788438033302,
+                    -105.7801387925686
+                ],
+                [
+                    39.87359745905521,
+                    -105.7629900892319
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3261.828943252563,
+        "numPoints": 299,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 1,
+        "startTime": 1398296380724,
+        "trackId": "535851e9aec08f100e9e05ae",
+        "trackName": "Track_2014-04-23 23:39:40 +0000",
+        "verticalDescent": 355.543701171875
+    },
+    {
+        "ascent": 3121.971923828125,
+        "date": 1398296596730,
+        "descent": 2772.522705078125,
+        "distance": 33659.92049653181,
+        "geojson": {
+            "coordinates": [
+                [
+                    39.88797490488727,
+                    -105.789709501067
+                ],
+                [
+                    39.85378097280847,
+                    -105.754387909645
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 3420.251306533813,
+        "numPoints": 2491,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 8,
+        "startTime": 1398296596730,
+        "trackId": "53585420aec08f100e9e05af",
+        "trackName": "Track_2014-04-23 23:43:16 +0000",
+        "verticalDescent": 2772.522705078125
+    },
+    {
+        "ascent": 1.497314453125,
+        "date": 1398637998529,
+        "descent": 0.0,
+        "distance": 2495.958431812435,
+        "geojson": {
+            "coordinates": [
+                [
+                    29.98742275874129,
+                    -95.35119598811434
+                ],
+                [
+                    29.97571768241932,
+                    -95.34146013320424
+                ]
+            ],
+            "type": "Polygon"
+        },
+        "maximumAltitude": 30.20562362670898,
+        "numPoints": 163,
+        "ownerId": "5300e4f2aec0858466a69b3e",
+        "runs": 0,
+        "startTime": 1398637998529,
+        "trackId": "535d8d462cdc1f15d83725ae",
+        "trackName": "Track_2014-04-27 22:33:17 +0000",
+        "verticalDescent": 0.0
+    }
+]
