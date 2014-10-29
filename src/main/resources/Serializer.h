@@ -8,17 +8,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Log.h"
 
 @interface Serializer : NSObject
 
 /** Protect us from NSNull!  */
 +(NSString *)safeGetDictString:(NSDictionary *)dict withKey:(NSString *)key;
 
-/** Sets an integer in the dictionary on your behalf.  */
+/** Sets an INT serialization key.  */
 +(void)setDict:(NSMutableDictionary *)dict intValue:(NSInteger)value forKey:(NSString *)key;
 
-/** Sets a double in the dictionary on your behalf.  */
+/** Sets a Double serialization key.  */
 +(void)setDict:(NSMutableDictionary *)dict doubleValue:(double)value forKey:(NSString *)key;
+
+/** Sets a BOOL serialization key.  */
++(void)setDict:(NSMutableDictionary *)dict boolValue:(BOOL)value forKey:(NSString *)key;
+
+/** Sets a NSDate serialization key.  */
++(void)setDict:(NSMutableDictionary *)dict dateValue:(NSDate *)date forKey:(NSString *)key;
 
 /**
  * Helper function that sets a value in the dictionary using the provided object and key.  If the object is nil, nothing happens, you don't blow up.  Yay!
@@ -31,9 +38,19 @@
 +(double)getDoubleFromDict:(NSDictionary *)dict forKey:(NSString *)key orDefaultTo:(double)defaultValue;
 
 /**
- * Reads the specified key from the dictionary and tries to get an Integer from it (assumes it's an NSNumber).  If the object is nil, it will return you back the default vale you've provided.
+ * Reads the specified key from the dictionary and tries to get an Integer from it (assumes it's an NSNumber).  If the object is nil, it will return you back the default value you've provided.
  */
 +(NSInteger)getIntegerFromDict:(NSDictionary *)dict forKey:(NSString *)key orDefaultTo:(NSInteger)defaultValue;
+
+/**
+ * Reads the specified key from the dictionary and tries to get a BOOL from it (assumes it's an NSNumber).  If the object is nil, it will return you back the default value you've provided.
+ */
++(BOOL)getBoolFromDict:(NSDictionary *)dict forKey:(NSString *)key orDefaultTo:(BOOL)defaultValue;
+
+/**
+ * Reads you the specified key from the dictionary and tries to get a NSDate from it (native storage type is NSNumber wrapper of double).  If the object is nil, it will return you back the default value you've provided.
+ */
++(NSDate *)getDateFromDict:(NSDictionary *)dict forKey:(NSString *)key orDefaultTo:(NSDate *)defaultValue;
 
 //
 //
@@ -49,7 +66,7 @@
 +(NSString *)jsonStringFromDictionary:(NSDictionary *)dict;
 
 /**
- * Uses the provided dictionary and serializes that into a JSON string for you.
+ * Uses the provided dictionary and serializes that into a JSON string for you.  
  * NOTE: It will do pretty printing if you ask that of it.
  */
 +(NSString *)jsonStringFromDictionary:(NSDictionary *)dict withPrettyPrint:(BOOL)prettyPrint;
