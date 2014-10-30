@@ -1,8 +1,12 @@
 package com.intere.generator.deserializer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonNode;
@@ -10,21 +14,24 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 
-
-
 public class JsonDeserializer {
-	
-	
 
 	private String json;
 	private JsonNode node;
 	private String name;
+	private NavigableMap<String, List<JsonDeserializer>> subClasses;
 	
-	public JsonDeserializer(String name, String json) throws JsonParseException, IOException {
+	public JsonDeserializer(NavigableMap<String, List<JsonDeserializer>> subClasses, String name, String json) throws JsonParseException, IOException {
+		this.subClasses = subClasses;
 		this.name = name;
 		this.json = json;
 		parseJson();
-	}	
+		buildObjectNodeTree();
+	}
+	
+	public JsonDeserializer(String name, String json) throws JsonParseException, IOException {
+		this(new TreeMap<String, List<JsonDeserializer>>(), name, json);
+	}
 
 	private void parseJson() throws JsonParseException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
@@ -33,9 +40,30 @@ public class JsonDeserializer {
 		node = mapper.readTree(jp);
 	}
 	
+	private void buildObjectNodeTree() throws JsonParseException, IOException {
+		Iterator<String> iter = node.getFieldNames();
+		
+		while(iter.hasNext()) {
+			String name = iter.next();
+			JsonNode childNode = node.get(name);
+			if(childNode.isObject()) {
+				addChildClass(new JsonDeserializer(subClasses, buildSubClassName(name), childNode.toString()));
+			}
+		}
+	}
+	
+	private void addChildClass(JsonDeserializer child) {
+		if(!subClasses.containsKey(name)) {
+			subClasses.put(name, new ArrayList<JsonDeserializer>());
+		}
+		subClasses.get(name).add(child);
+	}
+	
 	/**
 	 * Generates the Header file using the JSON String.
 	 * @return a String.
+	 * @throws IOException 
+	 * @throws JsonParseException 
 	 */
 	public String generateHeaderFile() {
 		StringBuilder builder = new StringBuilder();
@@ -47,39 +75,39 @@ public class JsonDeserializer {
 				"//\n\n" +
 				"#import <Foundation/Foundation.h>\n\n");
 		
+		if(subClasses.containsKey(this.name)) {
+			for(JsonDeserializer des : subClasses.get(this.name)) {
+				builder.append("#import \"" + des.name + ".h\"\n");
+			}
+		}
+		
 		builder.append("@interface " + name + " : NSObject\n\n" +
 				"//\n" +
 				"// Properties\n" + 
 				"//\n\n");
 		
 		// Now - go generate all of the properties:
-		
 		Iterator<String> iter = node.getFieldNames();
 		
 		while(iter.hasNext()) {
-			
 			String name = iter.next();
 			JsonNode childNode = node.get(name);
+			String variableName = cleanVariableName(name);
 			
 			if(childNode.isTextual()) {
-
-				builder.append("@property (nonatomic, strong) NSString *" + name + ";\n");
-
+				builder.append("@property (nonatomic, strong) NSString *" + variableName + ";\n");
 			} else if(childNode.isInt()) {
-				
-				builder.append("@property (nonatomic) NSInteger " + name + ";\n");
-				
+				builder.append("@property (nonatomic) NSInteger " + variableName + ";\n");
 			} else if(childNode.isFloatingPointNumber()) {
-				
-				builder.append("@property (nonatomic) double " + name + ";\n");
-				
-				
+				builder.append("@property (nonatomic) double " + variableName + ";\n");
 			} else if(childNode.isObject()) {
-				
-				System.out.println(name + ": We don't support sub objects (yet) - skipping property...");
-				
+				builder.append("@property (nonatomic, strong) " + buildSubClassName(name) + " *" + variableName + ";\n");
+//				System.out.println(name + ": We don't support sub objects (yet) - skipping property...");
+			} else if(childNode.isArray()) {
+				builder.append("@property (nonatomic, strong) NSMutableArray *" + variableName + ";\n");
+				// TODO - handle array
+				System.out.println(name + ": We don't support arrays yet");
 			} else {
-				
 				System.out.println(name + " is some other type of node...");
 			}
 		}
@@ -87,7 +115,6 @@ public class JsonDeserializer {
 		//
 		// Now generate the serialize / deserialize declarations:
 		//
-		
 		builder.append("\n\n" +
 			"/**\n" + 
 			" * Converts this " + name + " to a NSDictionary object (as a serialization mechanism).\n" + 
@@ -116,10 +143,22 @@ public class JsonDeserializer {
 		
 		builder.append("@end\n\n");
 		
-		
 		return builder.toString();
 	}
 	
+	protected String cleanVariableName(String name) {
+		name = name.replaceAll("^_", "");
+		char[] stringArray = name.trim().toCharArray();
+        stringArray[0] = Character.toLowerCase(stringArray[0]);
+        return new String(stringArray);
+	}
+	
+	protected String buildSubClassName(String theName) {
+		char[] stringArray = theName.trim().toCharArray();
+        stringArray[0] = Character.toUpperCase(stringArray[0]);
+        return name + new String(stringArray);
+	}
+
 	public String generateImplementationFile() {
 		StringBuilder builder = new StringBuilder();
 		
@@ -137,8 +176,7 @@ public class JsonDeserializer {
 		//
 		Iterator<String> iter = node.getFieldNames();
 		
-		while(iter.hasNext()) {
-			
+		while(iter.hasNext()) {			
 			String name = iter.next();
 			String defName = createDefName(name);
 			
@@ -156,29 +194,25 @@ public class JsonDeserializer {
 		//
 		builder.append("-(NSDictionary *)toDictionary {\n" + 
 			"\tNSMutableDictionary *dict = [[NSMutableDictionary alloc]init];\n\n");
-		
 		iter = node.getFieldNames();
 		
 		while(iter.hasNext()) {
-			
 			String name = iter.next();
 			String defName = createDefName(name);
 			JsonNode childNode = node.get(name);
+			String variableName = this.cleanVariableName(name);
 			
 			if(childNode.isTextual()) {
-
-				builder.append("\t[Serializer setDict:dict object:self." + name + " forKey:" + defName + "];\n");
-
+				builder.append("\t[Serializer setDict:dict object:self." + variableName + " forKey:" + defName + "];\n");
 			} else if(childNode.isInt()) {
-				
-				builder.append("\t[Serializer setDict:dict intValue:self." + name + " forKey:" + defName + "];\n");
-				
+				builder.append("\t[Serializer setDict:dict intValue:self." + variableName + " forKey:" + defName + "];\n");	
 			} else if(childNode.isFloatingPointNumber()) {
-				
-				builder.append("\t[Serializer setDict:dict doubleValue:self." + name + " forKey:" + defName + "];\n");
-				
+				builder.append("\t[Serializer setDict:dict doubleValue:self." + variableName + " forKey:" + defName + "];\n");
+			} else if(childNode.isArray()) {
+				// TODO: how do we handle an array?
+			} else if(childNode.isObject()) {
+				// TOOD: how do we handle a sub-object?
 			}
-			
 		}
 		
 		builder.append("\n\treturn dict;\n}\n\n");
@@ -199,31 +233,29 @@ public class JsonDeserializer {
 		//
 		// fromDictionary Method
 		//
-		builder.append("+ (" + name + " *)fromDictionary:(NSDictionary *)dict {\n" + 
+		builder.append("\n\n+ (" + name + " *)fromDictionary:(NSDictionary *)dict {\n" + 
 				"\t" + name + " *object = [[" + name + " alloc]init];\n");
-		
 		iter = node.getFieldNames();
-		
 		while(iter.hasNext()) {
 			
 			String name = iter.next();
 			String defName = createDefName(name);
 			JsonNode childNode = node.get(name);
+			String variableName = this.cleanVariableName(name);
+			String className = this.buildSubClassName(name);
 			
 			if(childNode.isTextual()) {
-
-				builder.append("\tobject." + name + " = [Serializer safeGetDictString:dict withKey:" + defName + "];\n");
-
+				builder.append("\tobject." + variableName + " = [Serializer safeGetDictString:dict withKey:" + defName + "];\n");
 			} else if(childNode.isInt()) {
-				
-				builder.append("\tobject." + name + " = [Serializer getIntegerFromDict:dict forKey:" + defName + " orDefaultTo:0];\n");
-				
+				builder.append("\tobject." + variableName + " = [Serializer getIntegerFromDict:dict forKey:" + defName + " orDefaultTo:0];\n");
 			} else if(childNode.isFloatingPointNumber()) {
-				
-				builder.append("\tobject." + name + " = [Serializer getDoubleFromDict:dict forKey:" + defName + " orDefaultTo:0.0];\n");
-				
+				builder.append("\tobject." + variableName + " = [Serializer getDoubleFromDict:dict forKey:" + defName + " orDefaultTo:0.0];\n");	
+			} else if(childNode.isArray()) {
+				builder.append("\tobject." + variableName + " = [[NSMutableArray alloc]initWithArray:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n");
+				// TODO: how do we handle an array?
+			} else if(childNode.isObject()) {
+				builder.append("\tobject." + variableName + " = [" + className + " fromDictionary:[dict objectForKey:" + defName + "]];\n");
 			}
-			
 		}
 		
 		builder.append("\treturn object;\n}\n\n");
@@ -231,19 +263,17 @@ public class JsonDeserializer {
 		//
 		// fromJSON Method:
 		//
-		
 		builder.append("+(" + name + " *)fromJsonString:(NSString *)json {\n" + 
 				"\tNSDictionary *dict = [Serializer fromJsonString:json];\n" + 
 				"\treturn [" + name + " fromDictionary:dict];\n" + 
 				"}\n\n"); 
-		
-		builder.append("@end\n\n");
-				
-				
-		
+		builder.append("@end\n\n");		
 		return builder.toString();
 	}
-
+	
+	public String getName() {
+		return name;
+	}
 	
 	public String getJson() {
 		return json;
@@ -253,8 +283,11 @@ public class JsonDeserializer {
 		return node;
 	}
 	
+	public NavigableMap<String, List<JsonDeserializer>> getSubClasses() {
+		return subClasses;
+	}
+	
 	protected String createDefName(String name) {
-		
 		StringBuilder serName = new StringBuilder("SERIALIZE_");
 		boolean lastLower = true;
 		for(int i=0; i<name.length(); i++) {

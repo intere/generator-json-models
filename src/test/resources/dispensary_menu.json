@@ -1,0 +1,47 @@
+{
+    "body": "",
+    "body_html": null,
+    "created_at": "2013-08-28T15:49:43.000Z",
+    "dispensary_id": 10263,
+    "featured": false,
+    "id": 3482344,
+    "image": {
+        "large": {
+            "url": "/assets/attachments_missing/menu_items/large_missing.png"
+        },
+        "medium": {
+            "url": "/assets/attachments_missing/menu_items/medium_missing.png"
+        },
+        "medium_oriented": {
+            "url": "/assets/attachments_missing/menu_items/medium_oriented_missing.png"
+        },
+        "medium_wide": {
+            "url": "/assets/attachments_missing/menu_items/medium_wide_missing.png"
+        },
+        "small": {
+            "url": "/assets/attachments_missing/menu_items/small_missing.png"
+        },
+        "small_wide": {
+            "url": "/assets/attachments_missing/menu_items/small_wide_missing.png"
+        },
+        "square": {
+            "url": "/assets/attachments_missing/menu_items/square_missing.png"
+        },
+        "url": "/assets/attachments_missing/menu_items/missing.png"
+    },
+    "menu_item_category_id": 1,
+    "name": "Kosher Kush (DC)",
+    "pictures": [],
+    "price_eighth": 46,
+    "price_gram": 0,
+    "price_half_gram": 0,
+    "price_half_ounce": 162,
+    "price_ounce": 279,
+    "price_quarter": 93,
+    "price_unit": 0,
+    "primary_picture_id": null,
+    "published": true,
+    "slug": "kosher-kush-dc",
+    "strain_id": null,
+    "updated_at": "2014-10-16T18:47:21.000Z"
+}

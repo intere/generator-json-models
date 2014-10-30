@@ -38,6 +38,11 @@
 +(double)getDoubleFromDict:(NSDictionary *)dict forKey:(NSString *)key orDefaultTo:(double)defaultValue;
 
 /**
+ * Reads the specified key from the dictionary and tries to get an NSArray from it (assumes that's the type that it is).  If the object is nil, it will return you back an empty array.
+ */
++(NSArray *)getArrayFromDict:(NSDictionary *)dict forKey:(NSString *)key;
+
+/**
  * Reads the specified key from the dictionary and tries to get an Integer from it (assumes it's an NSNumber).  If the object is nil, it will return you back the default value you've provided.
  */
 +(NSInteger)getIntegerFromDict:(NSDictionary *)dict forKey:(NSString *)key orDefaultTo:(NSInteger)defaultValue;
@@ -66,7 +71,7 @@
 +(NSString *)jsonStringFromDictionary:(NSDictionary *)dict;
 
 /**
- * Uses the provided dictionary and serializes that into a JSON string for you.  
+ * Uses the provided dictionary and serializes that into a JSON string for you.
  * NOTE: It will do pretty printing if you ask that of it.
  */
 +(NSString *)jsonStringFromDictionary:(NSDictionary *)dict withPrettyPrint:(BOOL)prettyPrint;

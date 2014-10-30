@@ -5,3 +5,4 @@ target
 *.h
 *.m
 .DS_Store
+tmp/

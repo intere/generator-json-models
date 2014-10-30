@@ -1,0 +1,71 @@
+{
+    "_id": 10263,
+    "_index": "weedmaps__20141014185633",
+    "_score": null,
+    "_type": "dispensary",
+    "fields": {
+        "address": [
+            "3600 S. Wadsworth Blvd"
+        ],
+        "city": [
+            "Lakewood"
+        ],
+        "feature_level": [
+            "gold"
+        ],
+        "feature_level_raw": [
+            4
+        ],
+        "feature_order": [
+            1
+        ],
+        "has_testing": [
+            false
+        ],
+        "is_delivery": [
+            false
+        ],
+        "latitude": [
+            "39.6495244"
+        ],
+        "license_type": [
+            "medical"
+        ],
+        "longitude": [
+            "-105.0807009"
+        ],
+        "name": [
+            "The Clinic on Wadsworth"
+        ],
+        "package_level": [
+            "listing_plus"
+        ],
+        "package_level_raw": [
+            2
+        ],
+        "phone_number": [
+            "(303) 484-8853"
+        ],
+        "published": [
+            true
+        ],
+        "rating": [
+            "4.49846153846154"
+        ],
+        "reviews_count": [
+            130
+        ],
+        "slug": [
+            "the-clinic-on-wadsworth"
+        ],
+        "state": [
+            "CO"
+        ],
+        "zip_code": [
+            "80235"
+        ]
+    },
+    "sort": [
+        1
+    ]
+}
