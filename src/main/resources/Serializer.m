@@ -67,7 +67,7 @@
     return array;
   }
 
-  return [NSArray alloc]init];
+  return [[NSArray alloc]init];
 }
 
 +(NSInteger)getIntegerFromDict:(NSDictionary *)dict forKey:(NSString *)key orDefaultTo:(NSInteger)defaultValue {
