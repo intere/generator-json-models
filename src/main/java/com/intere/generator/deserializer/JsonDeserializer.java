@@ -47,7 +47,7 @@ public class JsonDeserializer {
 			String name = iter.next();
 			JsonNode childNode = node.get(name);
 			if(childNode.isObject()) {
-				addChildClass(new JsonDeserializer(subClasses, buildSubClassName(name), childNode.toString()));
+				addChildClass(new JsonDeserializer(subClasses, JsonNodeUtils.buildSubClassName(getName(), name), childNode.toString()));
 			}
 		}
 	}
@@ -91,25 +91,7 @@ public class JsonDeserializer {
 		
 		while(iter.hasNext()) {
 			String name = iter.next();
-			JsonNode childNode = node.get(name);
-			String variableName = cleanVariableName(name);
-			
-			if(childNode.isTextual()) {
-				builder.append("@property (nonatomic, strong) NSString *" + variableName + ";\n");
-			} else if(childNode.isInt()) {
-				builder.append("@property (nonatomic) NSInteger " + variableName + ";\n");
-			} else if(childNode.isFloatingPointNumber()) {
-				builder.append("@property (nonatomic) double " + variableName + ";\n");
-			} else if(childNode.isObject()) {
-				builder.append("@property (nonatomic, strong) " + buildSubClassName(name) + " *" + variableName + ";\n");
-//				System.out.println(name + ": We don't support sub objects (yet) - skipping property...");
-			} else if(childNode.isArray()) {
-				builder.append("@property (nonatomic, strong) NSMutableArray *" + variableName + ";\n");
-				// TODO - handle array
-				System.out.println(name + ": We don't support arrays yet");
-			} else {
-				System.out.println(name + " is some other type of node...");
-			}
+			builder.append(JsonNodeUtils.buildPropertyDeclaration(node.get(name), getName(), name));
 		}
 		
 		//
@@ -145,20 +127,11 @@ public class JsonDeserializer {
 		
 		return builder.toString();
 	}
-	
-	protected String cleanVariableName(String name) {
-		name = name.replaceAll("^_", "");
-		char[] stringArray = name.trim().toCharArray();
-        stringArray[0] = Character.toLowerCase(stringArray[0]);
-        return new String(stringArray);
-	}
-	
-	protected String buildSubClassName(String theName) {
-		char[] stringArray = theName.trim().toCharArray();
-        stringArray[0] = Character.toUpperCase(stringArray[0]);
-        return name + new String(stringArray);
-	}
 
+	/**
+	 * Builds the ".m" (Implementation) file.
+	 * @return The file contents.
+	 */
 	public String generateImplementationFile() {
 		StringBuilder builder = new StringBuilder();
 		
@@ -175,12 +148,9 @@ public class JsonDeserializer {
 		// Create the serialization precompiler definitions:
 		//
 		Iterator<String> iter = node.getFieldNames();
-		
 		while(iter.hasNext()) {			
 			String name = iter.next();
-			String defName = createDefName(name);
-			
-			builder.append("#define " + defName + " @\"" + name + "\"\n");			
+			builder.append(JsonNodeUtils.buildPoundDefineSerializerDeclarations(name));
 		}
 		
 		//
@@ -198,29 +168,13 @@ public class JsonDeserializer {
 		
 		while(iter.hasNext()) {
 			String name = iter.next();
-			String defName = createDefName(name);
-			JsonNode childNode = node.get(name);
-			String variableName = this.cleanVariableName(name);
-			
-			if(childNode.isTextual()) {
-				builder.append("\t[Serializer setDict:dict object:self." + variableName + " forKey:" + defName + "];\n");
-			} else if(childNode.isInt()) {
-				builder.append("\t[Serializer setDict:dict intValue:self." + variableName + " forKey:" + defName + "];\n");	
-			} else if(childNode.isFloatingPointNumber()) {
-				builder.append("\t[Serializer setDict:dict doubleValue:self." + variableName + " forKey:" + defName + "];\n");
-			} else if(childNode.isArray()) {
-				// TODO: how do we handle an array?
-			} else if(childNode.isObject()) {
-				// TOOD: how do we handle a sub-object?
-			}
+			builder.append("\t" + JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), name));
 		}
-		
 		builder.append("\n\treturn dict;\n}\n\n");
 		
 		//
 		// To JSON methods:
 		//
-		
 		builder.append("-(NSString *)toJson {\n" + 
 				"\treturn [self toJson:NO];\n" + 
 				"}\n" + 
@@ -237,25 +191,8 @@ public class JsonDeserializer {
 				"\t" + name + " *object = [[" + name + " alloc]init];\n");
 		iter = node.getFieldNames();
 		while(iter.hasNext()) {
-			
 			String name = iter.next();
-			String defName = createDefName(name);
-			JsonNode childNode = node.get(name);
-			String variableName = this.cleanVariableName(name);
-			String className = this.buildSubClassName(name);
-			
-			if(childNode.isTextual()) {
-				builder.append("\tobject." + variableName + " = [Serializer safeGetDictString:dict withKey:" + defName + "];\n");
-			} else if(childNode.isInt()) {
-				builder.append("\tobject." + variableName + " = [Serializer getIntegerFromDict:dict forKey:" + defName + " orDefaultTo:0];\n");
-			} else if(childNode.isFloatingPointNumber()) {
-				builder.append("\tobject." + variableName + " = [Serializer getDoubleFromDict:dict forKey:" + defName + " orDefaultTo:0.0];\n");	
-			} else if(childNode.isArray()) {
-				builder.append("\tobject." + variableName + " = [[NSMutableArray alloc]initWithArray:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n");
-				// TODO: how do we handle an array?
-			} else if(childNode.isObject()) {
-				builder.append("\tobject." + variableName + " = [" + className + " fromDictionary:[dict objectForKey:" + defName + "]];\n");
-			}
+			builder.append("\t" + JsonNodeUtils.buildGenerateDeserializePropertyString(node.get(name), getName(), name));
 		}
 		
 		builder.append("\treturn object;\n}\n\n");
@@ -285,26 +222,6 @@ public class JsonDeserializer {
 	
 	public NavigableMap<String, List<JsonDeserializer>> getSubClasses() {
 		return subClasses;
-	}
-	
-	protected String createDefName(String name) {
-		StringBuilder serName = new StringBuilder("SERIALIZE_");
-		boolean lastLower = true;
-		for(int i=0; i<name.length(); i++) {
-			char c = name.charAt(i);
-			if(c>='A' && c<='Z') {
-				if(lastLower) {
-					serName.append('_');
-				}
-				serName.append(c);
-				lastLower = false;
-			} else {
-				lastLower = true;
-				serName.append(("" + c).toUpperCase());
-			}
-		}
-		
-		return serName.toString();
 	}
 	
 	private String getDate() {
