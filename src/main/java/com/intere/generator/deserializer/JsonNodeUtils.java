@@ -1,5 +1,7 @@
 package com.intere.generator.deserializer;
 
+import java.util.Iterator;
+
 import org.codehaus.jackson.JsonNode;
 
 /**
@@ -27,6 +29,8 @@ public class JsonNodeUtils {
 			return "@property (nonatomic) double " + variableName + ";\n";
 		} else if(node.isObject()) {
 			return "@property (nonatomic, strong) " + subClassName + " *" + variableName + ";\n";
+		} else if(node.isBoolean()) {
+			return "@property (nonatomic) BOOL " + variableName + ";\n";
 		} else if(node.isArray()) {
 			return "@property (nonatomic, strong) NSMutableArray *" + variableName + ";\n";
 		} else {
@@ -41,9 +45,39 @@ public class JsonNodeUtils {
 	}
 	
 	/**
-	 * Builds the Serialization snippet per property.
-	 * @param node
-	 * @param name
+	 * Is the provided node an Array of Objects?
+	 * @param node The node to check.
+	 * @return True if the node is in fact an array of objects.
+	 */
+	public static boolean isArrayOfObjects(JsonNode node) {
+		if(node.isArray()) {
+			for (Iterator<JsonNode> iterator = node.getElements(); iterator.hasNext();) {
+				JsonNode childNode = iterator.next();
+				if(childNode.isObject()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isArrayofArrays(JsonNode node) {
+		if(node.isArray()) {
+			for (Iterator<JsonNode> iterator = node.getElements(); iterator.hasNext();) {
+				JsonNode childNode = iterator.next();
+				if(childNode.isArray()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Builds the Serialization snippet per property.  
+	 * Think: Serializing properties into the dictionary prior to serializing to JSON.
+	 * @param node The node to be serialized.
+	 * @param name The name of the node that is going to be serialized.
 	 * @return
 	 */
 	public static String buildGeneratedSerializePropertyString(JsonNode node, String name) {
@@ -56,10 +90,18 @@ public class JsonNodeUtils {
 			return "[Serializer setDict:dict intValue:self." + variableName + " forKey:" + defName + "];\n";	
 		} else if(node.isFloatingPointNumber()) {
 			return "[Serializer setDict:dict doubleValue:self." + variableName + " forKey:" + defName + "];\n";
+		} else if(node.isBoolean()) {
+			return "[Serializer setDict:dict boolValue:self." + variableName + " forKey:" + defName + "];\n";
 		} else if(node.isArray()) {
-			// TODO: how do we handle an array?
+			if(JsonNodeUtils.isArrayOfObjects(node)) {
+				// TODO: how do we handle an array of objects?
+			} else if(JsonNodeUtils.isArrayofArrays(node)) {
+				// TODO: how do we handle an array of arrays?
+			} else {
+				return "[Serializer setDict:dict object:self." + variableName + " forKey:" + defName + "];\n";
+			}
 		} else if(node.isObject()) {
-			// TOOD: how do we handle a sub-object?
+			return "[Serializer setDict:dict object:[self." + variableName + " toDictionary] forKey:" + defName + "];\n";
 		}
 		return "";
 	}
@@ -81,7 +123,9 @@ public class JsonNodeUtils {
 		} else if(node.isInt()) {
 			return "object." + variableName + " = [Serializer getIntegerFromDict:dict forKey:" + defName + " orDefaultTo:0];\n";
 		} else if(node.isFloatingPointNumber()) {
-			return "object." + variableName + " = [Serializer getDoubleFromDict:dict forKey:" + defName + " orDefaultTo:0.0];\n";	
+			return "object." + variableName + " = [Serializer getDoubleFromDict:dict forKey:" + defName + " orDefaultTo:0.0];\n";
+		} else if(node.isBoolean()) {
+			return "object." + variableName + " = [Serializer getBoolFromDict:dict forKey:" + defName + " orDefaultTo:NO];\n";
 		} else if(node.isArray()) {
 			return "object." + variableName + " = [[NSMutableArray alloc]initWithArray:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
 			// TODO: how do we handle an array?
@@ -100,7 +144,15 @@ public class JsonNodeUtils {
 		name = name.replaceAll("^_", "");						// Remove leading underscore
 		char[] stringArray = name.trim().toCharArray();			
         stringArray[0] = Character.toLowerCase(stringArray[0]);	// ensure the first character is lower case
-        return new String(stringArray);
+        
+        for(int i=1;i<stringArray.length;i++) {
+        	if(stringArray[i] == '_' && stringArray.length>i) {
+        		stringArray[i+1] = Character.toUpperCase(stringArray[i+1]);
+        	}
+        }
+        String result = new String(stringArray).replaceAll("_", "");
+        
+        return result;
 	}
 	
 	/**
@@ -120,8 +172,8 @@ public class JsonNodeUtils {
 	 * @return The <Parent Name><Child Name> class name.
 	 */
 	public static String buildSubClassName(String name, String subClassName) {
-		char[] stringArray = subClassName.trim().toCharArray();
-        stringArray[0] = Character.toUpperCase(stringArray[0]);
+		char[] stringArray = cleanVariableName(subClassName.trim()).toCharArray();
+		stringArray[0] = Character.toUpperCase(stringArray[0]);
         return name + new String(stringArray);
 	}
 	

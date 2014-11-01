@@ -29,7 +29,6 @@ public class JsonDeserializerTest {
 	
 	@Test
 	public void testCleanVariableName() throws Exception {
-		JsonDeserializer des = new JsonDeserializer("Tacky", JSON);
 		assertEquals("Clean Variable Name isn't living up to its name", "id", JsonNodeUtils.cleanVariableName("_id"));
 		assertEquals("Clean Variable Name isn't living up to its name", "gottaJiboo", JsonNodeUtils.cleanVariableName("GottaJiboo"));
 	}

@@ -21,6 +21,14 @@ public class JsonDeserializer {
 	private String name;
 	private NavigableMap<String, List<JsonDeserializer>> subClasses;
 	
+	/**
+	 * Constructor that is used to hierarchically build the class structures for the JSON model.
+	 * @param subClasses A map to keep track of the hierarchical Class Tree Structure (passed throughout all child instances).
+	 * @param name This classes name.
+	 * @param json The Json String to be parsed for this part of the class tree.
+	 * @throws JsonParseException
+	 * @throws IOException
+	 */
 	public JsonDeserializer(NavigableMap<String, List<JsonDeserializer>> subClasses, String name, String json) throws JsonParseException, IOException {
 		this.subClasses = subClasses;
 		this.name = name;
@@ -29,10 +37,22 @@ public class JsonDeserializer {
 		buildObjectNodeTree();
 	}
 	
+	/**
+	 * This is the "User Constructor" if you will.  It is the root class for the JSON
+	 * @param name The root class name.
+	 * @param json The JSON for the root class.
+	 * @throws JsonParseException
+	 * @throws IOException
+	 */
 	public JsonDeserializer(String name, String json) throws JsonParseException, IOException {
 		this(new TreeMap<String, List<JsonDeserializer>>(), name, json);
 	}
 
+	/**
+	 * Parses the JSON to create the {@link JsonNode} that this class instance works with.
+	 * @throws JsonParseException
+	 * @throws IOException
+	 */
 	private void parseJson() throws JsonParseException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonFactory factory = mapper.getJsonFactory(); // since 2.1 use mapper.getFactory() instead
@@ -40,6 +60,11 @@ public class JsonDeserializer {
 		node = mapper.readTree(jp);
 	}
 	
+	/**
+	 * This is what builds out the {@link JsonDeserializer} tree structure, recursively.
+	 * @throws JsonParseException
+	 * @throws IOException
+	 */
 	private void buildObjectNodeTree() throws JsonParseException, IOException {
 		Iterator<String> iter = node.getFieldNames();
 		
@@ -48,6 +73,8 @@ public class JsonDeserializer {
 			JsonNode childNode = node.get(name);
 			if(childNode.isObject()) {
 				addChildClass(new JsonDeserializer(subClasses, JsonNodeUtils.buildSubClassName(getName(), name), childNode.toString()));
+			} else if (JsonNodeUtils.isArrayOfObjects(childNode)) {
+				addChildClass(new JsonDeserializer(subClasses, JsonNodeUtils.buildSubClassName(getName(), name), childNode.iterator().next().toString()));
 			}
 		}
 	}
