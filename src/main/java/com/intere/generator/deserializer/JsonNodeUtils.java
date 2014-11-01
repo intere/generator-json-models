@@ -77,12 +77,13 @@ public class JsonNodeUtils {
 	 * Builds the Serialization snippet per property.  
 	 * Think: Serializing properties into the dictionary prior to serializing to JSON.
 	 * @param node The node to be serialized.
-	 * @param name The name of the node that is going to be serialized.
+	 * @param nodeName The name of the node that is going to be serialized.
 	 * @return
 	 */
-	public static String buildGeneratedSerializePropertyString(JsonNode node, String name) {
-		String variableName = cleanVariableName(name);
-		String  defName = createSerializeConstantSymbolName(name);
+	public static String buildGeneratedSerializePropertyString(JsonNode node, String className, String nodeName) {
+		String variableName = cleanVariableName(nodeName);
+		String defName = createSerializeConstantSymbolName(nodeName);
+		String subClassName = buildSubClassName(className, nodeName);
 		
 		if(node.isTextual()) {
 			return "[Serializer setDict:dict object:self." + variableName + " forKey:" + defName + "];\n";
@@ -94,7 +95,7 @@ public class JsonNodeUtils {
 			return "[Serializer setDict:dict boolValue:self." + variableName + " forKey:" + defName + "];\n";
 		} else if(node.isArray()) {
 			if(JsonNodeUtils.isArrayOfObjects(node)) {
-				// TODO: how do we handle an array of objects?
+				return "[Serializer setDict:dict object:[" + subClassName + " toArrayOfDictionaries:self."+ variableName + "] forKey:" + defName + "];\n"; 
 			} else if(JsonNodeUtils.isArrayofArrays(node)) {
 				// TODO: how do we handle an array of arrays?
 			} else {
@@ -127,8 +128,14 @@ public class JsonNodeUtils {
 		} else if(node.isBoolean()) {
 			return "object." + variableName + " = [Serializer getBoolFromDict:dict forKey:" + defName + " orDefaultTo:NO];\n";
 		} else if(node.isArray()) {
-			return "object." + variableName + " = [[NSMutableArray alloc]initWithArray:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
-			// TODO: how do we handle an array?
+			if(isArrayOfObjects(node)) {
+				return "object." + variableName + " = [" + className + " fromArrayOfDictionaries:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
+				// TODO ??
+			} else if(isArrayofArrays(node)) {
+				// TODO ??
+			} else {
+				return "object." + variableName + " = [[NSMutableArray alloc]initWithArray:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
+			}
 		} else if(node.isObject()) {
 			return "object." + variableName + " = [" + className + " fromDictionary:[dict objectForKey:" + defName + "]];\n";
 		}

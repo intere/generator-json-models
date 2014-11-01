@@ -148,6 +148,15 @@ public class JsonDeserializer {
 			" * Deserializes the provided JSON String into a " + name + ".\n" + 
 			" */\n" + 
 			"+(" + name + " *)fromJsonString:(NSString *)json;\n" + 
+			"/**\n" + 
+			" * \"Deserializes\" the provided array of dictionaries into an array of " + name + ".\n" + 
+			" */\n" + 
+			"+(NSMutableArray *)fromArrayOfDictionaries:(NSArray *)array;\n" + 
+			"\n" + 
+			"/**\n" + 
+			" * \"Serializes\" the provided Array of " + name + " to an Array of Dictionaries.\n" + 
+			" */\n" + 
+			"+(NSMutableArray *)toArrayOfDictionaries:(NSArray *)array;" +
 			"\n\n");
 		
 		builder.append("@end\n\n");
@@ -195,7 +204,7 @@ public class JsonDeserializer {
 		
 		while(iter.hasNext()) {
 			String name = iter.next();
-			builder.append("\t" + JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), name));
+			builder.append("\t" + JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), getName(), name));
 		}
 		builder.append("\n\treturn dict;\n}\n\n");
 		
@@ -230,7 +239,33 @@ public class JsonDeserializer {
 		builder.append("+(" + name + " *)fromJsonString:(NSString *)json {\n" + 
 				"\tNSDictionary *dict = [Serializer fromJsonString:json];\n" + 
 				"\treturn [" + name + " fromDictionary:dict];\n" + 
-				"}\n\n"); 
+				"}\n\n");
+		//
+		// fromArrayOfDictionaries Method:
+		//
+		builder.append("+(NSMutableArray *)fromArrayOfDictionaries:(NSArray *)array {\n" + 
+				"    NSMutableArray *result = [[NSMutableArray alloc]init];\n" + 
+				"    \n" + 
+				"    for (NSDictionary *dict in array) {\n" + 
+				"        [result addObject:[" + name + " fromDictionary:dict]];\n" + 
+				"    }\n" + 
+				"    \n" + 
+				"    return result;\n" + 
+				"}\n\n");
+		
+		//
+		// toArrayOfDictionaries Method:
+		//
+		builder.append("+(NSMutableArray *)toArrayOfDictionaries:(NSArray *)array {\n" + 
+				"    NSMutableArray *result = [[NSMutableArray alloc]init];\n" + 
+				"    \n" + 
+				"    for(" + name + " *object in array) {\n" + 
+				"        [result addObject:[object toDictionary]];\n" + 
+				"    }\n" + 
+				"    \n" + 
+				"    return result;\n" + 
+				"}\n\n");
+		
 		builder.append("@end\n\n");		
 		return builder.toString();
 	}

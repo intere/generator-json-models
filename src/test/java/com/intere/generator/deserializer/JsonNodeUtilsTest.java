@@ -82,7 +82,7 @@ public class JsonNodeUtilsTest {
 	  String name = "prop1";
 	  JsonNode node = parseJsonObject(PROP_ARRAY_OF_OBJECTS);
 	  String result = JsonNodeUtils.buildGenerateDeserializePropertyString(node.get(name), "Foo",  name);
-	  assertEquals("", result);
+	  assertEquals("object.prop1 = [FooProp1 fromArrayOfDictionaries:[Serializer getArrayFromDict:dict forKey:SERIALIZE_PROP1]];\n", result);
 	}
 	
 	@Test
@@ -169,56 +169,63 @@ public class JsonNodeUtilsTest {
 	@Test
 	public void testBuildGeneratedSerializePropertyStringFromArrayOfObjects() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_ARRAY_OF_OBJECTS);
+		String className = "Parent";
 		String name = "prop1";
-		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), name);
+		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), className, name);
 		assertNotEquals("", result);
 	}
 	
 	@Test
 	public void testBuildGeneratedSerializePropertyStringFromArrayOfArrays() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_ARRAY_OF_ARRAYS);
+		String className = "Parent";
 		String name = "prop1";
-		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), name);
+		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), className, name);
 		assertNotEquals("", result);
 	}
 	
 	@Test
 	public void testBuildGeneratedSerializePropertyStringFromArrayOfStrings() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_ARRAY_OF_STRINGS);
+		String className = "Parent";
 		String name = "prop1";
-		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), name);
+		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), className, name);
 		assertEquals("[Serializer setDict:dict object:self.prop1 forKey:SERIALIZE_PROP1];\n", result);
 	}
 	
 	@Test
 	public void testBuildGeneratedSerializePropertyStringFromDecimal() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_DECIMAL);
+		String className = "Parent";
 		String name = "prop1";
-		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), name);
+		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), className, name);
 		assertEquals("[Serializer setDict:dict doubleValue:self.prop1 forKey:SERIALIZE_PROP1];\n", result);
 	}
 	
 	@Test
 	public void testBuildGeneratedSerializePropertyStringFromBool() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_BOOLEAN);
+		String className = "Parent";
 		String name = "prop1";
-		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), name);
+		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), className, name);
 		assertEquals("[Serializer setDict:dict boolValue:self.prop1 forKey:SERIALIZE_PROP1];\n", result);
 	}
 	
 	@Test
 	public void testBuildGeneratedSerializePropertyStringFromInt() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_INT);
+		String className = "Parent";
 		String name = "prop1";
-		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), name);
+		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), className, name);
 		assertEquals("[Serializer setDict:dict intValue:self.prop1 forKey:SERIALIZE_PROP1];\n", result);
 	}
 	
 	@Test
 	public void testBuildGeneratedSerializePropertyStringFromString() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_STRING);
+		String className = "Parent";
 		String name = "prop1";
-		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), name);
+		String result = JsonNodeUtils.buildGeneratedSerializePropertyString(node.get(name), className, name);
 		assertEquals("[Serializer setDict:dict object:self.prop1 forKey:SERIALIZE_PROP1];\n", result);
 	}
 	
