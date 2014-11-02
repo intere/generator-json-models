@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
@@ -15,6 +16,8 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
 import org.apache.commons.io.IOUtils;
 
+import com.intere.generator.builder.CodeBuilder;
+import com.intere.generator.builder.CodeBuilderFactory;
 import com.intere.generator.deserializer.JsonDeserializer;
 
 public class App {
@@ -27,55 +30,21 @@ public class App {
 		CommandLine cmd = cliParser.parse(getOptions(), args);
 		
 		String className = cmd.getOptionValue("cn");
-		String filename = cmd.getOptionValue("f");
+		String jsonFilename = cmd.getOptionValue("f");
 		Language language = Language.fromAbbreviation(cmd.getOptionValue('l', "objc"));
 		
-		if(null == className || null == filename) {
+		if(null == className || null == jsonFilename) {
 			System.out.println("ERROR: Invalid Usage...\n\n");
 			App.usage();
 			return;
 		}
 		
 		System.out.println("Using Language: " + language.getFullName());
-
-		File outputDir = getSourceOutputFolder(cmd.getOptionValue('o', "tmp"));
-
-		FileInputStream fisTargetFile = new FileInputStream(new File(filename));
-		String jsonString = IOUtils.toString(fisTargetFile, "UTF-8");
-		fisTargetFile.close();
-
-		List<JsonDeserializer> allDeserializers = new ArrayList<JsonDeserializer>();
-		JsonDeserializer des = new JsonDeserializer(className, jsonString);
-		allDeserializers.add(des);
-		for(List<JsonDeserializer> list : des.getSubClasses().values()) {
-			allDeserializers.addAll(list);
-		}
-		
-		for(JsonDeserializer generated : allDeserializers) {
-			File headerFile = new File(outputDir, generated.getName() + ".h");
-			FileOutputStream out = new FileOutputStream(headerFile);
-			out.write(generated.generateHeaderFile().getBytes());
-			out.close();
-			System.out.println("Created Header File: " + headerFile.getAbsolutePath());
-			
-			File implementationFile = new File(outputDir, generated.getName() + ".m");
-			out = new FileOutputStream(implementationFile);
-			out.write(generated.generateImplementationFile().getBytes());
-			out.close();
-			System.out.println("Created Implementation File: " + implementationFile.getAbsolutePath());
-		}
-		
-		copySerializerFiles(outputDir);
-	}
-
-	private static void copySerializerFiles(File outputDir) throws IOException {
-		FileOutputStream out = new FileOutputStream(new File(outputDir, "Serializer.h"));
-		InputStream in = App.class.getResourceAsStream("/Serializer.h");
-		IOUtils.copy(in, out);
-		
-		out = new FileOutputStream(new File(outputDir, "Serializer.m"));
-		in = App.class.getResourceAsStream("/Serializer.m");
-		IOUtils.copy(in, out);
+		File outputDirectory = getSourceOutputFolder(cmd.getOptionValue('o', "tmp"));
+		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language);		
+		JsonDeserializer deserializer = CodeBuilderFactory.parseJson(className, jsonFilename);
+		HashMap<File, String> generatedCode = builder.buildSourceFiles(deserializer, outputDirectory);
+		CodeBuilderFactory.generateCode(generatedCode);
 	}
 
 	public static File getSourceOutputFolder(String outputDir) {
