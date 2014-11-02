@@ -1,24 +1,16 @@
 package com.intere.generator;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
-import org.apache.commons.io.IOUtils;
 
 import com.intere.generator.builder.CodeBuilder;
 import com.intere.generator.builder.CodeBuilderFactory;
-import com.intere.generator.deserializer.JsonDeserializer;
 
 public class App {
 	
@@ -41,12 +33,16 @@ public class App {
 		
 		System.out.println("Using Language: " + language.getFullName());
 		File outputDirectory = getSourceOutputFolder(cmd.getOptionValue('o', "tmp"));
-		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language);		
-		JsonDeserializer deserializer = CodeBuilderFactory.parseJson(className, jsonFilename);
-		HashMap<File, String> generatedCode = builder.buildSourceFiles(deserializer, outputDirectory);
+		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language, className, jsonFilename);		
+		HashMap<File, String> generatedCode = builder.buildSourceFiles(outputDirectory);
 		CodeBuilderFactory.generateCode(generatedCode);
 	}
 
+	/**
+	 * Handles the creation of the output directory.
+	 * @param outputDir
+	 * @return
+	 */
 	public static File getSourceOutputFolder(String outputDir) {
 		File testOutputDir = new File(outputDir + File.separatorChar + "src");
 		if(!testOutputDir.exists()) {

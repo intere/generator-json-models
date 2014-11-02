@@ -9,6 +9,10 @@ import java.util.HashMap;
 import org.apache.commons.io.IOUtils;
 
 import com.intere.generator.Language;
+import com.intere.generator.builder.generation.CodeGeneration;
+import com.intere.generator.builder.generation.ObjectiveCGeneration;
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+import com.intere.generator.builder.interpreter.ObjectiveCInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
 
 /**
@@ -16,23 +20,7 @@ import com.intere.generator.deserializer.JsonDeserializer;
  * @author einternicola
  *
  */
-public class CodeBuilderFactory {	
-	/**
-	 * Gets you the {@link JsonDeserializer} as a prerequisite to doing the code building.
-	 * @param className
-	 * @param jsonFile
-	 * @return
-	 * @throws IOException
-	 */
-	public static JsonDeserializer parseJson(String className, String jsonFile) throws IOException {
-		FileInputStream fisTargetFile = new FileInputStream(new File(jsonFile));
-		String jsonString = IOUtils.toString(fisTargetFile, "UTF-8");
-		fisTargetFile.close();
-
-		JsonDeserializer deserializer = new JsonDeserializer(className, jsonString);
-		
-		return deserializer;
-	}
+public class CodeBuilderFactory {
 	
 	/**
 	 * Performs the actual code generation.
@@ -48,11 +36,11 @@ public class CodeBuilderFactory {
 		}
 	}
 	
-	public static CodeBuilder getCodeBuilderFactory(Language lang) {
+	public static CodeBuilder getCodeBuilderFactory(Language lang, String className, String jsonFilename) throws IOException {
 		if(null != lang) {
 			switch(lang) {
 			case ObjC: {
-				return new ObjectiveCCodeBuilder();
+				return new ObjectiveCCodeBuilder(className, jsonFilename);
 			}
 			case Java: {
 				// TODO
