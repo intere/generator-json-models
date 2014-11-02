@@ -2,7 +2,6 @@ package com.intere.generator.deserializer;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NavigableMap;
@@ -16,12 +15,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 
-
 public class JsonDeserializer {
 
 	private String json;
 	private JsonNode node;
 	private String name;
+	private String filename;
 	private NavigableMap<String, List<JsonDeserializer>> subClasses;
 	private JsonLanguageInterpreter interpreter;
 	
@@ -38,6 +37,7 @@ public class JsonDeserializer {
 		this.interpreter = interpreter;
 		this.name = name;
 		this.json = json;
+		this.filename = interpreter.buildFilenameFromClassname(name);
 		parseJson();
 		buildObjectNodeTree();
 	}
@@ -92,6 +92,9 @@ public class JsonDeserializer {
 		subClasses.get(name).add(child);
 	}
 	
+	public String getFilename() {
+		return filename;
+	}
 	
 	public String getName() {
 		return name;
@@ -107,9 +110,5 @@ public class JsonDeserializer {
 	
 	public NavigableMap<String, List<JsonDeserializer>> getSubClasses() {
 		return subClasses;
-	}
-	
-	private String getDate() {
-		return new Date().toString();
 	}
 }

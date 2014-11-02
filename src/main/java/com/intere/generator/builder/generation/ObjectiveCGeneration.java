@@ -314,8 +314,4 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		}
 		return "";
 	}
-
-	private String getDate() {
-		return new Date().toString();
-	}
 }

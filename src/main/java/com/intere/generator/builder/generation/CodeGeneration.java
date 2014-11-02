@@ -3,6 +3,7 @@ package com.intere.generator.builder.generation;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
 
@@ -47,4 +48,9 @@ public abstract class CodeGeneration {
 	 * @return
 	 */
 	public abstract JsonLanguageInterpreter getInterpreter();
+	
+	
+	protected String getDate() {
+		return new Date().toString();
+	}
 }

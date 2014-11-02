@@ -46,10 +46,10 @@ public class ObjectiveCCodeBuilder implements CodeBuilder {
 		}
 		
 		for(JsonDeserializer generated : allDeserializers) {
-			File headerFile = new File(parentDirectory, generated.getName() + ".h");
+			File headerFile = new File(parentDirectory, generated.getFilename() + ".h");
 			sourceCode.put(headerFile, generation.generateHeaderFile(generated));
 			
-			File implementationFile = new File(parentDirectory, generated.getName() + ".m");
+			File implementationFile = new File(parentDirectory, generated.getFilename() + ".m");
 			sourceCode.put(implementationFile, generation.generateImplementationFile(generated));
 			
 		}

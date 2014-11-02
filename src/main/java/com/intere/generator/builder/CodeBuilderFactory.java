@@ -1,19 +1,11 @@
 package com.intere.generator.builder;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
-import org.apache.commons.io.IOUtils;
-
 import com.intere.generator.Language;
-import com.intere.generator.builder.generation.CodeGeneration;
-import com.intere.generator.builder.generation.ObjectiveCGeneration;
-import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.ObjectiveCInterpreter;
-import com.intere.generator.deserializer.JsonDeserializer;
 
 /**
  * Factory creator for the appropriate type of code builder.
@@ -46,7 +38,7 @@ public class CodeBuilderFactory {
 				// TODO
 			}
 			case Ruby: {
-				// TODO
+				return new RubyCodeBuilder(className, jsonFilename);
 			}
 			}
 		}
