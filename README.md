@@ -1,7 +1,8 @@
-generator-objective-c
+generator-json-models
 =====================
-Objective-C Class creator (via JSON).  Essentially it takes JSON and a Class Name, and generates .h and .m files that will have properties and serialization/deserialization methods implemented.
-This is currently a *very* rudimentary tool.  It does not dive any deeper than top level (primitive) attributes.
+Multi-Language (currently Objective-C and Ruby, but more languages to come) JSON Model Class Creator.
+
+For Objective-C: Essentially it takes JSON and a Class Name, and generates .h and .m files that will have properties and serialization/deserialization methods implemented.
 
 ##Background
 I was / am in the process of building a full stack application that has an Objective-C
@@ -10,33 +11,41 @@ classes in Objective-C (not difficult, just tedious).  I wanted to build a tool 
 would save me a lot of time by reading a JSON file and generating an Objective-C
 class that was capable of the following:
 1.  Representing that JSON as a model
-2.  Deserializing that JSON into the model
+2.  Deserializing that JSON into the model (including collections)
 3.  Serializing the Model into the same style JSON.
+4.  Support nested classes (not a feature of ObjC, so I've created a class naming mechanism to work around this)
 
-
-##Notes
-You'll want to make use of the following to files (add them to your Objective-C project)
-* Serializer.h
-* Serializer.m
-
-These 2 files just have some utility methods used by the generated code.
 
 ##Usage
+App Usage Information:
+```bash
+usage: code-generator
+ -cn,--className <arg>        What is the name for the base class?  You
+                              must provide this
+ -f,--input-file <arg>        The Input (JSON) File to read to generate
+                              the class
+ -l,--language <arg>          What Language you would like to use, can be
+                              one of: objc (Objective-C), ruby, java
+ -o,--output-location <arg>   Where do you want the generated code to go?
+```
 
-    # First you need to compile the code and ensure it's up to date:
-    $ mvn clean install
+Building / Running
+```bash
+# First you need to compile the code and ensure it's up to date:
+mvn clean install
 
-    # Now you can run it - there are 3 sample JSON files provided to demonstrate
-    # the capabilities / limitations of the project:
+# Now you can run it - there are 3 sample JSON files provided to demonstrate
+# the capabilities / limitations of the project:
 
-    # The first - is a "user"
-    $ mvn exec:java -Dexec.args="User src/test/resources/user.json"
-    
-    # The second is an array - this demonstrates (current) limitations of the project
-    $ mvn exec:java -Dexec.args="TrackList src/test/resources/track-list.json"
+# The first - is a "user"
+mvn exec:java -Dexec.args="--className User --input-file src/test/resources/user.json"
 
-    # The third is a track
-    $ mvn exec:java -Dexec.args="Track src/test/resources/track.json"
+# The second is an array - this demonstrates (current) limitations of the project
+mvn exec:java -Dexec.args="-cn TrackList -f src/test/resources/track-list.json"
+
+# The third is a track
+mvn exec:java -Dexec.args="-cn Track -f src/test/resources/track.json"
+```
 
 ##License
 This tool is Licensed under the LGPL: http://www.gnu.org/licenses/lgpl-3.0.html#content
@@ -44,9 +53,8 @@ This tool is Licensed under the LGPL: http://www.gnu.org/licenses/lgpl-3.0.html#
 My intent is to allow you to use this tool for personal and/or commercial purposes.
 
 ##Limitations
-* Currently this project doesn't handle nested object structures
-* Currently this project doesn't handle top level arrays
+* Currently this project doesn't handle arrays of arrays
 
 ##Why Java?
-    Q: Why would you ever create a tool that generates Objective-C code using Java?
+    Q: Why would you ever create a tool that generates Objective-C and Ruby code using Java?
     A: My primary competency is in Java, and it was quick and dirty to do.

@@ -64,6 +64,9 @@ public class JsonDeserializer {
 		JsonFactory factory = mapper.getJsonFactory(); // since 2.1 use mapper.getFactory() instead
 		JsonParser jp = factory.createJsonParser(json);
 		node = mapper.readTree(jp);
+		if(node.isArray()) {
+			node = node.get(0);
+		}
 	}
 	
 	/**
