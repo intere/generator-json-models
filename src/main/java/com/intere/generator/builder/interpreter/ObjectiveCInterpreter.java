@@ -67,5 +67,9 @@ public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
 		return serName.toString();
 	}
 
+	public String buildFilenameFromClassname(String className) {
+		return className;
+	}
+
 
 }

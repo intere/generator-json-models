@@ -25,4 +25,12 @@ public interface JsonLanguageInterpreter {
 	 * @return
 	 */
 	String createSerializeConstantSymbolName(String propertyName);
+	
+	/**
+	 * What should the filename (no extensions) be (using the provided class name).
+	 * @param className The className.
+	 * @return The base filename (no extension) based on the provide class name.
+	 */
+	String buildFilenameFromClassname(String className);
+	
 }
