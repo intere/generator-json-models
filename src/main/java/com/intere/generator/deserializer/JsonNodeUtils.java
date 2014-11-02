@@ -130,7 +130,6 @@ public class JsonNodeUtils {
 		} else if(node.isArray()) {
 			if(isArrayOfObjects(node)) {
 				return "object." + variableName + " = [" + className + " fromArrayOfDictionaries:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
-				// TODO ??
 			} else if(isArrayofArrays(node)) {
 				// TODO ??
 			} else {
