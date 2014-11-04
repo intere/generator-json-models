@@ -33,4 +33,11 @@ public interface JsonLanguageInterpreter {
 	 */
 	String buildFilenameFromClassname(String className);
 	
+	/**
+	 * This is very Java-Centric, builds the "getter/setter" name.
+	 * @param propertyName
+	 * @return
+	 */
+	String buildGetterAndSetterName(String propertyName);
+	
 }

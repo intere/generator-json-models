@@ -11,7 +11,6 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 
 import com.intere.generator.App;
-import com.intere.generator.builder.generation.CodeGeneration;
 import com.intere.generator.builder.generation.ObjectiveCGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 
@@ -19,21 +18,10 @@ import com.intere.generator.deserializer.JsonDeserializer;
  * Code Builder for Objective-C.
  * @author einternicola
  */
-public class ObjectiveCCodeBuilder implements CodeBuilder {
-	private CodeGeneration generation;
-	protected String className;
-	protected String jsonFilename;
-	private JsonDeserializer deserializer;
-	
-	public JsonDeserializer getDeserializer() {
-		return deserializer;
-	}
+public class ObjectiveCCodeBuilder extends CodeBuilder {
 	
 	public ObjectiveCCodeBuilder(String className, String jsonFilename) throws IOException {
-		this.className = className;
-		this.jsonFilename = jsonFilename;
-		this.generation = new ObjectiveCGeneration();
-		this.deserializer = generation.parseJson(className, jsonFilename);				
+		super(null, className, jsonFilename, new ObjectiveCGeneration());
 	}
 
 	public HashMap<File, String> buildSourceFiles(File parentDirectory) throws IOException {

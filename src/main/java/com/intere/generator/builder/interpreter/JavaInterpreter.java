@@ -1,7 +1,6 @@
 package com.intere.generator.builder.interpreter;
 
-public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
-
+public class JavaInterpreter implements JsonLanguageInterpreter {
 	/**
 	 * Cleans a Variable Name (ensures there is no leading "_" and that the first character is lower case).
 	 * @param propertyName The variable name to clean up to ensure it's a valid variable name.
@@ -45,26 +44,10 @@ public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
 	}
 	
 	/**
-	 * 
+	 * Not used.
 	 */
 	public String createSerializeConstantSymbolName(String propertyName) {
-		StringBuilder serName = new StringBuilder("SERIALIZE_");
-		boolean lastLower = true;
-		for(int i=0; i<propertyName.length(); i++) {
-			char c = propertyName.charAt(i);
-			if(c>='A' && c<='Z') {
-				if(lastLower) {
-					serName.append('_');
-				}
-				serName.append(c);
-				lastLower = false;
-			} else {
-				lastLower = true;
-				serName.append(("" + c).toUpperCase());
-			}
-		}
-		
-		return serName.toString();
+		return "";
 	}
 
 	public String buildFilenameFromClassname(String className) {
@@ -72,6 +55,6 @@ public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
 	}
 
 	public String buildGetterAndSetterName(String propertyName) {
-		return null;
+		return buildSubClassName("", propertyName);
 	}
 }

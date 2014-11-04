@@ -51,4 +51,8 @@ public class RubyInterpreter implements JsonLanguageInterpreter {
 		return cleanVariableName(className);
 	}
 
+	public String buildGetterAndSetterName(String propertyName) {
+		return null;
+	}
+
 }

@@ -23,6 +23,7 @@ public class App {
 		
 		String className = cmd.getOptionValue("cn");
 		String jsonFilename = cmd.getOptionValue("f");
+		String namespace = cmd.getOptionValue("ns", "com.json.generated");
 		Language language = Language.fromAbbreviation(cmd.getOptionValue('l', "objc"));
 		
 		if(null == className || null == jsonFilename) {
@@ -33,7 +34,7 @@ public class App {
 		
 		System.out.println("Using Language: " + language.getFullName());
 		File outputDirectory = getSourceOutputFolder(cmd.getOptionValue('o', "tmp"));
-		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language, className, jsonFilename);		
+		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language, namespace, className, jsonFilename);		
 		HashMap<File, String> generatedCode = builder.buildSourceFiles(outputDirectory);
 		CodeBuilderFactory.generateCode(generatedCode);
 	}
@@ -63,6 +64,7 @@ public class App {
 		options.addOption("cn", "className", true, "What is the name for the base class?  You must provide this");
 		options.addOption("f", "input-file", true, "The Input (JSON) File to read to generate the class");
 		options.addOption("o", "output-location", true, "Where do you want the generated code to go?");
+		options.addOption("ns", "namespace", true, "The Namespace (ruby) or Package (java) that the generated code should live in");
 		
 		return options;
 	}

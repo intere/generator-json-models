@@ -21,6 +21,7 @@ public class JsonDeserializer {
 	private JsonNode node;
 	private String name;
 	private String filename;
+	private String namespace;
 	private NavigableMap<String, List<JsonDeserializer>> subClasses;
 	private JsonLanguageInterpreter interpreter;
 	
@@ -32,9 +33,11 @@ public class JsonDeserializer {
 	 * @throws JsonParseException
 	 * @throws IOException
 	 */
-	public JsonDeserializer(NavigableMap<String, List<JsonDeserializer>> subClasses, JsonLanguageInterpreter interpreter, String name, String json) throws JsonParseException, IOException {
+	public JsonDeserializer(NavigableMap<String, List<JsonDeserializer>> subClasses, JsonLanguageInterpreter interpreter, 
+			String namespace, String name, String json) throws JsonParseException, IOException {
 		this.subClasses = subClasses;
 		this.interpreter = interpreter;
+		this.namespace = namespace;
 		this.name = name;
 		this.json = json;
 		this.filename = interpreter.buildFilenameFromClassname(name);
@@ -50,8 +53,8 @@ public class JsonDeserializer {
 	 * @throws JsonParseException
 	 * @throws IOException
 	 */
-	public JsonDeserializer(JsonLanguageInterpreter interpreter, String name, String json) throws JsonParseException, IOException {
-		this(new TreeMap<String, List<JsonDeserializer>>(), interpreter, name, json);
+	public JsonDeserializer(JsonLanguageInterpreter interpreter, String namespace, String name, String json) throws JsonParseException, IOException {
+		this(new TreeMap<String, List<JsonDeserializer>>(), interpreter, namespace, name, json);
 	}
 
 	/**
@@ -81,9 +84,9 @@ public class JsonDeserializer {
 			String name = iter.next();
 			JsonNode childNode = node.get(name);
 			if(childNode.isObject()) {
-				addChildClass(new JsonDeserializer(subClasses, interpreter, interpreter.buildSubClassName(getName(), name), childNode.toString()));
+				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.toString()));
 			} else if (JsonNodeUtils.isArrayOfObjects(childNode)) {
-				addChildClass(new JsonDeserializer(subClasses, interpreter, interpreter.buildSubClassName(getName(), name), childNode.iterator().next().toString()));
+				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.iterator().next().toString()));
 			}
 		}
 	}
@@ -109,6 +112,14 @@ public class JsonDeserializer {
 	
 	public JsonNode getNode() {
 		return node;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getNamespace() {
+		return namespace;
 	}
 	
 	public NavigableMap<String, List<JsonDeserializer>> getSubClasses() {

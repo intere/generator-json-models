@@ -1,6 +1,6 @@
 generator-json-models
 =====================
-Multi-Language (currently Objective-C and Ruby, but more languages to come) JSON Model Class Creator.
+Multi-Language (currently Objective-C, Ruby and Java) JSON Model Class Creator.
 
 For Objective-C: Essentially it takes JSON and a Class Name, and generates .h and .m files that will have properties and serialization/deserialization methods implemented.
 
@@ -18,7 +18,7 @@ class that was capable of the following:
 
 ##Usage
 App Usage Information:
-```bash
+```
 usage: code-generator
  -cn,--className <arg>        What is the name for the base class?  You
                               must provide this
@@ -26,6 +26,8 @@ usage: code-generator
                               the class
  -l,--language <arg>          What Language you would like to use, can be
                               one of: objc (Objective-C), ruby, java
+ -ns,--namespace <arg>        The Namespace (ruby) or Package (java) that
+                              the generated code should live in
  -o,--output-location <arg>   Where do you want the generated code to go?
 ```
 

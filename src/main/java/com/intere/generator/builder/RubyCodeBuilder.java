@@ -11,22 +11,18 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 
 import com.intere.generator.App;
-import com.intere.generator.builder.generation.CodeGeneration;
 import com.intere.generator.builder.generation.RubyGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 
-public class RubyCodeBuilder implements CodeBuilder {
-	
-	private CodeGeneration generation;
-	protected String className;
-	protected String jsonFilename;
-	private JsonDeserializer deserializer;
-	
-	public RubyCodeBuilder(String className, String jsonFilename) throws IOException {
-		this.className = className;
-		this.jsonFilename = jsonFilename;
-		this.generation = new RubyGeneration();
-		this.deserializer = generation.parseJson(className, jsonFilename);				
+public class RubyCodeBuilder extends CodeBuilder {
+	/**
+	 * Constructor that sets up the code builder for ruby.
+	 * @param className
+	 * @param jsonFilename
+	 * @throws IOException
+	 */
+	public RubyCodeBuilder(String namespace, String className, String jsonFilename) throws IOException {
+		super(namespace, className, jsonFilename, new RubyGeneration());		
 	}
 
 	public HashMap<File, String> buildSourceFiles(File parentDirectory) throws IOException {
@@ -53,9 +49,5 @@ public class RubyCodeBuilder implements CodeBuilder {
 		IOUtils.copy(in, out);
 		
 		return new String(out.toByteArray());
-	}
-
-	public JsonDeserializer getDeserializer() {
-		return deserializer;
 	}
 }

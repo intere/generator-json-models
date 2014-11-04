@@ -28,17 +28,17 @@ public class CodeBuilderFactory {
 		}
 	}
 	
-	public static CodeBuilder getCodeBuilderFactory(Language lang, String className, String jsonFilename) throws IOException {
+	public static CodeBuilder getCodeBuilderFactory(Language lang, String namespace, String className, String jsonFilename) throws IOException {
 		if(null != lang) {
 			switch(lang) {
 			case ObjC: {
 				return new ObjectiveCCodeBuilder(className, jsonFilename);
 			}
 			case Java: {
-				// TODO
+				return new JavaCodeBuilder(namespace, className, jsonFilename);
 			}
 			case Ruby: {
-				return new RubyCodeBuilder(className, jsonFilename);
+				return new RubyCodeBuilder(namespace, className, jsonFilename);
 			}
 			}
 		}

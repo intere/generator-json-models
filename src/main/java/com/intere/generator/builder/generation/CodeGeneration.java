@@ -19,12 +19,12 @@ public abstract class CodeGeneration {
 	 * @return
 	 * @throws IOException
 	 */
-	public JsonDeserializer parseJson(String className, String jsonFile) throws IOException {
+	public JsonDeserializer parseJson(String namespace, String className, String jsonFile) throws IOException {
 		FileInputStream fisTargetFile = new FileInputStream(new File(jsonFile));
 		String jsonString = IOUtils.toString(fisTargetFile, "UTF-8");
 		fisTargetFile.close();
 
-		JsonDeserializer deserializer = new JsonDeserializer(getInterpreter(), className, jsonString);
+		JsonDeserializer deserializer = new JsonDeserializer(getInterpreter(), namespace, className, jsonString);
 		
 		return deserializer;
 	}
