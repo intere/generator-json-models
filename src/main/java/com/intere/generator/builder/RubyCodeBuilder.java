@@ -1,16 +1,11 @@
 package com.intere.generator.builder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-
-import com.intere.generator.App;
 import com.intere.generator.builder.generation.RubyGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 
@@ -44,10 +39,6 @@ public class RubyCodeBuilder extends CodeBuilder {
 	}
 	
 	private String readJsonModelFile() throws IOException {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		InputStream in = App.class.getResourceAsStream("/json_model.rb");
-		IOUtils.copy(in, out);
-		
-		return new String(out.toByteArray());
+		return readResourceAndReplaceHeaders("/json_model.rb");
 	}
 }

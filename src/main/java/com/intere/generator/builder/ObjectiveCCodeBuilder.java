@@ -1,16 +1,11 @@
 package com.intere.generator.builder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-
-import com.intere.generator.App;
 import com.intere.generator.builder.generation.ObjectiveCGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 
@@ -53,11 +48,7 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 	 * @throws IOException
 	 */
 	private String readSerializerImplementation() throws IOException {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		InputStream in = App.class.getResourceAsStream("/Serializer.m");
-		IOUtils.copy(in, out);
-		
-		return new String(out.toByteArray());
+		return readResourceAndReplaceHeaders("/Serializer.m");
 	}
 
 	/**
@@ -66,10 +57,6 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 	 * @throws IOException
 	 */
 	private String readSerializerHeader() throws IOException {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		InputStream in = App.class.getResourceAsStream("/Serializer.h");
-		IOUtils.copy(in, out);
-		
-		return new String(out.toByteArray());
+		return readResourceAndReplaceHeaders("/Serializer.h");
 	}
 }

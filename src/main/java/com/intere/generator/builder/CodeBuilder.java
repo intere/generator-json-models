@@ -1,9 +1,16 @@
 package com.intere.generator.builder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
+import org.apache.commons.io.IOUtils;
+
+import com.intere.generator.App;
 import com.intere.generator.builder.generation.CodeGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 
@@ -47,5 +54,18 @@ public abstract class CodeBuilder {
 
 	public JsonDeserializer getDeserializer() {
 		return deserializer;
+	}
+	
+	protected String readResourceAndReplaceHeaders(String resourceName) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		InputStream in = App.class.getResourceAsStream(resourceName);
+		IOUtils.copy(in, out);
+		
+		return replaceHeaderVariables(new String(out.toByteArray()));
+	}
+	
+	protected String replaceHeaderVariables(String input) {
+		return input.replaceAll(Pattern.quote("${version}"), App.getVersion())
+				.replaceAll(Pattern.quote("${date}"), new Date().toString());
 	}
 }

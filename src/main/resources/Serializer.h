@@ -1,10 +1,11 @@
 //
 //  Serializer.h
-//  Objective-C Code Generator
 //
-//  Licensed under the LGPL: http://www.gnu.org/licenses/lgpl-3.0.html#content
+//  Released with JSON Model Generator ${version} on ${date}
+//    https://github.com/intere/generator-json-models
 //
-//  Created by Eric Internicola on 12/8/13.
+//    The generator tool is licensed under the LGPL: http://www.gnu.org/licenses/lgpl-3.0.html#content
+//
 //
 
 #import <Foundation/Foundation.h>
