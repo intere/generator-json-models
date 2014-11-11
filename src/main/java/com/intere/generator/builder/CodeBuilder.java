@@ -39,10 +39,18 @@ public abstract class CodeBuilder {
 	/**
 	 * Given a {@link JsonDeserializer}, this method will hand you back a {@link HashMap} of all of the source files (and their generated source). 
 	 * @param parentDirectory The parent directory where the Files will be generated into.
-	 * @return A {@link HashMap} of {@link File}, {@link String} (source file + source.
+	 * @return A {@link HashMap} of {@link File}, {@link String} (source file + library files).
 	 * @throws IOException 
 	 */
 	public abstract HashMap<File, String> buildSourceFiles(File parentDirectory) throws IOException;
+	
+	/**
+	 * Given a {@link JsonDeserializer}, this method will hand you back a {@link HashMap} of all of the test files (and their generated source).
+	 * @param parentDirectory The parent directory where the Files will be generated into.
+	 * @return A {@link HashMap} of {@link File}, {@link String} (test file + source json).
+	 * @throws IOException
+	 */
+	public abstract HashMap<File, String> buildTestFiles(File parentDirectory) throws IOException;
 	
 	public String getClassName() {
 		return className;
@@ -56,14 +64,36 @@ public abstract class CodeBuilder {
 		return deserializer;
 	}
 	
-	protected String readResourceAndReplaceHeaders(String resourceName) throws IOException {
+	/**
+	 * Reads a resource (from the classpath) to a string for you.
+	 * @param resourceName
+	 * @return
+	 * @throws IOException
+	 */
+	public String readResource(String resourceName) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		InputStream in = App.class.getResourceAsStream(resourceName);
 		IOUtils.copy(in, out);
 		
-		return replaceHeaderVariables(new String(out.toByteArray()));
+		return new String(out.toByteArray());
 	}
 	
+	/**
+	 * Reads the provided resource and performs the substitution specified by 
+	 * {{@link #replaceHeaderVariables(String)}.
+	 * @param resourceName The resource you would like to read.
+	 * @return
+	 * @throws IOException
+	 */
+	public String readResourceAndReplaceHeaders(String resourceName) throws IOException {
+		return replaceHeaderVariables(readResource(resourceName));
+	}
+	
+	/**
+	 * Replaces the "${version}" string with the version and "${date}" with the date/time.
+	 * @param input
+	 * @return
+	 */
 	protected String replaceHeaderVariables(String input) {
 		return input.replaceAll(Pattern.quote("${version}"), App.getVersion())
 				.replaceAll(Pattern.quote("${date}"), new Date().toString());

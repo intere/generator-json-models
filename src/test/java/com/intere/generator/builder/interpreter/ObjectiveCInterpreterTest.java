@@ -17,7 +17,7 @@ public class ObjectiveCInterpreterTest {
 	@Test
 	public void testCleanVariableName() {
 		String []inputs = {"var", "Otis", "_id", "this_is_the_end", "description"};
-		String []expected = {"var", "otis", "id", "thisIsTheEnd", "theDescription"};
+		String []expected = {"var", "otis", "theId", "thisIsTheEnd", "theDescription"};
 		
 		for(int i=0; i<inputs.length; i++) {
 			assertEquals(expected[i], interpreter.cleanVariableName(inputs[i]));
@@ -28,7 +28,7 @@ public class ObjectiveCInterpreterTest {
 	public void testBuildSubClassName() {
 		String parentClassName = "My";
 		String []inputs = {"var", "Otis", "_id", "this_is_the_end"};
-		String []expected = {"MyVar", "MyOtis", "MyId", "MyThisIsTheEnd"};
+		String []expected = {"MyVar", "MyOtis", "MyTheId", "MyThisIsTheEnd"};
 		
 		for(int i=0; i<inputs.length; i++) {
 			assertEquals(expected[i], interpreter.buildSubClassName(parentClassName, inputs[i]));

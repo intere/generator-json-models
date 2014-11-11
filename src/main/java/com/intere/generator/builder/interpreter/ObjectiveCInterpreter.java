@@ -9,7 +9,8 @@ public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
 	 */
 	public String cleanVariableName(String propertyName) {
 		propertyName = propertyName.replaceAll("^_", "");		// Remove leading underscore
-		if(propertyName.equalsIgnoreCase("description")) {
+		if(propertyName.equalsIgnoreCase("description") ||
+				propertyName.equalsIgnoreCase("id")) {
 			propertyName = "the_" + propertyName; 
 		}
 		char[] stringArray = propertyName.trim().toCharArray();			

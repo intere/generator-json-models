@@ -1,54 +1,92 @@
 package com.intere.generator.deserializer;
 
-import static org.junit.Assert.*;
+import static com.intere.generator.test.TestUtils.parseJsonObject;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.junit.Ignore;
 import org.junit.Test;
 
-public class JsonNodeUtilsTest {
-	private static final String PROP_ARRAY_OF_STRINGS = "{\"prop1\":[\"string1\",\"string2\"]}";
-	private static final String PROP_STRING = "{\"prop1\": \"string1\"}";
-	private static final String PROP_INT = "{\"prop1\":5}";
-	private static final String PROP_BOOLEAN = "{\"prop1\":true}";
-	private static final String PROP_DECIMAL = "{\"prop1\": 1.2345}";
-	private static final String PROP_ARRAY_OF_OBJECTS = "{\"prop1\":[{\"sub1\":\"value1\",\"sub2\":\"value2\"}]}";
-	private static final String PROP_ARRAY_OF_ARRAYS = "{\"prop1\":[[{\"sub1\":\"value1\"}],[{\"sub2\":\"value2\"}]]}";
+import com.intere.generator.test.TestStrings;
+
+public class JsonNodeUtilsTest implements TestStrings {
 	
 	@Test
 	public void testIsArrayOfObjects() throws Exception {
-		JsonNode node = parseJsonObject(PROP_ARRAY_OF_OBJECTS).get("prop1");
+		JsonNode node = parseJsonObject(PROP_ARRAY_OF_OBJECTS).get(PROP_NAME);
 		assertTrue("This is an array of objects", JsonNodeUtils.isArrayOfObjects(node));
 	}
 
 	@Test
 	public void testIsNotArrayOfObjects() throws Exception {
-		JsonNode node = parseJsonObject(PROP_ARRAY_OF_STRINGS).get("prop1");
+		JsonNode node = parseJsonObject(PROP_ARRAY_OF_STRINGS).get(PROP_NAME);
 		assertFalse("This is NOT an array of objects", JsonNodeUtils.isArrayOfObjects(node));
 	}
 	
 	@Test
 	public void testIsArrayOfArrays() throws Exception {
-		JsonNode node = parseJsonObject(PROP_ARRAY_OF_ARRAYS).get("prop1");
+		JsonNode node = parseJsonObject(PROP_ARRAY_OF_ARRAYS).get(PROP_NAME);
 		assertTrue("This is an array of arrays", JsonNodeUtils.isArrayofArrays(node));
 	}
 	
 	@Test
 	public void testIsNotArrayOfArrays() throws Exception {
-		JsonNode node = parseJsonObject(PROP_ARRAY_OF_ARRAYS).get("prop1");
+		JsonNode node = parseJsonObject(PROP_ARRAY_OF_ARRAYS).get(PROP_NAME);
 		assertFalse("This is NOT an array of arrays", JsonNodeUtils.isArrayOfObjects(node));
 	}
 	
-	private JsonNode parseJsonObject(String json) throws JsonParseException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		JsonFactory factory = mapper.getJsonFactory();
-		JsonParser parser = factory.createJsonParser(json);
-		return mapper.readTree(parser);
+	@Test
+	public void testIsText() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_STRING).get(PROP_NAME);
+		assertTrue("String wasn't identified as JSON text", JsonNodeUtils.isText(node));
 	}
+
+	@Test
+	public void testIsDateFromIso() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_DATE_ISO).get(PROP_NAME);
+		assertTrue("ISO Date wasn't identified as JSON date", JsonNodeUtils.isDate(node));
+	}
+	
+	@Test
+	public void testIsDateFromZulu() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_DATE_ISO).get(PROP_NAME);
+		assertTrue("Zulu Date wasn't identified as JSON date", JsonNodeUtils.isDate(node));
+	}
+	
+	@Test
+	public void testIsInteger() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_INT).get(PROP_NAME);
+		assertTrue("Int value wasn't identified as JSON Int", JsonNodeUtils.isInteger(node));
+	}
+	
+	@Test
+	public void testIsLong() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_DATE_LONG).get(PROP_NAME);
+		assertTrue("Long value wasn't identified as JSON long", JsonNodeUtils.isLong(node));
+	}
+	
+	@Test
+	public void testIsFloat() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_DECIMAL).get(PROP_NAME);
+		assertTrue("Decimal value wasn't identified as JSON float", JsonNodeUtils.isFloat(node));
+	}
+	
+	@Test
+	public void testIsBoolean() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_BOOLEAN).get(PROP_NAME);
+		assertTrue("Boolean value wasn't identified as JSON boolean", JsonNodeUtils.isBoolean(node));
+	}
+	
+	@Test
+	public void testIsObject() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_OBJECT).get(PROP_NAME);
+		assertTrue("Object value wasn't identified as JSON Object", JsonNodeUtils.isObject(node));
+	}
+	
+	
+	
 }

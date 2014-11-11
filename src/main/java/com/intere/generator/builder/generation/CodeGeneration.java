@@ -49,7 +49,6 @@ public abstract class CodeGeneration {
 	 */
 	public abstract JsonLanguageInterpreter getInterpreter();
 	
-	
 	protected String getDate() {
 		return new Date().toString();
 	}

@@ -10,6 +10,9 @@
 
 #import "Serializer.h"
 
+static NSDateFormatter *ISO_FORMATTER;
+static NSDateFormatter *ZULU_FORMATTER;
+
 @implementation Serializer
 
 +(NSString *)safeGetDictString:(NSDictionary *)dict withKey:(NSString *)key {
@@ -39,7 +42,12 @@
 
 +(void)setDict:(NSMutableDictionary *)dict dateValue:(NSDate *)date forKey:(NSString *)key {
     if(date) {
-        [Serializer setDict:dict doubleValue:[date timeIntervalSince1970] forKey:key];
+        NSString *isoString = [[self isoDateFormatterInstance] stringFromDate:date];
+        if(isoString) {
+            [dict setObject:isoString forKey:key];
+        } else {
+            NSLog(@"Failed to convert Date to ISO Date String: %@", date);
+        }
     }
 }
 
@@ -93,10 +101,26 @@
 }
 
 +(NSDate *)getDateFromDict:(NSDictionary *)dict forKey:(NSString *)key orDefaultTo:(NSDate *)defaultValue {
-    NSNumber *value = [dict objectForKey:key];
-    if(value && ![[NSNull null] isEqual:value]) {
-        return [NSDate dateWithTimeIntervalSince1970:[value doubleValue]];
+    
+    NSObject *object = [dict objectForKey:key];
+    
+    if([object isKindOfClass:[NSNumber class]]) {
+        NSNumber *value = [dict objectForKey:key];
+        if(value && ![[NSNull null] isEqual:value]) {
+            NSInteger secondsSinceEpoch = (NSInteger)([value longLongValue]/1000);
+            return [NSDate dateWithTimeIntervalSince1970:secondsSinceEpoch];
+        }
+    } else if([object isKindOfClass:[NSString class]]) {
+        NSString *date = [self safeGetDictString:dict withKey:key];
+        NSDate *objDate = [[self zuluDateFormatterInstance] dateFromString:date];
+        if(!objDate) {
+            objDate = [[self isoDateFormatterInstance] dateFromString:date];
+        }
+        return objDate;
+    } else if([object isKindOfClass:[NSDate class]]) {
+        return (NSDate *)object;
     }
+    
 
     return defaultValue;
 }
@@ -186,6 +210,23 @@
     double nativeTimeInterval = (standardTime / 1000);
 
     return [[NSDate alloc]initWithTimeIntervalSince1970:nativeTimeInterval];
+}
+
++(NSDateFormatter *)zuluDateFormatterInstance {
+    if(!ZULU_FORMATTER) {
+        ZULU_FORMATTER = [[NSDateFormatter alloc]init];
+        ZULU_FORMATTER.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    }
+    return ZULU_FORMATTER;
+}
+
++(NSDateFormatter *)isoDateFormatterInstance {
+    if(!ISO_FORMATTER) {
+        ISO_FORMATTER = [[NSDateFormatter alloc]init];
+        ISO_FORMATTER.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+    }
+    
+    return ISO_FORMATTER;
 }
 
 @end

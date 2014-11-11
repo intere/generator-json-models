@@ -14,11 +14,20 @@ import com.intere.generator.deserializer.JsonDeserializer;
  * @author einternicola
  */
 public class ObjectiveCCodeBuilder extends CodeBuilder {
-	
+	/**
+	 * Constructor that sets the Class Name and input JSON filename and sets the stage to perform
+	 * code building for Objective-C.
+	 * @param className
+	 * @param jsonFilename
+	 * @throws IOException
+	 */
 	public ObjectiveCCodeBuilder(String className, String jsonFilename) throws IOException {
 		super(null, className, jsonFilename, new ObjectiveCGeneration());
 	}
-
+	
+	/**
+	 * Builds the source files (and any associated libraries).
+	 */
 	public HashMap<File, String> buildSourceFiles(File parentDirectory) throws IOException {
 		HashMap<File, String> sourceCode = new HashMap<File, String>();
 		List<JsonDeserializer> allDeserializers = new ArrayList<JsonDeserializer>();
@@ -40,6 +49,12 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 		sourceCode.put(new File(parentDirectory, "Serializer.m"), readSerializerImplementation());
 		
 		return sourceCode;
+	}
+	
+	@Override
+	public HashMap<File, String> buildTestFiles(File parentDirectory) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	/**

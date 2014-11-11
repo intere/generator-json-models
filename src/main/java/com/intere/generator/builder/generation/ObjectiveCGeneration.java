@@ -1,5 +1,16 @@
 package com.intere.generator.builder.generation;
 
+import static com.intere.generator.deserializer.JsonNodeUtils.isArray;
+import static com.intere.generator.deserializer.JsonNodeUtils.isArrayOfObjects;
+import static com.intere.generator.deserializer.JsonNodeUtils.isArrayofArrays;
+import static com.intere.generator.deserializer.JsonNodeUtils.isBoolean;
+import static com.intere.generator.deserializer.JsonNodeUtils.isDate;
+import static com.intere.generator.deserializer.JsonNodeUtils.isFloat;
+import static com.intere.generator.deserializer.JsonNodeUtils.isInteger;
+import static com.intere.generator.deserializer.JsonNodeUtils.isLong;
+import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
+import static com.intere.generator.deserializer.JsonNodeUtils.isText;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -12,8 +23,12 @@ import com.intere.generator.App;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.ObjectiveCInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
-import com.intere.generator.deserializer.JsonNodeUtils;
 
+/**
+ * Code Generator for Objective-C.
+ * 
+ * @author einternicola
+ */
 public class ObjectiveCGeneration extends CodeGeneration {
 	private static final JsonLanguageInterpreter INTERPRETER = new ObjectiveCInterpreter();
 
@@ -236,24 +251,26 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		String defName = getInterpreter().createSerializeConstantSymbolName(nodeName);
 		String subClassName = getInterpreter().buildSubClassName(className, nodeName);
 		
-		if(node.isTextual()) {
+		if(isText(node)) {
 			return "[Serializer setDict:dict object:self." + variableName + " forKey:" + defName + "];\n";
-		} else if(node.isInt()) {
+		} else if(isDate(node)) {
+			return "[Serializer setDict:dict dateValue:self." + variableName + " forKey:key];";
+		} else if(isInteger(node) || isLong(node)) {
 			return "[Serializer setDict:dict intValue:self." + variableName + " forKey:" + defName + "];\n";	
-		} else if(node.isFloatingPointNumber()) {
+		} else if(isFloat(node)) {
 			return "[Serializer setDict:dict doubleValue:self." + variableName + " forKey:" + defName + "];\n";
-		} else if(node.isBoolean()) {
+		} else if(isBoolean(node)) {
 			return "[Serializer setDict:dict boolValue:self." + variableName + " forKey:" + defName + "];\n";
-		} else if(node.isArray()) {
-			if(JsonNodeUtils.isArrayOfObjects(node)) {
-				return "[Serializer setDict:dict object:[" + subClassName + " toArrayOfDictionaries:self."+ variableName + "] forKey:" + defName + "];\n"; 
-			} else if(JsonNodeUtils.isArrayofArrays(node)) {
+		} else if(isArrayOfObjects(node)) {
+			return "[Serializer setDict:dict object:[" + subClassName + " toArrayOfDictionaries:self."+ variableName + "] forKey:" + defName + "];\n"; 
+		} else if(isArrayofArrays(node)) {
 				// TODO: how do we handle an array of arrays?
-			} else {
-				return "[Serializer setDict:dict object:self." + variableName + " forKey:" + defName + "];\n";
-			}
-		} else if(node.isObject()) {
+		} else if (isArray(node)) {
+			return "[Serializer setDict:dict object:self." + variableName + " forKey:" + defName + "];\n";
+		} else if(isObject(node)) {
 			return "[Serializer setDict:dict object:[self." + variableName + " toDictionary] forKey:" + defName + "];\n";
+		} else {
+			System.out.println("Unknown node type: " + node.toString());
 		}
 		return "";
 	}
@@ -269,17 +286,19 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		String variableName = getInterpreter().cleanVariableName(name);
 		String subClassName = getInterpreter().buildSubClassName(className, name);
 		
-		if(node.isTextual()) {
+		if(isText(node)) {
 			return "@property (nonatomic, strong) NSString *" + variableName + ";\n";
-		} else if(node.isInt()) {
+		} else if(isDate(node)) {
+			return "@property (nonatomic, strong) NSDate *" + variableName + ";\n";
+		} else if(isInteger(node) || isLong(node)) {
 			return "@property (nonatomic) NSInteger " + variableName + ";\n";
-		} else if(node.isFloatingPointNumber()) {
+		} else if(isFloat(node)) {
 			return "@property (nonatomic) double " + variableName + ";\n";
-		} else if(node.isObject()) {
+		} else if(isObject(node)) {
 			return "@property (nonatomic, strong) " + subClassName + " *" + variableName + ";\n";
-		} else if(node.isBoolean()) {
+		} else if(isBoolean(node)) {
 			return "@property (nonatomic) BOOL " + variableName + ";\n";
-		} else if(node.isArray()) {
+		} else if(isArray(node)) {
 			return "@property (nonatomic, strong) NSMutableArray *" + variableName + ";\n";
 		} else {
 			System.out.println(name + " is some other type of node...");
@@ -299,24 +318,26 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		String variableName = getInterpreter().cleanVariableName(name);
 		String className = getInterpreter().buildSubClassName(parentClassName, name);
 		
-		if(node.isTextual()) {
+		if(isText(node)) {
 			return "object." + variableName + " = [Serializer safeGetDictString:dict withKey:" + defName + "];\n";
-		} else if(node.isInt()) {
+		} else if(isDate(node)) {
+			return "object." + variableName + " = [Serializer getDateFromDict:dict withKey:" + defName + " orDefaultTo:nil];\n";
+		} else if(isInteger(node) || isLong(node)) {
 			return "object." + variableName + " = [Serializer getIntegerFromDict:dict forKey:" + defName + " orDefaultTo:0];\n";
-		} else if(node.isFloatingPointNumber()) {
+		} else if(isFloat(node)) {
 			return "object." + variableName + " = [Serializer getDoubleFromDict:dict forKey:" + defName + " orDefaultTo:0.0];\n";
-		} else if(node.isBoolean()) {
+		} else if(isBoolean(node)) {
 			return "object." + variableName + " = [Serializer getBoolFromDict:dict forKey:" + defName + " orDefaultTo:NO];\n";
-		} else if(node.isArray()) {
-			if(JsonNodeUtils.isArrayOfObjects(node)) {
-				return "object." + variableName + " = [" + className + " fromArrayOfDictionaries:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
-			} else if(JsonNodeUtils.isArrayofArrays(node)) {
-				// TODO ??
-			} else {
-				return "object." + variableName + " = [[NSMutableArray alloc]initWithArray:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
-			}
-		} else if(node.isObject()) {
+		} else if(isArrayOfObjects(node)) {
+			return "object." + variableName + " = [" + className + " fromArrayOfDictionaries:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
+		} else if(isArrayofArrays(node)) {
+			// TODO ??
+		} else if (isArray(node)){
+			return "object." + variableName + " = [[NSMutableArray alloc]initWithArray:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
+		} else if(isObject(node)) {
 			return "object." + variableName + " = [" + className + " fromDictionary:[dict objectForKey:" + defName + "]];\n";
+		} else {
+			System.out.println("Unknown Node Type: " + node.toString());
 		}
 		return "";
 	}

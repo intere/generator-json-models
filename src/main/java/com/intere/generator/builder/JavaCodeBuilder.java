@@ -30,4 +30,10 @@ public class JavaCodeBuilder extends CodeBuilder {
 		
 		return sourceCode;
 	}
+	
+	@Override
+	public HashMap<File, String> buildTestFiles(File parentDirectory) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
