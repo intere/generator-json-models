@@ -21,9 +21,11 @@ public class JsonDeserializer {
 	private JsonNode node;
 	private String name;
 	private String filename;
+	private String testFilename;
 	private String namespace;
 	private NavigableMap<String, List<JsonDeserializer>> subClasses;
 	private JsonLanguageInterpreter interpreter;
+	private boolean rootLevel;
 	
 	/**
 	 * Constructor that is used to hierarchically build the class structures for the JSON model.
@@ -41,6 +43,7 @@ public class JsonDeserializer {
 		this.name = name;
 		this.json = json;
 		this.filename = interpreter.buildFilenameFromClassname(name);
+		this.testFilename = interpreter.buildTestfilenameFromClassname(name);
 		parseJson();
 		buildObjectNodeTree();
 	}
@@ -55,6 +58,7 @@ public class JsonDeserializer {
 	 */
 	public JsonDeserializer(JsonLanguageInterpreter interpreter, String namespace, String name, String json) throws JsonParseException, IOException {
 		this(new TreeMap<String, List<JsonDeserializer>>(), interpreter, namespace, name, json);
+		this.rootLevel = true;
 	}
 
 	/**
@@ -98,6 +102,10 @@ public class JsonDeserializer {
 		subClasses.get(name).add(child);
 	}
 	
+	public String getTestFilename() {
+		return testFilename;
+	}
+	
 	public String getFilename() {
 		return filename;
 	}
@@ -120,6 +128,10 @@ public class JsonDeserializer {
 	
 	public String getNamespace() {
 		return namespace;
+	}
+	
+	public boolean isRootLevel() {
+		return rootLevel;
 	}
 	
 	public NavigableMap<String, List<JsonDeserializer>> getSubClasses() {

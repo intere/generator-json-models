@@ -29,5 +29,7 @@ public class CodeGenerationTest implements TestStrings {
 		public String generateImplementationFile(JsonDeserializer deserializer) {return null;}
 		@Override
 		public String generateHeaderFile(JsonDeserializer deserializer) {return null;}
+		@Override
+		public String generateTestFile(JsonDeserializer deserializer, String jsonFilename) {return null;}
 	}
 }

@@ -9,6 +9,8 @@ import java.util.List;
 import com.intere.generator.builder.generation.ObjectiveCGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 
+import static com.intere.generator.deserializer.JsonNodeUtils.*;
+
 /**
  * Code Builder for Objective-C.
  * @author einternicola
@@ -53,8 +55,24 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 	
 	@Override
 	public HashMap<File, String> buildTestFiles(File parentDirectory) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<File, String> sourceCode = new HashMap<File, String>();
+		List<JsonDeserializer> allDeserializers = new ArrayList<JsonDeserializer>();
+		
+		allDeserializers.add(getDeserializer());
+		for(List<JsonDeserializer> list : getDeserializer().getSubClasses().values()) {
+			allDeserializers.addAll(list);
+		}
+		
+		for(JsonDeserializer generated : allDeserializers) {
+			if(generated.isRootLevel()) {
+				File implementationFile = new File(parentDirectory, generated.getTestFilename() + ".m");
+				sourceCode.put(implementationFile, generation.generateTestFile(generated, jsonFilename));
+			}
+		}
+		
+		sourceCode.put(new File(parentDirectory, new File(jsonFilename).getName()), readFile(jsonFilename));
+		
+		return sourceCode;
 	}
 	
 	/**

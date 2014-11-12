@@ -15,7 +15,7 @@ import com.intere.generator.Language;
 public class CodeBuilderFactory {
 	
 	/**
-	 * Performs the actual code generation.
+	 * Performs the actual writing of the generated files.
 	 * @param generatedCode
 	 * @throws IOException
 	 */
@@ -25,6 +25,20 @@ public class CodeBuilderFactory {
 			out.write(generatedCode.get(f).getBytes());
 			out.close();
 			System.out.println("Generated Source File: " + f.getAbsolutePath());
+		}
+	}
+	
+	/**
+	 * Performs the writing of the generated test files to disk.
+	 * @param generatedCode
+	 * @throws IOException
+	 */
+	public static void generateTests(HashMap<File, String> generatedCode) throws IOException {
+		for(File f : generatedCode.keySet()) {
+			FileOutputStream out = new FileOutputStream(f);
+			out.write(generatedCode.get(f).getBytes());
+			out.close();
+			System.out.println("Generated TestFile: " + f.getAbsolutePath());
 		}
 	}
 	

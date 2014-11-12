@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FilenameUtils;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
@@ -42,6 +43,14 @@ public abstract class CodeGeneration {
 	 * @return The contents of the implementation file body.
 	 */
 	public abstract String generateImplementationFile(JsonDeserializer deserializer);
+	
+	/**
+	 * Generates the Unit Test Implementation File for the given language.
+	 * @param deserializer The deserializer to use to generate the test file.
+	 * @param jsonFilename The JSON Filename to use to build the test.
+	 * @return The contents of the implementation file body.
+	 */
+	public abstract String generateTestFile(JsonDeserializer deserializer, String jsonFilename);
 	
 	/**
 	 * Provides you with the Language Interpreter.

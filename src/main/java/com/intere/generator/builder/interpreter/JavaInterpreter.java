@@ -53,6 +53,10 @@ public class JavaInterpreter implements JsonLanguageInterpreter {
 	public String buildFilenameFromClassname(String className) {
 		return className;
 	}
+	
+	public String buildTestfilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "Test";
+	}
 
 	public String buildGetterAndSetterName(String propertyName) {
 		return buildSubClassName("", propertyName);

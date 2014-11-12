@@ -50,6 +50,10 @@ public class RubyInterpreter implements JsonLanguageInterpreter {
 	public String buildFilenameFromClassname(String className) {
 		return cleanVariableName(className);
 	}
+	
+	public String buildTestfilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "_spec";
+	}
 
 	public String buildGetterAndSetterName(String propertyName) {
 		return null;

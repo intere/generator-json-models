@@ -58,6 +58,12 @@ public class JsonNodeUtilsTest implements TestStrings {
 	}
 	
 	@Test
+	public void testIsNotDate() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_STRING).get(PROP_NAME);
+		assertFalse("String was incorrectly fingerprinted as a date", JsonNodeUtils.isDate(node));
+	}
+	
+	@Test
 	public void testIsInteger() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_INT).get(PROP_NAME);
 		assertTrue("Int value wasn't identified as JSON Int", JsonNodeUtils.isInteger(node));

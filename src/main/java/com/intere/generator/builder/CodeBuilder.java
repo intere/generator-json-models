@@ -2,6 +2,7 @@ package com.intere.generator.builder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -73,6 +74,14 @@ public abstract class CodeBuilder {
 	public String readResource(String resourceName) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		InputStream in = App.class.getResourceAsStream(resourceName);
+		IOUtils.copy(in, out);
+		
+		return new String(out.toByteArray());
+	}
+	
+	public String readFile(String filename) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		InputStream in = new FileInputStream(filename);
 		IOUtils.copy(in, out);
 		
 		return new String(out.toByteArray());

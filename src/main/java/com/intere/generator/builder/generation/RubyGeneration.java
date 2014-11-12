@@ -50,6 +50,12 @@ public class RubyGeneration extends CodeGeneration {
 		
 		return builder.toString();
 	}
+	
+	@Override
+	public String generateTestFile(JsonDeserializer deserializer, String jsonFilename) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public String buildPropertyDeclaration(JsonNode node, String className, String name) {
 		String propName = getInterpreter().cleanVariableName(name);

@@ -1,10 +1,12 @@
 package com.intere.generator.deserializer;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 
+import org.apache.commons.io.FilenameUtils;
 import org.codehaus.jackson.JsonNode;
 
 /**
@@ -94,16 +96,24 @@ public class JsonNodeUtils {
 				return true;
 			} catch(ParseException ex) {
 				// Not a ZULU Date
-				ex.printStackTrace();
 			}
 			try {
 				ISO_DATE.parse(node.getTextValue());
 				return true;
 			} catch (ParseException ex) {
 				// Not an ISO Date
-				ex.printStackTrace();
 			}
 		}
 		return false;
+	}
+	
+	public static String getFilenameWithoutPathWithoutExtension(String filename) {
+		File f = new File(filename);
+		return FilenameUtils.removeExtension(f.getName());
+	}
+	
+	public static String getExtensionFromFilename(String filename) {
+		File f = new File(filename);
+		return FilenameUtils.getExtension(f.getName());
 	}
 }

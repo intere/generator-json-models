@@ -104,6 +104,12 @@ public class JavaGeneration extends CodeGeneration {
 
 		return builder.toString();
 	}
+	
+	@Override
+	public String generateTestFile(JsonDeserializer deserializer, String jsonFilename) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public JsonLanguageInterpreter getInterpreter() {

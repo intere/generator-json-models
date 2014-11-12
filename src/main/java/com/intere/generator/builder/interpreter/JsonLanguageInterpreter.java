@@ -28,16 +28,22 @@ public interface JsonLanguageInterpreter {
 	
 	/**
 	 * What should the filename (no extensions) be (using the provided class name).
-	 * @param className The className.
-	 * @return The base filename (no extension) based on the provide class name.
+	 * @param className The Class Name.
+	 * @return The base filename (no extension) based on the provided class name.
 	 */
 	String buildFilenameFromClassname(String className);
+	
+	/**
+	 * What should the test filename be (no extension) using the provided class name
+	 * @param className the Class Name.
+	 * @return The base test filename (no extension) based on the provided class name.
+	 */
+	String buildTestfilenameFromClassname(String className);
 	
 	/**
 	 * This is very Java-Centric, builds the "getter/setter" name.
 	 * @param propertyName
 	 * @return
 	 */
-	String buildGetterAndSetterName(String propertyName);
-	
+	String buildGetterAndSetterName(String propertyName);	
 }

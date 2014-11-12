@@ -38,6 +38,23 @@ public class App {
 		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language, namespace, className, jsonFilename);
 		HashMap<File, String> generatedCode = builder.buildSourceFiles(outputDirectory);
 		CodeBuilderFactory.generateCode(generatedCode);
+		
+		outputDirectory = getTestOutputFolder(cmd.getOptionValue('o', "tmp"));
+		HashMap<File, String> generatedTests = builder.buildTestFiles(outputDirectory);
+		CodeBuilderFactory.generateTests(generatedTests);
+	}
+
+	private static File getTestOutputFolder(String outputDir) {
+		File testOutputDir = new File(outputDir + File.separatorChar + "test");
+		if(!testOutputDir.exists()) {
+			System.out.println(outputDir + " does not exist, creating it for you...");
+			if(!testOutputDir.mkdirs()) {
+				System.out.println("Couldn't create output directory, existing...");
+				System.exit(-1);
+			}
+		}
+
+		return testOutputDir;
 	}
 
 	/**
