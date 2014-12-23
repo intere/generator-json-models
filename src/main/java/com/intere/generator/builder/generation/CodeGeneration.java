@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.FilenameUtils;
 
+import com.intere.generator.builder.interpreter.InterpreterUtils;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
+import com.intere.generator.deserializer.JsonNodeUtils;
 
 public abstract class CodeGeneration {
 	
@@ -50,7 +51,7 @@ public abstract class CodeGeneration {
 	 * @param jsonFilename The JSON Filename to use to build the test.
 	 * @return The contents of the implementation file body.
 	 */
-	public abstract String generateTestFile(JsonDeserializer deserializer, String jsonFilename);
+	public abstract String generateTestFile(JsonDeserializer deserializer, String jsonFilename, String testJsonFilename);
 	
 	/**
 	 * Provides you with the Language Interpreter.
@@ -60,5 +61,13 @@ public abstract class CodeGeneration {
 	
 	protected String getDate() {
 		return new Date().toString();
+	}
+
+	public String generateTestJson(JsonDeserializer generated) {
+		return generated.getNode().toString();
+	}
+
+	public String getTestJsonFilename(JsonDeserializer generated) {
+		return InterpreterUtils.capsToUnderscores(generated.getName());
 	}
 }

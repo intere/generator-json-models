@@ -127,4 +127,9 @@ public class JsonNodeUtils {
 		File f = new File(filename);
 		return FilenameUtils.getExtension(f.getName());
 	}
+
+	public static String toString(JsonNode node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -106,7 +106,7 @@ public class JavaGeneration extends CodeGeneration {
 	}
 	
 	@Override
-	public String generateTestFile(JsonDeserializer deserializer, String jsonFilename) {
+	public String generateTestFile(JsonDeserializer deserializer, String jsonFilename, String jsonTestFilename) {
 		// TODO Auto-generated method stub
 		return null;
 	}

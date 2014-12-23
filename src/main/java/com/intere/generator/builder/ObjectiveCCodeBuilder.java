@@ -9,8 +9,6 @@ import java.util.List;
 import com.intere.generator.builder.generation.ObjectiveCGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 
-import static com.intere.generator.deserializer.JsonNodeUtils.*;
-
 /**
  * Code Builder for Objective-C.
  * @author einternicola
@@ -45,7 +43,6 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 			
 			File implementationFile = new File(parentDirectory, generated.getFilename() + ".m");
 			sourceCode.put(implementationFile, generation.generateImplementationFile(generated));
-			
 		}
 		sourceCode.put(new File(parentDirectory, "Serializer.h"), readSerializerHeader());
 		sourceCode.put(new File(parentDirectory, "Serializer.m"), readSerializerImplementation());
@@ -64,13 +61,13 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 		}
 		
 		for(JsonDeserializer generated : allDeserializers) {
-			if(generated.isRootLevel()) {
-				File implementationFile = new File(parentDirectory, generated.getTestFilename() + ".m");
-				sourceCode.put(implementationFile, generation.generateTestFile(generated, jsonFilename));
-			}
+			File implementationFile = new File(parentDirectory, generated.getTestFilename() + ".m");
+			sourceCode.put(implementationFile, generation.generateTestFile(generated, jsonFilename, generation.getTestJsonFilename(generated)));
 		}
 		
-		sourceCode.put(new File(parentDirectory, new File(jsonFilename).getName()), readFile(jsonFilename));
+		for(JsonDeserializer generated : allDeserializers) {
+			sourceCode.put(new File(parentDirectory, generation.getTestJsonFilename(generated) + ".json"), generation.generateTestJson(generated));
+		}
 		
 		return sourceCode;
 	}

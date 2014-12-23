@@ -223,7 +223,7 @@ public class ObjectiveCGeneration extends CodeGeneration {
 	}
 	
 	@Override
-	public String generateTestFile(JsonDeserializer deserializer, String jsonFilename) {
+	public String generateTestFile(JsonDeserializer deserializer, String jsonFilename, String jsonTestFilename) {
 		String className = deserializer.getName();
 		String testClassName = deserializer.getTestFilename();
 		JsonNode node = deserializer.getNode();
@@ -251,18 +251,13 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		builder.append("- (void)setUp\n" + 
 				"{\n" + 
 				"\t[super setUp];\n" + 
-				"\tNSString *pathToResource = [[NSBundle bundleForClass:self.class] pathForResource:@\"" + baseJsonFilename + "\" ofType:@\"" + jsonExtension + "\"];\n" + 
+				"\tNSString *pathToResource = [[NSBundle bundleForClass:self.class] pathForResource:@\"" + jsonTestFilename + "\" ofType:@\"" + jsonExtension + "\"];\n" + 
 				"\tNSError *error = nil;\n" + 
 				"\tsampleJson = [NSString stringWithContentsOfFile:pathToResource encoding:NSUTF8StringEncoding error:&error];\n" + 
 				"\tif(error) {\n" + 
 				"\t\tXCTFail(@\"Failed to load file: contests.json: %@\", error.localizedDescription);\n" + 
 				"\t}\n");
-		if(deserializer.isArray()) {
-			builder.append("\tNSDictionary *dict = [[Serializer arrayFromJsonString:sampleJson andError:error] objectAtIndex:0];\n" +
-					"\tXCTAssertNil(error);\n");
-		} else {
-			builder.append("\tNSDictionary *dict = [Serializer fromJsonString:sampleJson];\n");
-		}
+		builder.append("\tNSDictionary *dict = [Serializer fromJsonString:sampleJson];\n");
 		builder.append("\tdeserialized = [" + className + " fromDictionary:dict];\n" +
 				"\tXCTAssertNotNil(deserialized, @\"The " + className + " failed to deserialize properly\");\n" +
 				"}\n\n");

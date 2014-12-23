@@ -27,6 +27,12 @@ public class JsonDeserializer {
 	private JsonLanguageInterpreter interpreter;
 	private boolean rootLevel;
 	
+	public JsonDeserializer(NavigableMap<String, List<JsonDeserializer>> subClasses, JsonLanguageInterpreter interpreter, 
+			String namespace, String name, String json, boolean isArray) throws JsonParseException, IOException {
+		this(subClasses, interpreter, namespace, name, json);
+		setArray(isArray);
+	}
+	
 	/**
 	 * Constructor that is used to hierarchically build the class structures for the JSON model.
 	 * @param subClasses A map to keep track of the hierarchical Class Tree Structure (passed throughout all child instances).
@@ -89,9 +95,9 @@ public class JsonDeserializer {
 			String name = iter.next();
 			JsonNode childNode = node.get(name);
 			if(childNode.isObject()) {
-				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.toString()));
+				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.toString(), isArray()));
 			} else if (JsonNodeUtils.isArrayOfObjects(childNode)) {
-				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.iterator().next().toString()));
+				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.iterator().next().toString(), isArray()));
 			}
 		}
 	}
@@ -137,6 +143,10 @@ public class JsonDeserializer {
 	
 	public NavigableMap<String, List<JsonDeserializer>> getSubClasses() {
 		return subClasses;
+	}
+	
+	public void setArray(boolean array) {
+		this.array = array;
 	}
 	
 	public boolean isArray() {

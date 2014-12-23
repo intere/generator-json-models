@@ -1,30 +1,10 @@
 package com.intere.generator.builder.interpreter;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class RubyInterpreter implements JsonLanguageInterpreter {
 
 	public String cleanVariableName(String propertyName) {
-		propertyName = propertyName.replaceAll("^_", "");		// Remove leading underscore
-		char[] stringArray = propertyName.trim().toCharArray();
-		List<Character> chars = new ArrayList<Character>();
-		chars.add(Character.toLowerCase(stringArray[0]));
-		for(int i=1; i<stringArray.length; i++) {
-			if(Character.isUpperCase(stringArray[i])) {
-				chars.add('_');
-				chars.add(Character.toLowerCase(stringArray[i]));
-			} else {
-				chars.add(stringArray[i]);
-			}
-		}
-		
-		stringArray = new char[chars.size()];
-		for(int i=0; i<chars.size(); i++) {
-			stringArray[i] = chars.get(i).charValue();
-		}
-		
-		return new String(stringArray).replaceAll("__", "_");
+		return InterpreterUtils.capsToUnderscores(propertyName);
 	}
 
 	public String buildSubClassName(String parentClassName, String propertyName) {
@@ -48,7 +28,7 @@ public class RubyInterpreter implements JsonLanguageInterpreter {
 	}
 
 	public String buildFilenameFromClassname(String className) {
-		return cleanVariableName(className);
+		return InterpreterUtils.capsToUnderscores(className);
 	}
 	
 	public String buildTestfilenameFromClassname(String className) {

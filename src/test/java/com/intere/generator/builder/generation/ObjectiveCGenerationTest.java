@@ -1,5 +1,6 @@
 package com.intere.generator.builder.generation;
 
+import static com.intere.generator.test.TestUtils.parseJsonObject;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -10,8 +11,8 @@ import org.codehaus.jackson.JsonParseException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
 import com.intere.generator.test.TestStrings;
-import static com.intere.generator.test.TestUtils.parseJsonObject;
 
 public class ObjectiveCGenerationTest implements TestStrings {
 	
