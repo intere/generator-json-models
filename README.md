@@ -49,6 +49,14 @@ mvn exec:java -Dexec.args="-cn TrackList -f src/test/resources/track-list.json"
 mvn exec:java -Dexec.args="-cn Track -f src/test/resources/track.json"
 ```
 
+## Sample Usage
+```bash
+./run.sh -f src/test/resources/contests.json \
+  -cn Contest \
+  -l objc \
+  -o tmp/objc
+```
+
 ##License
 This tool is Licensed under the LGPL: http://www.gnu.org/licenses/lgpl-3.0.html#content
 

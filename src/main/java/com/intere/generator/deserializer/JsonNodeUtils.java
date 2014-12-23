@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.commons.io.FilenameUtils;
@@ -15,7 +16,8 @@ import org.codehaus.jackson.JsonNode;
  */
 public class JsonNodeUtils {
 	private static final DateFormat ZULU_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-	private static final DateFormat ISO_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+//	private static final DateFormat ISO_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+	private static final DateFormat ISO_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 	/**
 	 * Is the provided node an Array of Objects?
@@ -103,6 +105,15 @@ public class JsonNodeUtils {
 			} catch (ParseException ex) {
 				// Not an ISO Date
 			}
+		} else if(isLong(node)) {
+			try {
+				Date found = new Date(node.getLongValue());
+				long y2k = ISO_DATE.parse("2014-01-01T23:28:56.782-0700").getTime();
+				return found.getTime() > y2k;
+			} catch (ParseException ex) {
+				ex.printStackTrace();
+				// Not a Long Date (greater than 2000)
+			}			
 		}
 		return false;
 	}

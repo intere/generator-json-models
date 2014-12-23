@@ -16,7 +16,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 
 public class JsonDeserializer {
-
+	private boolean array;
 	private String json;
 	private JsonNode node;
 	private String name;
@@ -72,6 +72,7 @@ public class JsonDeserializer {
 		JsonParser jp = factory.createJsonParser(json);
 		node = mapper.readTree(jp);
 		if(node.isArray()) {
+			array = true;
 			node = node.get(0);
 		}
 	}
@@ -136,5 +137,9 @@ public class JsonDeserializer {
 	
 	public NavigableMap<String, List<JsonDeserializer>> getSubClasses() {
 		return subClasses;
+	}
+	
+	public boolean isArray() {
+		return array;
 	}
 }

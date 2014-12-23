@@ -233,9 +233,10 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		StringBuilder builder = new StringBuilder();
 		builder.append(generateHeaderCommentBlock(testClassName + ".m"));
 		
-		builder.append("#import <SenTestingKit/SenTestingKit.h>\n" +
-			"#import \"" + className + ".h\"\n\n");
-		builder.append("@interface " + testClassName + " : SenTestCase{\n" +
+		builder.append("#import <XCTest/XCTest.h>\n" +
+			"#import \"" + className + ".h\"\n" + 
+			"#import \"Serializer.h\"\n\n");
+		builder.append("@interface " + testClassName + " : XCTestCase{\n" +
 			"\tNSString *sampleJson;\n" +
 			"\t" + className + " *deserialized;\n" +
 			"}\n" +
@@ -250,14 +251,20 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		builder.append("- (void)setUp\n" + 
 				"{\n" + 
 				"\t[super setUp];\n" + 
-				"\tNSString *pathToResource = [[NSBundle mainBundle] pathForResource:@\"" + baseJsonFilename + "\" ofType:@\"" + jsonExtension + "\"];\n" + 
+				"\tNSString *pathToResource = [[NSBundle bundleForClass:self.class] pathForResource:@\"" + baseJsonFilename + "\" ofType:@\"" + jsonExtension + "\"];\n" + 
 				"\tNSError *error = nil;\n" + 
 				"\tsampleJson = [NSString stringWithContentsOfFile:pathToResource encoding:NSUTF8StringEncoding error:&error];\n" + 
 				"\tif(error) {\n" + 
-				"\t\tSTFail(@\"Failed to load file: contests.json: %@\", error.localizedDescription);\n" + 
-				"\t}\n" + 
-				"\tdeserialized = [" + className + " fromJsonString:sampleJson];\n" +
-				"\tSTAssertNotNull(deserialized, @\"The " + className + " failed to deserialize properly\");\n" +
+				"\t\tXCTFail(@\"Failed to load file: contests.json: %@\", error.localizedDescription);\n" + 
+				"\t}\n");
+		if(deserializer.isArray()) {
+			builder.append("\tNSDictionary *dict = [[Serializer arrayFromJsonString:sampleJson andError:error] objectAtIndex:0];\n" +
+					"\tXCTAssertNil(error);\n");
+		} else {
+			builder.append("\tNSDictionary *dict = [Serializer fromJsonString:sampleJson];\n");
+		}
+		builder.append("\tdeserialized = [" + className + " fromDictionary:dict];\n" +
+				"\tXCTAssertNotNil(deserialized, @\"The " + className + " failed to deserialize properly\");\n" +
 				"}\n\n");
 		
 		builder.append("- (void)tearDown\n" + 
@@ -273,26 +280,37 @@ public class ObjectiveCGeneration extends CodeGeneration {
 			String name = iter.next();
 			JsonNode childNode = node.get(name);
 			String propertyName = getInterpreter().cleanVariableName(name);
+			String methodPropName = getInterpreter().buildSubClassName("",name);
 			
 			if(isDate(childNode)) {
 				addDateMethods = true;
 				builder.append(generateDateMethods(childNode, propertyName));				
 			} else if(isText(childNode)) {
-				builder.append("-(void)test" + name + "() {\n" +
-					"\tSTAssertEquals(@\"" + childNode.getTextValue() + "\", deserialized." + propertyName + ", @\"Failed to properly deserialize the " + propertyName + "\");\n" + 
+				builder.append("-(void)test" + methodPropName + " {\n" +
+					"\tXCTAssertEqualObjects(@\"" + childNode.getTextValue() + "\", deserialized." + propertyName + ", @\"Failed to properly deserialize the " + propertyName + "\");\n" + 
 					"}\n\n");
 			} else if(isInteger(childNode)) {
-				
+				builder.append("-(void)test" + methodPropName + " {\n" +
+					"\tXCTAssertEqual((NSInteger)" + childNode.getIntValue() + ", deserialized." + propertyName + ", @\"Failed to properly deserialize the " + propertyName + "\");\n" +
+					"}\n\n"
+				);
 			} else if(isFloat(childNode)) {
-				
+				builder.append("-(void)test" + methodPropName + " {\n" +
+					"\tXCTAssertEqualWithAccuracy((CGFloat)" + childNode.getDoubleValue() + ", deserialized." + propertyName + 
+					", (CGFloat)0.01, @\"Failed to properly deserialize the " + propertyName + "\");\n" +
+					"}\n\n"
+				);
 			} else if(isObject(childNode)) {
-				
+				// TODO - this class will need its own test file
 			} else if(isArrayOfObjects(childNode)) {
-				
+				System.out.println("What is it?");
 			} else if(isArrayofArrays(childNode)) {
-				
+				System.out.println("What is it?");
 			} else if(isArray(childNode)) {
-				
+				builder.append("-(void)test" + name + " {\n" +
+					"\tXCTAssertEqual((NSUInteger)" + childNode.size() + ", deserialized." + propertyName + ".count, @\"Failed to properly deserialize the " + propertyName + "\");\n" +
+					"}\n\n"
+				);
 			}
 		}		
 		
@@ -308,7 +326,7 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		return "-(void)testDeserialize" + propertyName + "AsLongDate {\n" +
 				"\tNSDictionary *dict = [self createDictionaryWithObject:[NSNumber numberWithLongLong:DATE_LONG]];\n" + 
 				"\tNSDate *date = [Serializer getDateFromDict:dict forKey:TEST_KEY orDefaultTo:nil];\n" + 
-				"\tSTAssertNotNil(date, @\"The Serializer did not deserialize the date correctly\");\n" + 
+				"\tXCTAssertNotNil(date, @\"The Serializer did not deserialize the date correctly\");\n" + 
 				"}\n\n" + 
 				"-(void)testSerialize" + propertyName + "AsIsoDate {\n" + 
 				"\tNSString *formattedDate = [self formatIsoDateToString:DATE_ISO];\n" + 
@@ -316,12 +334,12 @@ public class ObjectiveCGeneration extends CodeGeneration {
 				"\tNSMutableDictionary *dict = [[NSMutableDictionary alloc]init];\n" + 
 				"\tNSString *key = @\"date\";\n" + 
 				"\t[Serializer setDict:dict dateValue:toSerialize forKey:key];\n" + 
-				"\tSTAssertNotNil([dict objectForKey:key], @\"The Serializer failed to set the date for key: %@\", key);\n" + 
-				"\tSTAssertTrue([[dict objectForKey:key] isKindOfClass:[NSString class]], @\"We're not even getting an NSString back...\");\n" + 
+				"\tXCTAssertNotNil([dict objectForKey:key], @\"The Serializer failed to set the date for key: %@\", key);\n" + 
+				"\tXCTAssertTrue([[dict objectForKey:key] isKindOfClass:[NSString class]], @\"We're not even getting an NSString back...\");\n" + 
 				"\tNSDate *date = [Serializer getDateFromDict:dict forKey:key orDefaultTo:nil];\n" + 
 				"\tNSString *fromDate = [self formatDateToIsoString:date];\n" + 
 				"\t\n" + 
-				"\tSTAssertEqualObjects(fromDate, formattedDate, @\"The Serialization of the date failed\");\n" + 
+				"\tXCTAssertEqualObjects(fromDate, formattedDate, @\"The Serialization of the date failed\");\n" + 
 				"}\n\n" + 
 				"-(void)testDeserialize" + propertyName + "AsZuluDate {\n" + 
 				"\tNSString *formattedDate = [self formatZuluDateToString:DATE_ZULU];\n" + 
@@ -329,17 +347,22 @@ public class ObjectiveCGeneration extends CodeGeneration {
 				"\tNSMutableDictionary *dict = [[NSMutableDictionary alloc]init];\n" + 
 				"\tNSString *key = @\"date\";\n" + 
 				"\t[Serializer setDict:dict dateValue:toSerialize forKey:key];\n" + 
-				"\tSTAssertNotNil([dict objectForKey:key], @\"The Serializer failed to set the date for key: %@\", key);\n" + 
-				"\tSTAssertTrue([[dict objectForKey:key] isKindOfClass:[NSString class]], @\"We're not even getting an NSString back...\");\n" + 
+				"\tXCTAssertNotNil([dict objectForKey:key], @\"The Serializer failed to set the date for key: %@\", key);\n" + 
+				"\tXCTAssertTrue([[dict objectForKey:key] isKindOfClass:[NSString class]], @\"We're not even getting an NSString back...\");\n" + 
 				"\tNSDate *date = [Serializer getDateFromDict:dict forKey:key orDefaultTo:nil];\n" + 
 				"\tNSString *fromDate = [self formatDateToZuluString:date];\n" + 
 				"\t\n" + 
-				"\tSTAssertEqualObjects(fromDate, formattedDate, @\"The Serialization of the date failed\");\n" + 
+				"\tXCTAssertEqualObjects(fromDate, formattedDate, @\"The Serialization of the date failed\");\n" + 
 				"}\n\n";
 	}
 
 	protected String testDateMethods() {
-		return "-(NSString *)formatZuluDateToString:(NSString *)dateString {\n" + 
+		return "-(NSDictionary *)createDictionaryWithObject:(NSObject *)object {\n" + 
+				"\tNSMutableDictionary *dict = [[NSMutableDictionary alloc]init];\n" + 
+				"\t[dict setObject:object forKey:TEST_KEY];\n" + 
+				"\treturn dict;\n" + 
+				"}\n\n" +
+				"-(NSString *)formatZuluDateToString:(NSString *)dateString {\n" + 
 				"\tNSDateFormatter *dateFormat = [NSDateFormatter new];\n" + 
 				"\tdateFormat.dateFormat = @\"yyyy-MM-dd'T'HH:mm:ss.SSSZ\";\n" + 
 				"\tNSDate *parsedDate = [dateFormat dateFromString:DATE_ISO];\n" + 

@@ -15,4 +15,5 @@ public interface TestStrings {
 	final String PROP_DATE_DATE = "{\"" + PROP_NAME + "\": new Date(1415577600000)}";	// Invalid
 	final String PROP_DATE_ISO = "{\"" + PROP_NAME + "\":\"2014-01-01T23:28:56.782-0700\"}";
 	final String PROP_DATE_ZULU = "{\"" + PROP_NAME + "\":\"2014-01-01T23:28:56.782Z\"}";
+	final String PROP_DATE_ISO_2 = "{\"" + PROP_NAME + "\":\"2000-01-01T01:00:00.782-0700\"}";
 }

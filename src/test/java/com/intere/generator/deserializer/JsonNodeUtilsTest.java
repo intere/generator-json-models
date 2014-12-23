@@ -3,9 +3,10 @@ package com.intere.generator.deserializer;
 import static com.intere.generator.test.TestUtils.parseJsonObject;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParseException;
@@ -13,7 +14,7 @@ import org.junit.Test;
 
 import com.intere.generator.test.TestStrings;
 
-public class JsonNodeUtilsTest implements TestStrings {
+public class JsonNodeUtilsTest implements TestStrings {	
 	
 	@Test
 	public void testIsArrayOfObjects() throws Exception {
@@ -48,6 +49,18 @@ public class JsonNodeUtilsTest implements TestStrings {
 	@Test
 	public void testIsDateFromIso() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_DATE_ISO).get(PROP_NAME);
+		assertTrue("ISO Date wasn't identified as JSON date", JsonNodeUtils.isDate(node));
+	}
+	
+	@Test
+	public void testIsDateFromDateLong() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_DATE_LONG).get(PROP_NAME);
+		assertTrue("Long Date wasn't identified as JSON date", JsonNodeUtils.isDate(node));
+	}
+	
+	@Test
+	public void testIsDateFromIsoDate2() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_DATE_ISO_2).get(PROP_NAME);
 		assertTrue("ISO Date wasn't identified as JSON date", JsonNodeUtils.isDate(node));
 	}
 	
