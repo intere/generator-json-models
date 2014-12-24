@@ -11,6 +11,7 @@ import org.apache.commons.cli.PosixParser;
 
 import com.intere.generator.builder.CodeBuilder;
 import com.intere.generator.builder.CodeBuilderFactory;
+import com.intere.generator.io.FileIOUtils;
 
 public class App {
 	private static final String GENERATOR_VERSION = "0.0.2";
@@ -34,45 +35,14 @@ public class App {
 		}
 
 		System.out.println("Using Language: " + language.getFullName());
-		File outputDirectory = getSourceOutputFolder(cmd.getOptionValue('o', "tmp"));
+		File outputDirectory = FileIOUtils.getSourceOutputFolder(cmd.getOptionValue('o', "tmp"));
 		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language, namespace, className, jsonFilename);
 		HashMap<File, String> generatedCode = builder.buildSourceFiles(outputDirectory);
 		CodeBuilderFactory.generateCode(generatedCode);
 		
-		outputDirectory = getTestOutputFolder(cmd.getOptionValue('o', "tmp"));
+		outputDirectory = FileIOUtils.getTestOutputFolder(cmd.getOptionValue('o', "tmp"));
 		HashMap<File, String> generatedTests = builder.buildTestFiles(outputDirectory);
 		CodeBuilderFactory.generateTests(generatedTests);
-	}
-
-	private static File getTestOutputFolder(String outputDir) {
-		File testOutputDir = new File(outputDir + File.separatorChar + "test");
-		if(!testOutputDir.exists()) {
-			System.out.println(outputDir + " does not exist, creating it for you...");
-			if(!testOutputDir.mkdirs()) {
-				System.out.println("Couldn't create output directory, existing...");
-				System.exit(-1);
-			}
-		}
-
-		return testOutputDir;
-	}
-
-	/**
-	 * Handles the creation of the output directory.
-	 * @param outputDir
-	 * @return
-	 */
-	public static File getSourceOutputFolder(String outputDir) {
-		File testOutputDir = new File(outputDir + File.separatorChar + "src");
-		if(!testOutputDir.exists()) {
-			System.out.println(outputDir + " does not exist, creating it for you...");
-			if(!testOutputDir.mkdirs()) {
-				System.out.println("Couldn't create output directory, existing...");
-				System.exit(-1);
-			}
-		}
-
-		return testOutputDir;
 	}
 
 	private static Options getOptions() {

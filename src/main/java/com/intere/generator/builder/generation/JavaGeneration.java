@@ -1,5 +1,7 @@
 package com.intere.generator.builder.generation;
 
+import static com.intere.generator.deserializer.JsonNodeUtils.*;
+
 import java.util.Iterator;
 
 import org.codehaus.jackson.JsonNode;
@@ -21,47 +23,60 @@ public class JavaGeneration extends CodeGeneration {
 		String propType = getNodeType(node, className, name);
 		String getSetName = getInterpreter().buildGetterAndSetterName(name);
 
-		return "\t/**\n" +
-			"\t * Setter for " + propName + " property.\n" +
-			"\t */\n" +
-			"\tpublic void set" + getSetName + "(" + propType + " " + propName + ") {\n" +
-			"\t\tthis." + propName + " = " + propName + ";\n" +
-			"\t}\n\n" +
-			"\t/**\n" +
-			"\t * Getter for " + propName + " property.\n" +
-			"\t */\n" +
-			"\tpublic " + propType + " get" + getSetName + "() {\n" +
-			"\t\treturn " + propName + ";\n" +
-			"\t}\n\n";
+		if(propType.length()>0) {
+			return "\t/**\n" +
+				"\t * Setter for " + propName + " property.\n" +
+				"\t */\n" +
+				"\tpublic void set" + getSetName + "(" + propType + " " + propName + ") {\n" +
+				"\t\tthis." + propName + " = " + propName + ";\n" +
+				"\t}\n\n" +
+				"\t/**\n" +
+				"\t * Getter for " + propName + " property.\n" +
+				"\t */\n" +
+				"\tpublic " + propType + " get" + getSetName + "() {\n" +
+				"\t\treturn " + propName + ";\n" +
+				"\t}\n\n";
+		}
+		return "";
 	}
 
 	public String buildPropertyDeclaration(JsonNode node, String className, String name) {
 		String propName = getInterpreter().cleanVariableName(name);
-
-		return "private " + getNodeType(node, className, name) + " " + propName + ";\n";
+		String nodeType = getNodeType(node, className, name);
+		if(nodeType.length()>0) {
+			return "private " + nodeType + " " + propName + ";\n";
+		}
+		
+		return "";
 	}
 
 	public String getNodeType(JsonNode node, String className, String name) {
 		String subClass = getInterpreter().buildSubClassName(className, name);
-		if(node.isTextual()) {
+		if(isText(node)) {
 			return "String";
-		} else if(node.isInt()) {
+		} else if(isDate(node)) {
+			return "Date";
+		} else if(isInteger(node) || isLong(node)) {
 			return "Long";
-		} else if(node.isFloatingPointNumber()) {
+		} else if(isFloat(node)) {
 			return "Double";
-		} else if(node.isBoolean()) {
+		} else if(isBoolean(node)) {
 			return "Boolean";
-		} else if(node.isObject()) {
+		} else if(isObject(node)) {
 			return subClass;
-		} else if(node.isArray()) {
-			if(node.iterator().hasNext()) {
-				return "List<" + getNodeType(node.iterator().next(), className, name) + ">";
-			} else {
-				return "List";
+		} else if(isArrayOfObjects(node)) {
+			return "List<" + getNodeType(node.iterator().next(), className, name) + ">";
+		} else if(isArrayofArrays(node)) {
+			return "List<List>";
+		} else if(isArray(node)) {
+			if(node.size()>0) {
+				return "List<" + getNodeType(node.get(0), className, name) + ">";
 			}
+			return "List";
+		} else {
+			System.out.println("Unknown Node type: " + node.toString() + ", defaulting to String");
+			return "String";
 		}
-
-		return "";
 	}
 
 	@Override
@@ -82,14 +97,19 @@ public class JavaGeneration extends CodeGeneration {
 				" */\n\n");
 		builder.append("package " + packageName + ";\n\n");
 		builder.append("import java.util.List;\n" +
+				"import java.util.Date;\n" +
 				"import java.io.Serializable;\n");
 
-		builder.append("\n\npublic class " + className + " implements Serializable {\n");
+		builder.append("\n\n@SuppressWarnings(\"serial\")\n" + 
+				"public class " + className + " implements Serializable {\n");
 
 		Iterator<String> iter = node.getFieldNames();
 		while(iter.hasNext()) {
 			String name = iter.next();
-			builder.append("\t" + buildPropertyDeclaration(node.get(name), className, name));
+			String declaration = buildPropertyDeclaration(node.get(name), className, name);
+			if(declaration.length()>0) {
+				builder.append("\t" + declaration);
+			}
 		}
 
 		builder.append("\n");
@@ -107,8 +127,12 @@ public class JavaGeneration extends CodeGeneration {
 	
 	@Override
 	public String generateTestFile(JsonDeserializer deserializer, String jsonFilename, String jsonTestFilename) {
-		// TODO Auto-generated method stub
-		return null;
+		String className = deserializer.getName();
+		String testClassName = deserializer.getTestFilename();
+		JsonNode node = deserializer.getNode();
+		String jsonExtension = getExtensionFromFilename(jsonFilename);
+		
+		return "";
 	}
 
 	@Override

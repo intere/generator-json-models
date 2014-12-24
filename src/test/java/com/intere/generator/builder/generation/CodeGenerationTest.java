@@ -7,6 +7,7 @@ import com.intere.generator.deserializer.JsonDeserializer;
 import com.intere.generator.test.TestStrings;
 
 public class CodeGenerationTest implements TestStrings {
+	@SuppressWarnings("unused")
 	private CodeGeneration codeGen;
 	
 	@Before
@@ -22,6 +23,6 @@ public class CodeGenerationTest implements TestStrings {
 		@Override
 		public String generateHeaderFile(JsonDeserializer deserializer) {return null;}
 		@Override
-		public String generateTestFile(JsonDeserializer deserializer, String jsonFilename) {return null;}
+		public String generateTestFile(JsonDeserializer deserializer,String jsonFilename, String testJsonFilename) {return null;}
 	}
 }

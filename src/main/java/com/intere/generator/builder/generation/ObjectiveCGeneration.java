@@ -1,7 +1,6 @@
 package com.intere.generator.builder.generation;
 
 import static com.intere.generator.deserializer.JsonNodeUtils.getExtensionFromFilename;
-import static com.intere.generator.deserializer.JsonNodeUtils.getFilenameWithoutPathWithoutExtension;
 import static com.intere.generator.deserializer.JsonNodeUtils.isArray;
 import static com.intere.generator.deserializer.JsonNodeUtils.isArrayOfObjects;
 import static com.intere.generator.deserializer.JsonNodeUtils.isArrayofArrays;
@@ -227,7 +226,7 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		String className = deserializer.getName();
 		String testClassName = deserializer.getTestFilename();
 		JsonNode node = deserializer.getNode();
-		String baseJsonFilename = getFilenameWithoutPathWithoutExtension(jsonFilename);
+//		String baseJsonFilename = getFilenameWithoutPathWithoutExtension(jsonFilename);
 		String jsonExtension = getExtensionFromFilename(jsonFilename);
 		
 		StringBuilder builder = new StringBuilder();

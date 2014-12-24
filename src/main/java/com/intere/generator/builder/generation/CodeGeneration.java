@@ -6,13 +6,16 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.intere.generator.builder.interpreter.InterpreterUtils;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
-import com.intere.generator.deserializer.JsonNodeUtils;
 
 public abstract class CodeGeneration {
+	private ObjectMapper jsonMapper = new ObjectMapper();
 	
 	/**
 	 * Gets you the {@link JsonDeserializer} as a prerequisite to doing the code building.
@@ -63,8 +66,8 @@ public abstract class CodeGeneration {
 		return new Date().toString();
 	}
 
-	public String generateTestJson(JsonDeserializer generated) {
-		return generated.getNode().toString();
+	public String generateTestJson(JsonDeserializer generated) throws JsonGenerationException, JsonMappingException, IOException {
+		return jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(generated.getNode());
 	}
 
 	public String getTestJsonFilename(JsonDeserializer generated) {
