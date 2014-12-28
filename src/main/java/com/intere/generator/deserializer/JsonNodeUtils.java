@@ -16,7 +16,6 @@ import org.codehaus.jackson.JsonNode;
  */
 public class JsonNodeUtils {
 	private static final DateFormat ZULU_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-//	private static final DateFormat ISO_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 	private static final DateFormat ISO_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 	/**
@@ -111,11 +110,29 @@ public class JsonNodeUtils {
 				long y2k = ISO_DATE.parse("2014-01-01T23:28:56.782-0700").getTime();
 				return found.getTime() > y2k;
 			} catch (ParseException ex) {
-				ex.printStackTrace();
 				// Not a Long Date (greater than 2000)
 			}			
 		}
 		return false;
+	}
+	
+	public static Date getDateFromNode(JsonNode node) {
+		if(null != node) {
+			if(isDate(node)) {
+				try {
+					return ZULU_DATE.parse(node.getTextValue());
+				} catch(Exception ex) {
+					// Not a ZULU Date
+				}
+				try {
+					return ISO_DATE.parse(node.getTextValue());
+				} catch (Exception ex) {
+					// Not an ISO Date
+				}
+				return new Date(node.getLongValue());
+			}
+		}
+		return null;
 	}
 	
 	public static String getFilenameWithoutPathWithoutExtension(String filename) {

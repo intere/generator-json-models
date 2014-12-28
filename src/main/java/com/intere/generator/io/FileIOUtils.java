@@ -2,20 +2,7 @@ package com.intere.generator.io;
 
 import java.io.File;
 
-public class FileIOUtils {
-	public static File getTestOutputFolder(String outputDir) {
-		return createFolderIfNotExists(outputDir + File.separatorChar + "test");
-	}
-	
-	/**
-	 * Handles the creation of the output directory.
-	 * @param outputDir
-	 * @return
-	 */
-	public static File getSourceOutputFolder(String outputDir) {
-		return createFolderIfNotExists(outputDir + File.separatorChar + "src");
-	}
-	
+public class FileIOUtils {	
 	public static File createFolderIfNotExists(String folderPath) {
 		File testFolder = new File(folderPath);
 		if(testFolderCreateIfDoesNotExist(testFolder)) {

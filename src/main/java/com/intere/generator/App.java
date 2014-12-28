@@ -35,12 +35,11 @@ public class App {
 		}
 
 		System.out.println("Using Language: " + language.getFullName());
-		File outputDirectory = FileIOUtils.getSourceOutputFolder(cmd.getOptionValue('o', "tmp"));
+		File outputDirectory = FileIOUtils.createFolderIfNotExists(cmd.getOptionValue('o', "tmp"));
 		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language, namespace, className, jsonFilename);
 		HashMap<File, String> generatedCode = builder.buildSourceFiles(outputDirectory);
 		CodeBuilderFactory.generateCode(generatedCode);
 		
-		outputDirectory = FileIOUtils.getTestOutputFolder(cmd.getOptionValue('o', "tmp"));
 		HashMap<File, String> generatedTests = builder.buildTestFiles(outputDirectory);
 		CodeBuilderFactory.generateTests(generatedTests);
 	}

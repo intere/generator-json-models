@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.intere.generator.builder.generation.ObjectiveCGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
+import com.intere.generator.io.FileIOUtils;
 
 /**
  * Code Builder for Objective-C.
@@ -37,6 +38,8 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 			allDeserializers.addAll(list);
 		}
 		
+		parentDirectory = FileIOUtils.createFolderIfNotExists(parentDirectory.getAbsolutePath() 
+				+ File.separator + "src");
 		for(JsonDeserializer generated : allDeserializers) {
 			File headerFile = new File(parentDirectory, generated.getFilename() + ".h");
 			sourceCode.put(headerFile, generation.generateHeaderFile(generated));
@@ -59,6 +62,9 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 		for(List<JsonDeserializer> list : getDeserializer().getSubClasses().values()) {
 			allDeserializers.addAll(list);
 		}
+		
+		parentDirectory = FileIOUtils.createFolderIfNotExists(parentDirectory.getAbsolutePath() 
+				+ File.separator + "test");
 		
 		for(JsonDeserializer generated : allDeserializers) {
 			File implementationFile = new File(parentDirectory, generated.getTestFilename() + ".m");
