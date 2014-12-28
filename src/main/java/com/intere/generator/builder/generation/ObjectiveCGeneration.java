@@ -290,8 +290,8 @@ public class ObjectiveCGeneration extends CodeGeneration {
 				);
 			} else if(isFloat(childNode)) {
 				builder.append("-(void)test" + methodPropName + " {\n" +
-					"\tXCTAssertEqualWithAccuracy((CGFloat)" + childNode.getDoubleValue() + ", deserialized." + propertyName + 
-					", (CGFloat)0.01, @\"Failed to properly deserialize the " + propertyName + "\");\n" +
+					"\tXCTAssertEqualWithAccuracy(" + childNode.getDoubleValue() + ", deserialized." + propertyName + 
+					", 0.01, @\"Failed to properly deserialize the " + propertyName + "\");\n" +
 					"}\n\n"
 				);
 			} else if(isObject(childNode)) {
