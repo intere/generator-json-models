@@ -33,12 +33,13 @@ public class ObjectiveCGenerationTest implements TestStrings {
 		assertEquals("object.prop1 = [Serializer safeGetDictString:dict withKey:SERIALIZE_PROP1];\n", result);
 	}
 	
-	@Test
+	/*@Test
 	public void testBuildGenerateDeserializePropertyFromLongDate() throws IOException {
 		JsonNode node = parseJsonObject(PROP_DATE_LONG);
 		String result = generator.buildGenerateDeserializePropertyString(node.get(PROP_NAME), "Foo",  PROP_NAME);
 		assertEquals("object.prop1 = [Serializer getIntegerFromDict:dict forKey:SERIALIZE_PROP1 orDefaultTo:0];\n", result);
 	}
+	*/
 	
 	@Test
 	public void testBuildGenerateDeserializePropertyStringFromArrayOfStrings() throws JsonParseException, IOException {

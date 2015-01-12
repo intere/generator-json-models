@@ -405,7 +405,7 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		if(isText(node)) {
 			return "[Serializer setDict:dict object:self." + variableName + " forKey:" + defName + "];\n";
 		} else if(isDate(node)) {
-			return "[Serializer setDict:dict dateValue:self." + variableName + " forKey:key];";
+			return "[Serializer setDict:dict dateValue:self." + variableName + " forKey:" + defName + "];\n";
 		} else if(isInteger(node) || isLong(node)) {
 			return "[Serializer setDict:dict intValue:self." + variableName + " forKey:" + defName + "];\n";	
 		} else if(isFloat(node)) {
@@ -472,7 +472,7 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		if(isText(node)) {
 			return "object." + variableName + " = [Serializer safeGetDictString:dict withKey:" + defName + "];\n";
 		} else if(isDate(node)) {
-			return "object." + variableName + " = [Serializer getDateFromDict:dict withKey:" + defName + " orDefaultTo:nil];\n";
+			return "object." + variableName + " = [Serializer getDateFromDict:dict forKey:" + defName + " orDefaultTo:nil];\n";
 		} else if(isInteger(node) || isLong(node)) {
 			return "object." + variableName + " = [Serializer getIntegerFromDict:dict forKey:" + defName + " orDefaultTo:0];\n";
 		} else if(isFloat(node)) {

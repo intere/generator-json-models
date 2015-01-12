@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.intere.generator.builder.generation.RubyGeneration;
+import com.intere.generator.builder.interpreter.InterpreterUtils;
+import com.intere.generator.builder.interpreter.RubyInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
 
 public class RubyCodeBuilder extends CodeBuilder {
@@ -30,12 +32,20 @@ public class RubyCodeBuilder extends CodeBuilder {
 		}
 		
 		for(JsonDeserializer generated : allDeserializers) {
-			File implementationFile = new File(parentDirectory, generated.getFilename() + ".rb");
+			File implementationFile = new File(parentDirectory, getRubyNamespacePath(namespace) + generated.getFilename() + ".rb");
 			sourceCode.put(implementationFile, generation.generateImplementationFile(generated));
 		}
 		sourceCode.put(new File(parentDirectory, "json_model.rb"), readJsonModelFile());
 		
 		return sourceCode;
+	}
+	
+	protected String getRubyNamespacePath(String namespace) {
+		if(null==namespace) {
+			return "";
+		}
+		
+		return InterpreterUtils.capsToUnderscores(namespace) + File.separator;
 	}
 	
 	@Override

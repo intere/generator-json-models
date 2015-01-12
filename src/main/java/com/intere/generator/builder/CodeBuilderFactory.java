@@ -13,7 +13,7 @@ import com.intere.generator.Language;
  *
  */
 public class CodeBuilderFactory {
-	
+
 	/**
 	 * Performs the actual writing of the generated files.
 	 * @param generatedCode
@@ -21,27 +21,30 @@ public class CodeBuilderFactory {
 	 */
 	public static void generateCode(HashMap<File, String> generatedCode) throws IOException {
 		for(File f : generatedCode.keySet()) {
+			new File(f.getParent()).mkdirs();
 			FileOutputStream out = new FileOutputStream(f);
 			out.write(generatedCode.get(f).getBytes());
 			out.close();
 			System.out.println("Generated Source File: " + f.getAbsolutePath());
 		}
 	}
-	
+
 	/**
 	 * Performs the writing of the generated test files to disk.
 	 * @param generatedCode
 	 * @throws IOException
 	 */
 	public static void generateTests(HashMap<File, String> generatedCode) throws IOException {
-		for(File f : generatedCode.keySet()) {
-			FileOutputStream out = new FileOutputStream(f);
-			out.write(generatedCode.get(f).getBytes());
-			out.close();
-			System.out.println("Generated TestFile: " + f.getAbsolutePath());
+		if(null != generatedCode) {
+			for(File f : generatedCode.keySet()) {
+				FileOutputStream out = new FileOutputStream(f);
+				out.write(generatedCode.get(f).getBytes());
+				out.close();
+				System.out.println("Generated TestFile: " + f.getAbsolutePath());
+			}
 		}
 	}
-	
+
 	public static CodeBuilder getCodeBuilderFactory(Language lang, String namespace, String className, String jsonFilename) throws IOException {
 		if(null != lang) {
 			switch(lang) {
@@ -56,7 +59,7 @@ public class CodeBuilderFactory {
 			}
 			}
 		}
-		
+
 		throw new IllegalArgumentException("Unsupported Language: " + lang.getFullName());
 	}
 }
