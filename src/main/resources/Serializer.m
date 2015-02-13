@@ -126,6 +126,25 @@ static NSDateFormatter *ZULU_FORMATTER;
 }
 
 #pragma mark Serialization Methods
++(NSString *)jsonStringFromArray:(NSArray *)array {
+    return [Serializer jsonStringFromArray:array withPrettyPrint:NO];
+}
+
++(NSString *)jsonStringFromArray:(NSArray *)array withPrettyPrint:(BOOL)prettyPrint {
+    NSError *error;
+    NSJSONWritingOptions opts = (prettyPrint ? NSJSONWritingPrettyPrinted : 0);
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:opts error:&error];
+    
+    
+    if (! jsonData) {
+        EILogError(@"Serializer jsonStringFromDictionary: error: %@", error.localizedDescription);
+    } else {
+        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    return nil;
+}
 
 +(NSString *)jsonStringFromDictionary:(NSDictionary *)dict {
     return [Serializer jsonStringFromDictionary:dict withPrettyPrint:NO];
