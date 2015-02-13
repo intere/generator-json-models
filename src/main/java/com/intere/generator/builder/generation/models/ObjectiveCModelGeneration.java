@@ -50,12 +50,15 @@ public class ObjectiveCModelGeneration extends CodeGeneration {
 		JsonNode node = deserializer.getNode();
 		StringBuilder builder = new StringBuilder();
 		builder.append(generateHeaderCommentBlock(className + ".h"));
+		
+		builder.append("#import <Foundation/Foundation.h>\n");
 
 		if(subClasses.containsKey(className)) {
 			for(JsonDeserializer des : subClasses.get(className)) {
 				builder.append("#import \"" + des.getName() + ".h\"\n");
 			}
 		}
+		builder.append("\n");
 
 		builder.append("@interface " + className + " : NSObject\n\n" +
 				"//\n" +
@@ -281,7 +284,7 @@ public class ObjectiveCModelGeneration extends CodeGeneration {
 				builder.append(generateDateMethods(childNode, propertyName));
 			} else if(isText(childNode)) {
 				builder.append("-(void)test" + methodPropName + " {\n" +
-					"\tXCTAssertEqualObjects(@\"" + childNode.getTextValue() + "\", deserialized." + propertyName + ", @\"Failed to properly deserialize the " + propertyName + "\");\n" +
+					"\tXCTAssertEqualObjects(@\"" + childNode.getTextValue().replaceAll("\"","\\\\\"") + "\", deserialized." + propertyName + ", @\"Failed to properly deserialize the " + propertyName + "\");\n" +
 					"}\n\n");
 			} else if(isInteger(childNode)) {
 				builder.append("-(void)test" + methodPropName + " {\n" +

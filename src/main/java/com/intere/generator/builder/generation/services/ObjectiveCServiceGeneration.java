@@ -21,6 +21,7 @@ public class ObjectiveCServiceGeneration extends ServiceCodeGeneration {
 		String listenerProtocolName = modelClassName + "Listener";
 		StringBuilder builder = new StringBuilder();
 		builder.append(generateHeaderCommentBlock(serviceClassName + ".h"));
+		builder.append("#import <Foundation/Foundation.h>\n\n");
 		
 		// Listener Protocol declaration
 		builder.append("@protocol " + listenerProtocolName + ";\n\n");
@@ -49,7 +50,7 @@ public class ObjectiveCServiceGeneration extends ServiceCodeGeneration {
 		builder.append(comment("Interface that listeners will implement to be notified of changes to the data model") + "\n");
 		builder.append("@protocol " + listenerProtocolName + "<NSObject>\n");
 		builder.append(comment("Notifies listeners of updates to the data model") + "\n");
-		builder.append("-(void)updated" + modelClassName + ":(NSArray *)arrayOf" + modelClassName + ");\n\n");
+		builder.append("-(void)updated" + modelClassName + ":(NSArray *)arrayOf" + modelClassName + ";\n\n");
 		builder.append("@end\n\n");
 		
 		return builder.toString();
@@ -67,9 +68,9 @@ public class ObjectiveCServiceGeneration extends ServiceCodeGeneration {
 		StringBuilder builder = new StringBuilder();
 		builder.append(generateHeaderCommentBlock(serviceClassName + ".m"));
 		
-		builder.append("#import \"" + serviceClassName + "\"\n\n");
+		builder.append("#import \"" + serviceClassName + ".h\"\n\n");
 		
-		builder.append("@interface " + serviceClassName + " {\n");
+		builder.append("@interface " + serviceClassName + "() {\n");
 		builder.append("\tNSArray *" + modelArrayName + ";\n" );
 		builder.append("\tNSMutableArray *listeners;");
 		builder.append("}\n");
@@ -82,7 +83,7 @@ public class ObjectiveCServiceGeneration extends ServiceCodeGeneration {
 		builder.append("\tself = [super init];\n");
 		builder.append("\tif(self) {\n");
 		builder.append("\t\tlisteners = [[NSMutableArray alloc]init];\n");
-		builder.append("\t\t" + modelArrayName + " = [[NSArray alloc]init]\n");
+		builder.append("\t\t" + modelArrayName + " = [[NSArray alloc]init];\n");
 		builder.append("\t}\n");
 		builder.append("\treturn self;\n");
 		builder.append("}\n\n");
