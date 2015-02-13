@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.intere.generator.builder.generation.ObjectiveCGeneration;
+import com.intere.generator.builder.generation.models.ObjectiveCModelGeneration;
+import com.intere.generator.builder.generation.services.ObjectiveCServiceGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 import com.intere.generator.io.FileIOUtils;
 
@@ -23,7 +24,7 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 	 * @throws IOException
 	 */
 	public ObjectiveCCodeBuilder(String className, String jsonFilename) throws IOException {
-		super(null, className, jsonFilename, new ObjectiveCGeneration());
+		super(null, className, jsonFilename, new ObjectiveCModelGeneration(), new ObjectiveCServiceGeneration());
 	}
 	
 	/**
@@ -74,6 +75,20 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 		for(JsonDeserializer generated : allDeserializers) {
 			sourceCode.put(new File(parentDirectory, generation.getTestJsonFilename(generated) + ".json"), generation.generateTestJson(generated));
 		}
+		
+		return sourceCode;
+	}
+	
+	@Override
+	public HashMap<File, String> buildServiceFiles(File parentDirectory) throws IOException {
+		parentDirectory = FileIOUtils.createFolderIfNotExists(parentDirectory.getAbsolutePath() 
+				+ File.separator + "src");
+		HashMap<File, String> sourceCode = new HashMap<File, String>();
+		File headerFile = new File(parentDirectory, getDeserializer().getServiceFilename() + ".h");
+		sourceCode.put(headerFile, serviceGeneration.generateHeaderFile(getDeserializer()));
+		
+		File implementationFile = new File(parentDirectory, getDeserializer().getServiceFilename() + ".m");
+		sourceCode.put(implementationFile, serviceGeneration.generateImplementationFile(getDeserializer()));
 		
 		return sourceCode;
 	}

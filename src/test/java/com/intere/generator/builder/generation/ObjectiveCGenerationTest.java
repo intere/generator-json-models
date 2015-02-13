@@ -12,15 +12,16 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.intere.generator.builder.generation.models.ObjectiveCModelGeneration;
 import com.intere.generator.test.TestStrings;
 
 public class ObjectiveCGenerationTest implements TestStrings {
 	
-	private ObjectiveCGeneration generator;
+	private ObjectiveCModelGeneration generator;
 	
 	@Before
 	public void setUp() {
-		generator = new ObjectiveCGeneration();
+		generator = new ObjectiveCModelGeneration();
 	}
 	
 	//

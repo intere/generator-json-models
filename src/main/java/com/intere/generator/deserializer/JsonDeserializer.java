@@ -21,6 +21,7 @@ public class JsonDeserializer {
 	private JsonNode node;
 	private String name;
 	private String filename;
+	private String serviceFilename;
 	private String testFilename;
 	private String namespace;
 	private NavigableMap<String, List<JsonDeserializer>> subClasses;
@@ -49,6 +50,7 @@ public class JsonDeserializer {
 		this.name = name;
 		this.json = json;
 		this.filename = interpreter.buildFilenameFromClassname(name);
+		this.serviceFilename = interpreter.buildServiceFilenameFromClassname(name);
 		this.testFilename = interpreter.buildTestfilenameFromClassname(name);
 		parseJson();
 		buildObjectNodeTree();
@@ -117,6 +119,10 @@ public class JsonDeserializer {
 		return filename;
 	}
 	
+	public String getServiceFilename() {
+		return serviceFilename;
+	}
+
 	public String getName() {
 		return name;
 	}

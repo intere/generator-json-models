@@ -1,4 +1,4 @@
-package com.intere.generator.builder.generation;
+package com.intere.generator.builder.generation.models;
 
 import java.io.File;
 import java.util.Iterator;
@@ -6,13 +6,14 @@ import java.util.Iterator;
 import org.codehaus.jackson.JsonNode;
 
 import com.intere.generator.App;
+import com.intere.generator.builder.generation.CodeGeneration;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.RubyInterpreter;
+import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
 import com.intere.generator.deserializer.JsonNodeUtils;
 
-public class RubyGeneration extends CodeGeneration {
-	private static final RubyInterpreter INTERPRETER = new RubyInterpreter();
+public class RubyModelGeneration extends CodeGeneration {
+	private static final RubyModelInterpreter INTERPRETER = new RubyModelInterpreter();
 
 	@Override
 	public String generateHeaderFile(JsonDeserializer deserializer) {

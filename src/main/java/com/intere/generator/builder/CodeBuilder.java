@@ -13,10 +13,12 @@ import org.apache.commons.io.IOUtils;
 
 import com.intere.generator.App;
 import com.intere.generator.builder.generation.CodeGeneration;
+import com.intere.generator.builder.generation.services.ServiceCodeGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 
 public abstract class CodeBuilder {	
 	protected CodeGeneration generation;
+	protected ServiceCodeGeneration serviceGeneration;
 	protected String className;
 	protected String jsonFilename;
 	protected JsonDeserializer deserializer;
@@ -29,11 +31,12 @@ public abstract class CodeBuilder {
 	 * @param generation
 	 * @throws IOException
 	 */
-	public CodeBuilder(String namespace, String className, String jsonFilename, CodeGeneration generation) throws IOException {
+	public CodeBuilder(String namespace, String className, String jsonFilename, CodeGeneration generation, ServiceCodeGeneration serviceGeneration) throws IOException {
 		this.namespace = namespace;
 		this.className = className;
 		this.jsonFilename = jsonFilename;
 		this.generation = generation;
+		this.serviceGeneration = serviceGeneration;
 		this.deserializer = generation.parseJson(namespace, className, jsonFilename);
 	}
 	
@@ -52,6 +55,14 @@ public abstract class CodeBuilder {
 	 * @throws IOException
 	 */
 	public abstract HashMap<File, String> buildTestFiles(File parentDirectory) throws IOException;
+	
+	/**
+	 * Given a {@link JsonDeserializer}, this method will hand you back a {@link HashMap} of all of the Service files (and their generated source).
+	 * @param parentDirFile The parent directory where the Files will be generated into.
+	 * @return A {@link HashMap} of {@link File}, {@link String} (test file + source json).
+	 * @throws IOException
+	 */
+	public abstract HashMap<File, String> buildServiceFiles(File parentDirFile) throws IOException;
 	
 	public String getClassName() {
 		return className;

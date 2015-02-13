@@ -1,6 +1,8 @@
-package com.intere.generator.builder.interpreter;
+package com.intere.generator.builder.interpreter.models;
 
-public class JavaInterpreter implements JsonLanguageInterpreter {
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+
+public class JavaModelInterpreter implements JsonLanguageInterpreter {
 	/**
 	 * Cleans a Variable Name (ensures there is no leading "_" and that the first character is lower case).
 	 * @param propertyName The variable name to clean up to ensure it's a valid variable name.
@@ -19,6 +21,10 @@ public class JavaInterpreter implements JsonLanguageInterpreter {
         String result = new String(stringArray).replaceAll("_", "");
         
         return result;
+	}
+	
+	public String buildClassName(String propertyName) {
+		return buildSubClassName("", propertyName);
 	}
 	
 	/**
@@ -52,6 +58,10 @@ public class JavaInterpreter implements JsonLanguageInterpreter {
 
 	public String buildFilenameFromClassname(String className) {
 		return className;
+	}
+	
+	public String buildServiceFilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "Service";
 	}
 	
 	public String buildTestfilenameFromClassname(String className) {

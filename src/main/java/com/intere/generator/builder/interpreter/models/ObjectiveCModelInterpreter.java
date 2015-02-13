@@ -1,6 +1,8 @@
-package com.intere.generator.builder.interpreter;
+package com.intere.generator.builder.interpreter.models;
 
-public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+
+public class ObjectiveCModelInterpreter implements JsonLanguageInterpreter {
 
 	/**
 	 * Cleans a Variable Name (ensures there is no leading "_" and that the first character is lower case).
@@ -24,6 +26,10 @@ public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
         String result = new String(stringArray).replaceAll("_", "");
         
         return result;
+	}
+	
+	public String buildClassName(String propertyName) {
+		return buildSubClassName("", propertyName);
 	}
 	
 	/**
@@ -73,6 +79,10 @@ public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
 
 	public String buildFilenameFromClassname(String className) {
 		return className;
+	}
+	
+	public String buildServiceFilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "Service";
 	}
 	
 	public String buildTestfilenameFromClassname(String className) {

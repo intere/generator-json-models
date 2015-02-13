@@ -4,9 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
+
 public class JavaInterpreterTest {
 	
-	private JavaInterpreter interpreter = new JavaInterpreter();
+	private JavaModelInterpreter interpreter = new JavaModelInterpreter();
 
 	@Test
 	public void testCleanVariableName() {

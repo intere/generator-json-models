@@ -1,10 +1,17 @@
-package com.intere.generator.builder.interpreter;
+package com.intere.generator.builder.interpreter.models;
+
+import com.intere.generator.builder.interpreter.InterpreterUtils;
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 
 
-public class RubyInterpreter implements JsonLanguageInterpreter {
+public class RubyModelInterpreter implements JsonLanguageInterpreter {
 
 	public String cleanVariableName(String propertyName) {
 		return InterpreterUtils.capsToUnderscores(propertyName);
+	}
+	
+	public String buildClassName(String propertyName) {
+		return buildSubClassName("", propertyName);
 	}
 
 	public String buildSubClassName(String parentClassName, String propertyName) {
@@ -29,6 +36,10 @@ public class RubyInterpreter implements JsonLanguageInterpreter {
 
 	public String buildFilenameFromClassname(String className) {
 		return InterpreterUtils.capsToUnderscores(className);
+	}
+	
+	public String buildServiceFilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "_service";
 	}
 	
 	public String buildTestfilenameFromClassname(String className) {

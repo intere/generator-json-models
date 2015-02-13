@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.intere.generator.builder.generation.RubyGeneration;
+import com.intere.generator.builder.generation.models.RubyModelGeneration;
 import com.intere.generator.builder.interpreter.InterpreterUtils;
-import com.intere.generator.builder.interpreter.RubyInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
 
 public class RubyCodeBuilder extends CodeBuilder {
@@ -19,7 +18,7 @@ public class RubyCodeBuilder extends CodeBuilder {
 	 * @throws IOException
 	 */
 	public RubyCodeBuilder(String namespace, String className, String jsonFilename) throws IOException {
-		super(namespace, className, jsonFilename, new RubyGeneration());		
+		super(namespace, className, jsonFilename, new RubyModelGeneration(), null);	// TODO - implement ruby service code generation	
 	}
 
 	public HashMap<File, String> buildSourceFiles(File parentDirectory) throws IOException {
@@ -50,6 +49,13 @@ public class RubyCodeBuilder extends CodeBuilder {
 	
 	@Override
 	public HashMap<File, String> buildTestFiles(File parentDirectory) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public HashMap<File, String> buildServiceFiles(File parentDirFile)
+			throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}

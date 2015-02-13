@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.intere.generator.builder.generation.JavaGeneration;
+import com.intere.generator.builder.generation.models.JavaModelGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 import com.intere.generator.io.FileIOUtils;
 
 public class JavaCodeBuilder extends CodeBuilder {
 	public JavaCodeBuilder(String namespace, String className, String jsonFilename) throws IOException {
-		super(namespace, className, jsonFilename, new JavaGeneration());
+		super(namespace, className, jsonFilename, new JavaModelGeneration(), null);	// TODO implement Java Service Code Generation
 	}
 
 	public HashMap<File, String> buildSourceFiles(File parentDirectory) throws IOException {		
@@ -22,8 +22,7 @@ public class JavaCodeBuilder extends CodeBuilder {
 		allDeserializers.add(getDeserializer());
 		for(List<JsonDeserializer> list : getDeserializer().getSubClasses().values()) {
 			allDeserializers.addAll(list);
-		}
-		
+		}		
 		
 		// Source Files
 		File sourceDir = FileIOUtils.createFolderIfNotExists(parentDirectory 
@@ -64,5 +63,12 @@ public class JavaCodeBuilder extends CodeBuilder {
 		}
 				
 		return sourceCode;
+	}
+	
+	@Override
+	public HashMap<File, String> buildServiceFiles(File parentDirFile)
+			throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
