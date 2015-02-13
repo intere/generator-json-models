@@ -27,7 +27,8 @@ public class App {
 		String jsonFilename = cmd.getOptionValue("f");
 		String namespace = cmd.getOptionValue("ns", "com.json.generated");
 		Language language = Language.fromAbbreviation(cmd.getOptionValue('l', "objc"));
-		boolean genServices = cmd.hasOption("svcs");		
+		boolean genServices = cmd.hasOption("svcs");
+		boolean genViews = cmd.hasOption("vw");
 
 		if(null == className || null == jsonFilename) {
 			System.out.println("ERROR: Invalid Usage: " + stringArrayToString(args) + "...\n\n");
@@ -45,6 +46,11 @@ public class App {
 			HashMap<File, String> generatedServices = builder.buildServiceFiles(outputDirectory);
 			CodeBuilderFactory.generateCode(generatedServices);
 		}
+		
+		if(genViews) {
+			HashMap<File, String> generatedViews = builder.buildViewFiles(outputDirectory);
+			CodeBuilderFactory.generateCode(generatedViews);
+		}
 
 		
 		HashMap<File, String> generatedTests = builder.buildTestFiles(outputDirectory);
@@ -59,7 +65,8 @@ public class App {
 		options.addOption("f", "input-file", true, "The Input (JSON) File to read to generate the class");
 		options.addOption("o", "output-location", true, "Where do you want the generated code to go?");
 		options.addOption("ns", "namespace", true, "The Namespace (ruby) or Package (java) that the generated code should live in");
-		options.addOption("svcs", "services", false, "Additionally, you'd like to generate services to go along with the models");
+		options.addOption("svcs", "generate-services", false, "Additionally, you'd like to generate services to go along with the models");
+		options.addOption("vw", "generate-views", false, "Additionally, you'd like to generate views to go along with the models");
 
 		return options;
 	}

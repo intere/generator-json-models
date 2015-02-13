@@ -64,6 +64,10 @@ public class JavaModelInterpreter implements JsonLanguageInterpreter {
 		return buildFilenameFromClassname(className) + "Service";
 	}
 	
+	public String buildViewFilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "View";
+	}
+	
 	public String buildTestfilenameFromClassname(String className) {
 		return buildFilenameFromClassname(className) + "Test";
 	}

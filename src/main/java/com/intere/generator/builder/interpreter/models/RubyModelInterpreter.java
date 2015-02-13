@@ -42,6 +42,10 @@ public class RubyModelInterpreter implements JsonLanguageInterpreter {
 		return buildFilenameFromClassname(className) + "_service";
 	}
 	
+	public String buildViewFilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "_view";
+	}
+	
 	public String buildTestfilenameFromClassname(String className) {
 		return buildFilenameFromClassname(className) + "_spec";
 	}

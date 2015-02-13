@@ -59,5 +59,12 @@ public interface JsonLanguageInterpreter {
 	 * @param propertyName
 	 * @return
 	 */
-	String buildGetterAndSetterName(String propertyName);	
+	String buildGetterAndSetterName(String propertyName);
+	
+	/**
+	 * What should the view classname (no extension) be (using the provided class name).
+	 * @param className the Class Name.
+	 * @return The base view filename (no extension) based on the provided class name.
+	 */
+	String buildViewFilenameFromClassname(String className);	
 }

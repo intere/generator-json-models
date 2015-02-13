@@ -12,7 +12,7 @@ import com.intere.generator.io.FileIOUtils;
 
 public class JavaCodeBuilder extends CodeBuilder {
 	public JavaCodeBuilder(String namespace, String className, String jsonFilename) throws IOException {
-		super(namespace, className, jsonFilename, new JavaModelGeneration(), null);	// TODO implement Java Service Code Generation
+		super(namespace, className, jsonFilename, new JavaModelGeneration(), null, null);	// TODO implement Java Service Code Generation
 	}
 
 	public HashMap<File, String> buildSourceFiles(File parentDirectory) throws IOException {		
@@ -66,9 +66,17 @@ public class JavaCodeBuilder extends CodeBuilder {
 	}
 	
 	@Override
-	public HashMap<File, String> buildServiceFiles(File parentDirFile)
+	public HashMap<File, String> buildServiceFiles(File parentDirectory)
 			throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public HashMap<File, String> buildViewFiles(File parentDirectory)
+			throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

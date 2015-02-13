@@ -18,7 +18,7 @@ public class RubyCodeBuilder extends CodeBuilder {
 	 * @throws IOException
 	 */
 	public RubyCodeBuilder(String namespace, String className, String jsonFilename) throws IOException {
-		super(namespace, className, jsonFilename, new RubyModelGeneration(), null);	// TODO - implement ruby service code generation	
+		super(namespace, className, jsonFilename, new RubyModelGeneration(), null, null);	// TODO - implement ruby service code generation	
 	}
 
 	public HashMap<File, String> buildSourceFiles(File parentDirectory) throws IOException {
@@ -52,9 +52,16 @@ public class RubyCodeBuilder extends CodeBuilder {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public HashMap<File, String> buildServiceFiles(File parentDirectory)
+			throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Override
-	public HashMap<File, String> buildServiceFiles(File parentDirFile)
+	public HashMap<File, String> buildViewFiles(File parentDirectory)
 			throws IOException {
 		// TODO Auto-generated method stub
 		return null;

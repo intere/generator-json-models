@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.intere.generator.builder.generation.models.ObjectiveCModelGeneration;
 import com.intere.generator.builder.generation.services.ObjectiveCServiceGeneration;
+import com.intere.generator.builder.generation.views.ObjectiveCViewGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 import com.intere.generator.io.FileIOUtils;
 
@@ -24,7 +25,7 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 	 * @throws IOException
 	 */
 	public ObjectiveCCodeBuilder(String className, String jsonFilename) throws IOException {
-		super(null, className, jsonFilename, new ObjectiveCModelGeneration(), new ObjectiveCServiceGeneration());
+		super(null, className, jsonFilename, new ObjectiveCModelGeneration(), new ObjectiveCServiceGeneration(), new ObjectiveCViewGeneration());
 	}
 	
 	/**
@@ -89,6 +90,21 @@ public class ObjectiveCCodeBuilder extends CodeBuilder {
 		
 		File implementationFile = new File(parentDirectory, getDeserializer().getServiceFilename() + ".m");
 		sourceCode.put(implementationFile, serviceGeneration.generateImplementationFile(getDeserializer()));
+		
+		return sourceCode;
+	}
+	
+	@Override
+	public HashMap<File, String> buildViewFiles(File parentDirectory) throws IOException {
+		parentDirectory = FileIOUtils.createFolderIfNotExists(parentDirectory.getAbsolutePath() 
+				+ File.separator + "src");
+		HashMap<File, String> sourceCode = new HashMap<File, String>();
+		
+		File headerFile = new File(parentDirectory, getDeserializer().getViewFilename() + ".h");
+		sourceCode.put(headerFile, viewGeneration.generateHeaderFile(getDeserializer()));
+		
+		File implementationFile = new File(parentDirectory, getDeserializer().getViewFilename() + ".m");
+		sourceCode.put(implementationFile, viewGeneration.generateImplementationFile(getDeserializer()));
 		
 		return sourceCode;
 	}
