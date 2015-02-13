@@ -206,7 +206,7 @@ public class ObjectiveCGenerationTest implements TestStrings {
 		JsonNode node = parseJsonObject(PROP_ARRAY_OF_OBJECTS);
 		
 		String result = generator.buildPropertyDeclaration(node.get(PROP_NAME), "Foo", PROP_NAME);
-		assertEquals("@property (nonatomic, strong) NSMutableArray *prop1;\n", result);
+		assertEquals("@property (nonatomic, strong) NSMutableArray *prop1;\t\t// Array of FooProp1 Objects\n", result);
 	}
 	
 	@Test
@@ -214,7 +214,7 @@ public class ObjectiveCGenerationTest implements TestStrings {
 		JsonNode node = parseJsonObject(PROP_ARRAY_OF_STRINGS);
 		
 		String result = generator.buildPropertyDeclaration(node.get(PROP_NAME), "Foo", PROP_NAME);
-		assertEquals("@property (nonatomic, strong) NSMutableArray *prop1;\n", result);
+		assertEquals("@property (nonatomic, strong) NSMutableArray *prop1;\t\t// Array of FooProp1 Objects\n", result);
 	}
 
 	@Test

@@ -64,6 +64,17 @@
 //
 //
 
+/**
+ * Uses the provided NSArray and serializes that into a JSON String for you and returns it:
+ * NOTE: This *will not* be a pretty print JSON string.
+ */
++(NSString *)jsonStringFromArray:(NSArray *)array;
+
+/**
+ * Uses the provided NSArray and serializes that into a JSON String for you and returns it:
+ * NOTE: It will do pretty printing if you ask that of it.
+ */
++(NSString *)jsonStringFromArray:(NSArray *)array withPrettyPrint:(BOOL)prettyPrint;
 
 /**
  * Uses the provided dictionary and serializes that into a JSON string for you and returns it:

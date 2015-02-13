@@ -486,7 +486,9 @@ public class ObjectiveCGeneration extends CodeGeneration {
 		} else if (isArray(node)){
 			return "object." + variableName + " = [[NSMutableArray alloc]initWithArray:[Serializer getArrayFromDict:dict forKey:" + defName + "]];\n";
 		} else if(isObject(node)) {
-			return "object." + variableName + " = [" + className + " fromDictionary:[dict objectForKey:" + defName + "]];\n";
+			return "if([dict objectForKey:" + defName + "] && ![[NSNull null] isEqual:[dict objectForKey:" + defName + "]]) {\n" +
+					"\t\tobject." + variableName + " = [" + className + " fromDictionary:[dict objectForKey:" + defName + "]];\n" +
+					"\t}\n";
 		} else {
 			System.out.println("Unknown Node Type: " + node.toString());
 		}
