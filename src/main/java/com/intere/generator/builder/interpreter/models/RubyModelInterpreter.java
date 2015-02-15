@@ -5,6 +5,10 @@ import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 
 
 public class RubyModelInterpreter implements JsonLanguageInterpreter {
+	
+	public String humanReadableName(String propertyName) {
+		return InterpreterUtils.humanReadableString(propertyName);
+	}
 
 	public String cleanVariableName(String propertyName) {
 		return InterpreterUtils.capsToUnderscores(propertyName);
@@ -16,7 +20,7 @@ public class RubyModelInterpreter implements JsonLanguageInterpreter {
 
 	public String buildSubClassName(String parentClassName, String propertyName) {
 		propertyName = propertyName.replaceAll("^_", "");		// Remove leading underscore
-		char[] stringArray = propertyName.trim().toCharArray();			
+		char[] stringArray = propertyName.trim().toCharArray();
         stringArray[0] = Character.toLowerCase(stringArray[0]);	// ensure the first character is lower case
         
         for(int i=1;i<stringArray.length;i++) {

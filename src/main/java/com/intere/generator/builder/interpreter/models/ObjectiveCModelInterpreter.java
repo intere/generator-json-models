@@ -1,8 +1,13 @@
 package com.intere.generator.builder.interpreter.models;
 
+import com.intere.generator.builder.interpreter.InterpreterUtils;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 
 public class ObjectiveCModelInterpreter implements JsonLanguageInterpreter {
+	
+	public String humanReadableName(String propertyName) {
+		return InterpreterUtils.humanReadableString(propertyName);
+	}
 
 	/**
 	 * Cleans a Variable Name (ensures there is no leading "_" and that the first character is lower case).
@@ -15,17 +20,8 @@ public class ObjectiveCModelInterpreter implements JsonLanguageInterpreter {
 				propertyName.equalsIgnoreCase("id")) {
 			propertyName = "the_" + propertyName; 
 		}
-		char[] stringArray = propertyName.trim().toCharArray();			
-        stringArray[0] = Character.toLowerCase(stringArray[0]);	// ensure the first character is lower case
-        
-        for(int i=1;i<stringArray.length;i++) {
-        	if(stringArray[i] == '_' && stringArray.length>i) {
-        		stringArray[i+1] = Character.toUpperCase(stringArray[i+1]);
-        	}
-        }
-        String result = new String(stringArray).replaceAll("_", "");
-        
-        return result;
+		
+		return InterpreterUtils.javaStyleVariableName(propertyName);
 	}
 	
 	public String buildClassName(String propertyName) {

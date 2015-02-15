@@ -9,6 +9,16 @@ import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 public class JavaInterpreterTest {
 	
 	private JavaModelInterpreter interpreter = new JavaModelInterpreter();
+	
+	@Test
+	public void testHumanReadableString() {
+		String []inputs = {"var", "Otis", "_id", "this_is_the_end", "ThisIsTheEnd", "user ID", "user_iD", "myJavaClass"};
+		String []expected = {"Var", "Otis", "Id", "This Is The End", "This Is The End", "User ID", "User ID", "My Java Class"};
+		
+		for(int i=0; i<inputs.length; i++) {
+			assertEquals(expected[i], interpreter.humanReadableName(inputs[i]));
+		}
+	}
 
 	@Test
 	public void testCleanVariableName() {

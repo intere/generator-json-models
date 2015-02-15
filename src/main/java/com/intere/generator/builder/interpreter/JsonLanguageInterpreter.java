@@ -4,6 +4,13 @@ package com.intere.generator.builder.interpreter;
 public interface JsonLanguageInterpreter {
 	
 	/**
+	 * Gets you a Human-Readable version of the property name.
+	 * @param propertyName The name of the property that you want to be pretty for the user.
+	 * @return
+	 */
+	String humanReadableName(String propertyName);
+	
+	/**
 	 * Given the string, provides you a "clean" variable name (appropriate for the language).
 	 * @param propertyName The property name that we would like to generate a property for.
 	 * @return
