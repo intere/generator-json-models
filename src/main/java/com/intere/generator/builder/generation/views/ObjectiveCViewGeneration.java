@@ -86,6 +86,7 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 		builder.append("-(void)configureAndAddTextField:(UITextField *)textField;\n");
 		builder.append("-(void)configureAndAddButton:(UIButton *)button;\n");
 		builder.append("-(void)configureAndAddSwitch:(UISwitch *)toggleSwitch;\n");
+		builder.append("-(void)buttonPressed:(UIButton *)button;\n");
 		builder.append("@end\n\n");
 		
 		builder.append("@implementation " + viewClassName + "\n");
@@ -146,6 +147,10 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 		builder.append("\t[self addSubview:toggleSwitch];\n");
 		builder.append("}\n\n");
 		
+		builder.append("-(void)buttonPressed:(UIButton *)button {\n");
+		builder.append("#warning NOT YET IMPLEMENTED\n");
+		builder.append("}\n\n");
+		
 		builder.append("-(void)updateValues {\n");
 		updateView(builder, node, modelInstanceName);
 		builder.append("}\n\n");
@@ -198,23 +203,29 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 			builder.append("\t// " + getInterpreter().humanReadableName(propertyName) + " info\n");
 			if(first) {
 				first = false;
-				builder.append("\tdouble x=5.0, y=5.0, width=self.frame.size.width - 10.0, height = 30.0;\n");
+				builder.append("\tdouble x=10.0, y=5.0, width=self.frame.size.width - 20.0, height = 30.0;\n");
 				builder.append("\tCGRect frame = CGRectMake(x, y, width, height);\n");
 				builder.append("\tUILabel *propertyLabel = [[UILabel alloc]initWithFrame:frame];\n");
 			} else {
-				builder.append("\ty += height + 20.0, height = 30.0;\n");
+				builder.append("\tx=10.0, y += height + 20.0, height = 30.0;\n");
 				builder.append("\tframe = CGRectMake(x, y, width, height);\n");
 				builder.append("\tpropertyLabel = [[UILabel alloc]initWithFrame:frame];\n");
 			}
 			
 			builder.append("\t[propertyLabel setText:@\"" + humanReadableName + "\"];\n");
 			builder.append("\t[self configureAndAddPropertyLabel:propertyLabel];\n");
-			
-			builder.append("\ty += height + 10.0, height = " + controlHeight + ".0;\n");
+			int x = 10;
+			if(controlType.equals("UIDatePicker")) {
+				x = 0;
+			}
+			builder.append("\tx = " + x + ".0,y += height + 10.0, height = " + controlHeight + ".0;\n");
 			builder.append("\tframe = CGRectMake(x, y, width, height);\n");
 			builder.append("\t" + propertyName + " = [[" + controlType + " alloc]initWithFrame:frame];\n");
 			if(controlType.equals("UIButton")) {
 				builder.append("\t[" + propertyName + " setTitle:@\"Manage " + humanReadableName + "\" forState:UIControlStateNormal];\n");
+				builder.append("\t[" + propertyName + " sizeToFit];\n");
+				builder.append("\t[" + propertyName + " addTarget:self action:@selector(buttonPressed:) " + 
+						"forControlEvents:UIControlEventTouchUpInside];\n");
 			}
 			builder.append("\t[self configureAndAdd" + controlType.replace("UI", "") + ":" + propertyName + "];\n\n");
 		}
