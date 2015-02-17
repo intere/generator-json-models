@@ -13,10 +13,25 @@ public enum Language {
 		this.fullName = fullName;
 	}
 	
+	public static Language fromFullName(String fullName) {
+		if(null != fullName) {
+			for(Language lang : Language.values()) {
+				if(lang.getFullName().toLowerCase().equals(fullName.toLowerCase())) {
+					return lang;
+				}
+			}
+			
+			return null;
+		}
+		return null;
+	}
+	
 	public static Language fromAbbreviation(String abbreviation) {
-		for(Language lang : Language.values()) {
-			if(lang.getAbbreviation().equals(abbreviation)) {
-				return lang;
+		if(null != abbreviation) {
+			for(Language lang : Language.values()) {
+				if(lang.getAbbreviation().equals(abbreviation.toLowerCase())) {
+					return lang;
+				}
 			}
 		}
 		

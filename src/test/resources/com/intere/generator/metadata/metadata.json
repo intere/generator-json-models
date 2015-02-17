@@ -1,0 +1,32 @@
+{
+  "language" : "objective-c",
+  "namespace" : null,
+  "classes" : [ {
+    "className" : "Contest",
+    "json" : "contest.json",
+    "key" : "id",
+    "urlPath" : "/contest",
+    "readonly" : false,
+    "propertyMap" : [ {
+      "property" : "state",
+      "mapClassName" : "EnumerationTournamentStates",
+      "mapClassProperty" : "value"
+    }, {
+      "property" : "stateName",
+      "mapClassName" : "EnumerationTournamentStates",
+      "mapClassProperty" : "name"
+    } ]
+  }, {
+    "className" : "Enumeration",
+    "json" : "enumerations.json",
+    "readonly" : true,
+    "urlPath" : "/enumerations"
+  } ],
+  "generate" : {
+    "models" : true,
+    "tests" : true,
+    "views" : true,
+    "services" : true,
+    "restServices" : true
+  }
+}

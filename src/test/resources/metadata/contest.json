@@ -1,0 +1,100 @@
+{
+  "id": "54c6958fe4b0e7fb4e9aed29",
+  "title": "Get some POW.",
+  "typeName": "Highest Daily Descent",
+  "stateName": "Archived",
+  "imageUrl": "image16x9:https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgF4_RB9f3unm7-qLqrUvyjU20Hp2RZyjdMogES-W8tPT6x2Z5XQ",
+  "description": "Think you can rip the most powder runs today?  Let's see what you're made of.  Get the most vertical and win!",
+  "startDate": 1422284400000,
+  "endDate": 1422316800000,
+  "userIDs": [
+      "5300e4f2aec0858466a69b3e"
+  ],
+
+  "results": [
+  {
+          "order": 1,
+          "sponsor": {
+              "address1": "78336 US Hwy 40",
+              "address2": "",
+              "category": "Pub & Grub",
+              "city": "Winter Park",
+              "contactEmail": "chrismoore11@msn.com",
+              "contactName": "Chris Moore",
+              "contactTitle": "Owner",
+              "id": "541ae52baec039165e7e52b8",
+              "logo": "http://www.fontenotswp.com/images/albums/NewAlbum_6ec89/tn_480_FontenotsLogo.GIF.jpg",
+              "name": "Fontenot's",
+              "phoneNumber": "(970) 726-4021",
+              "siteUrl": "http://fontenotswp.com/",
+              "state": "CO",
+              "zip": "80482"
+          },
+          "trackId": "54d7b12ce4b0c913e158e891",
+          "userId": "5300e4f2aec0858466a69b3e",
+          "winner": true
+      }
+  ],
+
+
+  "createdDate": 1421158421429,
+
+
+
+    "latitude": 39.79813221845757,
+    "longitude": -105.7788929064812,
+    "purseDescription": "A free dinner, courtesy of Fontenot's.  Not to exceed $35.",
+    "purseImageUrl": "http://www.fontenotswp.com/images/bg_o926.jpg",
+    "pursePrizeValue": "$35",
+    "purseTitle": "Free Dinner",
+    "purseType": "Pub & Grub",
+
+    "runnerUpDescription": "Cannot be combined with other offers.",
+    "runnerUpPrizeValue": "20%",
+    "runnerUpPurseImageUrl": "http://www.fontenotswp.com/images/albums/NewAlbum_6ec89/tn_480_FontenotsLogo.GIF.jpg",
+    "runnerUpTitle": "20% off Entire Purchase",
+    "scored": true,
+    "size": 50,
+    "sponsor": {
+        "address1": "78336 US Hwy 40",
+        "address2": "",
+        "category": "Pub & Grub",
+        "city": "Winter Park",
+        "contactEmail": "chrismoore11@msn.com",
+        "contactName": "Chris Moore",
+        "contactTitle": "Owner",
+        "id": "541ae52baec039165e7e52b8",
+        "logo": "http://www.fontenotswp.com/images/albums/NewAlbum_6ec89/tn_480_FontenotsLogo.GIF.jpg",
+        "name": "Fontenot's",
+        "phoneNumber": "(970) 726-4021",
+        "siteUrl": "http://fontenotswp.com/",
+        "state": "CO",
+        "zip": "80482"
+    },
+    "state": 2,
+    "trackIDs": [
+        "54c6cb8ce4b0e7fb4e9aed2b",
+        "54c6ccb9e4b0e7fb4e9aed2c",
+        "54c6cf55e4b0e7fb4e9aed2d",
+        "54c6cf96e4b0e7fb4e9aed2e",
+        "54c6cfaae4b0e7fb4e9aed2f",
+        "54c6d0aee4b0e7fb4e9aed30",
+        "54c7225ee4b0e7fb4e9aed31",
+        "54c722a0e4b0e7fb4e9aed32",
+        "54c722ebe4b0e7fb4e9aed33",
+        "54c7230ae4b0e7fb4e9aed34",
+        "54c7231ce4b0e7fb4e9aed35",
+        "54c72340e4b0e7fb4e9aed36",
+        "54c723c7e4b0e7fb4e9aed37",
+        "54c72400e4b0e7fb4e9aed38",
+        "54c72405e4b0e7fb4e9aed39",
+        "54c724f9e4b0e7fb4e9aed3a",
+        "54c72523e4b0e7fb4e9aed3b",
+        "54c72574e4b0e7fb4e9aed3c",
+        "54c72735e4b0e7fb4e9aed3d",
+        "54c727cde4b0e7fb4e9aed3e",
+        "54c727f9e4b0e7fb4e9aed3f",
+        "54c72851e4b0e7fb4e9aed40"
+    ],
+    "type": 0
+}

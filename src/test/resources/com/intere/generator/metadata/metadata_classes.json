@@ -1,0 +1,16 @@
+{
+  "className" : "Contest",
+  "json" : "contest.json",
+  "key" : "id",
+  "urlPath" : "/contest",
+  "readonly" : false,
+  "propertyMap" : [ {
+    "property" : "state",
+    "mapClassName" : "EnumerationTournamentStates",
+    "mapClassProperty" : "value"
+  }, {
+    "property" : "stateName",
+    "mapClassName" : "EnumerationTournamentStates",
+    "mapClassProperty" : "name"
+  } ]
+}
