@@ -86,6 +86,18 @@ public class JsonNodeUtils {
 	}
 	
 	/**
+	 * Is the provided node an Image Node?
+	 * @param node The {@link JsonNode}.
+	 * @return true/false
+	 */
+	public static boolean isImage(JsonNode node) {
+		return isText(node) && 
+				(node.getTextValue().startsWith("image16x9:") || 
+						node.getTextValue().startsWith("image4x3:") || 
+						node.getTextValue().startsWith("image:"));
+	}
+	
+	/**
 	 * Is the provided node a date?
 	 * @param node The {@link JsonNode}.
 	 * @return true/false

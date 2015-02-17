@@ -1,13 +1,6 @@
 package com.intere.generator.builder.generation.views;
 
-import static com.intere.generator.deserializer.JsonNodeUtils.isArray;
-import static com.intere.generator.deserializer.JsonNodeUtils.isBoolean;
-import static com.intere.generator.deserializer.JsonNodeUtils.isDate;
-import static com.intere.generator.deserializer.JsonNodeUtils.isFloat;
-import static com.intere.generator.deserializer.JsonNodeUtils.isInteger;
-import static com.intere.generator.deserializer.JsonNodeUtils.isLong;
-import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
-import static com.intere.generator.deserializer.JsonNodeUtils.isText;
+import static com.intere.generator.deserializer.JsonNodeUtils.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -63,6 +56,7 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 		builder.append(generateHeaderCommentBlock(viewClassName + ".m"));
 		builder.append("#import \"" + viewClassName + ".h\"\n");
 		builder.append("#import \"UITheme.h\"\n");
+		builder.append("#import \"UIHelper.h\"\n");
 		builder.append("\n");
 		
 		// Interface Declaration
@@ -86,6 +80,7 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 		builder.append("-(void)configureAndAddTextField:(UITextField *)textField;\n");
 		builder.append("-(void)configureAndAddButton:(UIButton *)button;\n");
 		builder.append("-(void)configureAndAddSwitch:(UISwitch *)toggleSwitch;\n");
+		builder.append("-(void)configureAndAddImageView:(UIImageView *)imageView;\n");
 		builder.append("-(void)buttonPressed:(UIButton *)button;\n");
 		builder.append("@end\n\n");
 		
@@ -128,23 +123,28 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddTextView:(UITextView *)textView {\n");
-		builder.append("[UITheme configureTextView:textView];\n");
+		builder.append("\t[UITheme configureTextView:textView];\n");
 		builder.append("\t[self addSubview:textView];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddTextField:(UITextField *)textField {\n");
-		builder.append("[UITheme configureTextField:textField];\n");
+		builder.append("\t[UITheme configureTextField:textField];\n");
 		builder.append("\t[self addSubview:textField];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddButton:(UIButton *)button {\n");
-		builder.append("[UITheme configureButton:button];\n");
+		builder.append("\t[UITheme configureButton:button];\n");
 		builder.append("\t[self addSubview:button];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddSwitch:(UISwitch *)toggleSwitch {\n");
-		builder.append("[UITheme configureSwitch:toggleSwitch];\n");
+		builder.append("\t[UITheme configureSwitch:toggleSwitch];\n");
 		builder.append("\t[self addSubview:toggleSwitch];\n");
+		builder.append("}\n\n");
+		
+		builder.append("-(void)configureAndAddImageView:(UIImageView *)imageView {\n");
+		builder.append("\t[UITheme configureImageView:imageView];\n");
+		builder.append("\t[self addSubview:imageView];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)buttonPressed:(UIButton *)button {\n");
@@ -175,7 +175,9 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 			String name = iter.next();
 			JsonNode childNode = node.get(name);
 			String propertyName = getInterpreter().cleanVariableName(name);
-			if(isDate(childNode)) {
+			if(isImage(childNode)) {
+				builder.append("\t[UIHelper loadImageInBackground:" + propertyName + " fromUrl:" + modelInstanceName + "." + propertyName + "];\n");
+			} else if(isDate(childNode)) {
 				builder.append("\t[self->" + propertyName + " setDate:" + modelInstanceName + "." + propertyName + "];\n");
 			} else if(isText(childNode)) {
 				builder.append("\t[self->" + propertyName + " setText:" + modelInstanceName + "." + propertyName + "];\n");
@@ -197,7 +199,7 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 			JsonNode childNode = node.get(name);
 			String propertyName = getInterpreter().cleanVariableName(name);
 			String controlType = buildViewType(childNode, name);
-			int controlHeight = getHeightForControl(controlType);
+			String controlHeight = getHeightForControl(controlType, childNode.getTextValue());
 			String humanReadableName = getInterpreter().humanReadableName(name);
 			
 			builder.append("\t// " + getInterpreter().humanReadableName(propertyName) + " info\n");
@@ -218,14 +220,15 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 			if(controlType.equals("UIDatePicker")) {
 				x = 0;
 			}
-			builder.append("\tx = " + x + ".0,y += height + 10.0, height = " + controlHeight + ".0;\n");
+			builder.append("\tx = " + x + ".0,y += height + 10.0, height = " + controlHeight + ";\n");
 			builder.append("\tframe = CGRectMake(x, y, width, height);\n");
-			builder.append("\t" + propertyName + " = [[" + controlType + " alloc]initWithFrame:frame];\n");
+			
 			if(controlType.equals("UIButton")) {
-				builder.append("\t[" + propertyName + " setTitle:@\"Manage " + humanReadableName + "\" forState:UIControlStateNormal];\n");
-				builder.append("\t[" + propertyName + " sizeToFit];\n");
+				builder.append("\t" + propertyName + " = [UITheme createUIButtonWithFrame:frame andText:@\"Manage " + humanReadableName + "\"];\n");
 				builder.append("\t[" + propertyName + " addTarget:self action:@selector(buttonPressed:) " + 
 						"forControlEvents:UIControlEventTouchUpInside];\n");
+			} else {
+				builder.append("\t" + propertyName + " = [[" + controlType + " alloc]initWithFrame:frame];\n");
 			}
 			builder.append("\t[self configureAndAdd" + controlType.replace("UI", "") + ":" + propertyName + "];\n\n");
 		}
@@ -266,25 +269,38 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 		return false;
 	}
 	
-	private int getHeightForControl(String control) {
+	private String getHeightForControl(String control, String value) {
 		switch(control) {
 		case "UITextView":
-			return 130;
+			return "130.0";
 		case "UITextField":
-			return 30;
+			return "30.0";
 		case "UISwitch":
-			return 32;
+			return "32.0";
 		case "UIDatePicker":
-			return 200;
+			return "200.0";
 		case "UIButton":
-			return 30;
+			return "30.0";
+		case "UIImageView":
+			return getImageHeight(value);
 		}
 		
-		return 20;
+		return "20";
+	}
+	
+	private String getImageHeight(String value) {
+		 if(value.startsWith("image16x9")) {
+			return "(width * 9.0 / 16.0)";
+		} else if(value.startsWith("image4x3")) {
+			return "(width * 3.0 / 4.0)";
+		}
+		 return "100";
 	}
 
 	private String buildViewType(JsonNode node, String name) {
-		if(isDate(node)) {
+		if(isImage(node)) {
+			return "UIImageView";
+		} else if(isDate(node)) {
 			return "UIDatePicker";
 		} else if(isText(node)) {
 			if(node.getTextValue().length()>25) {
