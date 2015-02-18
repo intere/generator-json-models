@@ -1,0 +1,7 @@
+{
+  "name" : "id",
+  "key" : true,
+  "type" : "String",
+  "visible" : true,
+  "readonly" : true
+}

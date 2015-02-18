@@ -79,7 +79,7 @@ public class CodeOrchestration {
 
 	private CodeBuilder createBuilderFactoryForMetadataClass(MetadataClasses metaClass) throws IOException {
 		String jsonFilename = getJsonFilename(metaClass);
-		return CodeBuilderFactory.getCodeBuilderFactory(language, metadata.getNamespace(), metaClass.getClassName(),  jsonFilename);
+		return CodeBuilderFactory.getCodeBuilderFactory(metadata, metaClass.getClassName(),  jsonFilename);
 	}
 	
 	private String getJsonFilename(MetadataClasses metaClass) {

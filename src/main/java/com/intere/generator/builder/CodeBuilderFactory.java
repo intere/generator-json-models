@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.intere.generator.Language;
+import com.intere.generator.metadata.Metadata;
 
 /**
  * Factory creator for the appropriate type of code builder.
@@ -61,5 +62,14 @@ public class CodeBuilderFactory {
 		}
 
 		throw new IllegalArgumentException("Unsupported Language: " + lang.getFullName());
+	}
+
+	public static CodeBuilder getCodeBuilderFactory(Metadata metadata, String className, String jsonFilename) throws IOException {
+		String namespace = metadata.getNamespace();
+		Language language = Language.fromFullName(metadata.getLanguage());
+		CodeBuilder builder = getCodeBuilderFactory(language, namespace, className, jsonFilename);
+		builder.setMetadata(metadata);
+		
+		return builder;
 	}
 }

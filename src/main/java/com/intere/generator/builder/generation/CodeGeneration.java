@@ -13,9 +13,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.intere.generator.builder.interpreter.InterpreterUtils;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
+import com.intere.generator.metadata.Metadata;
 
 public abstract class CodeGeneration {
 	private ObjectMapper jsonMapper = new ObjectMapper();
+	protected Metadata metadata;
 	
 	/**
 	 * Gets you the {@link JsonDeserializer} as a prerequisite to doing the code building.
@@ -72,5 +74,9 @@ public abstract class CodeGeneration {
 
 	public String getTestJsonFilename(JsonDeserializer generated) {
 		return InterpreterUtils.capsToUnderscores(generated.getName());
+	}
+
+	public void setMetadata(Metadata metadata) {
+		this.metadata = metadata;
 	}
 }

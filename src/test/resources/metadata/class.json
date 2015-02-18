@@ -1,0 +1,24 @@
+[
+  {
+    "uniqueId": "ou812",
+    "className": "Contest",
+    "fileName": "Contest.java",
+    "testClassName": "ContestTest",
+    "readonly": false,
+    "packageName": "com.intere.generated",
+    "hasSubClasses": true,
+    "property": [
+      {
+        "name": "id",
+        "key": true,
+        "type": "String",
+        "visible": true,
+        "readonly": true
+      }
+    ],
+    "restUrl": "/contest",
+    "imports": [
+      "Enumeration"
+    ]
+  }
+]

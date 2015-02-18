@@ -2,9 +2,18 @@ generator-json-models
 =====================
 Multi-Language (currently Objective-C, Ruby and Java) JSON Model Class Creator.
 
+## Context
+* I'm currently working on revamping the entire structure for code generation.  Here is the strategy:
+  * Orchestrate everything (via orchestration):
+
+1. The metadata is what initializes the configuration for classes, names, relationships, etc.
+2. Next (TODO) is to then begin building a model (of the generated model objects [see ModelClass.java generated via class.json]) using JSON and then performing the mappings necessary to start adding additional metadata (relationships between the models, renaming)
+3. TODO: Build language specific generators that handle a given ModelClassProperty, ModelClass, etc.
+4. PROFIT!  (Okay, not really)
+
 For Objective-C: Essentially it takes JSON and a Class Name, and generates .h and .m files that will have properties and serialization/deserialization methods implemented.
 
-##Background
+## Background
 I was / am in the process of building a full stack application that has an Objective-C
 front end.  It became apparent that it was a lot of work to create JSON serializing / deserializing
 classes in Objective-C (not difficult, just tedious).  I wanted to build a tool that

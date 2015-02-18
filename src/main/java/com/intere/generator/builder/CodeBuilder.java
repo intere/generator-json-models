@@ -16,8 +16,10 @@ import com.intere.generator.builder.generation.CodeGeneration;
 import com.intere.generator.builder.generation.services.ServiceCodeGeneration;
 import com.intere.generator.builder.generation.views.ViewCodeGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
+import com.intere.generator.metadata.Metadata;
 
-public abstract class CodeBuilder {	
+public abstract class CodeBuilder {
+	protected Metadata metadata;
 	protected CodeGeneration generation;
 	protected ServiceCodeGeneration serviceGeneration;
 	protected ViewCodeGeneration viewGeneration;
@@ -128,5 +130,16 @@ public abstract class CodeBuilder {
 	protected String replaceHeaderVariables(String input) {
 		return input.replaceAll(Pattern.quote("${version}"), App.getVersion())
 				.replaceAll(Pattern.quote("${date}"), new Date().toString());
+	}
+
+	/**
+	 * Sets the metadata reference and delegates setting it on the generators.
+	 * @param metadata
+	 */
+	public void setMetadata(Metadata metadata) {
+		this.metadata = metadata;
+		generation.setMetadata(this.metadata);
+		serviceGeneration.setMetadata(this.metadata);
+		viewGeneration.setMetadata(this.metadata);
 	}
 }

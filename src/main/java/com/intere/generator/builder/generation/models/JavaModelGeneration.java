@@ -56,8 +56,14 @@ public class JavaModelGeneration extends CodeGeneration {
 	public String buildPropertyDeclaration(JsonNode node, String className, String name) {
 		String propName = getInterpreter().cleanVariableName(name);
 		String nodeType = getNodeType(node, className, name);
+		String suffix = ";\n";
 		if(nodeType.length()>0) {
-			return "private " + nodeType + " " + propName + ";\n";
+			if(isArrayOfObjects(node)) {
+				suffix = " = new ArrayList<" + getNodeType(node.iterator().next(), className, name) + ">();\n";
+			} else if(isArrayofArrays(node)) {
+				suffix = " = new ArrayList<List" + getNodeType(node.iterator().next(), className, name) + ">();\n";
+			}
+			return "private " + nodeType + " " + propName + suffix;
 		}
 		
 		return "";
@@ -103,6 +109,7 @@ public class JavaModelGeneration extends CodeGeneration {
 		builder.append(generateHeaderCommentBlock(filename));
 		builder.append("package " + packageName + ";\n\n");
 		builder.append("import java.util.List;\n" +
+				"import java.util.ArrayList;\n" +
 				"import java.util.Date;\n" +
 				"import java.io.Serializable;\n");
 
