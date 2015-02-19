@@ -3,5 +3,7 @@
   "key" : true,
   "type" : "String",
   "visible" : true,
-  "readonly" : true
+  "readonly" : true,
+  "array" : true,
+  "arraySubType" : "String"
 }

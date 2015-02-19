@@ -1,0 +1,164 @@
+package com.intere.generator.builder.orchestration;
+
+import static com.intere.generator.deserializer.JsonNodeUtils.*;
+import static com.intere.generator.deserializer.JsonNodeUtils.isArrayOfObjects;
+import static com.intere.generator.deserializer.JsonNodeUtils.isArrayofArrays;
+import static com.intere.generator.deserializer.JsonNodeUtils.isBoolean;
+import static com.intere.generator.deserializer.JsonNodeUtils.isDate;
+import static com.intere.generator.deserializer.JsonNodeUtils.isFloat;
+import static com.intere.generator.deserializer.JsonNodeUtils.isInteger;
+import static com.intere.generator.deserializer.JsonNodeUtils.isLong;
+import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
+import static com.intere.generator.deserializer.JsonNodeUtils.isText;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
+import org.codehaus.jackson.JsonNode;
+
+import com.intere.generator.Language;
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
+import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
+import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
+import com.intere.generator.deserializer.JsonNodeUtils;
+import com.intere.generator.metadata.Metadata;
+import com.intere.generator.metadata.MetadataClasses;
+import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.metadata.ModelClassProperty;
+
+public class OrchestrationUtils {
+
+	public static List<ModelClass> readBuildClasses(Metadata metadata, MetadataClasses clazz, JsonNode node) {
+		return createAndPopulateModelClass(metadata, clazz, clazz.getClassName(), node, clazz.getUrlPath());
+	}
+
+	private static Collection<ModelClass> getSubClasses(JsonLanguageInterpreter interpreter, Metadata metadata, MetadataClasses clazz, JsonNode node, String className) {
+		List<ModelClass> modelClasses = new ArrayList<>();
+		
+		Iterator<String> iter = node.getFieldNames();
+		while(iter.hasNext()) {
+			String name = iter.next();
+			JsonNode child = node.get(name);
+			String childClassName = interpreter.buildSubClassName(className, name);
+			if(isObject(child)) {
+				modelClasses.addAll(createAndPopulateModelClass(metadata, clazz, childClassName, child, null));
+			} else if(isArrayOfObjects(child)) {
+				// TODO: Will this work?
+				modelClasses.addAll(createAndPopulateModelClass(metadata, clazz, childClassName, child.iterator().next(), null));
+			}
+		}
+		
+		// TODO Auto-generated method stub
+		return modelClasses;
+	}
+
+	private static Collection<ModelClassProperty> populateProperties(JsonLanguageInterpreter interpreter, String className, Metadata metadata, MetadataClasses clazz, JsonNode node) {
+		List<ModelClassProperty> properties = new ArrayList<>();
+		Iterator<String> iter = node.getFieldNames();
+		while(iter.hasNext()) {
+			String name = iter.next();
+			JsonNode child = node.get(name);
+			ModelClassProperty property = new ModelClassProperty();
+			property.setName(name);
+			configureNodeType(interpreter, className, name, child, property);
+			
+			properties.add(property);
+		}
+		
+		return properties;
+	}
+	
+	private static void configureNodeType(JsonLanguageInterpreter interpreter, String className, String name, JsonNode child, ModelClassProperty property) {		
+		property.setType(getNodeType(interpreter, child, className, name));
+		property.setArray(isArray(child));
+		
+		if(isArray(child)) {
+			property.setArraySubType(getNodeType(interpreter, child.iterator().next(), className, name));
+		}
+	}
+	
+	private static String getNodeType(JsonLanguageInterpreter interpreter, JsonNode node, String className, String name) {
+		String subClass = interpreter.buildSubClassName(className, name);
+		
+		if(isImage(node)) {
+			return "Image";
+		} else if(isDate(node)) {
+			return "Date";
+		} else if(isText(node)) {
+			return "String";
+		} else if(isInteger(node) || isLong(node)) {
+			return "Long";
+		} else if(isFloat(node)) {
+			return "Double";
+		} else if(isBoolean(node)) {
+			return "Boolean";
+		} else if(isObject(node)) {
+			return subClass;
+		} else if(isArrayOfObjects(node)) {
+			return "Array";
+		} else if(isArrayofArrays(node)) {
+			return "Array";
+		} else if(isArray(node)) {
+			if(node.size()>0) {
+				return "Array";
+			}
+			return "List";
+		} else {
+			System.out.println("Unknown Node type: " + node.toString() + ", defaulting to String");
+			return "String";
+		}
+	}
+
+	private static List<ModelClass> createAndPopulateModelClass(Metadata metadata, MetadataClasses clazz, String className, JsonNode node, String restUrl) {
+		JsonLanguageInterpreter interpreter = getInterpreterFromMetadata(metadata);
+		List<ModelClass> modelClasses = new ArrayList<>();
+		ModelClass model = new ModelClass();
+		model.setClassName(className);
+		model.setHasSubClasses(hasSubClasses(node));
+		model.setNamespace(metadata.getNamespace());
+		model.setReadonly(clazz.getReadonly());
+		model.setRestUrl(restUrl);
+		model.getProperty().addAll(populateProperties(interpreter, className, metadata, clazz, node));
+		model.setFileName(interpreter.buildFilenameFromClassname(className));
+		model.setTestClassName(interpreter.buildClassName(className) + "Test");
+		modelClasses.add(model);
+		if(model.getHasSubClasses()) {
+			modelClasses.addAll(getSubClasses(interpreter, metadata, clazz, node, model.getClassName()));
+		}
+		
+		return modelClasses;
+	}
+
+	private static JsonLanguageInterpreter getInterpreterFromMetadata(Metadata metadata) {
+		Language lang = Language.fromFullName(metadata.getLanguage());
+		switch(lang) {
+		case Java:
+			return new JavaModelInterpreter();
+			
+		case ObjC:
+			return new ObjectiveCModelInterpreter();
+			
+		case Ruby:
+			return new RubyModelInterpreter();
+			
+			default:
+				System.out.println("ERROR: No Interpreter for type: " + lang.name());
+				return null;
+		}
+	}
+
+	private static Boolean hasSubClasses(JsonNode node) {
+		Iterator<JsonNode> iter = node.getElements();
+		while(iter.hasNext()) {
+			JsonNode child = iter.next();
+			if(JsonNodeUtils.isObject(child) || JsonNodeUtils.isArrayOfObjects(child)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+}

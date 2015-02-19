@@ -4,7 +4,7 @@
   "classes": [
     {
       "className": "Contest",
-      "json": "contest.json",
+      "jsonFile": "contest.json",
       "key": "id",
       "urlPath": "/contest",
       "readonly": false,
@@ -23,7 +23,7 @@
     },
     {
       "className": "Enumeration",
-      "json": "enumerations.json",
+      "jsonFile": "enumerations.json",
       "readonly": true,
       "urlPath": "/enumerations"
     }

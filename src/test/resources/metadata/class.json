@@ -5,7 +5,7 @@
     "fileName": "Contest.java",
     "testClassName": "ContestTest",
     "readonly": false,
-    "packageName": "com.intere.generated",
+    "namespace": "com.intere.generated",
     "hasSubClasses": true,
     "property": [
       {
@@ -13,7 +13,9 @@
         "key": true,
         "type": "String",
         "visible": true,
-        "readonly": true
+        "readonly": true,
+        "array": true,
+        "arraySubType": "String"
       }
     ],
     "restUrl": "/contest",

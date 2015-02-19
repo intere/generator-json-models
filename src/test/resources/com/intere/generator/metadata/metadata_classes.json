@@ -1,6 +1,6 @@
 {
   "className" : "Contest",
-  "json" : "contest.json",
+  "jsonFile" : "contest.json",
   "key" : "id",
   "urlPath" : "/contest",
   "readonly" : false,
