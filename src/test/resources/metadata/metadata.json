@@ -19,6 +19,13 @@
           "mapClassName": "EnumerationTournamentStates",
           "mapClassProperty": "name"
         }
+      ],
+      "transientProperty": [
+        {
+          "className": "",
+          "name": "",
+          "type": ""
+        }
       ]
     },
     {

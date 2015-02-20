@@ -12,6 +12,8 @@ generateMetadataJson() {
   ./run.sh -cn ModelClass -f src/test/resources/metadata/class.json \
     -o tmp  -l java -ns com.intere.generator.metadata
 
+  # ./run.sh -o tmp --orchestrate src/test/resources/metadata/class_metadata.json
+
   mkdir -p src/main/java/com/intere/generator/metadata
   cp tmp/src/main/java/com/intere/generator/metadata/* src/main/java/com/intere/generator/metadata
 

@@ -1,0 +1,33 @@
+{
+  "language": "java",
+  "namespace": "com.intere.generator.metadata",
+  "classes": [
+    {
+      "className": "ModelClass",
+      "jsonFile": "class.json",
+      "readonly": false,
+      "urlPath": "",
+      "propertyMap": [
+        {
+          "mapClassName": "",
+          "mapClassProperty": ""
+        }
+      ],
+      "transientProperty": [
+        {
+          "className": "",
+          "name": "",
+          "type": ""
+        }
+      ]
+    }
+  ],
+  "generate": {
+    "models": true,
+    "tests": true,
+    "views": true,
+    "services": true,
+    "restServices": true
+  }
+
+}

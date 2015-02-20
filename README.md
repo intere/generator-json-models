@@ -8,6 +8,7 @@ Multi-Language (currently Objective-C, Ruby and Java) JSON Model Class Creator.
 
 1. The metadata is what initializes the configuration for classes, names, relationships, etc.
 2. Next (TODO) is to then begin building a model (of the generated model objects [see ModelClass.java generated via class.json]) using JSON and then performing the mappings necessary to start adding additional metadata (relationships between the models, renaming)
+  * Phase 1 is in progress (I have the models and their properties being created).
 3. TODO: Build language specific generators that handle a given ModelClassProperty, ModelClass, etc.
 4. PROFIT!  (Okay, not really)
 
