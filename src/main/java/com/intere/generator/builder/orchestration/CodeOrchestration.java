@@ -13,6 +13,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.intere.generator.Language;
 import com.intere.generator.builder.CodeBuilder;
 import com.intere.generator.builder.CodeBuilderFactory;
+import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
 
@@ -27,10 +28,9 @@ public class CodeOrchestration {
 	public CodeOrchestration(String orchestrationFilePath, File outputDirectory) throws IOException {
 		this.outputDirectory = outputDirectory;
 		tree = new OrchestrationTree(orchestrationFilePath);
-		getTree();
 //		readMetadata(orchestrationFilePath);
 //		createGenerationModels();
-//		generateCode();
+		generateCode();
 	}
 	
 	public OrchestrationTree getTree() {
@@ -38,6 +38,8 @@ public class CodeOrchestration {
 	}
 	
 	private void generateCode() throws IOException {
+		LanguageOrchestrator orchestrator = OrchestrationUtils.getLanguageOrchestrator(tree.getMetadata());
+		orchestrator.generateModels(outputDirectory, tree);
 //		if(metadata.getGenerate().getModels()) {
 //			for(CodeBuilder builder : builders) {
 //				CodeBuilderFactory.generateCode(builder.buildSourceFiles(outputDirectory));

@@ -1,15 +1,8 @@
 package com.intere.generator.builder.orchestration;
 
-import static com.intere.generator.deserializer.JsonNodeUtils.*;
+import static com.intere.generator.deserializer.JsonNodeUtils.isArray;
 import static com.intere.generator.deserializer.JsonNodeUtils.isArrayOfObjects;
-import static com.intere.generator.deserializer.JsonNodeUtils.isArrayofArrays;
-import static com.intere.generator.deserializer.JsonNodeUtils.isBoolean;
-import static com.intere.generator.deserializer.JsonNodeUtils.isDate;
-import static com.intere.generator.deserializer.JsonNodeUtils.isFloat;
-import static com.intere.generator.deserializer.JsonNodeUtils.isInteger;
-import static com.intere.generator.deserializer.JsonNodeUtils.isLong;
 import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
-import static com.intere.generator.deserializer.JsonNodeUtils.isText;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,6 +16,8 @@ import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
+import com.intere.generator.builder.orchestration.language.JavaOrchestration;
+import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
 import com.intere.generator.deserializer.JsonNodeUtils;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
@@ -64,7 +59,6 @@ public class OrchestrationUtils {
 			ModelClassProperty property = new ModelClassProperty();
 			property.setName(name);
 			configureNodeType(interpreter, className, name, child, property);
-			
 			properties.add(property);
 		}
 		
@@ -82,33 +76,17 @@ public class OrchestrationUtils {
 	
 	private static String getNodeType(JsonLanguageInterpreter interpreter, JsonNode node, String className, String name) {
 		String subClass = interpreter.buildSubClassName(className, name);
+		OrchestrationDataType type = OrchestrationDataType.fromJsonNode(node);
 		
-		if(isImage(node)) {
-			return "Image";
-		} else if(isDate(node)) {
-			return "Date";
-		} else if(isText(node)) {
-			return "String";
-		} else if(isInteger(node) || isLong(node)) {
-			return "Long";
-		} else if(isFloat(node)) {
-			return "Double";
-		} else if(isBoolean(node)) {
-			return "Boolean";
-		} else if(isObject(node)) {
+		switch(type) {
+		case CLASS:
 			return subClass;
-		} else if(isArrayOfObjects(node)) {
-			return "Array";
-		} else if(isArrayofArrays(node)) {
-			return "Array";
-		} else if(isArray(node)) {
-			if(node.size()>0) {
-				return "Array";
-			}
-			return "List";
-		} else {
-			System.out.println("Unknown Node type: " + node.toString() + ", defaulting to String");
-			return "String";
+			
+		case UNKNOWN:
+			return OrchestrationDataType.STRING.getInternalName();
+			
+		default:
+			return type.getInternalName();
 		}
 	}
 
@@ -147,6 +125,17 @@ public class OrchestrationUtils {
 			default:
 				System.out.println("ERROR: No Interpreter for type: " + lang.name());
 				return null;
+		}
+	}
+	
+	public static LanguageOrchestrator getLanguageOrchestrator(Metadata metadata) {
+		Language lang = Language.fromFullName(metadata.getLanguage());
+		switch(lang) {
+		case Java:
+			return new JavaOrchestration();
+			
+		default:
+			return null;
 		}
 	}
 
