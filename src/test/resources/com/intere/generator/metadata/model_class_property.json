@@ -2,6 +2,7 @@
   "name" : "id",
   "key" : true,
   "type" : "String",
+  "primitive" : false,
   "visible" : true,
   "readonly" : true,
   "array" : true,

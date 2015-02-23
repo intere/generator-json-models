@@ -18,6 +18,7 @@ import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterprete
 import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
 import com.intere.generator.builder.orchestration.language.JavaOrchestration;
 import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
+import com.intere.generator.builder.orchestration.language.ObjectiveCOrchestration;
 import com.intere.generator.deserializer.JsonNodeUtils;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
@@ -68,12 +69,25 @@ public class OrchestrationUtils {
 	private static void configureNodeType(JsonLanguageInterpreter interpreter, String className, String name, JsonNode child, ModelClassProperty property) {		
 		property.setType(getNodeType(interpreter, child, className, name));
 		property.setArray(isArray(child));
+		property.setPrimitive(isPrimitive(property));
 		
 		if(isArray(child)) {
 			property.setArraySubType(getNodeType(interpreter, child.iterator().next(), className, name));
 		}
 	}
 	
+	private static Boolean isPrimitive(ModelClassProperty property) {
+		switch(property.getType()) {
+		case "Boolean":
+		case "Long":
+		case "Double":
+			return true;
+			
+		default:
+			return false;
+		}
+	}
+
 	private static String getNodeType(JsonLanguageInterpreter interpreter, JsonNode node, String className, String name) {
 		String subClass = interpreter.buildSubClassName(className, name);
 		OrchestrationDataType type = OrchestrationDataType.fromJsonNode(node);
@@ -133,6 +147,8 @@ public class OrchestrationUtils {
 		switch(lang) {
 		case Java:
 			return new JavaOrchestration();
+		case ObjC:
+			return new ObjectiveCOrchestration();
 			
 		default:
 			return null;

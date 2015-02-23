@@ -1,31 +1,36 @@
 package com.intere.generator.builder.orchestration;
 
 import org.codehaus.jackson.JsonNode;
+
+import com.intere.generator.metadata.ModelClassProperty;
+
 import static com.intere.generator.deserializer.JsonNodeUtils.*;
 
 
 
 public enum OrchestrationDataType {	
-	IMAGE("Image", "String"),
-	DATE("Date", "Date"),
-	STRING("String", "String"),
-	LONG("Long", "Long"),
-	DOUBLE("Double", "Double"),
-	BOOLEAN("Boolean", "Boolean"),
-	ARRAY("Array", "List"),
+	IMAGE("Image", "String", "NSString"),
+	DATE("Date", "Date", "NSDate"),
+	STRING("String", "String", "NSString"),
+	LONG("Long", "Long", "NSInteger"),
+	DOUBLE("Double", "Double", "CGFloat"),
+	BOOLEAN("Boolean", "Boolean", "BOOL"),
+	ARRAY("Array", "List", "NSArray"),
 	CLASS,
-	UNKNOWN("Unknown", "String");
+	UNKNOWN("Unknown", "String", "NSString");
 	
 	private String internalName;
 	private String javaName;
+	private String objcName;
 	
 	/** Default Constructor.  */
 	private OrchestrationDataType() {}
 	
 	/** Constructor that set the internal name. */
-	private OrchestrationDataType(String internalName, String javaName) {
+	private OrchestrationDataType(String internalName, String javaName, String objcName) {
 		this.internalName = internalName;
 		this.javaName = javaName;
+		this.objcName = objcName;
 	}
 	
 	public String getInternalName() {
@@ -60,9 +65,16 @@ public enum OrchestrationDataType {
 	}
 
 	public static OrchestrationDataType fromString(String typeName) {
+		if(null == typeName) {
+			return null;
+		}
+		
 		OrchestrationDataType type = OrchestrationDataType.fromInternalName(typeName);
 		if(null == type) {
 			type = OrchestrationDataType.fromName(typeName);
+		}
+		if(null == type) {
+			type = UNKNOWN;
 		}
 		
 		return type;
@@ -90,8 +102,28 @@ public enum OrchestrationDataType {
 			return UNKNOWN;
 		}
 	}
+	
+	@SuppressWarnings("unused")
+	public static OrchestrationDataType fromModelProperty(ModelClassProperty prop) {
+		if(prop.getArray()) {
+			return ARRAY;
+		}
+		OrchestrationDataType dt = OrchestrationDataType.fromString(prop.getType());
+		if(dt == null || UNKNOWN == dt) {
+			return CLASS;
+		}
+		else if(null != dt) {
+			return dt;
+		}
+		
+		return UNKNOWN;
+	}
 
 	public String getJavaName() {
 		return javaName;
+	}
+
+	public String getObjectiveCName() {
+		return objcName;
 	}
 }

@@ -8,6 +8,9 @@ import java.net.URL;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.metadata.ModelClassProperty;
+
 public class OrchestrationTreeTest {
 	
 	private String metadataPath;
@@ -46,9 +49,24 @@ public class OrchestrationTreeTest {
 	}
 	
 	@Test
+	public void testPropertyDataTypes() throws Exception {
+		OrchestrationTree tree = new OrchestrationTree(metadataPath);
+		assertNotNull(tree);
+		for(ModelClass model : tree.getModelClasses()) {
+			assertNotNull(model);
+			for(ModelClassProperty prop : model.getProperty()) {
+				assertNotNull(prop);
+				OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(prop);
+				String propInfo = prop.getName() + " - " + prop.getType() + (prop.getArray() ? "<" + prop.getArraySubType() + ">" : "");
+				assertNotNull(propInfo + " was null", dt);
+			}
+		}
+	}
+	
+	@Test
 	public void testOverlays() throws Exception {
 		OrchestrationTree tree = new OrchestrationTree(metadataPath);
 		assertNotNull(tree);
-		
+		// TODO		
 	}
 }

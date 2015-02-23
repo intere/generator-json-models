@@ -14,7 +14,6 @@ public interface LanguageOrchestrator {
 	 * @throws IOException */
 	void generateModels(File outputDirectory, OrchestrationTree tree) throws IOException;
 	
-	
 	public interface LanguageUtility {
 		String tabs(int tabCount);
 		String singleLineComment(String comment);
@@ -22,7 +21,7 @@ public interface LanguageOrchestrator {
 		String multiLineComment(String comment);
 		String multiLineComment(String comment, int tabCount);
 		String buildNamespace(ModelClass modelClass);
-		String buildFileComment(ModelClass modelClass);
+		String buildFileComment(ModelClass modelClass, String extension);
 		String buildClassDeclaration(ModelClass modelClass);
 		String finishClass(ModelClass modelClass);
 		String buildPropertyDeclarations(ModelClass modelClass);
@@ -31,5 +30,9 @@ public interface LanguageOrchestrator {
 		String buildGetterAndSetter(ModelClassProperty prop);
 		String getPropertyType(ModelClassProperty property);
 		String buildImports(ModelClass modelClass);
+		String buildClassImplementation(ModelClass modelClass);
+		String buildSerializationConstants(ModelClass modelClass);
+		String buildModelUtilityDeclarationMethods(ModelClass modelClass);
+		String buildModelUtilityDefinitionMethods(ModelClass modelClass);
 	}
 }
