@@ -1,6 +1,6 @@
 {
-  "language": "Objective-C",
-  "namespace": null,
+  "language": "Java",
+  "namespace": "com.intere.test",
   "classes": [
     {
       "className": "Contest",

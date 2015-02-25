@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -30,6 +31,14 @@ public class MetadataTest {
 	public void setUp() throws JsonParseException, JsonMappingException, IOException {
 		InputStream in = getClass().getResourceAsStream("/com/intere/generator/metadata/metadata.json");
 		metadata = jsonMapper.readValue(in, Metadata.class);
+	}
+	
+	protected String serialize(Metadata object) throws JsonGenerationException, JsonMappingException, IOException {
+		return jsonMapper.writeValueAsString(object);
+	}
+	
+	protected Metadata deserialize(String json) throws JsonParseException, JsonMappingException, IOException {
+		return jsonMapper.readValue(json, Metadata.class);
 	}
 
 	@Test
