@@ -1,7 +1,6 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
 
-import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,8 +27,8 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	}
 
 	@Override
-	public String finishClass(ModelClass modelClass) {
-		return "}\t" + singleLineComment("end " + modelClass.getClassName()) + "\n\n";
+	public String finishClass(ModelClass modelClass, boolean testClass) {
+		return "}\t" + singleLineComment("end " + (testClass ? modelClass.getTestClassName() : modelClass.getClassName())) + "\n\n";
 	}
 	
 	@Override
@@ -251,6 +250,17 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 		String getSetBase = interpreter.buildGetterAndSetterName(prop.getName());
 		OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(prop);
 		switch(dt) {
+		case ARRAY:
+			builder.append(tabs(2) + "final " + prop.getArraySubType() + " object = new " + prop.getArraySubType() + "();\n");
+			builder.append(tabs(2) + "final List<" + prop.getArraySubType() + "> expected = new ArrayList<" + prop.getArraySubType() + ">();\n");
+			builder.append(tabs(2) + "expected.add(object);\n");
+			builder.append(tabs(2) + "instance.set" + getSetBase + "(expected);\n");
+			builder.append(tabs(2) + "String serialized = serialize(instance);\n" );
+			builder.append(tabs(2) + "instance = deserialize(serialized);\n");
+			builder.append(tabs(2) + "assertEquals(\"The " + prop.getName() 
+					+ " property didn't deserialize properly\", expected, instance.get" 
+					+ getSetBase + "());\n");
+			break;
 		case STRING:
 		case IMAGE:
 			builder.append(tabs(2) + "final String expected = \"test\";\n");

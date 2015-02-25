@@ -20,17 +20,17 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	}
 
 	@Override
-	public String finishClass(ModelClass modelClass) {
-		return "@end\t" + singleLineComment("End of " + modelClass.getClassName() + " Class", 0) + "\n\n";
+	public String finishClass(ModelClass modelClass, boolean testClass) {
+		return "@end\t" + singleLineComment("End of " + (testClass ? modelClass.getTestClassName() : modelClass.getClassName()) + " Class", 0) + "\n\n";
 	}
 
 	@Override
 	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
 		StringBuilder builder = new StringBuilder();
 		String propertyType = getPropertyType(property);
-		String comment = (property.getArray() ? "\t\t" + singleLineComment("Array of " + property.getArraySubType()) : "");
+		String comment = (property.getIsArray() ? "\t\t" + singleLineComment("Array of " + property.getArraySubType()) : "");
 		builder.append("@property " + getPropertyDecorations(property) + propertyType + " " 
-				+ (property.getPrimitive() ? "" : "*") + property.getName() + ";" + comment + "\n");
+				+ (property.getIsPrimitive() ? "" : "*") + property.getName() + ";" + comment + "\n");
 		return builder.toString();
 	}
 
@@ -329,26 +329,58 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 
 	@Override
 	public String buildTestClassDeclaration(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder builder = new StringBuilder();
+		builder.append("@interface " + modelClass.getTestClassName() + " : XCTestCase\n");
+		builder.append(singleLineComment("TODO: Any properties your tests might need", 1) + "\n");
+		builder.append("@end\n\n");
+		builder.append("@implementation " + modelClass.getTestClassName() + "\n");
+		return builder.toString();
 	}
 
 	@Override
 	public String buildTestImports(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder builder = new StringBuilder();
+		builder.append("#import <UIKit/UIKit.h>\n");
+		builder.append("#import <XCTest/XCTest.h>\n");
+		builder.append("#import \"Serializer.h\"\n");
+		builder.append("#import \"" + modelClass.getClassName() + ".h\";\n\n");
+		return builder.toString();
 	}
 
 	@Override
 	public String buildTestSetupMethod(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder builder = new StringBuilder();
+		builder.append("- (void)setUp {\n");
+		builder.append(tabs(1) + "[super setUp];\n");
+		builder.append(singleLineComment("Put setup code here. This method is called before the invocation of each test method in the class.",1) + "\n");
+		builder.append("}\n\n");
+		builder.append("- (void)tearDown {\n");
+		builder.append(singleLineComment("Put teardown code here. This method is called after the invocation of each test method in the class.",1) + "\n");
+		builder.append(tabs(1) + "[super tearDown];\n");
+		builder.append("}\n\n");
+		return builder.toString();
 	}
 
 	@Override
 	public String buildTestMethods(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder builder = new StringBuilder();
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			builder.append(buildTestMethod(prop));
+		}
+		return builder.toString();
+	}
+
+	private String buildTestMethod(ModelClassProperty prop) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(multiLineComment("Tests Serialization / Deserialization of the " + prop.getName() + " property", 0) + "\n");
+		builder.append("test" + interpreter.buildClassName(prop.getName()) + " {\n");
+		OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(prop);
+		switch(dt) {
+		case BOOLEAN:
+			builder.append("NSString *json=@\"{\\\"" + prop.getName() + "\\\":true}\";\n");
+		}
+		builder.append("}\n\n");
+		return builder.toString();
 	}		
 }
 

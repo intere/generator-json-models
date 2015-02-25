@@ -108,7 +108,7 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.buildTestClassDeclaration(modelClass));
 		builder.append(languageUtil.buildTestSetupMethod(modelClass));
 		builder.append(languageUtil.buildTestMethods(modelClass));
-		builder.append(languageUtil.finishClass(modelClass));
+		builder.append(languageUtil.finishClass(modelClass, true));
 		
 		return builder.toString();
 	}
@@ -122,7 +122,7 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.buildPropertyDeclarations(modelClass));
 		builder.append(languageUtil.buildGettersAndSetters(modelClass));
 		builder.append(languageUtil.buildModelUtilityDefinitionMethods(modelClass));
-		builder.append(languageUtil.finishClass(modelClass));
+		builder.append(languageUtil.finishClass(modelClass, false));
 		return builder.toString();
 	}
 

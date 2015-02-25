@@ -8,12 +8,13 @@
   "hasSubClasses" : true,
   "property" : [ {
     "name" : "id",
-    "key" : true,
+    "isKey" : true,
     "type" : "String",
-    "primitive" : false,
-    "visible" : true,
-    "readonly" : true,
-    "array" : true,
+    "isPrimitive" : false,
+    "isTransient" : false,
+    "isVisible" : true,
+    "isReadonly" : true,
+    "isArray" : true,
     "arraySubType" : "String"
   } ],
   "restUrl" : "/contest",

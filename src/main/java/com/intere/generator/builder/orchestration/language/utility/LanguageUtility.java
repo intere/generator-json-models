@@ -34,7 +34,7 @@ public interface LanguageUtility {
 	String buildClassDeclaration(ModelClass modelClass);
 	
 	/** Wrap up the class.  */
-	String finishClass(ModelClass modelClass);
+	String finishClass(ModelClass modelClass, boolean testClass);
 	
 	/** Build the property declarations for the provided model class.  */
 	String buildPropertyDeclarations(ModelClass modelClass);

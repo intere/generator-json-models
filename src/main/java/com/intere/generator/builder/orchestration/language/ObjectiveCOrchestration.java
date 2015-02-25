@@ -1,5 +1,7 @@
 package com.intere.generator.builder.orchestration.language;
 
+import static com.intere.generator.io.FileIOUtils.ensureExists;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,8 +31,12 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 
 	@Override
 	public List<File> generateModelUnitTests(File outputDirFile, OrchestrationTree tree) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		List<File> generatedClasses = new ArrayList<>();
+		for(ModelClass modelClass : tree.getModelClasses()) {
+			generatedClasses.add(buildTestFile(outputDirFile, modelClass));
+		}
+		
+		return generatedClasses;
 	}
 
 	@Override
@@ -55,6 +61,22 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		return null;
 	}
 	
+	/**
+	 * Builds the Test Class File (in the provided output directory).
+	 * @param outputDirectory
+	 * @param modelClass
+	 * @return
+	 */
+	private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException {
+		String fileContents = buildTestClass(modelClass);
+		File outputFile = new File(outputDirectory, modelClass.getTestClassName() + ".java");
+		System.out.println("About to create Test Class: " + outputFile.getAbsolutePath());
+		FileOutputStream fout = new FileOutputStream(outputFile);
+		IOUtils.write(fileContents, fout);
+		fout.close();
+		return outputFile;
+	}
+
 	/**
 	 * Performs the generation / writing of the Model implementation file.
 	 * @param outputDirectory Where to put the implementation file.
@@ -108,7 +130,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.buildClassDeclaration(modelClass));
 		builder.append(languageUtil.buildPropertyDeclarations(modelClass));
 		builder.append(languageUtil.buildModelUtilityDeclarationMethods(modelClass));
-		builder.append(languageUtil.finishClass(modelClass));
+		builder.append(languageUtil.finishClass(modelClass, false));
 		return builder.toString();
 	}
 
@@ -123,7 +145,19 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.buildSerializationConstants(modelClass));
 		builder.append(languageUtil.buildClassImplementation(modelClass));
 		builder.append(languageUtil.buildModelUtilityDefinitionMethods(modelClass));
-		builder.append(languageUtil.finishClass(modelClass));
+		builder.append(languageUtil.finishClass(modelClass, false));
+		
+		return builder.toString();
+	}
+	
+	private String buildTestClass(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(languageUtil.buildFileComment(modelClass.getTestClassName() + ".m"));
+		builder.append(languageUtil.buildTestImports(modelClass));
+		builder.append(languageUtil.buildTestClassDeclaration(modelClass));
+		builder.append(languageUtil.buildTestSetupMethod(modelClass));
+		builder.append(languageUtil.buildTestMethods(modelClass));
+		builder.append(languageUtil.finishClass(modelClass, true));
 		
 		return builder.toString();
 	}

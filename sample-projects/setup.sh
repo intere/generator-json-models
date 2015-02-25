@@ -30,7 +30,7 @@ generateObjectiveC() {
 }
 
 main() {
-  # generateJava;
+  generateJava;
   generateObjectiveC
 }
 

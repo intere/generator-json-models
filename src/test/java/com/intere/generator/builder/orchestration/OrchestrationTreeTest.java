@@ -57,7 +57,7 @@ public class OrchestrationTreeTest {
 			for(ModelClassProperty prop : model.getProperty()) {
 				assertNotNull(prop);
 				OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(prop);
-				String propInfo = prop.getName() + " - " + prop.getType() + (prop.getArray() ? "<" + prop.getArraySubType() + ">" : "");
+				String propInfo = prop.getName() + " - " + prop.getType() + (prop.getIsArray() ? "<" + prop.getArraySubType() + ">" : "");
 				assertNotNull(propInfo + " was null", dt);
 			}
 		}

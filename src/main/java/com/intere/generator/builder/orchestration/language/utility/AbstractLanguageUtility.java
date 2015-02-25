@@ -56,6 +56,7 @@ public abstract class AbstractLanguageUtility implements LanguageUtility {
 		for(ModelClassProperty prop : modelClass.getProperty()) {
 			builder.append(buildSinglePropertyDeclaration(prop));
 		}
+		
 		builder.append("\n");
 		return builder.toString();
 	}

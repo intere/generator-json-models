@@ -105,7 +105,7 @@ public enum OrchestrationDataType {
 	
 	@SuppressWarnings("unused")
 	public static OrchestrationDataType fromModelProperty(ModelClassProperty prop) {
-		if(prop.getArray()) {
+		if(prop.getIsArray()) {
 			return ARRAY;
 		}
 		OrchestrationDataType dt = OrchestrationDataType.fromString(prop.getType());

@@ -23,8 +23,8 @@
       "transientProperty": [
         {
           "className": "",
-          "name": "",
-          "type": ""
+          "name": "eric",
+          "type": "String"
         }
       ]
     },

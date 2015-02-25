@@ -22,6 +22,7 @@ import com.intere.generator.builder.orchestration.language.ObjectiveCOrchestrati
 import com.intere.generator.deserializer.JsonNodeUtils;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
+import com.intere.generator.metadata.MetadataClassesTransientProperty;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
@@ -63,13 +64,20 @@ public class OrchestrationUtils {
 			properties.add(property);
 		}
 		
+		for(MetadataClassesTransientProperty prop : clazz.getTransientProperty()) {
+			ModelClassProperty property = new ModelClassProperty();
+			property.setIsTransient(true);
+			property.setName(prop.getName());
+			property.setType(prop.getType());
+		}
+		
 		return properties;
 	}
 	
 	private static void configureNodeType(JsonLanguageInterpreter interpreter, String className, String name, JsonNode child, ModelClassProperty property) {		
 		property.setType(getNodeType(interpreter, child, className, name));
-		property.setArray(isArray(child));
-		property.setPrimitive(isPrimitive(property));
+		property.setIsArray(isArray(child));
+		property.setIsPrimitive(isPrimitive(property));
 		
 		if(isArray(child)) {
 			property.setArraySubType(getNodeType(interpreter, child.iterator().next(), className, name));
