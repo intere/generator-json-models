@@ -1,5 +1,7 @@
 package com.intere.generator.builder.orchestration;
 
+import static com.intere.generator.io.FileIOUtils.ensureExists;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -76,20 +78,6 @@ public class CodeOrchestration {
 			File restPath = new File(outputDirectory, "rest-services");
 			if(ensureExists(restPath)) {
 				orchestrator.generateRestServices(restPath, tree);
-			}
-		}
-	}
-	
-	private boolean ensureExists(File directory) {
-		if(directory.exists()) {
-			return true;
-		} else {
-			if(directory.mkdirs()) {
-				System.out.println("Created directory: " + directory.getAbsolutePath());
-				return true;
-			} else {
-				System.out.println("Failed to create directory: " + directory.getAbsolutePath());
-				return false;
 			}
 		}
 	}

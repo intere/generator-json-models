@@ -22,4 +22,23 @@ public class FileIOUtils {
 		
 		return testFolder.exists();
 	}
+	
+	/**
+	 * This method will ensure that the provided directory exists.  If it doesn't exist, it attempts to create it.
+	 * @param directory
+	 * @return
+	 */
+	public static boolean ensureExists(File directory) {
+		if(directory.exists()) {
+			return true;
+		} else {
+			if(directory.mkdirs()) {
+				System.out.println("Created directory: " + directory.getAbsolutePath());
+				return true;
+			} else {
+				System.out.println("Failed to create directory: " + directory.getAbsolutePath());
+				return false;
+			}
+		}
+	}
 }

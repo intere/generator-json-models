@@ -1,5 +1,7 @@
 package com.intere.generator.builder.orchestration.language;
 
+import static com.intere.generator.io.FileIOUtils.ensureExists;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -61,13 +63,19 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	 * @throws IOException
 	 */
 	private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException {
-		String fileContents = buildModelClass(modelClass);
-		File outputFile = new File(outputDirectory, modelClass.getFileName() + ".java");
-		System.out.println("About to create Model Class: " + outputFile.getAbsolutePath());
-		FileOutputStream fout = new FileOutputStream(outputFile);
-		IOUtils.write(fileContents, fout);
-		fout.close();
-		return outputFile;
+		File completePath = new File(outputDirectory, modelClass.getNamespace().replaceAll("\\.",  File.separator));
+		if(ensureExists(completePath)) {
+			String fileContents = buildModelClass(modelClass);
+			File outputFile = new File(completePath, modelClass.getFileName() + ".java");
+			System.out.println("About to create Model Class: " + outputFile.getAbsolutePath());
+			FileOutputStream fout = new FileOutputStream(outputFile);
+			IOUtils.write(fileContents, fout);
+			fout.close();
+			return outputFile;
+		} else {
+			System.out.println("Could not create directory: " + completePath);
+		}
+		return null;
 	}
 	
 	/**
@@ -77,13 +85,19 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	 * @return
 	 */
 	private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException {
-		String fileContents = buildTestClass(modelClass);
-		File outputFile = new File(outputDirectory, modelClass.getTestClassName() + ".java");
-		System.out.println("About to create Test Class: " + outputFile.getAbsolutePath());
-		FileOutputStream fout = new FileOutputStream(outputFile);
-		IOUtils.write(fileContents, fout);
-		fout.close();
-		return outputFile;
+		File completePath = new File(outputDirectory, modelClass.getNamespace().replaceAll("\\.",  File.separator));
+		if(ensureExists(completePath)) {
+			String fileContents = buildTestClass(modelClass);
+			File outputFile = new File(completePath, modelClass.getTestClassName() + ".java");
+			System.out.println("About to create Test Class: " + outputFile.getAbsolutePath());
+			FileOutputStream fout = new FileOutputStream(outputFile);
+			IOUtils.write(fileContents, fout);
+			fout.close();
+			return outputFile;
+		} else {
+			System.out.println("Could not create directory: " + completePath);
+		}
+		return null;
 	}
 
 	private String buildTestClass(ModelClass modelClass) {
@@ -94,6 +108,7 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.buildTestClassDeclaration(modelClass));
 		builder.append(languageUtil.buildTestSetupMethod(modelClass));
 		builder.append(languageUtil.buildTestMethods(modelClass));
+		builder.append(languageUtil.finishClass(modelClass));
 		
 		return builder.toString();
 	}
@@ -106,6 +121,7 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.buildClassDeclaration(modelClass));
 		builder.append(languageUtil.buildPropertyDeclarations(modelClass));
 		builder.append(languageUtil.buildGettersAndSetters(modelClass));
+		builder.append(languageUtil.buildModelUtilityDefinitionMethods(modelClass));
 		builder.append(languageUtil.finishClass(modelClass));
 		return builder.toString();
 	}

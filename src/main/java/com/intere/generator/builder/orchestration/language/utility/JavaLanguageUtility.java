@@ -1,19 +1,13 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
 
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
-import com.intere.generator.deserializer.JsonNodeUtils;
-import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
@@ -58,9 +52,6 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public String getPropertyType(ModelClassProperty property) {
 		OrchestrationDataType type = OrchestrationDataType.fromModelProperty(property);
-		if(null==type) {
-			return property.getType();
-		}
 		
 		switch(type) {
 		case ARRAY:
@@ -72,6 +63,9 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 			
 		case UNKNOWN:
 			return "String";
+			
+		case CLASS:
+			return property.getType();
 			
 		default:
 			return type.getJavaName();
@@ -151,8 +145,41 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 
 	@Override
 	public String buildModelUtilityDefinitionMethods(ModelClass modelClass) {
-		// Not currently used
-		return null;
+		StringBuilder builder = new StringBuilder();
+		
+		// hashCode method
+		builder.append(tabs(1) + "@Override\n");
+		builder.append(tabs(1) + "public int hashCode() {\n");
+		builder.append(tabs(2) + "final int prime = 31;\n");
+		builder.append(tabs(2) + "int result = 1;\n");
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			builder.append(tabs(2) + "result = prime * result + ((" 
+					+ prop.getName() + " == null) ? 0 : " + prop.getName() + ".hashCode());\n");
+		}
+		builder.append(tabs(2) + "return result;\n");
+		builder.append(tabs(1) + "}\n\n");
+		
+		// equals method
+		builder.append(tabs(1) + "@Override\n");
+		builder.append(tabs(1) + "public boolean equals(Object obj) {\n");
+		builder.append(tabs(2) + "if (this == obj)\n");
+		builder.append(tabs(3) + "return true;\n");
+		builder.append(tabs(2) + "if (obj == null)\n");
+		builder.append(tabs(3) + "return false;\n");
+		builder.append(tabs(2) + "if (getClass() != obj.getClass())\n");
+		builder.append(tabs(3) + "return false;\n");
+		builder.append(tabs(2) + modelClass.getClassName() + " other = (" + modelClass.getClassName() + ")obj;\n");
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			builder.append(tabs(2) + "if(" + prop.getName() + " == null) {\n");
+			builder.append(tabs(3) + "if(other." + prop.getName() + " != null)\n");
+			builder.append(tabs(4) + "return false;\n");
+			builder.append(tabs(2) + "} else if(!" + prop.getName() + ".equals(other." + prop.getName() + "))\n");
+			builder.append(tabs(3) + "return false;\n");
+		}
+		
+		builder.append(tabs(2) + "return true;\n");
+		builder.append(tabs(1) + "}\n\n");		
+		return builder.toString();
 	}
 
 	@Override
@@ -166,8 +193,10 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 		builder.append("import static org.junit.Assert.*;\n\n");
 		builder.append("import org.junit.Test;\n");
 		builder.append("import org.junit.Before;\n");
+		builder.append("import java.io.ByteArrayInputStream;\n");
 		builder.append("import java.io.IOException;\n");
 		builder.append("import java.io.InputStream;\n");
+		builder.append("import org.codehaus.jackson.JsonGenerationException;\n");
 		builder.append("import org.codehaus.jackson.JsonParseException;\n");
 		builder.append("import org.codehaus.jackson.map.JsonMappingException;\n");
 		builder.append("import org.codehaus.jackson.map.ObjectMapper;\n");
@@ -183,7 +212,7 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 		
 		builder.append(tabs(1) + "@Before\n");
 		builder.append(tabs(1) + "public void setUp() throws JsonParseException, JsonMappingException, IOException {\n");
-		builder.append(tabs(2) + "InputStream in = getClass().getResourceAsStream(\"/" + modelClass.getNamespace().replaceAll("\\.", "/") + "/" + modelClass.getTestClassName() + ".json\");\n");
+		builder.append(tabs(2) + "InputStream in = new ByteArrayInputStream(\"{}\".getBytes());\n");
 		builder.append(tabs(2) + "instance = jsonMapper.readValue(in, " + modelClass.getClassName() + ".class);\n");
 		builder.append(tabs(1) + "}\n\n");
 		
@@ -225,7 +254,7 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 		case STRING:
 		case IMAGE:
 			builder.append(tabs(2) + "final String expected = \"test\";\n");
-			builder.append(tabs(2) + "intance.set" + getSetBase + "(expected);\n");
+			builder.append(tabs(2) + "instance.set" + getSetBase + "(expected);\n");
 			builder.append(tabs(2) + "String serialized = serialize(instance);\n" );
 			builder.append(tabs(2) + "instance = deserialize(serialized);\n");
 			builder.append(tabs(2) + "assertEquals(\"The " + prop.getName() 
@@ -235,7 +264,7 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 			
 		case BOOLEAN:
 			builder.append(tabs(2) + "final Boolean expected = true;\n");
-			builder.append(tabs(2) + "intance.set" + getSetBase + "(expected);\n");
+			builder.append(tabs(2) + "instance.set" + getSetBase + "(expected);\n");
 			builder.append(tabs(2) + "String serialized = serialize(instance);\n" );
 			builder.append(tabs(2) + "instance = deserialize(serialized);\n");
 			builder.append(tabs(2) + "assertEquals(\"The " + prop.getName() 
@@ -245,7 +274,7 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 			
 		case DOUBLE:
 			builder.append(tabs(2) + "final Double expected = 123.456;\n");
-			builder.append(tabs(2) + "intance.set" + getSetBase + "(expected);\n");
+			builder.append(tabs(2) + "instance.set" + getSetBase + "(expected);\n");
 			builder.append(tabs(2) + "String serialized = serialize(instance);\n" );
 			builder.append(tabs(2) + "instance = deserialize(serialized);\n");
 			builder.append(tabs(2) + "assertEquals(\"The " + prop.getName() 
@@ -255,7 +284,7 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 			
 		case LONG:
 			builder.append(tabs(2) + "final Long expected = 123456789L;\n");
-			builder.append(tabs(2) + "intance.set" + getSetBase + "(expected);\n");
+			builder.append(tabs(2) + "instance.set" + getSetBase + "(expected);\n");
 			builder.append(tabs(2) + "String serialized = serialize(instance);\n" );
 			builder.append(tabs(2) + "instance = deserialize(serialized);\n");
 			builder.append(tabs(2) + "assertEquals(\"The " + prop.getName() 
@@ -265,13 +294,22 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 			
 		case DATE:
 			builder.append(tabs(2) + "final Date expected = new Date();\n");
-			builder.append(tabs(2) + "intance.set" + getSetBase + "(expected);\n");
+			builder.append(tabs(2) + "instance.set" + getSetBase + "(expected);\n");
 			builder.append(tabs(2) + "String serialized = serialize(instance);\n" );
 			builder.append(tabs(2) + "instance = deserialize(serialized);\n");
 			builder.append(tabs(2) + "assertEquals(\"The " + prop.getName() 
 					+ " property didn't deserialize properly\", expected, instance.get" 
 					+ getSetBase + "());\n");
 			break;
+			
+		case CLASS:
+			builder.append(tabs(2) + "final " + prop.getType() + " expected = new " + prop.getType() + "();\n");
+			builder.append(tabs(2) + "instance.set" + getSetBase + "(expected);\n");
+			builder.append(tabs(2) + "String serialized = serialize(instance);\n" );
+			builder.append(tabs(2) + "instance = deserialize(serialized);\n");
+			builder.append(tabs(2) + "assertEquals(\"The " + prop.getName() 
+					+ " property didn't deserialize properly\", expected, instance.get" 
+					+ getSetBase + "());\n");
 		default:
 			System.out.println("Unknown type: " + prop.getName());
 		}
