@@ -16,7 +16,7 @@
       "transientProperty": [
         {
           "className": "ModelClassProperty",
-          "name": "arrayProperty",
+          "name": "arraySubTypeProperty",
           "type": "ModelClassProperty"
         }
       ]

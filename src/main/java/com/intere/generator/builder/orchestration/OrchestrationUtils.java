@@ -96,9 +96,9 @@ public class OrchestrationUtils {
 		return properties;
 	}
 	
-	private static List<ModelClassProperty> addTransientProperties(MetadataClasses clazz) {
+	private static List<ModelClassProperty> addTransientProperties(MetadataClasses parent, ModelClass clazz) {
 		List<ModelClassProperty> props = new ArrayList<>();
-		for(MetadataClassesTransientProperty prop : clazz.getTransientProperty()) {
+		for(MetadataClassesTransientProperty prop : parent.getTransientProperty()) {
 			if(null == prop.getClassName() || 0 == prop.getClassName().trim().length()) {
 				LOGGER.error("Found Transient Property without a class name");
 				continue;
@@ -183,7 +183,7 @@ public class OrchestrationUtils {
 		model.setReadonly(clazz.getReadonly());
 		model.setRestUrl(restUrl);
 		model.getProperty().addAll(populateProperties(interpreter, className, metadata, clazz, node));
-		model.getProperty().addAll(addTransientProperties(clazz));
+		model.getProperty().addAll(addTransientProperties(clazz, model));
 		model.setFileName(interpreter.buildFilenameFromClassname(className));
 		model.setTestClassName(interpreter.buildClassName(className) + "Test");
 		modelClasses.add(model);
