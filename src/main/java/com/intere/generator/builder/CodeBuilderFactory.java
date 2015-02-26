@@ -5,6 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.intere.generator.App;
 import com.intere.generator.Language;
 import com.intere.generator.metadata.Metadata;
 
@@ -14,7 +18,8 @@ import com.intere.generator.metadata.Metadata;
  *
  */
 public class CodeBuilderFactory {
-
+	private static final Logger LOGGER = LogManager.getLogger(CodeBuilderFactory.class);
+	
 	/**
 	 * Performs the actual writing of the generated files.
 	 * @param generatedCode
@@ -26,7 +31,7 @@ public class CodeBuilderFactory {
 			FileOutputStream out = new FileOutputStream(f);
 			out.write(generatedCode.get(f).getBytes());
 			out.close();
-			System.out.println("Generated Source File: " + f.getAbsolutePath());
+			LOGGER.info("Generated Source File: " + f.getAbsolutePath());
 		}
 	}
 
@@ -41,7 +46,7 @@ public class CodeBuilderFactory {
 				FileOutputStream out = new FileOutputStream(f);
 				out.write(generatedCode.get(f).getBytes());
 				out.close();
-				System.out.println("Generated TestFile: " + f.getAbsolutePath());
+				LOGGER.info("Generated TestFile: " + f.getAbsolutePath());
 			}
 		}
 	}

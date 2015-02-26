@@ -1,11 +1,21 @@
 package com.intere.generator.builder.generation.views;
 
-import static com.intere.generator.deserializer.JsonNodeUtils.*;
+import static com.intere.generator.deserializer.JsonNodeUtils.isArray;
+import static com.intere.generator.deserializer.JsonNodeUtils.isBoolean;
+import static com.intere.generator.deserializer.JsonNodeUtils.isDate;
+import static com.intere.generator.deserializer.JsonNodeUtils.isFloat;
+import static com.intere.generator.deserializer.JsonNodeUtils.isImage;
+import static com.intere.generator.deserializer.JsonNodeUtils.isInteger;
+import static com.intere.generator.deserializer.JsonNodeUtils.isLong;
+import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
+import static com.intere.generator.deserializer.JsonNodeUtils.isText;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.NavigableMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 
 import com.intere.generator.builder.generation.utils.CodeGenerationUtils;
@@ -14,7 +24,7 @@ import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterprete
 import com.intere.generator.deserializer.JsonDeserializer;
 
 public class ObjectiveCViewGeneration extends ViewCodeGeneration {
-	
+	private static final Logger LOGGER = LogManager.getLogger(ObjectiveCViewGeneration.class);
 	private JsonLanguageInterpreter INTERPRETER = new ObjectiveCModelInterpreter();
 
 	@Override
@@ -315,7 +325,7 @@ public class ObjectiveCViewGeneration extends ViewCodeGeneration {
 		} else if(isObject(node) || isArray(node)) {
 			return "UIButton";
 		} else {
-			System.out.println(name + " is some other type of node...");
+			LOGGER.warn(name + " is some other type of node...");
 			return "// Unknown Type: ";
 		}
 	}

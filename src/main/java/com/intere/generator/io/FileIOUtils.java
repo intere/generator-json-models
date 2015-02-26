@@ -2,7 +2,12 @@ package com.intere.generator.io;
 
 import java.io.File;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class FileIOUtils {	
+	private static final Logger LOGGER = LogManager.getLogger(FileIOUtils.class);
+	
 	public static File createFolderIfNotExists(String folderPath) {
 		File testFolder = new File(folderPath);
 		if(testFolderCreateIfDoesNotExist(testFolder)) {
@@ -13,9 +18,9 @@ public class FileIOUtils {
 	
 	public static boolean testFolderCreateIfDoesNotExist(File testFolder) {
 		if(!testFolder.exists()) {
-			System.out.println(testFolder.getAbsolutePath() + " does not exist, creating it for you...");
+			LOGGER.info(testFolder.getAbsolutePath() + " does not exist, creating it for you...");
 			if(!testFolder.mkdirs()) {
-				System.out.println("Couldn't create output directory, existing...");
+				LOGGER.error("Couldn't create output directory, existing...");
 				System.exit(-1);
 			}
 		}
@@ -33,10 +38,10 @@ public class FileIOUtils {
 			return true;
 		} else {
 			if(directory.mkdirs()) {
-				System.out.println("Created directory: " + directory.getAbsolutePath());
+				LOGGER.info("Created directory: " + directory.getAbsolutePath());
 				return true;
 			} else {
-				System.out.println("Failed to create directory: " + directory.getAbsolutePath());
+				LOGGER.error("Failed to create directory: " + directory.getAbsolutePath());
 				return false;
 			}
 		}

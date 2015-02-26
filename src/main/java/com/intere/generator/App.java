@@ -9,6 +9,8 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.intere.generator.builder.CodeBuilder;
 import com.intere.generator.builder.CodeBuilderFactory;
@@ -16,6 +18,8 @@ import com.intere.generator.builder.orchestration.CodeOrchestration;
 import com.intere.generator.io.FileIOUtils;
 
 public class App {
+	private static final Logger LOGGER = LogManager.getLogger(App.class);
+	
 	private static final String GENERATOR_VERSION = "0.0.3";
 
 	/**
@@ -69,12 +73,12 @@ public class App {
 		boolean genViews = cmd.hasOption("vw");
 
 		if(null == className || null == jsonFilename) {
-			System.out.println("ERROR: Invalid Usage: " + stringArrayToString(args) + "...\n\n");
+			LOGGER.error("ERROR: Invalid Usage: " + stringArrayToString(args) + "...\n\n");
 			App.usage();
 			return;
 		}
 
-		System.out.println("Using Language: " + language.getFullName());
+		LOGGER.info("Using Language: " + language.getFullName());
 		File outputDirectory = FileIOUtils.createFolderIfNotExists(cmd.getOptionValue('o', "tmp"));
 		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language, namespace, className, jsonFilename);
 		HashMap<File, String> generatedCode = builder.buildSourceFiles(outputDirectory);

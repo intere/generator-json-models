@@ -1,10 +1,20 @@
 package com.intere.generator.builder.orchestration;
 
+import static com.intere.generator.deserializer.JsonNodeUtils.isArray;
+import static com.intere.generator.deserializer.JsonNodeUtils.isBoolean;
+import static com.intere.generator.deserializer.JsonNodeUtils.isDate;
+import static com.intere.generator.deserializer.JsonNodeUtils.isFloat;
+import static com.intere.generator.deserializer.JsonNodeUtils.isImage;
+import static com.intere.generator.deserializer.JsonNodeUtils.isInteger;
+import static com.intere.generator.deserializer.JsonNodeUtils.isLong;
+import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
+import static com.intere.generator.deserializer.JsonNodeUtils.isText;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 
 import com.intere.generator.metadata.ModelClassProperty;
-
-import static com.intere.generator.deserializer.JsonNodeUtils.*;
 
 
 
@@ -19,6 +29,7 @@ public enum OrchestrationDataType {
 	CLASS,
 	UNKNOWN("Unknown", "String", "NSString");
 	
+	private static final Logger LOGGER = LogManager.getLogger(OrchestrationDataType.class);
 	private String internalName;
 	private String javaName;
 	private String objcName;
@@ -98,7 +109,7 @@ public enum OrchestrationDataType {
 		} else if(isArray(node)) {
 			return ARRAY;
 		} else {
-			System.out.println("Unknown Node type: " + node.toString() + ", defaulting to String");
+			LOGGER.warn("Unknown Node type: " + node.toString() + ", defaulting to String");
 			return UNKNOWN;
 		}
 	}

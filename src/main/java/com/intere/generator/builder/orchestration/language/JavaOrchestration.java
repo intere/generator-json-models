@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.JavaLanguageUtility;
@@ -16,6 +18,7 @@ import com.intere.generator.builder.orchestration.language.utility.LanguageUtili
 import com.intere.generator.metadata.ModelClass;
 
 public class JavaOrchestration implements LanguageOrchestrator {
+	private static final Logger LOGGER = LogManager.getLogger(JavaOrchestration.class);
 	LanguageUtility languageUtil = new JavaLanguageUtility();
 
 	@Override
@@ -67,13 +70,13 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		if(ensureExists(completePath)) {
 			String fileContents = buildModelClass(modelClass);
 			File outputFile = new File(completePath, modelClass.getFileName() + ".java");
-			System.out.println("About to create Model Class: " + outputFile.getAbsolutePath());
+			LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
 			FileOutputStream fout = new FileOutputStream(outputFile);
 			IOUtils.write(fileContents, fout);
 			fout.close();
 			return outputFile;
 		} else {
-			System.out.println("Could not create directory: " + completePath);
+			LOGGER.error("Could not create directory: " + completePath);
 		}
 		return null;
 	}
@@ -89,13 +92,13 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		if(ensureExists(completePath)) {
 			String fileContents = buildTestClass(modelClass);
 			File outputFile = new File(completePath, modelClass.getTestClassName() + ".java");
-			System.out.println("About to create Test Class: " + outputFile.getAbsolutePath());
+			LOGGER.info("About to create Test Class: " + outputFile.getAbsolutePath());
 			FileOutputStream fout = new FileOutputStream(outputFile);
 			IOUtils.write(fileContents, fout);
 			fout.close();
 			return outputFile;
 		} else {
-			System.out.println("Could not create directory: " + completePath);
+			LOGGER.error("Could not create directory: " + completePath);
 		}
 		return null;
 	}

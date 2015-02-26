@@ -16,6 +16,8 @@ import static com.intere.generator.deserializer.JsonNodeUtils.isText;
 import java.util.Date;
 import java.util.Iterator;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 
 import com.intere.generator.builder.generation.CodeGeneration;
@@ -25,6 +27,7 @@ import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
 
 public class JavaModelGeneration extends CodeGeneration {
+	private static final Logger LOGGER = LogManager.getLogger(JavaModelGeneration.class);
 
 	@Override
 	public String generateHeaderFile(JsonDeserializer deserializer) {
@@ -93,7 +96,7 @@ public class JavaModelGeneration extends CodeGeneration {
 			}
 			return "List";
 		} else {
-			System.out.println("Unknown Node type: " + node.toString() + ", defaulting to String");
+			LOGGER.warn("Unknown Node type: " + node.toString() + ", defaulting to String");
 			return "String";
 		}
 	}

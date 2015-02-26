@@ -22,9 +22,9 @@
       ],
       "transientProperty": [
         {
-          "className": "",
-          "name": "",
-          "type": ""
+          "className": "Contest",
+          "name": "transientProperty",
+          "type": "String"
         }
       ]
     },

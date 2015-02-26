@@ -4,6 +4,9 @@ package com.intere.generator.builder.orchestration.language.utility;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
@@ -11,6 +14,7 @@ import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
 public class JavaLanguageUtility extends AbstractLanguageUtility {
+	private static final Logger LOGGER = LogManager.getLogger(JavaLanguageUtility.class);
 	JsonLanguageInterpreter interpreter = new JavaModelInterpreter();
 	@Override
 	public String buildNamespace(ModelClass modelClass) {
@@ -320,8 +324,10 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 			builder.append(tabs(2) + "assertEquals(\"The " + prop.getName() 
 					+ " property didn't deserialize properly\", expected, instance.get" 
 					+ getSetBase + "());\n");
+			break;
 		default:
-			System.out.println("Unknown type: " + prop.getName());
+			LOGGER.warn("Unknown type: " + prop.getName());
+			break;
 		}
 		
 		return builder.toString();

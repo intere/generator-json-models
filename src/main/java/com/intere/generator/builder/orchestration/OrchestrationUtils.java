@@ -6,9 +6,13 @@ import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 
 import com.intere.generator.Language;
@@ -27,9 +31,37 @@ import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
 public class OrchestrationUtils {
-
+	private static final Logger LOGGER = LogManager.getLogger(OrchestrationUtils.class);
+	
+	/**
+	 * This method is responsible for taking the provided {@link Metadata}, {@link MetadataClasses} and {@link JsonNode} objects and rectifying them all together 
+	 * to build a collection of {@link ModelClass} objects for you. 
+	 * @param metadata The {@link Metadata} object.
+	 * @param clazz The {@link MetadataClasses} object.
+	 * @param node The {@link JsonNode} object (the JSON Model that ultimately drives the bulk of the code creation).
+	 * @return A Collection of {@link ModelClass} objects.
+	 */
 	public static List<ModelClass> readBuildClasses(Metadata metadata, MetadataClasses clazz, JsonNode node) {
 		return createAndPopulateModelClass(metadata, clazz, clazz.getClassName(), node, clazz.getUrlPath());
+	}
+	
+	/**
+	 * This method is responsible for providing you with a {@link LanguageOrchestrator} object based on what the provided {@link Metadata} object requires.
+	 * @param metadata
+	 * @return
+	 */
+	public static LanguageOrchestrator getLanguageOrchestrator(Metadata metadata) {
+		Language lang = Language.fromFullName(metadata.getLanguage());
+		switch(lang) {
+		case Java:
+			return new JavaOrchestration();
+		case ObjC:
+			return new ObjectiveCOrchestration();
+			
+		default:
+			LOGGER.warn("No Language Orchestrator for language: " + lang.getFullName());
+			return null;
+		}
 	}
 
 	private static Collection<ModelClass> getSubClasses(JsonLanguageInterpreter interpreter, Metadata metadata, MetadataClasses clazz, JsonNode node, String className) {
@@ -43,12 +75,10 @@ public class OrchestrationUtils {
 			if(isObject(child)) {
 				modelClasses.addAll(createAndPopulateModelClass(metadata, clazz, childClassName, child, null));
 			} else if(isArrayOfObjects(child)) {
-				// TODO: Will this work?
 				modelClasses.addAll(createAndPopulateModelClass(metadata, clazz, childClassName, child.iterator().next(), null));
 			}
 		}
 		
-		// TODO Auto-generated method stub
 		return modelClasses;
 	}
 
@@ -62,16 +92,38 @@ public class OrchestrationUtils {
 			property.setName(name);
 			configureNodeType(interpreter, className, name, child, property);
 			properties.add(property);
-		}
-		
-		for(MetadataClassesTransientProperty prop : clazz.getTransientProperty()) {
-			ModelClassProperty property = new ModelClassProperty();
-			property.setIsTransient(true);
-			property.setName(prop.getName());
-			property.setType(prop.getType());
-		}
-		
+		}		
 		return properties;
+	}
+	
+	private static List<ModelClassProperty> addTransientProperties(MetadataClasses clazz) {
+		List<ModelClassProperty> props = new ArrayList<>();
+		for(MetadataClassesTransientProperty prop : clazz.getTransientProperty()) {
+			if(null == prop.getClassName() || 0 == prop.getClassName().trim().length()) {
+				LOGGER.error("Found Transient Property without a class name");
+				continue;
+			}
+			if(null != prop.getName() && null != prop.getType() && prop.getName().trim().length()>0 && prop.getType().trim().length()>0) {
+				if(clazz.getClassName().equals(prop.getClassName())) {
+					ModelClassProperty property = new ModelClassProperty();
+					property.setIsTransient(true);
+					property.setName(prop.getName());
+					property.setType(prop.getType());
+					property.setIsArray(false);
+					property.setIsKey(false);
+					props.add(property);
+				}
+			} else {
+				if(prop.getName().trim().length()==0) {
+					LOGGER.warn(clazz.getClassName() + " has a transient property without a name");
+				}
+				if(prop.getType().trim().length()==0) {
+					LOGGER.warn(clazz.getClassName() + " has a transient property without a class name");
+				}
+			}
+		}
+		
+		return props;
 	}
 	
 	private static void configureNodeType(JsonLanguageInterpreter interpreter, String className, String name, JsonNode child, ModelClassProperty property) {		
@@ -112,6 +164,15 @@ public class OrchestrationUtils {
 		}
 	}
 
+	/**
+	 * This method is responsible for the creation and population of the Model Classes.
+	 * @param metadata
+	 * @param clazz
+	 * @param className
+	 * @param node
+	 * @param restUrl
+	 * @return
+	 */
 	private static List<ModelClass> createAndPopulateModelClass(Metadata metadata, MetadataClasses clazz, String className, JsonNode node, String restUrl) {
 		JsonLanguageInterpreter interpreter = getInterpreterFromMetadata(metadata);
 		List<ModelClass> modelClasses = new ArrayList<>();
@@ -122,6 +183,7 @@ public class OrchestrationUtils {
 		model.setReadonly(clazz.getReadonly());
 		model.setRestUrl(restUrl);
 		model.getProperty().addAll(populateProperties(interpreter, className, metadata, clazz, node));
+		model.getProperty().addAll(addTransientProperties(clazz));
 		model.setFileName(interpreter.buildFilenameFromClassname(className));
 		model.setTestClassName(interpreter.buildClassName(className) + "Test");
 		modelClasses.add(model);
@@ -145,21 +207,8 @@ public class OrchestrationUtils {
 			return new RubyModelInterpreter();
 			
 			default:
-				System.out.println("ERROR: No Interpreter for type: " + lang.name());
+				LOGGER.error("ERROR: No Interpreter for type: " + lang.name());
 				return null;
-		}
-	}
-	
-	public static LanguageOrchestrator getLanguageOrchestrator(Metadata metadata) {
-		Language lang = Language.fromFullName(metadata.getLanguage());
-		switch(lang) {
-		case Java:
-			return new JavaOrchestration();
-		case ObjC:
-			return new ObjectiveCOrchestration();
-			
-		default:
-			return null;
 		}
 	}
 

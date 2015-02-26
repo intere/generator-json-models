@@ -1,12 +1,17 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
+import com.intere.generator.builder.orchestration.OrchestrationUtils;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
 public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
+	private static final Logger LOGGER = LogManager.getLogger(ObjectiveCLanguageUtility.class);
 	JsonLanguageInterpreter interpreter = new ObjectiveCModelInterpreter();
 	
 	@Override
@@ -268,7 +273,7 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 					return BASE + "[" + prop.getArraySubType() + " fromArrayOfDictionaries:[Serializer getArrayFromDict:dict forKey:" + serConstant + "]];\n";
 				}
 			} else {
-				System.out.println("No Subtype for: " + prop.getArraySubType());
+				LOGGER.warn("No Subtype for: " + prop.getArraySubType());
 			}
 			return "\n";
 		default:

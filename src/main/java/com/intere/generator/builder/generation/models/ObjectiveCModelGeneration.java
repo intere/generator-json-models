@@ -17,6 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NavigableMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParseException;
 
@@ -32,6 +34,7 @@ import com.intere.generator.deserializer.JsonDeserializer;
  * @author einternicola
  */
 public class ObjectiveCModelGeneration extends CodeGeneration {
+	private static final Logger LOGGER = LogManager.getLogger(ObjectiveCModelGeneration.class);
 	private static final JsonLanguageInterpreter INTERPRETER = new ObjectiveCModelInterpreter();
 
 	public JsonLanguageInterpreter getInterpreter() {
@@ -300,9 +303,9 @@ public class ObjectiveCModelGeneration extends CodeGeneration {
 			} else if(isObject(childNode)) {
 				// TODO - this class will need its own test file
 			} else if(isArrayOfObjects(childNode)) {
-				System.out.println("What is it?");
+				LOGGER.warn("What is it?");
 			} else if(isArrayofArrays(childNode)) {
-				System.out.println("What is it?");
+				LOGGER.warn("What is it?");
 			} else if(isArray(childNode)) {
 				builder.append("-(void)test" + name + " {\n" +
 					"\tXCTAssertEqual((NSUInteger)" + childNode.size() + ", deserialized." + propertyName + ".count, @\"Failed to properly deserialize the " + propertyName + "\");\n" +
@@ -424,7 +427,7 @@ public class ObjectiveCModelGeneration extends CodeGeneration {
 		} else if(isObject(node)) {
 			return "[Serializer setDict:dict object:[self." + variableName + " toDictionary] forKey:" + defName + "];\n";
 		} else {
-			System.out.println("Unknown node type: " + node.toString());
+			LOGGER.warn("Unknown node type: " + node.toString());
 		}
 		return "";
 	}
@@ -455,7 +458,7 @@ public class ObjectiveCModelGeneration extends CodeGeneration {
 		} else if(isArray(node)) {
 			return "@property (nonatomic, strong) NSMutableArray *" + variableName + ";\t\t// Array of " + subClassName + " Objects\n";
 		} else {
-			System.out.println(name + " is some other type of node...");
+			LOGGER.warn(name + " is some other type of node...");
 		}
 		return "";
 	}
@@ -493,7 +496,7 @@ public class ObjectiveCModelGeneration extends CodeGeneration {
 					"\t\tobject." + variableName + " = [" + className + " fromDictionary:[dict objectForKey:" + defName + "]];\n" +
 					"\t}\n";
 		} else {
-			System.out.println("Unknown Node Type: " + node.toString());
+			LOGGER.warn("Unknown Node Type: " + node.toString());
 		}
 		return "";
 	}

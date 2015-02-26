@@ -1,7 +1,5 @@
 package com.intere.generator.builder.orchestration.language;
 
-import static com.intere.generator.io.FileIOUtils.ensureExists;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
@@ -16,6 +16,7 @@ import com.intere.generator.builder.orchestration.language.utility.ObjectiveCLan
 import com.intere.generator.metadata.ModelClass;
 
 public class ObjectiveCOrchestration implements LanguageOrchestrator {
+	private static final Logger LOGGER = LogManager.getLogger(ObjectiveCOrchestration.class);
 	LanguageUtility languageUtil = new ObjectiveCLanguageUtility();
 	
 	@Override
@@ -70,7 +71,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException {
 		String fileContents = buildTestClass(modelClass);
 		File outputFile = new File(outputDirectory, modelClass.getTestClassName() + ".java");
-		System.out.println("About to create Test Class: " + outputFile.getAbsolutePath());
+		LOGGER.info("About to create Test Class: " + outputFile.getAbsolutePath());
 		FileOutputStream fout = new FileOutputStream(outputFile);
 		IOUtils.write(fileContents, fout);
 		fout.close();
@@ -111,7 +112,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	 * @throws IOException
 	 */
 	private File writeFile(File outputFile, String fileContents) throws IOException {
-		System.out.println("About to create model class: " + outputFile.getAbsolutePath());
+		LOGGER.info("About to create model class: " + outputFile.getAbsolutePath());
 		FileOutputStream fout = new FileOutputStream(outputFile);
 		IOUtils.write(fileContents, fout);
 		fout.close();
