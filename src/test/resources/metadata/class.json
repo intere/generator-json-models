@@ -22,7 +22,10 @@
     ],
     "restUrl": "/contest",
     "imports": [
-      "Enumeration"
+      {
+        "package": "com.intere.generator.builder.orchestration",
+        "className": "Enumeration"
+      }
     ]
   }
 ]

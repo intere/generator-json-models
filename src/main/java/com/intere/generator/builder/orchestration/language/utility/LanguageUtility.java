@@ -1,5 +1,6 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
+import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
@@ -77,4 +78,7 @@ public interface LanguageUtility {
 	
 	/** Builds the test methods for this class.  */
 	String buildTestMethods(ModelClass modelClass);
+	
+	/** Enforces the filenames based on the model class names.  */
+	void enforceFilenames(OrchestrationTree tree);
 }

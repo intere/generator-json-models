@@ -18,6 +18,11 @@
           "className": "ModelClassProperty",
           "name": "arraySubTypeProperty",
           "type": "ModelClassProperty"
+        },
+        {
+          "className": "ModelClassProperty",
+          "name": "parentModel",
+          "type": "ModelClass"
         }
       ]
     }

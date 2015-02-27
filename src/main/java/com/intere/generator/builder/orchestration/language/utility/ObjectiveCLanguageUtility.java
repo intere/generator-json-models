@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
+import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.OrchestrationUtils;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
@@ -386,6 +387,11 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 		}
 		builder.append("}\n\n");
 		return builder.toString();
+	}
+
+	@Override
+	public void enforceFilenames(OrchestrationTree tree) {
+		// No-Op for Objective C		
 	}		
 }
 

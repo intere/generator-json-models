@@ -6,10 +6,8 @@ import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +21,7 @@ import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
 import com.intere.generator.builder.orchestration.language.JavaOrchestration;
 import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
 import com.intere.generator.builder.orchestration.language.ObjectiveCOrchestration;
+import com.intere.generator.builder.orchestration.language.RubyOrchestration;
 import com.intere.generator.deserializer.JsonNodeUtils;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
@@ -58,6 +57,9 @@ public class OrchestrationUtils {
 		case ObjC:
 			return new ObjectiveCOrchestration();
 			
+		case Ruby:
+			return new RubyOrchestration();
+			
 		default:
 			LOGGER.warn("No Language Orchestrator for language: " + lang.getFullName());
 			return null;
@@ -82,7 +84,7 @@ public class OrchestrationUtils {
 		return modelClasses;
 	}
 
-	private static Collection<ModelClassProperty> populateProperties(JsonLanguageInterpreter interpreter, String className, Metadata metadata, MetadataClasses clazz, JsonNode node) {
+	private static Collection<ModelClassProperty> populateProperties(JsonLanguageInterpreter interpreter, String className, Metadata metadata, MetadataClasses clazz, JsonNode node, ModelClass modelClass) {
 		List<ModelClassProperty> properties = new ArrayList<>();
 		Iterator<String> iter = node.getFieldNames();
 		while(iter.hasNext()) {
@@ -90,6 +92,7 @@ public class OrchestrationUtils {
 			JsonNode child = node.get(name);
 			ModelClassProperty property = new ModelClassProperty();
 			property.setName(name);
+			property.setParentModel(modelClass);
 			configureNodeType(interpreter, className, name, child, property);
 			properties.add(property);
 		}		
@@ -182,7 +185,7 @@ public class OrchestrationUtils {
 		model.setNamespace(metadata.getNamespace());
 		model.setReadonly(clazz.getReadonly());
 		model.setRestUrl(restUrl);
-		model.getProperty().addAll(populateProperties(interpreter, className, metadata, clazz, node));
+		model.getProperty().addAll(populateProperties(interpreter, className, metadata, clazz, node, model));
 		model.getProperty().addAll(addTransientProperties(clazz, model));
 		model.setFileName(interpreter.buildFilenameFromClassname(className));
 		model.setTestClassName(interpreter.buildClassName(className) + "Test");
