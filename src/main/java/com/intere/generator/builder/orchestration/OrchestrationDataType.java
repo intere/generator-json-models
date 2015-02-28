@@ -17,7 +17,6 @@ import org.codehaus.jackson.JsonNode;
 import com.intere.generator.metadata.ModelClassProperty;
 
 
-
 public enum OrchestrationDataType {	
 	IMAGE("Image", "String", "NSString"),
 	DATE("Date", "Date", "NSDate"),

@@ -14,7 +14,6 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.intere.generator.Language;
-import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
 import com.intere.generator.metadata.ModelClass;
@@ -53,7 +52,7 @@ public class OrchestrationTree {
 			modelClassMap.put(model.getClassName(), model);
 		}
 		modelClasses.addAll(tmpModelClasses);
-		// TODO: Now we need to pass back through and overlay the metadata configuration
+
 	}
 
 	private void readMetadata(String metadataPath) throws IOException {

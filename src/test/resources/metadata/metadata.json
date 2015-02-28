@@ -26,6 +26,12 @@
           "name": "transientProperty",
           "type": "String"
         }
+      ],
+      "imports": [
+        {
+          "importName": "com.intere.generator.builder.orchestration",
+          "targetClassName": "Enumeration"
+        }
       ]
     },
     {

@@ -25,8 +25,10 @@ import com.intere.generator.builder.orchestration.language.RubyOrchestration;
 import com.intere.generator.deserializer.JsonNodeUtils;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
+import com.intere.generator.metadata.MetadataClassesImports;
 import com.intere.generator.metadata.MetadataClassesTransientProperty;
 import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.metadata.ModelClassImports;
 import com.intere.generator.metadata.ModelClassProperty;
 
 public class OrchestrationUtils {
@@ -129,7 +131,13 @@ public class OrchestrationUtils {
 		return props;
 	}
 	
-	private static void configureNodeType(JsonLanguageInterpreter interpreter, String className, String name, JsonNode child, ModelClassProperty property) {		
+	private static void configureNodeType(JsonLanguageInterpreter interpreter, String className, String name, JsonNode child, ModelClassProperty property) {
+		property.setIsArray(false);
+		property.setIsKey(false);
+		property.setIsPrimitive(false);
+		property.setIsReadonly(false);
+		property.setIsTransient(false);
+		property.setIsVisible(true);
 		property.setType(getNodeType(interpreter, child, className, name));
 		property.setIsArray(isArray(child));
 		property.setIsPrimitive(isPrimitive(property));
@@ -187,6 +195,7 @@ public class OrchestrationUtils {
 		model.setRestUrl(restUrl);
 		model.getProperty().addAll(populateProperties(interpreter, className, metadata, clazz, node, model));
 		model.getProperty().addAll(addTransientProperties(clazz, model));
+		model.getImports().addAll(getImports(clazz, model));
 		model.setFileName(interpreter.buildFilenameFromClassname(className));
 		model.setTestClassName(interpreter.buildClassName(className) + "Test");
 		modelClasses.add(model);
@@ -195,6 +204,19 @@ public class OrchestrationUtils {
 		}
 		
 		return modelClasses;
+	}
+
+	private static Collection<? extends ModelClassImports> getImports(MetadataClasses clazz, ModelClass model) {
+		List<ModelClassImports> importList = new ArrayList<>();
+		for(MetadataClassesImports mImport : clazz.getImports()) {
+			if(mImport.getTargetClassName().equals(model.getClassName())) {
+				ModelClassImports theImport = new ModelClassImports();
+				theImport.setImportName(mImport.getImportName());
+				theImport.setTargetClassName(mImport.getTargetClassName());
+				importList.add(theImport);
+			}
+		}
+		return importList;
 	}
 
 	private static JsonLanguageInterpreter getInterpreterFromMetadata(Metadata metadata) {

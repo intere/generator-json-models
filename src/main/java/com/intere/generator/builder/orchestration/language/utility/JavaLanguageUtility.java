@@ -12,6 +12,7 @@ import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.metadata.ModelClassImports;
 import com.intere.generator.metadata.ModelClassProperty;
 
 public class JavaLanguageUtility extends AbstractLanguageUtility {
@@ -40,7 +41,10 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
 		StringBuilder builder = new StringBuilder();
-		String propertyType = getPropertyType(property);			
+		String propertyType = getPropertyType(property);
+		if(property.getIsTransient()) {
+			builder.append(tabs(1) + "@JsonIgnore\n");
+		}
 		builder.append(tabs(1) + "private " + propertyType + " " + property.getName());
 		if(OrchestrationDataType.ARRAY == OrchestrationDataType.fromModelProperty(property)) {
 			if(null != property.getArraySubType()) {
@@ -49,7 +53,7 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 				builder.append(" = new ArrayList()");
 			}
 		}
-		builder.append(";\n");
+		builder.append(";" + (property.getIsTransient() ? tabs(2) + singleLineComment("Transient Property") : "") + "\n");
 		
 		return builder.toString();
 	}
@@ -119,6 +123,12 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 				imports.put("List", "java.util.List");
 				imports.put("ArrayList", "java.util.ArrayList");
 			}
+		}
+		if(hasTransientProperties(modelClass)) {
+			imports.put("JsonIgnore", "org.codehaus.jackson.annotate.JsonIgnore");
+		}
+		for(ModelClassImports theImport : modelClass.getImports()) {
+			imports.put(theImport.getImportName(), theImport.getImportName());
 		}
 		
 		for(String key : imports.keySet()) {
@@ -236,7 +246,9 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	public String buildTestMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		for(ModelClassProperty prop : modelClass.getProperty()) {
-			builder.append(addTestMethod(prop));
+			if(!prop.getIsTransient()) {
+				builder.append(addTestMethod(prop));
+			}
 		}
 		
 		return builder.toString();
@@ -338,5 +350,14 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public void enforceFilenames(OrchestrationTree tree) {
 		// No-Op for Java
+	}
+	
+	private boolean hasTransientProperties(ModelClass modelClass) {
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			if(prop.getIsTransient()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

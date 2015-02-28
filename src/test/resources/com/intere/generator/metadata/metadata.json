@@ -17,9 +17,13 @@
       "mapClassProperty" : "name"
     } ],
     "transientProperty" : [ {
-      "className" : "",
-      "name" : "",
-      "type" : ""
+      "className" : "Contest",
+      "name" : "transientProperty",
+      "type" : "String"
+    } ],
+    "imports" : [ {
+      "importName" : "com.intere.generator.builder.orchestration",
+      "targetClassName" : "Enumeration"
     } ]
   }, {
     "className" : "Enumeration",
