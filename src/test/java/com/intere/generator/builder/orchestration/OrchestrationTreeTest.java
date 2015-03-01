@@ -64,9 +64,30 @@ public class OrchestrationTreeTest {
 	}
 	
 	@Test
+	public void testArraySubTypes() throws Exception {
+		OrchestrationTree tree = new OrchestrationTree(metadataPath);
+		assertNotNull(tree);
+		
+		for(ModelClass clazz : tree.getModelClasses()) {
+			for(ModelClassProperty prop : clazz.getProperty()) {
+				assertNotNull(prop.getDataType());
+				if(prop.getDataType() == OrchestrationDataType.ARRAY) {
+					assertNotNull(prop.getArraySubTypeProperty());
+				}
+			}
+		}
+	}
+	
+	@Test
 	public void testOverlays() throws Exception {
 		OrchestrationTree tree = new OrchestrationTree(metadataPath);
 		assertNotNull(tree);
-		// TODO		
+		// TODO
+		assertNotNull(tree.getModelClassMap().get("Contest").getProperty());
+		for(ModelClassProperty prop : tree.getModelClassMap().get("Contest").getProperty()) {
+			if(prop.getName().equals("transientProperty")) {
+				assertTrue(prop.getIsTransient());
+			}
+		}
 	}
 }

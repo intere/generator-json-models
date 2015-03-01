@@ -116,6 +116,7 @@ public class OrchestrationUtils {
 					property.setType(prop.getType());
 					property.setIsArray(false);
 					property.setIsKey(false);
+					property.setDataType(OrchestrationDataType.fromModelProperty(property));
 					props.add(property);
 				}
 			} else {
@@ -131,6 +132,14 @@ public class OrchestrationUtils {
 		return props;
 	}
 	
+	/**
+	 * This method is responsible for filling in the details of the Property object you pass to it.  It uses delegation to fill in the data for Array Sub Type properties too.
+	 * @param interpreter
+	 * @param className
+	 * @param name
+	 * @param child
+	 * @param property
+	 */
 	private static void configureNodeType(JsonLanguageInterpreter interpreter, String className, String name, JsonNode child, ModelClassProperty property) {
 		property.setIsArray(false);
 		property.setIsKey(false);
@@ -141,12 +150,22 @@ public class OrchestrationUtils {
 		property.setType(getNodeType(interpreter, child, className, name));
 		property.setIsArray(isArray(child));
 		property.setIsPrimitive(isPrimitive(property));
+		property.setDataType(OrchestrationDataType.fromModelProperty(property));
+		if(property.getDataType() == OrchestrationDataType.ARRAY) {
+			property.setArraySubTypeProperty(getArraySubtypeProperty(interpreter, className, name, child.get(0)));
+		}
 		
 		if(isArray(child)) {
 			property.setArraySubType(getNodeType(interpreter, child.iterator().next(), className, name));
 		}
 	}
 	
+	private static ModelClassProperty getArraySubtypeProperty(JsonLanguageInterpreter interpreter, String className, String name, JsonNode child) {
+		ModelClassProperty property = new ModelClassProperty();
+		configureNodeType(interpreter, className, name, child, property);
+		return property;
+	}
+
 	private static Boolean isPrimitive(ModelClassProperty property) {
 		switch(property.getType()) {
 		case "Boolean":
