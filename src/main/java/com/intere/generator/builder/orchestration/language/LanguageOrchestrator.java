@@ -51,4 +51,13 @@ public interface LanguageOrchestrator {
 	 * @throws IOException
 	 */
 	List<File> generateRestServices(File restPath, OrchestrationTree tree) throws IOException;
+
+	/**
+	 * Copies the resource files associated with the source (models).
+	 * @param sourcePath Where to copy the resource files to.
+	 * @param tree The {@link OrchestrationTree} to help out (if necessary).
+	 * @return a {@link List} of {@link File} objects.
+	 * @throws IOException 
+	 */
+	List<File> copyResources(File sourcePath, OrchestrationTree tree) throws IOException;
 }

@@ -1,5 +1,10 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
@@ -81,4 +86,7 @@ public interface LanguageUtility {
 	
 	/** Enforces the filenames based on the model class names.  */
 	void enforceFilenames(OrchestrationTree tree);
+
+	/** Copies the Model Resource files into the provided sourcePath. */
+	Map<File, String> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException;
 }

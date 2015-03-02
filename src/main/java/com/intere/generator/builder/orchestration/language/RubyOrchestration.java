@@ -1,11 +1,11 @@
 package com.intere.generator.builder.orchestration.language;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -56,7 +56,7 @@ public class RubyOrchestration implements LanguageOrchestrator {
 
 	private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException {
 		String fileContents = buildModelClass(modelClass);
-		File outputFile = new File(outputDirectory, modelClass.getFileName() + ".java");
+		File outputFile = new File(outputDirectory, modelClass.getFileName() + ".rb");
 		LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
 		FileOutputStream fout = new FileOutputStream(outputFile);
 		IOUtils.write(fileContents, fout);
@@ -77,4 +77,17 @@ public class RubyOrchestration implements LanguageOrchestrator {
 		return builder.toString();
 	}
 
+	@Override
+	public List<File> copyResources(File sourcePath, OrchestrationTree tree) throws IOException {
+		List<File> generatedResources = new ArrayList<>();
+		Map<File, String> resources = languageUtil.copyModelResources(sourcePath, tree);
+		for(File f : resources.keySet()) {
+			LOGGER.info("About to copy resource: " + f.getAbsolutePath());
+			FileOutputStream fout = new FileOutputStream(f);
+			IOUtils.write(resources.get(f), fout);
+			fout.close();
+			generatedResources.add(f);
+		}
+		return generatedResources;
+	}
 }

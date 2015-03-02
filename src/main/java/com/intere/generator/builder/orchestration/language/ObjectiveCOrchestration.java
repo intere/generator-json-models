@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -28,6 +29,20 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		}
 		
 		return generatedClasses;
+	}
+
+	@Override
+	public List<File> copyResources(File sourcePath, OrchestrationTree tree) throws IOException {
+		List<File> generatedResources = new ArrayList<>();
+		Map<File, String> resources = languageUtil.copyModelResources(sourcePath, tree);
+		for(File f : resources.keySet()) {
+			LOGGER.info("About to copy resource: " + f.getAbsolutePath());
+			FileOutputStream fout = new FileOutputStream(f);
+			IOUtils.write(resources.get(f), fout);
+			fout.close();
+			generatedResources.add(f);
+		}
+		return generatedResources;
 	}
 
 	@Override

@@ -1,5 +1,12 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -46,10 +53,18 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 		int tabIndex = (hasNamespace(property.getParentModel()) ? 2 : 1);
 		String propName = interpreter.cleanVariableName(property.getName());
 		String subClass = interpreter.buildSubClassName(property.getParentModel().getClassName(), property.getName());
-		OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(property);
-		switch(dt) {
+		switch(property.getDataType()) {
 		case ARRAY:
-			
+			switch(property.getArraySubTypeProperty().getDataType()) {
+			case CLASS:
+				return tabs(tabIndex) + "def " + propName + "\n"
+					+ tabs(tabIndex+1) + "@" + propName + " ||= @json.try(:[], '" + property.getName() + "').map {|o| " + subClass + ".new(" + property.getName() + ")}\n"
+					+ tabs(tabIndex) + "end\n\n";
+			default:
+				return tabs(tabIndex) + "def " + propName + "\n"
+					+ tabs(tabIndex+1) + "@" + propName + " ||= @json.try(:[], '" + property.getName() + "')\n"
+					+ tabs(tabIndex) + "end\n\n";
+			}
 		case CLASS:
 			return tabs(tabIndex) + "def " + propName + "\n"
 					+ tabs(tabIndex+1) + "@" + propName + " ||= " + subClass + ".new @json.try(:[], '" + property.getName() + "')\n"
@@ -64,7 +79,7 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public String buildGettersAndSetters(ModelClass modelClass) {
 		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
@@ -81,8 +96,8 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 
 	@Override
 	public String buildImports(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO
+		return "";
 	}
 
 	@Override
@@ -106,7 +121,7 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public String buildModelUtilityDefinitionMethods(ModelClass modelClass) {
 		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
@@ -152,7 +167,18 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 		}
 	}
 	
+	@Override
+	public Map<File, String> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException {
+		Map<File, String> generatedResource = new HashMap<>();
+		generatedResource.put(new File(sourcePath, "json_model.rb"), readJsonModelFile());		
+		return generatedResource;
+	}
+	
 	private boolean hasNamespace(ModelClass modelClass) {
 		return null != modelClass && null != modelClass.getNamespace() && 0 != modelClass.getNamespace().trim().length();
+	}
+
+	private String readJsonModelFile() throws IOException {
+		return readResourceAndReplaceHeaders("/json_model.rb");
 	}
 }

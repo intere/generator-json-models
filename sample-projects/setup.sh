@@ -10,6 +10,16 @@ nukeTmp() {
   fi
 }
 
+generateRuby() {
+  RUBY_DIR=${CUR_DIR}/ruby;
+  RUBY_MODELS=${RUBY_DIR}/app/models;
+
+  nukeTmp;
+  ../run.sh --orchestrate ${CUR_DIR}/metadata-ruby.json \
+    -o ${CUR_DIR}/tmp
+  cp ${CUR_DIR}/tmp/src/* ${RUBY_MODELS};
+}
+
 generateJava() {
   JAVA_DIR=${CUR_DIR}/java/generated-code;
 
@@ -30,6 +40,7 @@ generateObjectiveC() {
 }
 
 main() {
+  generateRuby;
   generateJava;
   generateObjectiveC
 }

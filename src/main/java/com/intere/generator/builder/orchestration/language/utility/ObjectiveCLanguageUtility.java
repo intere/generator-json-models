@@ -1,5 +1,10 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -225,12 +230,35 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 		builder.append(tabs(2) + "[result addObject:[object toDictionary]];\n");
 		builder.append(tabs(1) + "}\n");
 		builder.append(tabs(1) + "return result;\n");
-		builder.append("}\n\n");
-		
-		//
-				
+		builder.append("}\n\n");				
 		
 		return builder.toString();
+	}
+	
+	@Override
+	public Map<File, String> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException {
+		Map<File, String> resources = new HashMap<>();
+		resources.put(new File(sourcePath, "Serializer.h"), readSerializerHeader());
+		resources.put(new File(sourcePath, "Serializer.m"), readSerializerImplementation());
+		return resources;
+	}
+	
+	/**
+	 * Reads the contents of the static Serializer.m file.
+	 * @return The contents of the entire Serializer.m file
+	 * @throws IOException
+	 */
+	private String readSerializerImplementation() throws IOException {
+		return readResourceAndReplaceHeaders("/Serializer.m");
+	}
+
+	/**
+	 * Reads the contents of the static Serializer.h file.
+	 * @return The contents of the entire Serializer.h file.
+	 * @throws IOException
+	 */
+	private String readSerializerHeader() throws IOException {
+		return readResourceAndReplaceHeaders("/Serializer.h");
 	}
 
 	private Object addDeserializeProperty(ModelClassProperty prop) {

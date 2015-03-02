@@ -129,4 +129,10 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		return builder.toString();
 	}
 
+	@Override
+	public List<File> copyResources(File sourcePath, OrchestrationTree tree) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

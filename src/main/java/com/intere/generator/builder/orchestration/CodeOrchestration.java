@@ -50,6 +50,7 @@ public class CodeOrchestration {
 			File srcPath = new File(outputDirectory, "src");
 			if(ensureExists(srcPath)) {
 				orchestrator.generateModels(srcPath, tree);
+				orchestrator.copyResources(srcPath, tree);
 			}
 		}
 		

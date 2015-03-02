@@ -1,6 +1,8 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -252,6 +254,12 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 		}
 		
 		return builder.toString();
+	}
+	
+	@Override
+	public Map<File, String> copyModelResources(File sourcePath,OrchestrationTree tree) throws IOException {
+		// Currently a No-Op for Java;
+		return new HashMap<>();
 	}
 
 	private String addTestMethod(ModelClassProperty prop) {
