@@ -13,11 +13,16 @@ nukeTmp() {
 generateRuby() {
   RUBY_DIR=${CUR_DIR}/ruby;
   RUBY_MODELS=${RUBY_DIR}/app/models;
+  RUBY_SPECS=${RUBY_DIR}/spec/models;
 
   nukeTmp;
   ../run.sh --orchestrate ${CUR_DIR}/metadata-ruby.json \
     -o ${CUR_DIR}/tmp
   cp ${CUR_DIR}/tmp/src/* ${RUBY_MODELS};
+  if [ ! -e ${RUBY_SPECS} ] ; then
+    mkdir -p ${RUBY_SPECS};
+  fi
+  cp ${CUR_DIR}/tmp/test/* ${RUBY_SPECS};
 }
 
 generateJava() {
@@ -40,9 +45,9 @@ generateObjectiveC() {
 }
 
 main() {
-  generateRuby;
   generateJava;
-  generateObjectiveC
+  generateObjectiveC;
+  generateRuby;
 }
 
 main;

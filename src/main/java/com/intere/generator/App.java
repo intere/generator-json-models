@@ -56,7 +56,19 @@ public class App {
 		String orchestrationFilePath = cmd.getOptionValue("orchestrate");
 		File outputDirectory = FileIOUtils.createFolderIfNotExists(cmd.getOptionValue('o', "tmp"));
 		
-		new CodeOrchestration(orchestrationFilePath, outputDirectory);
+		CodeOrchestration orchestrator = new CodeOrchestration(orchestrationFilePath, outputDirectory);
+		System.out.println("\n");
+		switch(orchestrator.getTree().getLanguage()) {
+		case Java:
+			System.out.println(javaBanner());
+			break;
+		case ObjC:
+			System.out.println(objectiveCBanner());
+			break;
+		case Ruby:
+			System.out.println(rubyBanner());
+		}
+		System.out.println("\n");
 	}
 	
 	/**
@@ -80,6 +92,16 @@ public class App {
 		}
 
 		LOGGER.info("Using Language: " + language.getFullName());
+		switch(language) {
+		case Java:
+			System.out.println(javaBanner());
+			break;
+		case ObjC:
+			System.out.println(objectiveCBanner());
+			break;
+		case Ruby:
+			System.out.println(rubyBanner());
+		}
 		File outputDirectory = FileIOUtils.createFolderIfNotExists(cmd.getOptionValue('o', "tmp"));
 		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language, namespace, className, jsonFilename);
 		HashMap<File, String> generatedCode = builder.buildSourceFiles(outputDirectory);
@@ -136,6 +158,43 @@ public class App {
 				"`Y888P\n" + 
 				"============================================================================================================================================================\n" + 
 				"\n";
+	}
+	
+	public static String javaBanner() {
+		return  "   oooo                                 \n" + 
+				"   `888                                 \n" + 
+				"    888  .oooo.   oooo    ooo  .oooo.   \n" + 
+				"    888 `P  )88b   `88.  .8'  `P  )88b  \n" + 
+				"    888  .oP\"888    `88..8'    .oP\"888  \n" + 
+				"    888 d8(  888     `888'    d8(  888  \n" + 
+				".o. 88P `Y888\"\"8o     `8'     `Y888\"\"8o \n" + 
+				"`Y888P                                  \n" + 
+				"                                        \n";
+	}
+	
+	public static String rubyBanner() {
+		return  "ooooooooo.                .o8                   \n" + 
+				"`888   `Y88.             \"888                   \n" + 
+				" 888   .d88' oooo  oooo   888oooo.  oooo    ooo \n" + 
+				" 888ooo88P'  `888  `888   d88' `88b  `88.  .8'  \n" + 
+				" 888`88b.     888   888   888   888   `88..8'   \n" + 
+				" 888  `88b.   888   888   888   888    `888'    \n" + 
+				"o888o  o888o  `V88V\"V8P'  `Y8bod8P'     .8'     \n" + 
+				"                                    .o..P'      \n" + 
+				"                                    `Y8P'       \n";
+	}
+	
+	public static String objectiveCBanner() {
+		return  "  .oooooo.    .o8           o8o                         .    o8o                                  .oooooo.   \n" + 
+				" d8P'  `Y8b  \"888           `\"'                       .o8    `\"'                                 d8P'  `Y8b  \n" + 
+				"888      888  888oooo.     oooo  .ooooo.   .ooooo.  .o888oo oooo  oooo    ooo  .ooooo.          888          \n" + 
+				"888      888  d88' `88b    `888 d88' `88b d88' `\"Y8   888   `888   `88.  .8'  d88' `88b         888          \n" + 
+				"888      888  888   888     888 888ooo888 888         888    888    `88..8'   888ooo888 8888888 888          \n" + 
+				"`88b    d88'  888   888     888 888    .o 888   .o8   888 .  888     `888'    888    .o         `88b    ooo  \n" + 
+				" `Y8bood8P'   `Y8bod8P'     888 `Y8bod8P' `Y8bod8P'   \"888\" o888o     `8'     `Y8bod8P'          `Y8bood8P'  \n" + 
+				"                            888                                                                              \n" + 
+				"                        .o. 88P                                                                              \n" + 
+				"                        `Y888P                                                                               ";
 	}
 	
 	public static String getVersion() {

@@ -58,20 +58,20 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 			switch(property.getArraySubTypeProperty().getDataType()) {
 			case CLASS:
 				return tabs(tabIndex) + "def " + propName + "\n"
-					+ tabs(tabIndex+1) + "@" + propName + " ||= @json.try(:[], '" + property.getName() + "').map {|o| " + subClass + ".new(" + property.getName() + ")}\n"
+					+ tabs(tabIndex+1) + "@" + propName + " ||= json.try(:[], :" + property.getName() + ").map {|o| " + subClass + ".new(" + property.getName() + ")}\n"
 					+ tabs(tabIndex) + "end\n\n";
 			default:
 				return tabs(tabIndex) + "def " + propName + "\n"
-					+ tabs(tabIndex+1) + "@" + propName + " ||= @json.try(:[], '" + property.getName() + "')\n"
+					+ tabs(tabIndex+1) + "@" + propName + " ||= json.try(:[], :" + property.getName() + ")\n"
 					+ tabs(tabIndex) + "end\n\n";
 			}
 		case CLASS:
 			return tabs(tabIndex) + "def " + propName + "\n"
-					+ tabs(tabIndex+1) + "@" + propName + " ||= " + subClass + ".new @json.try(:[], '" + property.getName() + "')\n"
+					+ tabs(tabIndex+1) + "@" + propName + " ||= " + subClass + ".new json.try(:[], :" + property.getName() + ")\n"
 					+ tabs(tabIndex) + "end\n\n";
 		default:
 			return tabs(tabIndex) + "def " + propName + "\n"
-					+ tabs(tabIndex+1) + "@json.try(:[], '" + property.getName() + "')\n"
+					+ tabs(tabIndex+1) + "json.try(:[], :" + property.getName() + ")\n"
 					+ tabs(tabIndex) + "end\n\n";
 		}
 	}
@@ -126,26 +126,64 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 
 	@Override
 	public String buildTestClassDeclaration(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		if(hasNamespace(modelClass)) {
+			return "describe " + modelClass.getNamespace() + "::" + modelClass.getClassName() + " do\n";
+		} else {
+			return "describe " + modelClass.getClassName() + " do\n";
+		}
 	}
 
 	@Override
 	public String buildTestImports(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		return "require 'rails_helper'\n\n";
 	}
 
 	@Override
 	public String buildTestSetupMethod(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		String newClassName = (hasNamespace(modelClass) ? modelClass.getNamespace() + "::" : "") + modelClass.getClassName();
+		StringBuilder builder = new StringBuilder();
+		builder.append(tabs(1) + "before do\n");
+		builder.append(tabs(2) + "@model = " + newClassName + ".new({})\n");
+		builder.append(tabs(1) + "end\n\n");
+		
+		builder.append(tabs(1) + "context '#json' do\n");
+		builder.append(tabs(2) + "it 'does symblize keys' do\n");
+		builder.append(tabs(3) + "@model = " + newClassName + ".new({'key'=>'value'})\n");
+		builder.append(tabs(3) + "expect(@model.json[:key]).to eq('value')\n");
+		builder.append(tabs(2) + "end\n");
+		builder.append(tabs(1) + "end\n\n");
+		return builder.toString();
 	}
 
 	@Override
 	public String buildTestMethods(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder builder = new StringBuilder();
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			if(!prop.getIsTransient()) {
+				String propName = interpreter.cleanVariableName(prop.getName());
+				String subClass = interpreter.buildSubClassName(modelClass.getClassName(), prop.getName());
+				builder.append(tabs(1) + "context '#" + propName + "' do\n");
+				builder.append(tabs(2) + "it 'does get a valid " + propName + " from symbols' do\n");
+				switch(prop.getDataType()) {
+				case CLASS:
+					builder.append(tabs(3) + "allow(@model).to receive(:json).and_return({:" + prop.getName() + "=>{}})\n");
+					builder.append(tabs(3) + "expect(@model." + propName + ".class).to be " + subClass  + "\n");
+					break;
+				case ARRAY:
+					builder.append(tabs(3) + "allow(@model).to receive(:json).and_return({:" + prop.getName() + "=>[]})\n");
+					builder.append(tabs(3) + "expect(@model." + propName + ".class).to be Array\n");
+					
+					break;
+				default:
+					builder.append(tabs(3) + "allow(@model).to receive(:json).and_return({:" + prop.getName() + "=>'value'})\n");
+					builder.append(tabs(3) + "expect(@model." + propName + ").to eq('value')\n");
+					break;
+				}
+				builder.append(tabs(2) + "end\n");
+				builder.append(tabs(1) + "end\n\n");
+			}
+		}
+		return builder.toString();
 	}
 	
 	@Override

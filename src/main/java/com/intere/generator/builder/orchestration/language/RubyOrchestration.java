@@ -1,6 +1,7 @@
 package com.intere.generator.builder.orchestration.language;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,8 +33,12 @@ public class RubyOrchestration implements LanguageOrchestrator {
 
 	@Override
 	public List<File> generateModelUnitTests(File testPath, OrchestrationTree tree) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		List<File> generatedSpecs = new ArrayList<>();
+		languageUtil.enforceFilenames(tree);
+		for(ModelClass modelClass : tree.getModelClasses()) {
+			generatedSpecs.add(buildSpecFiles(testPath, modelClass));
+		}
+		return generatedSpecs;
 	}
 
 	@Override
@@ -63,6 +68,16 @@ public class RubyOrchestration implements LanguageOrchestrator {
 		fout.close();
 		return outputFile;
 	}
+	
+	private File buildSpecFiles(File testPath, ModelClass modelClass) throws IOException {
+		String fileContents = buildSpecFile(modelClass);
+		File outputFile = new File(testPath, modelClass.getFileName() + "_spec.rb");
+		LOGGER.info("About to create Spec File: " + outputFile.getAbsolutePath());
+		FileOutputStream fout = new FileOutputStream(outputFile);
+		IOUtils.write(fileContents, fout);
+		fout.close();
+		return outputFile;
+	}
 
 	private String buildModelClass(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
@@ -76,6 +91,18 @@ public class RubyOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.finishClass(modelClass, false));
 		return builder.toString();
 	}
+	
+	private String buildSpecFile(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(languageUtil.buildFileComment(modelClass.getFileName() + "_spec.rb"));
+		builder.append(languageUtil.buildTestImports(modelClass));
+		builder.append(languageUtil.buildTestClassDeclaration(modelClass));
+		builder.append(languageUtil.buildTestSetupMethod(modelClass));
+		builder.append(languageUtil.buildTestMethods(modelClass));
+		builder.append(languageUtil.finishClass(modelClass, false));
+		return builder.toString();
+	}
+	
 
 	@Override
 	public List<File> copyResources(File sourcePath, OrchestrationTree tree) throws IOException {

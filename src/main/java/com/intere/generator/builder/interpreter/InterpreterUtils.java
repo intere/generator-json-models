@@ -42,11 +42,16 @@ public class InterpreterUtils {
 		char[] stringArray = stringToConvert.trim().toCharArray();
 		List<Character> chars = new ArrayList<Character>();
 		chars.add(Character.toLowerCase(stringArray[0]));
+		boolean lastIsCapital = false;
 		for(int i=1; i<stringArray.length; i++) {
 			if(Character.isUpperCase(stringArray[i])) {
-				chars.add('_');
+				if(!lastIsCapital) {
+					chars.add('_');
+				}
 				chars.add(Character.toLowerCase(stringArray[i]));
+				lastIsCapital = true;
 			} else {
+				lastIsCapital = false;
 				chars.add(stringArray[i]);
 			}
 		}

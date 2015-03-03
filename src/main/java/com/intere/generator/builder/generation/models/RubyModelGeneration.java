@@ -1,6 +1,5 @@
 package com.intere.generator.builder.generation.models;
 
-import java.io.File;
 import java.util.Iterator;
 
 import org.codehaus.jackson.JsonNode;
