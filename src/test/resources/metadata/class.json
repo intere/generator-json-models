@@ -4,6 +4,7 @@
     "className": "Contest",
     "fileName": "Contest.java",
     "testClassName": "ContestTest",
+    "viewClassName": "ContestView",
     "readonly": false,
     "namespace": "com.intere.generated",
     "hasSubClasses": true,

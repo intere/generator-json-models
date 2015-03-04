@@ -105,27 +105,27 @@ public class JavaOrchestration implements LanguageOrchestrator {
 
 	private String buildTestClass(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.buildNamespace(modelClass));
-		builder.append(languageUtil.buildFileComment(modelClass.getTestClassName() + ".java"));
-		builder.append(languageUtil.buildTestImports(modelClass));
-		builder.append(languageUtil.buildTestClassDeclaration(modelClass));
-		builder.append(languageUtil.buildTestSetupMethod(modelClass));
-		builder.append(languageUtil.buildTestMethods(modelClass));
-		builder.append(languageUtil.finishClass(modelClass, true));
+		builder.append(languageUtil.getTestBuilder().buildNamespace(modelClass));
+		builder.append(languageUtil.getTestBuilder().buildImplementationFileComment(modelClass));
+		builder.append(languageUtil.getTestBuilder().buildTestImports(modelClass));
+		builder.append(languageUtil.getTestBuilder().buildTestClassDeclaration(modelClass));
+		builder.append(languageUtil.getTestBuilder().buildTestSetupMethod(modelClass));
+		builder.append(languageUtil.getTestBuilder().buildTestMethods(modelClass));
+		builder.append(languageUtil.getTestBuilder().finishClass(modelClass));
 		
 		return builder.toString();
 	}
 
 	private String buildModelClass(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.buildNamespace(modelClass));
-		builder.append(languageUtil.buildFileComment(modelClass.getFileName() + ".java"));
-		builder.append(languageUtil.buildImports(modelClass));
-		builder.append(languageUtil.buildClassDeclaration(modelClass));
-		builder.append(languageUtil.buildPropertyDeclarations(modelClass));
-		builder.append(languageUtil.buildGettersAndSetters(modelClass));
-		builder.append(languageUtil.buildModelUtilityDefinitionMethods(modelClass));
-		builder.append(languageUtil.finishClass(modelClass, false));
+		builder.append(languageUtil.getModelBuilder().buildNamespace(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildImplementationFileComment(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildImports(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildClassDeclaration(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildPropertyDeclarations(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildGettersAndSetters(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildModelUtilityDefinitionMethods(modelClass));
+		builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
 		return builder.toString();
 	}
 

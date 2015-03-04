@@ -51,7 +51,6 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		for(ModelClass modelClass : tree.getModelClasses()) {
 			generatedClasses.add(buildTestFile(outputDirFile, modelClass));
 		}
-		
 		return generatedClasses;
 	}
 
@@ -64,11 +63,13 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	}
 
 	@Override
-	public List<File> generateViews(File viewPath, OrchestrationTree tree)
-			throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-		
+	public List<File> generateViews(File viewPath, OrchestrationTree tree) throws IOException {
+		List<File> viewClasses = new ArrayList<>();
+		for(ModelClass modelClass : tree.getModelClasses()) {
+			viewClasses.add(buildViewHeaderFile(viewPath, modelClass));
+			viewClasses.add(buildViewImplementationFile(viewPath, modelClass));
+		}
+		return viewClasses;
 	}
 
 	@Override
@@ -118,6 +119,38 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		File outputFile = new File(outputDirectory, modelClass.getFileName() + ".h");
 		return writeFile(outputFile, fileContents);
 	}
+	
+	private File buildViewHeaderFile(File viewPath, ModelClass modelClass) throws IOException {
+		String fileContents = buildViewClassDeclaration(modelClass);
+		File outputFile = new File(viewPath, modelClass.getViewClassName() + ".h");
+		return writeFile(outputFile, fileContents);
+	}
+	
+	private File buildViewImplementationFile(File viewPath, ModelClass modelClass) throws IOException {
+		String fileContents = buildViewClassImplementation(modelClass);
+		File outputFile = new File(viewPath, modelClass.getViewClassName() + ".m");
+		return writeFile(outputFile, fileContents);
+	}
+
+	private String buildViewClassDeclaration(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(languageUtil.getViewBuilder().buildHeaderFileComment(modelClass));
+		builder.append(languageUtil.getViewBuilder().buildImports(modelClass));
+		builder.append(languageUtil.getViewBuilder().buildClassDeclaration(modelClass));
+		builder.append(languageUtil.getViewBuilder().buildModelUtilityDeclarationMethods(modelClass));
+		builder.append(languageUtil.getViewBuilder().finishClass(modelClass));
+		return builder.toString();
+	}
+	
+	private String buildViewClassImplementation(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(languageUtil.getViewBuilder().buildImplementationFileComment(modelClass));
+		builder.append(languageUtil.getViewBuilder().buildClassImplementation(modelClass));
+		builder.append(languageUtil.getViewBuilder().buildGettersAndSetters(modelClass));
+		builder.append(languageUtil.getViewBuilder().buildModelUtilityDefinitionMethods(modelClass));
+		builder.append(languageUtil.getViewBuilder().finishClass(modelClass));
+		return builder.toString();
+	}
 
 	/**
 	 * Does the actual writing of the file for you.
@@ -141,12 +174,12 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	 */
 	private String buildClassDeclaration(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.buildFileComment(modelClass.getFileName() + ".h"));
-		builder.append(languageUtil.buildImports(modelClass));
-		builder.append(languageUtil.buildClassDeclaration(modelClass));
-		builder.append(languageUtil.buildPropertyDeclarations(modelClass));
-		builder.append(languageUtil.buildModelUtilityDeclarationMethods(modelClass));
-		builder.append(languageUtil.finishClass(modelClass, false));
+		builder.append(languageUtil.getModelBuilder().buildHeaderFileComment(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildImports(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildClassDeclaration(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildPropertyDeclarations(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildModelUtilityDeclarationMethods(modelClass));
+		builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
 		return builder.toString();
 	}
 
@@ -157,23 +190,23 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	 */
 	private String buildClassImplementation(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.buildFileComment(modelClass.getFileName() + ".m"));
-		builder.append(languageUtil.buildSerializationConstants(modelClass));
-		builder.append(languageUtil.buildClassImplementation(modelClass));
-		builder.append(languageUtil.buildModelUtilityDefinitionMethods(modelClass));
-		builder.append(languageUtil.finishClass(modelClass, false));
+		builder.append(languageUtil.getModelBuilder().buildImplementationFileComment(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildSerializationConstants(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildClassImplementation(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildModelUtilityDefinitionMethods(modelClass));
+		builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
 		
 		return builder.toString();
 	}
 	
 	private String buildTestClass(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.buildFileComment(modelClass.getTestClassName() + ".m"));
-		builder.append(languageUtil.buildTestImports(modelClass));
-		builder.append(languageUtil.buildTestClassDeclaration(modelClass));
-		builder.append(languageUtil.buildTestSetupMethod(modelClass));
-		builder.append(languageUtil.buildTestMethods(modelClass));
-		builder.append(languageUtil.finishClass(modelClass, true));
+		builder.append(languageUtil.getTestBuilder().buildImplementationFileComment(modelClass));
+		builder.append(languageUtil.getTestBuilder().buildTestImports(modelClass));
+		builder.append(languageUtil.getTestBuilder().buildTestClassDeclaration(modelClass));
+		builder.append(languageUtil.getTestBuilder().buildTestSetupMethod(modelClass));
+		builder.append(languageUtil.getTestBuilder().buildTestMethods(modelClass));
+		builder.append(languageUtil.getTestBuilder().finishClass(modelClass));
 		
 		return builder.toString();
 	}
