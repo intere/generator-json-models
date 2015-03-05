@@ -4,10 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
-import com.intere.generator.builder.orchestration.language.utility.ObjectiveCLanguageUtility;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseModelBuilder;
 import com.intere.generator.builder.orchestration.language.utility.comments.CStyleCommentBuilder;
@@ -158,7 +156,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 
 	@Override
 	public String buildClassDeclaration(ModelClass modelClass) {
-		return "@class " + modelClass.getClassName() + " : NSObject\n";
+		return "@interface " + modelClass.getClassName() + " : NSObject\n";
 	}
 
 	@Override
@@ -172,7 +170,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 		String propertyType = getPropertyType(property);
 		String comment = (property.getIsArray() ? "\t\t" + singleLineComment("Array of " + property.getArraySubType()) : "");
 		builder.append("@property " + getPropertyDecorations(property) + propertyType + " " 
-				+ (property.getIsPrimitive() ? "" : "*") + property.getName() + ";" + comment + "\n");
+				+ (property.getIsPrimitive() ? "" : "*") + property.getAlias() + ";" + comment + "\n");
 		return builder.toString();
 	}
 
@@ -221,32 +219,22 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 	@Override
 	public String buildImports(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
+		builder.append("#import <Foundation/Foundation.h>\n");
 		for(ModelClassProperty prop : modelClass.getProperty()) {
-			OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(prop);
-			if(null != dt) {
-				switch(dt) {
+			switch(prop.getDataType()) {
+			case CLASS:
+				builder.append("#import \"" + prop.getType() + ".h\"\n");
+				break;
+			case ARRAY:
+				switch(prop.getArraySubTypeProperty().getDataType()) {
 				case CLASS:
-					builder.append("#import \"" + prop.getType() + ".h\"\n");
+					builder.append("#import \"" + prop.getArraySubType() + ".h\"\n");
 					break;
 				default:
 					break;
 				}
-			} else if(null == prop.getArraySubType()) {
-				builder.append("#import \"" + prop.getType() + ".h\"\n");
-			}
-			if(null != prop.getArraySubType()) {
-				OrchestrationDataType subType = OrchestrationDataType.fromString(prop.getArraySubType());
-				if(null != subType) {
-					switch(subType) {
-					case CLASS:
-						builder.append("#import \"" + prop.getArraySubType() + ".h\"\n");
-						break;
-					default:
-						break;
-					}
-				} else {
-					builder.append("#import \"" + prop.getArraySubType() + ".h\"\n");
-				}
+			default:
+				break;
 			}
 		}
 		builder.append("\n");
@@ -257,9 +245,11 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 	
 	private Object addDeserializeProperty(ModelClassProperty prop) {
 		OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(prop);
-		final String BASE = tabs(1) + "self." + prop.getName() + " = ";
+		final String BASE = tabs(1) + "object." + prop.getAlias() + " = ";
 		final String propName = prop.getName();
 		final String serConstant = interpreter.createSerializeConstantSymbolName(propName);
+		final String subClassName = interpreter.buildSubClassName(prop.getParentModel().getClassName(), prop.getName());
+		
 		switch(dt) {
 		case STRING:
 		case IMAGE:
@@ -274,7 +264,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 			return BASE + "[Serializer getIntegerFromDict:dict forKey:" + serConstant + " orDefaultTo:0];\n";
 		case CLASS:
 			return tabs(1) + "if([dict objectForKey:" + serConstant + "] && ![[NSNull null] isEqual:[dict objectForKey:" + serConstant + "]]) {\n" + 
-					tabs(1) + BASE + "[" + propName + " fromDictionary:[dict objectForKey:" + serConstant + "]];\n" + 
+					tabs(1) + BASE + "[" + subClassName + " fromDictionary:[dict objectForKey:" + serConstant + "]];\n" + 
 					tabs(1) + "}\n";
 		case ARRAY:
 			OrchestrationDataType subType = OrchestrationDataType.fromString(prop.getArraySubType());
@@ -308,8 +298,8 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 	private String addSerializeProperty(ModelClassProperty prop) {
 		OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(prop);
 		final String BASE = tabs(1) + "[Serializer setDict:dict ";
-		final String propName = prop.getName();
-		final String serConstant = interpreter.createSerializeConstantSymbolName(propName);
+		final String propName = prop.getAlias();
+		final String serConstant = interpreter.createSerializeConstantSymbolName(prop.getName());
 		
 		switch(dt) {
 		case CLASS:

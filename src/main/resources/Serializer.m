@@ -138,7 +138,7 @@ static NSDateFormatter *ZULU_FORMATTER;
     
     
     if (! jsonData) {
-        EILogError(@"Serializer jsonStringFromDictionary: error: %@", error.localizedDescription);
+        NSLog(@"Serializer jsonStringFromDictionary: error: %@", error.localizedDescription);
     } else {
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }

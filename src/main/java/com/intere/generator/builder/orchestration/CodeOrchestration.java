@@ -45,6 +45,7 @@ public class CodeOrchestration {
 	 */
 	private void generateCode() throws IOException {
 		LanguageOrchestrator orchestrator = OrchestrationUtils.getLanguageOrchestrator(tree.getMetadata());
+		orchestrator.review(tree);
 		
 		if(shouldGeenerateModels()) {
 			File srcPath = new File(outputDirectory, "src");

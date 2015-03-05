@@ -22,7 +22,7 @@ public enum OrchestrationDataType {
 	DATE("Date", "Date", "NSDate"),
 	STRING("String", "String", "NSString"),
 	LONG("Long", "Long", "NSInteger"),
-	DOUBLE("Double", "Double", "CGFloat"),
+	DOUBLE("Double", "Double", "double"),
 	BOOLEAN("Boolean", "Boolean", "BOOL"),
 	ARRAY("Array", "List", "NSArray"),
 	CLASS,

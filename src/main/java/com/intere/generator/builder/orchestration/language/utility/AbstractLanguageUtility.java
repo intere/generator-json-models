@@ -5,17 +5,22 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.IOUtils;
 
 import com.intere.generator.App;
+import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
 public abstract class AbstractLanguageUtility implements LanguageUtility {
-
 	
+	/** The Property Mappings you'd like to take place.  */
+	public abstract Map<String, String> getPropertyMappings();
+
 	/**
 	 * Reads a resource (from the classpath) to a string for you.
 	 * @param resourceName
@@ -57,5 +62,20 @@ public abstract class AbstractLanguageUtility implements LanguageUtility {
 	protected String replaceHeaderVariables(String input) {
 		return input.replaceAll(Pattern.quote("${version}"), App.getVersion())
 				.replaceAll(Pattern.quote("${date}"), new Date().toString());
+	}
+	
+	@Override
+	public void enforcePropertyMappings(OrchestrationTree tree) {
+		Map<String, String> propertyMapping = getPropertyMappings();
+		
+		for(ModelClass clazz : tree.getModelClasses()) {
+			for(ModelClassProperty prop : clazz.getProperty()) {
+				if(propertyMapping.containsKey(prop.getName())) {
+					prop.setAlias(propertyMapping.get(prop.getName()));
+				} else {
+					prop.setAlias(prop.getName());
+				}
+			}
+		}
 	}
 }

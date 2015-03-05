@@ -13,6 +13,7 @@
         "name": "id",
         "isKey": true,
         "type": "String",
+        "alias": "String",
         "isPrimitive": false,
         "isTransient": false,
         "isVisible": true,

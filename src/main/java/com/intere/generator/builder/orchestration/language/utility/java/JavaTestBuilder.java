@@ -1,5 +1,8 @@
 package com.intere.generator.builder.orchestration.language.utility.java;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -65,6 +68,7 @@ public class JavaTestBuilder extends BaseTestBuilder {
 		builder.append("import org.codehaus.jackson.map.JsonMappingException;\n");
 		builder.append("import org.codehaus.jackson.map.ObjectMapper;\n");
 		builder.append(buildImports(modelClass));
+		builder.append("\n\n");
 		return builder.toString();
 	}
 
@@ -85,7 +89,7 @@ public class JavaTestBuilder extends BaseTestBuilder {
 		builder.append(tabs(1) + "}\n\n");
 		
 		builder.append(tabs(1) + "protected " + modelClass.getClassName() + " deserialize(String json) throws JsonParseException, JsonMappingException, IOException {\n");
-		builder.append(tabs(2) + "return jsonMapper.readValue(json, " + modelClass.getClassName() + ".class);");
+		builder.append(tabs(2) + "return jsonMapper.readValue(json, " + modelClass.getClassName() + ".class);\n");
 		builder.append(tabs(1) + "}\n\n");
 		
 		return builder.toString();
@@ -209,8 +213,22 @@ public class JavaTestBuilder extends BaseTestBuilder {
 
 	@Override
 	public String buildImports(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> imports = new HashMap<>();
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			OrchestrationDataType type = OrchestrationDataType.fromModelProperty(prop);
+			if(OrchestrationDataType.DATE == type) {
+				imports.put("Date", "java.util.Date");
+			} else if(OrchestrationDataType.ARRAY == type) {
+				imports.put("List", "java.util.List");
+				imports.put("ArrayList", "java.util.ArrayList");
+			}
+		}
+		
+		StringBuilder builder = new StringBuilder();
+		for(String sImport : imports.values()) {
+			builder.append("import " + sImport + ";\n");
+		}
+		return builder.toString();
 	}
 
 	@Override

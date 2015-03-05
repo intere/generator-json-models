@@ -71,13 +71,28 @@ public class ObjectiveCTestBuilder extends BaseTestBuilder {
 	}
 
 	private String buildTestMethod(ModelClassProperty prop) {
+		final String classType = prop.getParentModel().getClassName();
+		final String instanceName = interpreter.cleanVariableName(classType);
 		StringBuilder builder = new StringBuilder();
 		builder.append(multiLineComment("Tests Serialization / Deserialization of the " + prop.getName() + " property", 0) + "\n");
-		builder.append("test" + interpreter.buildClassName(prop.getName()) + " {\n");
-		OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(prop);
-		switch(dt) {
+		builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + " {\n");
+		switch(prop.getDataType()) {
 		case BOOLEAN:
-			builder.append("NSString *json=@\"{\\\"" + prop.getName() + "\\\":true}\";\n");
+			builder.append(tabs(1) + "NSString *json=@\"{\\\"" + prop.getName() + "\\\":true}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertTrue(" + instanceName + "." + prop.getAlias() + ");\n");
+			break;
+			
+		case STRING:
+		case IMAGE:
+			builder.append(tabs(1) + "NSString *json=@\"{\\\"" + prop.getName() + "\\\":\\\"foo\\\"}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqualObjects(" + instanceName + "." + prop.getAlias() + ", @\"foo\");\n");
+			break;
+			
+		default:
+			builder.append(singleLineComment("TODO: Implement test for this type", 1) + "\n");
+			break;
 		}
 		builder.append("}\n\n");
 		return builder.toString();

@@ -19,11 +19,11 @@ import com.intere.generator.metadata.ModelClass;
 public class RubyOrchestration implements LanguageOrchestrator {
 	private static final Logger LOGGER = LogManager.getLogger(RubyOrchestration.class);
 	LanguageUtility languageUtil = new RubyLanguageUtility();
-	
+		
 	@Override
 	public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {
 		List<File> generatedClasses = new ArrayList<>();
-		languageUtil.enforceFilenames(tree);
+		
 		for(ModelClass modelClass : tree.getModelClasses()) {
 			generatedClasses.add(buildModelClassFile(outputDirectory, modelClass));
 		}
@@ -57,6 +57,13 @@ public class RubyOrchestration implements LanguageOrchestrator {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public void review(OrchestrationTree tree) {
+		languageUtil.enforceFilenames(tree);
+		languageUtil.enforcePropertyMappings(tree);
+	}
+
 
 	private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException {
 		String fileContents = buildModelClass(modelClass);

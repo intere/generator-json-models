@@ -34,20 +34,22 @@ generateJava() {
     -o ${CUR_DIR}/tmp
 
   rm -rf ${JAVA_DIR}/src/main/java ${JAVA_DIR}/src/test/java
-  mv ${CUR_DIR}/tmp/src ${JAVA_DIR}/src/main/java
-  mv ${CUR_DIR}/tmp/test ${JAVA_DIR}/src/test/java
+  cp -r ${CUR_DIR}/tmp/src ${JAVA_DIR}/src/main/java
+  cp -r ${CUR_DIR}/tmp/test ${JAVA_DIR}/src/test/java
 }
 
 generateObjectiveC() {
   nukeTmp;
   ../run.sh --orchestrate ${CUR_DIR}/metadata-objc.json \
     -o ${CUR_DIR}/tmp
+  cp ${CUR_DIR}/tmp/src/* objc/Generated/Generated/
+  cp ${CUR_DIR}/tmp/test/* objc/Generated/GeneratedTests/
 }
 
 main() {
-  # generateJava;
+  generateJava;
   generateObjectiveC;
-  # generateRuby;
+  generateRuby;
 }
 
 main;

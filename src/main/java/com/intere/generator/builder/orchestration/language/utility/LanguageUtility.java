@@ -15,9 +15,6 @@ import com.intere.generator.metadata.ModelClassProperty;
  */
 public interface LanguageUtility {
 	
-	/** Gets you the Comment Builder for this class. */
-//	CommentBuilder getCommentBuilder();
-	
 	/** Gets you the Model Builder for this class.  */
 	ModelBuilder getModelBuilder();
 	
@@ -29,6 +26,9 @@ public interface LanguageUtility {
 	
 	/** Enforces the filenames based on the model class names.  */
 	void enforceFilenames(OrchestrationTree tree);
+	
+	/** Enforces Property Name Mappings.  */
+	void enforcePropertyMappings(OrchestrationTree tree);
 
 	/** Copies the Model Resource files into the provided sourcePath. */
 	Map<File, String> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException;

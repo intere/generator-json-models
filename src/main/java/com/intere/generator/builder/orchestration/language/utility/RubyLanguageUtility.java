@@ -14,7 +14,6 @@ import com.intere.generator.builder.orchestration.language.utility.ruby.RubyView
 import com.intere.generator.metadata.ModelClass;
 
 public class RubyLanguageUtility extends AbstractLanguageUtility {
-//	private static final Logger LOGGER = LogManager.getLogger(RubyLanguageUtility.class);
 	JsonLanguageInterpreter interpreter = new RubyModelInterpreter();
 	ModelBuilder modelBuilder = new RubyModelBuilder();
 	TestBuilder testBuilder = new RubyTestBuilder();
@@ -53,4 +52,8 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 	private String readJsonModelFile() throws IOException {
 		return readResourceAndReplaceHeaders("/json_model.rb");
 	}
+	
+	public Map<String,String> getPropertyMappings() {
+		return new HashMap<>();
+	};
 }

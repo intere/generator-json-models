@@ -134,5 +134,10 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public void review(OrchestrationTree tree) {
+		languageUtil.enforcePropertyMappings(tree);
+	}
 
 }

@@ -37,34 +37,23 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public Map<File, String> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException {
 		Map<File, String> resources = new HashMap<>();
-		resources.put(new File(sourcePath, "Serializer.h"), readSerializerHeader());
-		resources.put(new File(sourcePath, "Serializer.m"), readSerializerImplementation());
+		resources.put(new File(sourcePath, "Serializer.h"), readResource("/Serializer.h"));
+		resources.put(new File(sourcePath, "Serializer.m"), readResourceAndReplaceHeaders("/Serializer.m"));
+		resources.put(new File(sourcePath, "Log.h"), readResourceAndReplaceHeaders("/Log.h"));
 		return resources;
 	}
 	
-	/**
-	 * Reads the contents of the static Serializer.m file.
-	 * @return The contents of the entire Serializer.m file
-	 * @throws IOException
-	 */
-	private String readSerializerImplementation() throws IOException {
-		return readResourceAndReplaceHeaders("/Serializer.m");
-	}
-
-	/**
-	 * Reads the contents of the static Serializer.h file.
-	 * @return The contents of the entire Serializer.h file.
-	 * @throws IOException
-	 */
-	private String readSerializerHeader() throws IOException {
-		return readResourceAndReplaceHeaders("/Serializer.h");
-	}
-
-	
-
 	@Override
 	public void enforceFilenames(OrchestrationTree tree) {
 		// No-Op for Objective C		
+	}
+	
+	@Override
+	public Map<String, String> getPropertyMappings() {
+		Map<String, String> mappings = new HashMap<>();
+		mappings.put("id", "theId");
+		mappings.put("description", "theDescription");
+		return mappings;
 	}
 
 //	@Override

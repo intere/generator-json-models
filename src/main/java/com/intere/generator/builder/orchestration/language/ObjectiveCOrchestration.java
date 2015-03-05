@@ -78,6 +78,11 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		return null;
 	}
 	
+	@Override
+	public void review(OrchestrationTree tree) {
+		languageUtil.enforcePropertyMappings(tree);
+	}
+	
 	/**
 	 * Builds the Test Class File (in the provided output directory).
 	 * @param outputDirectory
@@ -86,7 +91,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	 */
 	private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException {
 		String fileContents = buildTestClass(modelClass);
-		File outputFile = new File(outputDirectory, modelClass.getTestClassName() + ".java");
+		File outputFile = new File(outputDirectory, modelClass.getTestClassName() + ".m");
 		LOGGER.info("About to create Test Class: " + outputFile.getAbsolutePath());
 		FileOutputStream fout = new FileOutputStream(outputFile);
 		IOUtils.write(fileContents, fout);

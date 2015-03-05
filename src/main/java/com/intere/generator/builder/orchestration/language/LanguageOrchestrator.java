@@ -60,4 +60,10 @@ public interface LanguageOrchestrator {
 	 * @throws IOException 
 	 */
 	List<File> copyResources(File sourcePath, OrchestrationTree tree) throws IOException;
+
+	/**
+	 * Reviews all of the data and performs the last metadata overlays necessary for code generation.
+	 * @param tree
+	 */
+	void review(OrchestrationTree tree);
 }

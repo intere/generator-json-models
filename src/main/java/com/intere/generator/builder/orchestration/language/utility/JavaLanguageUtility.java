@@ -41,4 +41,14 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	public void enforceFilenames(OrchestrationTree tree) {
 		// No-Op for Java
 	}
+
+	@Override
+	public void enforcePropertyMappings(OrchestrationTree tree) {
+		// no-op for Java (unless we find keywords).
+	}
+	
+	@Override
+	public Map<String, String> getPropertyMappings() {
+		return new HashMap<>();
+	}
 }

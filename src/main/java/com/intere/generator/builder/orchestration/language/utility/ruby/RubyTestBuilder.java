@@ -98,8 +98,7 @@ public class RubyTestBuilder extends BaseTestBuilder {
 
 	@Override
 	public String buildImplementationFileComment(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		return buildFileComment(modelClass.getFileName() + "_spec.rb");
 	}
 
 	@Override
@@ -140,8 +139,7 @@ public class RubyTestBuilder extends BaseTestBuilder {
 
 	@Override
 	public String finishClass(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+		return "end" + tabs(2) + singleLineComment("End of " + modelClass.getClassName() + " Spec") + "\n\n";
 	}
 
 	@Override
