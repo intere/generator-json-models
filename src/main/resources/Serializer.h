@@ -13,6 +13,7 @@
 
 @interface Serializer : NSObject
 
+
 /** Protect us from NSNull!  */
 +(NSString *)safeGetDictString:(NSDictionary *)dict withKey:(NSString *)key;
 
@@ -88,12 +89,6 @@
  */
 +(NSString *)jsonStringFromDictionary:(NSDictionary *)dict withPrettyPrint:(BOOL)prettyPrint;
 
-/**
- * The internal "Time Interval" used by iOS is not the same as it is for all other languages I'm familiar with
- * so this method will convert the given date into an Integer that is "portable".
- */
-+(double)dateToStandardTimeInterval:(NSDate *)date;
-
 //
 //
 // Deserialization
@@ -116,10 +111,34 @@
  */
 +(NSDictionary *)fromJsonString:(NSString *)json;
 
-/**
- * Takes the Standard Time Interval you provide and gives you back an NSDate object for it.
- */
+//
+//
+// Date Utility Methods
+//
+//
+
+/** Takes the Standard Time Interval you provide and gives you back an NSDate object for it. */
 +(NSDate *)standardTimeIntervalToDate:(double)standardTime;
 
+/**
+ * The internal "Time Interval" used by iOS is not the same as it is for all other languages I'm familiar with
+ * so this method will convert the given date into an Integer that is "portable".
+ */
++(double)dateToStandardTimeInterval:(NSDate *)date;
+
+
+/** Converts the provided Zulu dateString to nicely formatted NSString object for you.  */
++(NSString *)formatZuluDateToString:(NSString *)dateString;
+/** Converts the provided NSDate object to a nicely formatted NSString object for you.  */
++(NSString *)formatDateToZuluString:(NSDate *)date;
+/** Converts the provided NSDate object to a nicely formatted NSString object for you.  */
++(NSString *)formatIsoDateToString:(NSString *)dateString;
+/** Converts the provided NSDate object to a nicely formatted NSString object for you.  */
++(NSString *)formatDateToIsoString:(NSDate *)date;
+
+/** Converts the provided Zulu-formatted NSString to a NSDate object for you.  */
++(NSDate *)zuluDateStringToNSDate:(NSString *)dateString;
+/** Converts the provided ISO-formatted NSString to a NSDate object for you.  */
++(NSDate *)isoDateStringToNSDate:(NSString *)dateString;
 
 @end

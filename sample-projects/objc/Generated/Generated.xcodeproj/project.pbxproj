@@ -30,6 +30,7 @@
 		3665CA511AA7F52500EE4255 /* EnumerationTournamentStatesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA461AA7F52500EE4255 /* EnumerationTournamentStatesTest.m */; };
 		3665CA521AA7F52500EE4255 /* EnumerationTournamentTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA471AA7F52500EE4255 /* EnumerationTournamentTypesTest.m */; };
 		3665CA531AA7F52500EE4255 /* EnumerationUserTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA481AA7F52500EE4255 /* EnumerationUserTypesTest.m */; };
+		3665CA561AA8A19300EE4255 /* SerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA551AA8A19300EE4255 /* SerializerTest.m */; };
 		368FA33A1A9E077D0037193C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 368FA3391A9E077D0037193C /* main.m */; };
 		368FA33D1A9E077D0037193C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 368FA33C1A9E077D0037193C /* AppDelegate.m */; };
 		368FA3401A9E077D0037193C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 368FA33F1A9E077D0037193C /* ViewController.m */; };
@@ -85,6 +86,7 @@
 		3665CA471AA7F52500EE4255 /* EnumerationTournamentTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesTest.m; sourceTree = "<group>"; };
 		3665CA481AA7F52500EE4255 /* EnumerationUserTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesTest.m; sourceTree = "<group>"; };
 		3665CA541AA8000900EE4255 /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		3665CA551AA8A19300EE4255 /* SerializerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerializerTest.m; sourceTree = "<group>"; };
 		368FA3341A9E077D0037193C /* Generated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Generated.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		368FA3381A9E077D0037193C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		368FA3391A9E077D0037193C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				3665CA461AA7F52500EE4255 /* EnumerationTournamentStatesTest.m */,
 				3665CA471AA7F52500EE4255 /* EnumerationTournamentTypesTest.m */,
 				3665CA481AA7F52500EE4255 /* EnumerationUserTypesTest.m */,
+				3665CA551AA8A19300EE4255 /* SerializerTest.m */,
 			);
 			name = generated;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				3665CA4F1AA7F52500EE4255 /* EnumerationTest.m in Sources */,
 				3665CA521AA7F52500EE4255 /* EnumerationTournamentTypesTest.m in Sources */,
 				3665CA4E1AA7F52500EE4255 /* EnumerationSkillLevelsTest.m in Sources */,
+				3665CA561AA8A19300EE4255 /* SerializerTest.m in Sources */,
 				3665CA4B1AA7F52500EE4255 /* ContestSponsorTest.m in Sources */,
 				3665CA4D1AA7F52500EE4255 /* EnumerationPurseTypesTest.m in Sources */,
 			);

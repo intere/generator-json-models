@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
-import com.intere.generator.builder.orchestration.OrchestrationDataType;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseTestBuilder;
 import com.intere.generator.builder.orchestration.language.utility.comments.CStyleCommentBuilder;
@@ -43,7 +42,7 @@ public class ObjectiveCTestBuilder extends BaseTestBuilder {
 		builder.append("#import <UIKit/UIKit.h>\n");
 		builder.append("#import <XCTest/XCTest.h>\n");
 		builder.append("#import \"Serializer.h\"\n");
-		builder.append("#import \"" + modelClass.getClassName() + ".h\";\n\n");
+		builder.append("#import \"" + modelClass.getClassName() + ".h\"\n\n");
 		return builder.toString();
 	}
 
@@ -74,27 +73,99 @@ public class ObjectiveCTestBuilder extends BaseTestBuilder {
 		final String classType = prop.getParentModel().getClassName();
 		final String instanceName = interpreter.cleanVariableName(classType);
 		StringBuilder builder = new StringBuilder();
-		builder.append(multiLineComment("Tests Serialization / Deserialization of the " + prop.getName() + " property", 0) + "\n");
-		builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + " {\n");
+		
 		switch(prop.getDataType()) {
 		case BOOLEAN:
+			
+			builder.append(multiLineComment("Tests the \"Happy Path\" Serialization / Deserialization of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "HappyPath {\n");
 			builder.append(tabs(1) + "NSString *json=@\"{\\\"" + prop.getName() + "\\\":true}\";\n");
 			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
 			builder.append(tabs(1) + "XCTAssertTrue(" + instanceName + "." + prop.getAlias() + ");\n");
+			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with nil) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithNil {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertFalse(" + instanceName + "." + prop.getAlias() + ");\n");
+			builder.append("}\n\n");
 			break;
 			
 		case STRING:
 		case IMAGE:
+			builder.append(multiLineComment("Tests the \"Happy Path\" Serialization / Deserialization of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "HappyPath {\n");
 			builder.append(tabs(1) + "NSString *json=@\"{\\\"" + prop.getName() + "\\\":\\\"foo\\\"}\";\n");
 			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
 			builder.append(tabs(1) + "XCTAssertEqualObjects(" + instanceName + "." + prop.getAlias() + ", @\"foo\");\n");
+			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with nil) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithNil {\n");
+			builder.append(singleLineComment("Test with nil", 1) + "\n");
+			builder.append(tabs(1) + "NSString *json=@\"{}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertNil(" + instanceName + "." + prop.getAlias() + ");\n");
+			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with empty string) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithEmptyString {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{\\\"" + prop.getName() + "\\\":\\\"\\\"}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqualObjects(" + instanceName + "." + prop.getAlias() + ", @\"\");\n");
+			builder.append("}\n\n");
+			break;
+			
+		case DATE:
+			builder.append(multiLineComment("Tests the \"Happy Path\" Serialization / Deserialization of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "HappyPath {\n");
+			builder.append(tabs(1) + "NSDate *date = [[NSDate alloc]init];\n");
+			builder.append(tabs(1) + "NSString *json = [NSString stringWithFormat:@\"{\\\"" + prop.getName() 
+					+ "\\\":\\\"%@\\\"}\", [Serializer formatDateToIsoString:date]];\n" );
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqualWithAccuracy([Serializer dateToStandardTimeInterval:" + instanceName + "." 
+					+ prop.getAlias() + "], [Serializer dateToStandardTimeInterval:date], 1);\n");
+			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with a Zulu Date String) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithZuluDate {\n");
+			builder.append(tabs(1) + "NSDate *date = [[NSDate alloc]init];\n");
+			builder.append(tabs(1) + "NSString *json = [NSString stringWithFormat:@\"{\\\"" + prop.getName() 
+					+ "\\\":\\\"%@\\\"}\", [Serializer formatDateToZuluString:date]];\n" );
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqualWithAccuracy([Serializer dateToStandardTimeInterval:" + instanceName + "." 
+					+ prop.getAlias() + "], [Serializer dateToStandardTimeInterval:date], 1);\n");
+			builder.append("}\n\n");
+			
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (Seconds Since the Epoch) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithLongDate {\n");
+			builder.append(tabs(1) + "NSDate *date = [[NSDate alloc]init];\n");
+			builder.append(tabs(1) + "NSString *json = [NSString stringWithFormat:@\"{\\\"" + prop.getName() 
+					+ "\\\":%f}\", [Serializer dateToStandardTimeInterval:date]];\n" );
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqualWithAccuracy([Serializer dateToStandardTimeInterval:" + instanceName + "." 
+					+ prop.getAlias() + "], [Serializer dateToStandardTimeInterval:date], 1);\n");
+			builder.append("}\n\n");
+			
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with nil) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithNil {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertNil(" + instanceName + "." + prop.getAlias() + ");\n");
+			builder.append("}\n\n");
 			break;
 			
 		default:
+			builder.append(multiLineComment("Tests Serialization / Deserialization of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + " {\n");
+			builder.append(tabs(1) + "#warning Not Yet Implemented\n");
 			builder.append(singleLineComment("TODO: Implement test for this type", 1) + "\n");
+			builder.append("}\n\n");
 			break;
 		}
-		builder.append("}\n\n");
 		return builder.toString();
 	}
 
