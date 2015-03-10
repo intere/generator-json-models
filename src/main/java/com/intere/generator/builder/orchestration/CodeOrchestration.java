@@ -51,7 +51,7 @@ public class CodeOrchestration {
 			File srcPath = new File(outputDirectory, "src");
 			if(ensureExists(srcPath)) {
 				orchestrator.generateModels(srcPath, tree);
-				orchestrator.copyResources(srcPath, tree);
+				orchestrator.copyModelResources(srcPath, tree);
 			}
 		}
 		
@@ -73,6 +73,7 @@ public class CodeOrchestration {
 			File viewPath = new File(outputDirectory, "views");
 			if(ensureExists(viewPath)) {
 				orchestrator.generateViews(viewPath, tree);
+				orchestrator.copyViewResources(viewPath, tree);
 			}
 		}
 		

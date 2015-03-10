@@ -130,7 +130,13 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	}
 
 	@Override
-	public List<File> copyResources(File sourcePath, OrchestrationTree tree) {
+	public List<File> copyModelResources(File sourcePath, OrchestrationTree tree) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public List<File> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}

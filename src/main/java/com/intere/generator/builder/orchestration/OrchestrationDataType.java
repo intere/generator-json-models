@@ -16,31 +16,56 @@ import org.codehaus.jackson.JsonNode;
 
 import com.intere.generator.metadata.ModelClassProperty;
 
-
-public enum OrchestrationDataType {	
-	IMAGE("Image", "String", "NSString"),
-	DATE("Date", "Date", "NSDate"),
-	STRING("String", "String", "NSString"),
-	LONG("Long", "Long", "NSInteger"),
-	DOUBLE("Double", "Double", "double"),
-	BOOLEAN("Boolean", "Boolean", "BOOL"),
-	ARRAY("Array", "List", "NSArray"),
-	CLASS,
-	UNKNOWN("Unknown", "String", "NSString");
+/**
+ * This enumeration serves as an abstract way to deal with various data types we might encounter.
+ *
+ */
+public enum OrchestrationDataType {
+	/** It's really just a string, but starts with one of the following: "image:", "image16x9:", or "image4x3:" */
+	IMAGE("Image", "String", "NSString", "UIImageView"),
+	
+	/** Probably a string, could be a number, but determined to be a Date. */
+	DATE("Date", "Date", "NSDate", "UIDatePicker"),
+	
+	/** A String that's not greater than 25 characters.  */
+	STRING("String", "String", "NSString", "UITextField"),
+	
+	/** A String that's longer than 25 characters.  */
+	TEXT("String", "String", "NSString", "UITextView"),
+	
+	/** An Integer. */
+	LONG("Long", "Long", "NSInteger", "UITextField"),
+	
+	/** A Decimal number */
+	DOUBLE("Double", "Double", "double", "UITextField"),
+	
+	/** True / False */
+	BOOLEAN("Boolean", "Boolean", "BOOL", "UISwitch"),
+	
+	/** A collection of other objects, strings, numbers, etc. */
+	ARRAY("Array", "List", "NSArray", "UIButton"),
+	
+	/** An abstract data type, a "child class" */
+	CLASS(null, null, null, "UIButton"),
+	
+	/** Type could not be determined, hopefully we don't have too many of these. */
+	UNKNOWN("Unknown", "String", "NSString", null);
 	
 	private static final Logger LOGGER = LogManager.getLogger(OrchestrationDataType.class);
 	private String internalName;
 	private String javaName;
 	private String objcName;
+	private String objcViewName;
 	
 	/** Default Constructor.  */
 	private OrchestrationDataType() {}
 	
 	/** Constructor that set the internal name. */
-	private OrchestrationDataType(String internalName, String javaName, String objcName) {
+	private OrchestrationDataType(String internalName, String javaName, String objcName, String objcViewName) {
 		this.internalName = internalName;
 		this.javaName = javaName;
 		this.objcName = objcName;
+		this.objcViewName = objcViewName;
 	}
 	
 	public String getInternalName() {
@@ -96,6 +121,9 @@ public enum OrchestrationDataType {
 		} else if(isDate(node)) {
 			return DATE;
 		} else if(isText(node)) {
+			if(node.getTextValue().length()>25) {
+				return TEXT;
+			}
 			return STRING;
 		} else if(isInteger(node) || isLong(node)) {
 			return LONG;
@@ -135,5 +163,9 @@ public enum OrchestrationDataType {
 
 	public String getObjectiveCName() {
 		return objcName;
+	}
+
+	public String getObjectiveCViewClass() {
+		return objcViewName;
 	}
 }

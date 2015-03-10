@@ -183,6 +183,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 			case DATE:
 			case IMAGE:
 			case STRING:
+			case TEXT:
 			case UNKNOWN:
 				return "(nonatomic, strong) ";
 			default:
@@ -252,6 +253,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 		
 		switch(dt) {
 		case STRING:
+		case TEXT:
 		case IMAGE:
 			return BASE + "[Serializer safeGetDictString:dict withKey:" + serConstant + "];\n";
 		case DATE:
@@ -306,6 +308,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 			return BASE + "object:[self." + propName + " toDictionary] forKey:" + serConstant + "];\n";
 			
 		case STRING:
+		case TEXT:
 			return BASE + "object:self." + propName + " forKey:" + serConstant + "];\n";
 			
 		case DATE:

@@ -59,11 +59,19 @@ public interface LanguageOrchestrator {
 	 * @return a {@link List} of {@link File} objects.
 	 * @throws IOException 
 	 */
-	List<File> copyResources(File sourcePath, OrchestrationTree tree) throws IOException;
+	List<File> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException;
 
 	/**
 	 * Reviews all of the data and performs the last metadata overlays necessary for code generation.
 	 * @param tree
 	 */
 	void review(OrchestrationTree tree);
+
+	/**
+	 * Copies the resource files associated with the views.
+	 * @param viewPath Where to copy the resource files to.
+	 * @param tree The {@link OrchestrationTree} to help out (if necessary).
+	 * @throws IOException
+	 */
+	List<File> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException;
 }

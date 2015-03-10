@@ -36,6 +36,11 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 		// Currently a No-Op for Java;
 		return new HashMap<>();
 	}
+	@Override
+	public Map<File, String> copyViewResources(File viewPath,OrchestrationTree tree) throws IOException {
+		// Currently a No-Op for Java;
+		return new HashMap<>();
+	}
 
 	@Override
 	public void enforceFilenames(OrchestrationTree tree) {

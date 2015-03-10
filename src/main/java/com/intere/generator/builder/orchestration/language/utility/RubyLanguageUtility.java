@@ -48,6 +48,12 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 		generatedResource.put(new File(sourcePath, "json_model.rb"), readJsonModelFile());		
 		return generatedResource;
 	}
+	
+	@Override
+	public Map<File, String> copyViewResources(File viewPath,OrchestrationTree tree) throws IOException {
+		// Currently a No-Op for Ruby;
+		return new HashMap<>();
+	}
 
 	private String readJsonModelFile() throws IOException {
 		return readResourceAndReplaceHeaders("/json_model.rb");

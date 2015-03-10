@@ -133,6 +133,7 @@ public class JavaTestBuilder extends BaseTestBuilder {
 					+ getSetBase + "());\n");
 			break;
 		case STRING:
+		case TEXT:
 		case IMAGE:
 			builder.append(tabs(2) + "final String expected = \"test\";\n");
 			builder.append(tabs(2) + "instance.set" + getSetBase + "(expected);\n");

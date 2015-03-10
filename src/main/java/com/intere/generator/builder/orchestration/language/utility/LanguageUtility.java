@@ -33,6 +33,9 @@ public interface LanguageUtility {
 	/** Copies the Model Resource files into the provided sourcePath. */
 	Map<File, String> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException;
 	
+	/** Copies the View Resource files into the provided viewPath.  */
+	Map<File, String> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException;
+	
 	public interface CommentBuilder {
 		/** Give me some number of tabs.  */
 		String tabs(int tabCount);

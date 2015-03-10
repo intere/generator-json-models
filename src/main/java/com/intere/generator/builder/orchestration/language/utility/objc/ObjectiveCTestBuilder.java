@@ -1,8 +1,5 @@
 package com.intere.generator.builder.orchestration.language.utility.objc;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
@@ -12,7 +9,6 @@ import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
 public class ObjectiveCTestBuilder extends BaseTestBuilder {
-	private static final Logger LOGGER = LogManager.getLogger(ObjectiveCTestBuilder.class);
 	protected CommentBuilder commentBuilder = new CStyleCommentBuilder();
 	protected JsonLanguageInterpreter interpreter = new ObjectiveCModelInterpreter();
 	
@@ -93,6 +89,7 @@ public class ObjectiveCTestBuilder extends BaseTestBuilder {
 			break;
 			
 		case STRING:
+		case TEXT:
 		case IMAGE:
 			builder.append(multiLineComment("Tests the \"Happy Path\" Serialization / Deserialization of the " + prop.getName() + " property", 0) + "\n");
 			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "HappyPath {\n");

@@ -2,6 +2,10 @@ generator-json-models
 =====================
 Multi-Language (currently Objective-C, Ruby and Java) JSON Model Class Creator.
 
+## TODO
+* Find UIHelper.h and UIHelper.m and copy / alter as necessary for code generation.
+
+
 ## Project Management
 Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1295722
 

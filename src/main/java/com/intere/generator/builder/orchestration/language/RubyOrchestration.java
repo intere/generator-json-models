@@ -111,7 +111,7 @@ public class RubyOrchestration implements LanguageOrchestrator {
 	
 
 	@Override
-	public List<File> copyResources(File sourcePath, OrchestrationTree tree) throws IOException {
+	public List<File> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException {
 		List<File> generatedResources = new ArrayList<>();
 		Map<File, String> resources = languageUtil.copyModelResources(sourcePath, tree);
 		for(File f : resources.keySet()) {
@@ -122,5 +122,11 @@ public class RubyOrchestration implements LanguageOrchestrator {
 			generatedResources.add(f);
 		}
 		return generatedResources;
+	}
+	
+	@Override
+	public List<File> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

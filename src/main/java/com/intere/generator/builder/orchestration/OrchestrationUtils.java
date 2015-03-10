@@ -151,6 +151,7 @@ public class OrchestrationUtils {
 		property.setIsArray(isArray(child));
 		property.setIsPrimitive(isPrimitive(property));
 		property.setDataType(OrchestrationDataType.fromModelProperty(property));
+		property.setValue(child.getTextValue());
 		if(property.getDataType() == OrchestrationDataType.ARRAY) {
 			property.setArraySubTypeProperty(getArraySubtypeProperty(interpreter, className, name, child.get(0)));
 		}

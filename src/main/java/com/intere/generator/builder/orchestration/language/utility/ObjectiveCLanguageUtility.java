@@ -44,6 +44,16 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	}
 	
 	@Override
+	public Map<File, String> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException {
+		Map<File, String> resources = new HashMap<>();
+		resources.put(new File(viewPath, "UIHelper.h"), readResource("/UIHelper.h"));
+		resources.put(new File(viewPath, "UIHelper.m"), readResourceAndReplaceHeaders("/UIHelper.m"));
+		resources.put(new File(viewPath, "UITheme.h"), readResource("/UITheme.h"));
+		resources.put(new File(viewPath, "UITheme.m"), readResourceAndReplaceHeaders("/UITheme.m"));
+		return resources;
+	}
+	
+	@Override
 	public void enforceFilenames(OrchestrationTree tree) {
 		// No-Op for Objective C		
 	}
