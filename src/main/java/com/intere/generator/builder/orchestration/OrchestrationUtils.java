@@ -219,6 +219,8 @@ public class OrchestrationUtils {
 		model.setFileName(interpreter.buildFilenameFromClassname(className));
 		model.setTestClassName(interpreter.buildClassName(className) + "Test");
 		model.setViewClassName(interpreter.buildClassName(className) + "View");	
+		model.setServiceClassName(interpreter.buildClassName(className) + "Service");
+		model.setRestServiceClassName(interpreter.buildClassName(className) + "RestService");
 		modelClasses.add(model);
 		if(model.getHasSubClasses()) {
 			modelClasses.addAll(getSubClasses(interpreter, metadata, clazz, node, model.getClassName()));

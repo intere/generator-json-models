@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
 import com.intere.generator.builder.orchestration.language.utility.ObjectiveCLanguageUtility;
+import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.ServiceBuilder;
 import com.intere.generator.metadata.ModelClass;
 
 public class ObjectiveCOrchestration implements LanguageOrchestrator {
@@ -69,11 +70,13 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	}
 
 	@Override
-	public List<File> generateServices(File servicePath, OrchestrationTree tree)
-			throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-		
+	public List<File> generateServices(File servicePath, OrchestrationTree tree) throws IOException {
+		List<File> generatedServices = new ArrayList<>();
+		for(ModelClass modelClass : tree.getModelClasses()) {
+			generatedServices.add(buildServiceHeaderFile(servicePath, modelClass));
+			generatedServices.add(buildServiceImplementationFile(servicePath, modelClass));
+		}
+		return generatedServices;
 	}
 
 	@Override
@@ -97,6 +100,32 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		languageUtil.enforcePropertyMappings(tree);
 	}
 	
+	/**
+	 * Builds the Service Class Header File (in the provided output directory).
+	 */
+	private File buildServiceHeaderFile(File outputDirectory, ModelClass modelClass) throws IOException {
+		String fileContents = buildServiceClassHeader(modelClass);
+		File outputFile = new File(outputDirectory, modelClass.getServiceClassName() + ".h");
+		LOGGER.info("About to create Service Class: " + outputFile.getAbsolutePath());
+		FileOutputStream fout = new FileOutputStream(outputFile);
+		IOUtils.write(fileContents, fout);
+		fout.close();
+		return outputFile;
+	}
+
+	/**
+	 * Builds the Service Class Implementation File (in the provided output directory).
+	 */
+	private File buildServiceImplementationFile(File outputDirectory, ModelClass modelClass) throws IOException {
+		String fileContents = buildServiceClassImplementation(modelClass);
+		File outputFile = new File(outputDirectory, modelClass.getServiceClassName() + ".m");
+		LOGGER.info("About to create Service Class: " + outputFile.getAbsolutePath());
+		FileOutputStream fout = new FileOutputStream(outputFile);
+		IOUtils.write(fileContents, fout);
+		fout.close();
+		return outputFile;
+	}
+
 	/**
 	 * Builds the Test Class File (in the provided output directory).
 	 * @param outputDirectory
@@ -149,6 +178,27 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		String fileContents = buildViewClassImplementation(modelClass);
 		File outputFile = new File(viewPath, modelClass.getViewClassName() + ".m");
 		return writeFile(outputFile, fileContents);
+	}
+
+	private String buildServiceClassHeader(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		ServiceBuilder serviceBuilder = languageUtil.getServiceBuilder();
+		builder.append(serviceBuilder.buildHeaderFileComment(modelClass));
+		builder.append(serviceBuilder.buildClassDeclaration(modelClass));
+		builder.append(serviceBuilder.buildPropertyDeclarations(modelClass));
+		builder.append(serviceBuilder.buildModelUtilityDeclarationMethods(modelClass));
+		builder.append(serviceBuilder.finishClass(modelClass));
+		return builder.toString();
+	}
+	
+	private String buildServiceClassImplementation(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		ServiceBuilder serviceBuilder = languageUtil.getServiceBuilder();
+		builder.append(serviceBuilder.buildImplementationFileComment(modelClass));
+		builder.append(serviceBuilder.buildClassImplementation(modelClass));
+		builder.append(serviceBuilder.buildModelUtilityDefinitionMethods(modelClass));
+		builder.append(serviceBuilder.finishClass(modelClass));
+		return builder.toString();
 	}
 
 	private String buildViewClassDeclaration(ModelClass modelClass) {

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.java.JavaModelBuilder;
+import com.intere.generator.builder.orchestration.language.utility.java.JavaServiceBuilder;
 import com.intere.generator.builder.orchestration.language.utility.java.JavaTestBuilder;
 import com.intere.generator.builder.orchestration.language.utility.java.JavaViewBuilder;
 
@@ -15,6 +16,7 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	ModelBuilder modelBuilder = new JavaModelBuilder();
 	TestBuilder testBuilder = new JavaTestBuilder();
 	ViewBuilder viewBuilder = new JavaViewBuilder();
+	ServiceBuilder serviceBuilder = new JavaServiceBuilder();
 	
 	@Override
 	public ModelBuilder getModelBuilder() {
@@ -29,6 +31,11 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public ViewBuilder getViewBuilder() {
 		return viewBuilder;
+	}
+	
+	@Override
+	public ServiceBuilder getServiceBuilder() {
+		return serviceBuilder;
 	}
 
 	@Override

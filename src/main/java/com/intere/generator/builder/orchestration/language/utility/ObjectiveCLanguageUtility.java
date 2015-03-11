@@ -7,17 +7,15 @@ import java.util.Map;
 
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.objc.ObjectiveCModelBuilder;
+import com.intere.generator.builder.orchestration.language.utility.objc.ObjectiveCServiceBuilder;
 import com.intere.generator.builder.orchestration.language.utility.objc.ObjectiveCTestBuilder;
 import com.intere.generator.builder.orchestration.language.utility.objc.ObjectiveCViewBuilder;
 
-public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
-//	private static final Logger LOGGER = LogManager.getLogger(ObjectiveCLanguageUtility.class);
-//	JsonLanguageInterpreter interpreter = new ObjectiveCModelInterpreter();
-	
+public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {	
 	ModelBuilder modelBuilder = new ObjectiveCModelBuilder();
 	TestBuilder testBuilder = new ObjectiveCTestBuilder();
 	ViewBuilder viewBuilder = new ObjectiveCViewBuilder();
-	
+	ServiceBuilder serviceBuilder = new ObjectiveCServiceBuilder();
 	
 	@Override
 	public ModelBuilder getModelBuilder() {
@@ -32,6 +30,11 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public ViewBuilder getViewBuilder() {
 		return viewBuilder;
+	}
+	
+	@Override
+	public ServiceBuilder getServiceBuilder() {
+		return serviceBuilder;
 	}
 	
 	@Override
@@ -65,17 +68,5 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 		mappings.put("description", "theDescription");
 		return mappings;
 	}
-
-//	@Override
-//	public String buildViewImports(ModelClass modelClass) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public String buildViewClassDeclaration(ModelClass modelClass) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }
 

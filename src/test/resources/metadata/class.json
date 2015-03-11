@@ -5,6 +5,8 @@
     "fileName": "Contest.java",
     "testClassName": "ContestTest",
     "viewClassName": "ContestView",
+    "serviceClassName": "ContestService",
+    "restServiceClassName": "ContestRestService",
     "readonly": false,
     "namespace": "com.intere.generated",
     "hasSubClasses": true,

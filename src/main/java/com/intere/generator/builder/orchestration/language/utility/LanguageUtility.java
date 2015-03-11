@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.intere.generator.builder.orchestration.OrchestrationTree;
+import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.ModelBuilder;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
@@ -23,6 +24,9 @@ public interface LanguageUtility {
 	
 	/** Gets you the View Builder for this class. */
 	ViewBuilder getViewBuilder();
+	
+	/** Gets you the Service Builder for this class.  */
+	ServiceBuilder getServiceBuilder();
 	
 	/** Enforces the filenames based on the model class names.  */
 	void enforceFilenames(OrchestrationTree tree);
@@ -118,19 +122,11 @@ public interface LanguageUtility {
 	}
 	
 	public interface ViewBuilder extends ModelBuilder {
-//		/** Builds out the Imports for a View Class. */
-//		String buildViewImports(ModelClass modelClass);
-//
-//		/** Builds the View Class Declaration.  */
-//		String buildViewClassDeclaration(ModelClass modelClass);
-//
-//		/** Finishes the View Class.  */
-//		String finishViewClass(ModelClass modelClass);
-//
-//		String buildViewClassDefinition(ModelClass modelClass);
-//
-//		String buildViewMethodDefinitions(ModelClass modelClass);
-//
-//		String buildFileComment(String string);
+		
 	}
+	
+	public interface ServiceBuilder extends ModelBuilder {
+		
+	}
+
 }

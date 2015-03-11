@@ -9,6 +9,7 @@ import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.ruby.RubyModelBuilder;
+import com.intere.generator.builder.orchestration.language.utility.ruby.RubyServiceBuilder;
 import com.intere.generator.builder.orchestration.language.utility.ruby.RubyTestBuilder;
 import com.intere.generator.builder.orchestration.language.utility.ruby.RubyViewBuilder;
 import com.intere.generator.metadata.ModelClass;
@@ -18,6 +19,7 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 	ModelBuilder modelBuilder = new RubyModelBuilder();
 	TestBuilder testBuilder = new RubyTestBuilder();
 	ViewBuilder viewBuilder = new RubyViewBuilder();
+	ServiceBuilder serviceBuilder = new RubyServiceBuilder();
 	
 
 	@Override
@@ -33,6 +35,11 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public ViewBuilder getViewBuilder() {
 		return viewBuilder;
+	}
+	
+	@Override
+	public ServiceBuilder getServiceBuilder() {
+		return serviceBuilder;
 	}
 
 	@Override

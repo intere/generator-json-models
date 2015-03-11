@@ -1,13 +1,5 @@
 package com.intere.generator.builder.orchestration.language.utility.objc;
 
-import static com.intere.generator.deserializer.JsonNodeUtils.isBoolean;
-import static com.intere.generator.deserializer.JsonNodeUtils.isDate;
-import static com.intere.generator.deserializer.JsonNodeUtils.isFloat;
-import static com.intere.generator.deserializer.JsonNodeUtils.isImage;
-import static com.intere.generator.deserializer.JsonNodeUtils.isInteger;
-import static com.intere.generator.deserializer.JsonNodeUtils.isLong;
-import static com.intere.generator.deserializer.JsonNodeUtils.isText;
-
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
