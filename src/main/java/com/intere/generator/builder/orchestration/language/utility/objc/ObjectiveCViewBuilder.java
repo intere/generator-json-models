@@ -56,8 +56,23 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		builder.append(buildPrivateInterface(modelClass));
 		
 		builder.append("@implementation " + modelClass.getViewClassName() + "\n");
+		builder.append("-(id)initWithCoder:(NSCoder *)aDecoder {\n");
+		builder.append(tabs(1) + "self = [super initWithCoder:aDecoder];\n");
+		builder.append(tabs(1) + "if(self) {\n");
+		builder.append(tabs(2) + "[self buildView];\n");
+		builder.append(tabs(1) + "}\n");
+		builder.append(tabs(1) + "return self;\n");
+		builder.append("}\n\n");
+		builder.append("-(id)initWithFrame:(CGRect)frame {\n");
+		builder.append(tabs(1) + "self = [super initWithFrame:frame];\n");
+		builder.append(tabs(1) + "if(self) {\n");
+		builder.append(tabs(2) + "[self buildView];\n");
+		builder.append(tabs(1) + "}\n");
+		builder.append(tabs(1) + "return self;\n");
+		builder.append("}\n\n");
+		
 		builder.append("-(void)set" + modelClass.getClassName() + ":(" + modelClass.getClassName() + " *)model {\n");
-		builder.append(tabs(1) + "self." + instanceName + " = model;\n");
+		builder.append(tabs(1) + "_" + instanceName + " = model;\n");
 		builder.append(tabs(1) + "[self updateValues];\n");
 		builder.append("}\n\n");
 		
@@ -79,37 +94,37 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		builder.append("#pragma mark Private Methods\n");
 		builder.append("-(void)configureAndAddPropertyLabel:(UILabel *)propertyLabel {\n");
 		builder.append("[UITheme configurePropertyLabel:propertyLabel];\n");
-		builder.append("\t[self addSubview:propertyLabel];\n");
+		builder.append(tabs(1) + "[self addSubview:propertyLabel];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddDatePicker:(UIDatePicker *)datePicker {\n");
 		builder.append("[UITheme configureDatePicker:datePicker];\n");
-		builder.append("\t[self addSubview:datePicker];\n");
+		builder.append(tabs(1) + "[self addSubview:datePicker];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddTextView:(UITextView *)textView {\n");
-		builder.append("\t[UITheme configureTextView:textView];\n");
-		builder.append("\t[self addSubview:textView];\n");
+		builder.append(tabs(1) + "[UITheme configureTextView:textView];\n");
+		builder.append(tabs(1) + "[self addSubview:textView];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddTextField:(UITextField *)textField {\n");
-		builder.append("\t[UITheme configureTextField:textField];\n");
-		builder.append("\t[self addSubview:textField];\n");
+		builder.append(tabs(1) + "[UITheme configureTextField:textField];\n");
+		builder.append(tabs(1) + "[self addSubview:textField];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddButton:(UIButton *)button {\n");
-		builder.append("\t[UITheme configureButton:button];\n");
-		builder.append("\t[self addSubview:button];\n");
+		builder.append(tabs(1) + "[UITheme configureButton:button];\n");
+		builder.append(tabs(1) + "[self addSubview:button];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddSwitch:(UISwitch *)toggleSwitch {\n");
-		builder.append("\t[UITheme configureSwitch:toggleSwitch];\n");
-		builder.append("\t[self addSubview:toggleSwitch];\n");
+		builder.append(tabs(1) + "[UITheme configureSwitch:toggleSwitch];\n");
+		builder.append(tabs(1) + "[self addSubview:toggleSwitch];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)configureAndAddImageView:(UIImageView *)imageView {\n");
-		builder.append("\t[UITheme configureImageView:imageView];\n");
-		builder.append("\t[self addSubview:imageView];\n");
+		builder.append(tabs(1) + "[UITheme configureImageView:imageView];\n");
+		builder.append(tabs(1) + "[self addSubview:imageView];\n");
 		builder.append("}\n\n");
 		
 		builder.append("-(void)buttonPressed:(UIButton *)button {\n");
@@ -170,23 +185,25 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 			String propertyName = interpreter.cleanVariableName(prop.getName());
 			switch(prop.getDataType()) {
 			case IMAGE:
-				builder.append("\t[UIHelper loadImageInBackground:" + propertyName + " fromUrl:" + modelInstanceName + "." + propertyName + "];\n");
+				builder.append(tabs(1) + "[UIHelper loadImageInBackground:" + propertyName + " fromUrl:" + modelInstanceName + "." + propertyName + "];\n");
 				break;
 			case DATE:
-				builder.append("\t[self->" + propertyName + " setDate:" + modelInstanceName + "." + propertyName + "];\n");
+				builder.append(tabs(1) + "if(self." + modelInstanceName + "." + propertyName + ") {\n" );
+				builder.append(tabs(2) + "[self->" + propertyName + " setDate:" + modelInstanceName + "." + propertyName + "];\n");
+				builder.append(tabs(1) + "}\n");
 				break;
 			case STRING:
 			case TEXT:
-				builder.append("\t[self->" + propertyName + " setText:" + modelInstanceName + "." + propertyName + "];\n");
+				builder.append(tabs(1) + "[self->" + propertyName + " setText:" + modelInstanceName + "." + propertyName + "];\n");
 				break;
 			case LONG:
-				builder.append("\t[self->" + propertyName + " setText:[NSString stringWithFormat:@\"%li\", (NSInteger)" + modelInstanceName + "." + propertyName + "]];\n");
+				builder.append(tabs(1) + "[self->" + propertyName + " setText:[NSString stringWithFormat:@\"%li\", (NSInteger)" + modelInstanceName + "." + propertyName + "]];\n");
 				break;
 			case BOOLEAN:
-				builder.append("\t[self->" + propertyName + " setSelected:" + modelInstanceName + "." + propertyName + "];\n");
+				builder.append(tabs(1) + "[self->" + propertyName + " setSelected:" + modelInstanceName + "." + propertyName + "];\n");
 				break;
 			case DOUBLE:
-				builder.append("\t[self->" + propertyName + " setText:[NSString stringWithFormat:@\"%1.2f\", " + modelInstanceName + "." + propertyName + "]];\n");
+				builder.append(tabs(1) + "[self->" + propertyName + " setText:[NSString stringWithFormat:@\"%1.2f\", " + modelInstanceName + "." + propertyName + "]];\n");
 				break;
 			default:
 				// Do Nothing

@@ -61,6 +61,9 @@
 		368FA3431A9E077D0037193C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 368FA3411A9E077D0037193C /* Main.storyboard */; };
 		368FA3451A9E077D0037193C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 368FA3441A9E077D0037193C /* Images.xcassets */; };
 		368FA3481A9E077D0037193C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368FA3461A9E077D0037193C /* LaunchScreen.xib */; };
+		36BDAD041AB1CCB200201F7E /* contests.json in Resources */ = {isa = PBXBuildFile; fileRef = 36BDAD031AB1CCB200201F7E /* contests.json */; };
+		36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD061AB1CD8500201F7E /* MockDataService.m */; };
+		36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +174,10 @@
 		368FA3471A9E077D0037193C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		368FA34D1A9E077D0037193C /* GeneratedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeneratedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		368FA3521A9E077D0037193C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36BDAD031AB1CCB200201F7E /* contests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = contests.json; sourceTree = "<group>"; };
+		36BDAD051AB1CD8500201F7E /* MockDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockDataService.h; sourceTree = "<group>"; };
+		36BDAD061AB1CD8500201F7E /* MockDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockDataService.m; sourceTree = "<group>"; };
+		36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockDataServiceTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +310,8 @@
 			isa = PBXGroup;
 			children = (
 				367668D91AB076390012B7FF /* generated */,
+				36BDAD051AB1CD8500201F7E /* MockDataService.h */,
+				36BDAD061AB1CD8500201F7E /* MockDataService.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -357,6 +366,7 @@
 		368FA3361A9E077D0037193C /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				36BDAD021AB1CC5F00201F7E /* Sample Data */,
 				367668D81AB076330012B7FF /* services */,
 				361589521AADE70800FFE84C /* views */,
 				3665C9FD1AA7CFC800EE4255 /* models */,
@@ -384,6 +394,7 @@
 		368FA3501A9E077D0037193C /* GeneratedTests */ = {
 			isa = PBXGroup;
 			children = (
+				36BDAD081AB1CFA900201F7E /* services */,
 				3665CA231AA7D00600EE4255 /* models */,
 				368FA3511A9E077D0037193C /* Supporting Files */,
 			);
@@ -396,6 +407,22 @@
 				368FA3521A9E077D0037193C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		36BDAD021AB1CC5F00201F7E /* Sample Data */ = {
+			isa = PBXGroup;
+			children = (
+				36BDAD031AB1CCB200201F7E /* contests.json */,
+			);
+			name = "Sample Data";
+			sourceTree = "<group>";
+		};
+		36BDAD081AB1CFA900201F7E /* services */ = {
+			isa = PBXGroup;
+			children = (
+				36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */,
+			);
+			name = services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,6 +505,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36BDAD041AB1CCB200201F7E /* contests.json in Resources */,
 				368FA3431A9E077D0037193C /* Main.storyboard in Resources */,
 				368FA3481A9E077D0037193C /* LaunchScreen.xib in Resources */,
 				368FA3451A9E077D0037193C /* Images.xcassets in Resources */,
@@ -499,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3665CA1A1AA7CFDD00EE4255 /* ContestSponsor.m in Sources */,
+				36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */,
 				367668F71AB076520012B7FF /* EnumerationTournamentSizesService.m in Sources */,
 				3665CA1E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m in Sources */,
 				3665CA171AA7CFDD00EE4255 /* Contest.m in Sources */,
@@ -552,6 +581,7 @@
 				3665CA511AA7F52500EE4255 /* EnumerationTournamentStatesTest.m in Sources */,
 				3665CA4F1AA7F52500EE4255 /* EnumerationTest.m in Sources */,
 				3665CA521AA7F52500EE4255 /* EnumerationTournamentTypesTest.m in Sources */,
+				36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */,
 				3665CA4E1AA7F52500EE4255 /* EnumerationSkillLevelsTest.m in Sources */,
 				3665CA561AA8A19300EE4255 /* SerializerTest.m in Sources */,
 				3665CA4B1AA7F52500EE4255 /* ContestSponsorTest.m in Sources */,
