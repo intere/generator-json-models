@@ -14,9 +14,6 @@ public class OrchestrationDataTypeTest {
 			assertNotNull(OrchestrationDataType.fromString(value));
 		}
 	}
-	
-//	@Test
-//	public void test
 
 	@Test
 	public void testFromInternalName() {

@@ -31,7 +31,7 @@ public enum OrchestrationDataType {
 	STRING("String", "String", "NSString", "UITextField"),
 	
 	/** A String that's longer than 25 characters.  */
-	TEXT("String", "String", "NSString", "UITextView"),
+	TEXT("Text", "String", "NSString", "UITextView"),
 	
 	/** An Integer. */
 	LONG("Long", "Long", "NSInteger", "UITextField"),
