@@ -153,6 +153,112 @@ public class ObjectiveCTestBuilder extends BaseTestBuilder {
 			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
 			builder.append(tabs(1) + "XCTAssertNil(" + instanceName + "." + prop.getAlias() + ");\n");
 			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with nil) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithEmptyString {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{\\\"" + prop.getName() + "\\\":\\\"\\\"}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertNil(" + instanceName + "." + prop.getAlias() + ");\n");
+			builder.append("}\n\n");
+			break;
+			
+		case DOUBLE:
+			builder.append(multiLineComment("Tests the \"Happy Path\" Serialization / Deserialization of the " + prop.getName() + " property", 0));
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "HappyPath {\n");
+			builder.append(tabs(1) + "double value = 12345.6789;\n");
+			builder.append(tabs(1) + "NSString *json = [NSString stringWithFormat:@\"{\\\"" + prop.getName() 
+					+ "\\\":\\\"%f\\\"}\", value];\n" );
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqualWithAccuracy(" + instanceName + "." 
+					+ prop.getAlias() + ", value, 0.00001);\n");
+			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with nil) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithNil {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqualWithAccuracy(" + instanceName + "." 
+					+ prop.getAlias() + ", 0.0, 0.00001);\n");
+			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with empty string) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithEmptyString {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{\\\"" + prop.getName() + "\\\":\\\"\\\"}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqualWithAccuracy(" + instanceName + "." 
+					+ prop.getAlias() + ", 0.0, 0.00001);\n");
+			builder.append("}\n\n");
+			break;
+			
+		case LONG:
+			builder.append(multiLineComment("Tests the \"Happy Path\" Serialization / Deserialization of the " + prop.getName() + " property", 0));
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "HappyPath {\n");
+			builder.append(tabs(1) + "NSInteger value = 12345;\n");
+			builder.append(tabs(1) + "NSString *json = [NSString stringWithFormat:@\"{\\\"" + prop.getName() 
+					+ "\\\":\\\"%ld\\\"}\", (long)value];\n" );
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqual(" + instanceName + "." 
+					+ prop.getAlias() + ", value);\n");
+			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with nil) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithNil {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqual(" + instanceName + "." 
+					+ prop.getAlias() + ", 0);\n");
+			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with empty string) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithEmptyString {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{\\\"" + prop.getName() + "\\\":\\\"\\\"}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertEqual(" + instanceName + "." 
+					+ prop.getAlias() + ", 0);\n");
+			builder.append("}\n\n");
+			break;
+			
+		case ARRAY:
+			String arrayValues = getArrayValues(prop.getArraySubTypeProperty());
+			builder.append(multiLineComment("Tests the \"Happy Path\" Serialization / Deserialization of the " + prop.getName() + " property", 0));
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "HappyPath {\n");
+			builder.append(tabs(1) + "NSString *json = @\"{\\\"" + prop.getName() 
+					+ "\\\":" + arrayValues + "}\";\n" );
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertNotNil(" + instanceName + "." 
+					+ prop.getAlias() + ");\n");
+			builder.append(tabs(1) + "XCTAssertTrue("+ instanceName + "." 
+					+ prop.getAlias() + ".count == 5);\n");
+			builder.append("}\n\n");
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with nil) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithNil {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertNotNil(" + instanceName + "." 
+					+ prop.getAlias() + ");\n");
+			builder.append("}\n\n");
+			break;
+			
+		case CLASS:
+			builder.append(multiLineComment("Tests the \"Happy Path\" Serialization / Deserialization of the " + prop.getName() + " property", 0));
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "HappyPath {\n");
+			builder.append(tabs(1) + "NSString *json = @\"{\\\"" + prop.getName() 
+					+ "\\\":{}}\";\n" );
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertNotNil(" + instanceName + "." + prop.getAlias() + ");\n");
+			builder.append(tabs(1) + "XCTAssertTrue([" + instanceName + "." 
+					+ prop.getAlias() + " isKindOfClass:[" + interpreter.buildSubClassName(classType, prop.getName()) + " class]]);\n");
+			builder.append("}\n\n");
+			
+			
+			builder.append(multiLineComment("Tests Serialization / Deserialization (with nil) of the " + prop.getName() + " property", 0) + "\n");
+			builder.append("-(void) test" + interpreter.buildClassName(prop.getName()) + "WithNil {\n");
+			builder.append(tabs(1) + "NSString *json=@\"{}\";\n");
+			builder.append(tabs(1) + classType + " *" + instanceName + " = [" + classType + " fromJsonString:json];\n");
+			builder.append(tabs(1) + "XCTAssertNil(" + instanceName + "." 
+					+ prop.getAlias() + ");\n");
+			builder.append("}\n\n");
 			break;
 			
 		default:
@@ -240,5 +346,28 @@ public class ObjectiveCTestBuilder extends BaseTestBuilder {
 	public String getPropertyType(ModelClassProperty property) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private String getArrayValues(ModelClassProperty arraySubTypeProperty) {
+		switch(arraySubTypeProperty.getDataType()) {
+		case BOOLEAN:
+			return "[true, false, true, true, false]";
+		case DATE:
+			return "[1422284400000, 1422316800000, 1426428483382.030029, \\\"2015-03-15T08:07:11.527-06:00\\\", \\\"2015-03-15T08:08:31.787-0600\\\" ]";
+		case DOUBLE:
+			return "[1234.5678, 9876.13234, 1.2345678, 187.456, -321234.453242]";
+		case IMAGE:
+		case STRING:
+		case TEXT:
+			return "[\\\"hello\\\", \\\"world\\\", \\\"this is a call\\\", \\\"foo fighters\\\", \\\"bar\\\"]";
+		case LONG:
+			return "[42, 12345, 987654321, 12, -142]";
+		case ARRAY:
+			return "[[{}], [], [], [], []]";
+		case CLASS:
+			return "[{}, {}, {}, {}, {}]";
+		default:
+			return "";
+		}		
 	}
 }
