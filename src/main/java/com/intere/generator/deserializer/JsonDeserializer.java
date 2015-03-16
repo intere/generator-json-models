@@ -16,14 +16,24 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 
 public class JsonDeserializer {
-
+	private boolean array;
 	private String json;
 	private JsonNode node;
 	private String name;
 	private String filename;
+	private String serviceFilename;
+	private String viewFilename;
+	private String testFilename;
 	private String namespace;
 	private NavigableMap<String, List<JsonDeserializer>> subClasses;
 	private JsonLanguageInterpreter interpreter;
+	private boolean rootLevel;
+	
+	public JsonDeserializer(NavigableMap<String, List<JsonDeserializer>> subClasses, JsonLanguageInterpreter interpreter, 
+			String namespace, String name, String json, boolean isArray) throws JsonParseException, IOException {
+		this(subClasses, interpreter, namespace, name, json);
+		setArray(isArray);
+	}
 	
 	/**
 	 * Constructor that is used to hierarchically build the class structures for the JSON model.
@@ -41,6 +51,9 @@ public class JsonDeserializer {
 		this.name = name;
 		this.json = json;
 		this.filename = interpreter.buildFilenameFromClassname(name);
+		this.serviceFilename = interpreter.buildServiceFilenameFromClassname(name);
+		this.viewFilename = interpreter.buildViewFilenameFromClassname(name);
+		this.testFilename = interpreter.buildTestfilenameFromClassname(name);
 		parseJson();
 		buildObjectNodeTree();
 	}
@@ -55,6 +68,7 @@ public class JsonDeserializer {
 	 */
 	public JsonDeserializer(JsonLanguageInterpreter interpreter, String namespace, String name, String json) throws JsonParseException, IOException {
 		this(new TreeMap<String, List<JsonDeserializer>>(), interpreter, namespace, name, json);
+		this.rootLevel = true;
 	}
 
 	/**
@@ -68,6 +82,7 @@ public class JsonDeserializer {
 		JsonParser jp = factory.createJsonParser(json);
 		node = mapper.readTree(jp);
 		if(node.isArray()) {
+			array = true;
 			node = node.get(0);
 		}
 	}
@@ -84,9 +99,9 @@ public class JsonDeserializer {
 			String name = iter.next();
 			JsonNode childNode = node.get(name);
 			if(childNode.isObject()) {
-				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.toString()));
+				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.toString(), isArray()));
 			} else if (JsonNodeUtils.isArrayOfObjects(childNode)) {
-				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.iterator().next().toString()));
+				addChildClass(new JsonDeserializer(subClasses, interpreter, namespace, interpreter.buildSubClassName(getName(), name), childNode.iterator().next().toString(), isArray()));
 			}
 		}
 	}
@@ -98,10 +113,18 @@ public class JsonDeserializer {
 		subClasses.get(name).add(child);
 	}
 	
+	public String getTestFilename() {
+		return testFilename;
+	}
+	
 	public String getFilename() {
 		return filename;
 	}
 	
+	public String getServiceFilename() {
+		return serviceFilename;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -122,7 +145,23 @@ public class JsonDeserializer {
 		return namespace;
 	}
 	
+	public boolean isRootLevel() {
+		return rootLevel;
+	}
+	
 	public NavigableMap<String, List<JsonDeserializer>> getSubClasses() {
 		return subClasses;
+	}
+	
+	public void setArray(boolean array) {
+		this.array = array;
+	}
+	
+	public boolean isArray() {
+		return array;
+	}
+
+	public String getViewFilename() {
+		return viewFilename;
 	}
 }

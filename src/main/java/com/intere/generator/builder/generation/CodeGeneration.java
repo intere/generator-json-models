@@ -6,11 +6,16 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 
+import com.intere.generator.builder.interpreter.InterpreterUtils;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.deserializer.JsonDeserializer;
 
 public abstract class CodeGeneration {
+	private ObjectMapper jsonMapper = new ObjectMapper();
 	
 	/**
 	 * Gets you the {@link JsonDeserializer} as a prerequisite to doing the code building.
@@ -44,6 +49,14 @@ public abstract class CodeGeneration {
 	public abstract String generateImplementationFile(JsonDeserializer deserializer);
 	
 	/**
+	 * Generates the Unit Test Implementation File for the given language.
+	 * @param deserializer The deserializer to use to generate the test file.
+	 * @param jsonFilename The JSON Filename to use to build the test.
+	 * @return The contents of the implementation file body.
+	 */
+	public abstract String generateTestFile(JsonDeserializer deserializer, String jsonFilename, String testJsonFilename);
+	
+	/**
 	 * Provides you with the Language Interpreter.
 	 * @return
 	 */
@@ -51,5 +64,13 @@ public abstract class CodeGeneration {
 	
 	protected String getDate() {
 		return new Date().toString();
+	}
+
+	public String generateTestJson(JsonDeserializer generated) throws JsonGenerationException, JsonMappingException, IOException {
+		return jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(generated.getNode());
+	}
+
+	public String getTestJsonFilename(JsonDeserializer generated) {
+		return InterpreterUtils.capsToUnderscores(generated.getName());
 	}
 }

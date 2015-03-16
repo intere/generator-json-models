@@ -2,6 +2,7 @@ package com.intere.generator.builder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
@@ -12,10 +13,14 @@ import org.apache.commons.io.IOUtils;
 
 import com.intere.generator.App;
 import com.intere.generator.builder.generation.CodeGeneration;
+import com.intere.generator.builder.generation.services.ServiceCodeGeneration;
+import com.intere.generator.builder.generation.views.ViewCodeGeneration;
 import com.intere.generator.deserializer.JsonDeserializer;
 
 public abstract class CodeBuilder {	
 	protected CodeGeneration generation;
+	protected ServiceCodeGeneration serviceGeneration;
+	protected ViewCodeGeneration viewGeneration;
 	protected String className;
 	protected String jsonFilename;
 	protected JsonDeserializer deserializer;
@@ -28,11 +33,13 @@ public abstract class CodeBuilder {
 	 * @param generation
 	 * @throws IOException
 	 */
-	public CodeBuilder(String namespace, String className, String jsonFilename, CodeGeneration generation) throws IOException {
+	public CodeBuilder(String namespace, String className, String jsonFilename, CodeGeneration generation, ServiceCodeGeneration serviceGeneration, ViewCodeGeneration viewGeneration) throws IOException {
 		this.namespace = namespace;
 		this.className = className;
 		this.jsonFilename = jsonFilename;
 		this.generation = generation;
+		this.serviceGeneration = serviceGeneration;
+		this.viewGeneration = viewGeneration;
 		this.deserializer = generation.parseJson(namespace, className, jsonFilename);
 	}
 	
@@ -51,6 +58,22 @@ public abstract class CodeBuilder {
 	 * @throws IOException
 	 */
 	public abstract HashMap<File, String> buildTestFiles(File parentDirectory) throws IOException;
+	
+	/**
+	 * Given a {@link JsonDeserializer}, this method will hand you back a {@link HashMap} of all of the Service files (and their generated source).
+	 * @param parentDirectory The parent directory where the Files will be generated into.
+	 * @return A {@link HashMap} of {@link File}, {@link String} (test file + source json).
+	 * @throws IOException
+	 */
+	public abstract HashMap<File, String> buildServiceFiles(File parentDirectory) throws IOException;
+	
+	/**
+	 * Given a {@link JsonDeserializer}, this method will hand you back a {@link HashMap} of all of the View files (and their generated source).
+	 * @param parentDirectory The parent directory where the Files will be generated into.
+	 * @return A {@link HashMap} of {@link File}, {@link String} (test file + source json).
+	 * @throws IOException
+	 */
+	public abstract HashMap<File, String> buildViewFiles(File parentDirectory) throws IOException;
 	
 	public String getClassName() {
 		return className;
@@ -73,6 +96,14 @@ public abstract class CodeBuilder {
 	public String readResource(String resourceName) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		InputStream in = App.class.getResourceAsStream(resourceName);
+		IOUtils.copy(in, out);
+		
+		return new String(out.toByteArray());
+	}
+	
+	public String readFile(String filename) throws IOException {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		InputStream in = new FileInputStream(filename);
 		IOUtils.copy(in, out);
 		
 		return new String(out.toByteArray());

@@ -11,9 +11,10 @@ import org.apache.commons.cli.PosixParser;
 
 import com.intere.generator.builder.CodeBuilder;
 import com.intere.generator.builder.CodeBuilderFactory;
+import com.intere.generator.io.FileIOUtils;
 
 public class App {
-	private static final String GENERATOR_VERSION = "0.0.2";
+	private static final String GENERATOR_VERSION = "0.0.3";
 
 	/**
 	 * @param args
@@ -26,36 +27,34 @@ public class App {
 		String jsonFilename = cmd.getOptionValue("f");
 		String namespace = cmd.getOptionValue("ns", "com.json.generated");
 		Language language = Language.fromAbbreviation(cmd.getOptionValue('l', "objc"));
+		boolean genServices = cmd.hasOption("svcs");
+		boolean genViews = cmd.hasOption("vw");
 
 		if(null == className || null == jsonFilename) {
 			System.out.println("ERROR: Invalid Usage: " + stringArrayToString(args) + "...\n\n");
 			App.usage();
 			return;
-		}
+		}		
 
 		System.out.println("Using Language: " + language.getFullName());
-		File outputDirectory = getSourceOutputFolder(cmd.getOptionValue('o', "tmp"));
+		File outputDirectory = FileIOUtils.createFolderIfNotExists(cmd.getOptionValue('o', "tmp"));
 		CodeBuilder builder = CodeBuilderFactory.getCodeBuilderFactory(language, namespace, className, jsonFilename);
 		HashMap<File, String> generatedCode = builder.buildSourceFiles(outputDirectory);
 		CodeBuilderFactory.generateCode(generatedCode);
-	}
-
-	/**
-	 * Handles the creation of the output directory.
-	 * @param outputDir
-	 * @return
-	 */
-	public static File getSourceOutputFolder(String outputDir) {
-		File testOutputDir = new File(outputDir + File.separatorChar + "src");
-		if(!testOutputDir.exists()) {
-			System.out.println(outputDir + " does not exist, creating it for you...");
-			if(!testOutputDir.mkdirs()) {
-				System.out.println("Couldn't create output directory, existing...");
-				System.exit(-1);
-			}
+		
+		if(genServices) {
+			HashMap<File, String> generatedServices = builder.buildServiceFiles(outputDirectory);
+			CodeBuilderFactory.generateCode(generatedServices);
+		}
+		
+		if(genViews) {
+			HashMap<File, String> generatedViews = builder.buildViewFiles(outputDirectory);
+			CodeBuilderFactory.generateCode(generatedViews);
 		}
 
-		return testOutputDir;
+		
+		HashMap<File, String> generatedTests = builder.buildTestFiles(outputDirectory);
+		CodeBuilderFactory.generateTests(generatedTests);		
 	}
 
 	private static Options getOptions() {
@@ -66,6 +65,8 @@ public class App {
 		options.addOption("f", "input-file", true, "The Input (JSON) File to read to generate the class");
 		options.addOption("o", "output-location", true, "Where do you want the generated code to go?");
 		options.addOption("ns", "namespace", true, "The Namespace (ruby) or Package (java) that the generated code should live in");
+		options.addOption("svcs", "generate-services", false, "Additionally, you'd like to generate services to go along with the models");
+		options.addOption("vw", "generate-views", false, "Additionally, you'd like to generate views to go along with the models");
 
 		return options;
 	}

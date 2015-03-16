@@ -3,7 +3,6 @@ package com.intere.generator.deserializer;
 import static com.intere.generator.test.TestUtils.parseJsonObject;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
@@ -13,7 +12,7 @@ import org.junit.Test;
 
 import com.intere.generator.test.TestStrings;
 
-public class JsonNodeUtilsTest implements TestStrings {
+public class JsonNodeUtilsTest implements TestStrings {	
 	
 	@Test
 	public void testIsArrayOfObjects() throws Exception {
@@ -52,9 +51,27 @@ public class JsonNodeUtilsTest implements TestStrings {
 	}
 	
 	@Test
+	public void testIsDateFromDateLong() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_DATE_LONG).get(PROP_NAME);
+		assertTrue("Long Date wasn't identified as JSON date", JsonNodeUtils.isDate(node));
+	}
+	
+	@Test
+	public void testIsDateFromIsoDate2() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_DATE_ISO_2).get(PROP_NAME);
+		assertTrue("ISO Date wasn't identified as JSON date", JsonNodeUtils.isDate(node));
+	}
+	
+	@Test
 	public void testIsDateFromZulu() throws JsonParseException, IOException {
 		JsonNode node = parseJsonObject(PROP_DATE_ISO).get(PROP_NAME);
 		assertTrue("Zulu Date wasn't identified as JSON date", JsonNodeUtils.isDate(node));
+	}
+	
+	@Test
+	public void testIsNotDate() throws JsonParseException, IOException {
+		JsonNode node = parseJsonObject(PROP_STRING).get(PROP_NAME);
+		assertFalse("String was incorrectly fingerprinted as a date", JsonNodeUtils.isDate(node));
 	}
 	
 	@Test

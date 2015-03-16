@@ -55,7 +55,15 @@ mvn exec:java -Dexec.args="-cn Track -f src/test/resources/track.json"
 * feature/Services - Generation of various Services to manage (currently only for Objective-C)
 * feature/Views - Generation of View code for managing data (experimental)
 
-## License
+## Sample Usage
+```bash
+./run.sh -f src/test/resources/contests.json \
+  -cn Contest \
+  -l objc \
+  -o tmp/objc
+```
+
+##License
 This tool is Licensed under the LGPL: http://www.gnu.org/licenses/lgpl-3.0.html#content
 
 My intent is to allow you to use this tool for personal and/or commercial purposes.

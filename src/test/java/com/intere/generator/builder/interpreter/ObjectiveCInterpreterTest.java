@@ -5,13 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
+
 public class ObjectiveCInterpreterTest {
 	
-	private ObjectiveCInterpreter interpreter;
+	private ObjectiveCModelInterpreter interpreter;
 	
 	@Before
 	public void setUp() {
-		interpreter = new ObjectiveCInterpreter();
+		interpreter = new ObjectiveCModelInterpreter();
 	}
 
 	@Test

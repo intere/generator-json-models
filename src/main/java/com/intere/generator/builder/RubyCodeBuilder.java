@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.intere.generator.builder.generation.RubyGeneration;
+import com.intere.generator.builder.generation.models.RubyModelGeneration;
+import com.intere.generator.builder.interpreter.InterpreterUtils;
 import com.intere.generator.deserializer.JsonDeserializer;
 
 public class RubyCodeBuilder extends CodeBuilder {
@@ -17,7 +18,7 @@ public class RubyCodeBuilder extends CodeBuilder {
 	 * @throws IOException
 	 */
 	public RubyCodeBuilder(String namespace, String className, String jsonFilename) throws IOException {
-		super(namespace, className, jsonFilename, new RubyGeneration());		
+		super(namespace, className, jsonFilename, new RubyModelGeneration(), null, null);	// TODO - implement ruby service code generation	
 	}
 
 	public HashMap<File, String> buildSourceFiles(File parentDirectory) throws IOException {
@@ -30,7 +31,7 @@ public class RubyCodeBuilder extends CodeBuilder {
 		}
 		
 		for(JsonDeserializer generated : allDeserializers) {
-			File implementationFile = new File(parentDirectory, generated.getFilename() + ".rb");
+			File implementationFile = new File(parentDirectory, getRubyNamespacePath(namespace) + generated.getFilename() + ".rb");
 			sourceCode.put(implementationFile, generation.generateImplementationFile(generated));
 		}
 		sourceCode.put(new File(parentDirectory, "json_model.rb"), readJsonModelFile());
@@ -38,8 +39,30 @@ public class RubyCodeBuilder extends CodeBuilder {
 		return sourceCode;
 	}
 	
+	protected String getRubyNamespacePath(String namespace) {
+		if(null==namespace) {
+			return "";
+		}
+		
+		return InterpreterUtils.capsToUnderscores(namespace) + File.separator;
+	}
+	
 	@Override
 	public HashMap<File, String> buildTestFiles(File parentDirectory) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HashMap<File, String> buildServiceFiles(File parentDirectory)
+			throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public HashMap<File, String> buildViewFiles(File parentDirectory)
+			throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}

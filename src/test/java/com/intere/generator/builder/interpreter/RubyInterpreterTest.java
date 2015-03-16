@@ -5,13 +5,15 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
+
 public class RubyInterpreterTest {
 	
-	private RubyInterpreter interpreter;
+	private RubyModelInterpreter interpreter;
 
 	@Before
 	public void setUp() {
-		interpreter = new RubyInterpreter();
+		interpreter = new RubyModelInterpreter();
 	}
 	
 	@Test

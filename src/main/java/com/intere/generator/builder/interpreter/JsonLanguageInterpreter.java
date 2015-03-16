@@ -4,11 +4,25 @@ package com.intere.generator.builder.interpreter;
 public interface JsonLanguageInterpreter {
 	
 	/**
+	 * Gets you a Human-Readable version of the property name.
+	 * @param propertyName The name of the property that you want to be pretty for the user.
+	 * @return
+	 */
+	String humanReadableName(String propertyName);
+	
+	/**
 	 * Given the string, provides you a "clean" variable name (appropriate for the language).
 	 * @param propertyName The property name that we would like to generate a property for.
 	 * @return
 	 */
 	String cleanVariableName(String propertyName);
+	
+	/**
+	 * Given the propertyName value, this will build you a className.
+	 * @param propertyName
+	 * @return A nicely formatted class name.
+	 */
+	String buildClassName(String propertyName);
 	
 	/**
 	 * Given the provided names for parent class and property, this method will provide you with an appropriate
@@ -28,10 +42,24 @@ public interface JsonLanguageInterpreter {
 	
 	/**
 	 * What should the filename (no extensions) be (using the provided class name).
-	 * @param className The className.
-	 * @return The base filename (no extension) based on the provide class name.
+	 * @param className The Class Name.
+	 * @return The base filename (no extension) based on the provided class name.
 	 */
 	String buildFilenameFromClassname(String className);
+	
+	/**
+	 * What should the service classname (no extension) be (using the provided class name).
+	 * @param className The Class Name.
+	 * @return The base service filename (no extension) based on the provided class name.
+	 */
+	String buildServiceFilenameFromClassname(String className);
+	
+	/**
+	 * What should the test filename be (no extension) using the provided class name
+	 * @param className the Class Name.
+	 * @return The base test filename (no extension) based on the provided class name.
+	 */
+	String buildTestfilenameFromClassname(String className);
 	
 	/**
 	 * This is very Java-Centric, builds the "getter/setter" name.
@@ -40,4 +68,10 @@ public interface JsonLanguageInterpreter {
 	 */
 	String buildGetterAndSetterName(String propertyName);
 	
+	/**
+	 * What should the view classname (no extension) be (using the provided class name).
+	 * @param className the Class Name.
+	 * @return The base view filename (no extension) based on the provided class name.
+	 */
+	String buildViewFilenameFromClassname(String className);	
 }

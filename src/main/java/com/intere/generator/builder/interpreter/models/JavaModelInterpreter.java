@@ -1,29 +1,25 @@
-package com.intere.generator.builder.interpreter;
+package com.intere.generator.builder.interpreter.models;
 
-public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
+import com.intere.generator.builder.interpreter.InterpreterUtils;
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 
+public class JavaModelInterpreter implements JsonLanguageInterpreter {
+	
+	public String humanReadableName(String propertyName) {
+		return InterpreterUtils.humanReadableString(propertyName);
+	}
+	
 	/**
 	 * Cleans a Variable Name (ensures there is no leading "_" and that the first character is lower case).
 	 * @param propertyName The variable name to clean up to ensure it's a valid variable name.
 	 * @return The cleaned up variable name.
 	 */
 	public String cleanVariableName(String propertyName) {
-		propertyName = propertyName.replaceAll("^_", "");		// Remove leading underscore
-		if(propertyName.equalsIgnoreCase("description") ||
-				propertyName.equalsIgnoreCase("id")) {
-			propertyName = "the_" + propertyName; 
-		}
-		char[] stringArray = propertyName.trim().toCharArray();			
-        stringArray[0] = Character.toLowerCase(stringArray[0]);	// ensure the first character is lower case
-        
-        for(int i=1;i<stringArray.length;i++) {
-        	if(stringArray[i] == '_' && stringArray.length>i) {
-        		stringArray[i+1] = Character.toUpperCase(stringArray[i+1]);
-        	}
-        }
-        String result = new String(stringArray).replaceAll("_", "");
-        
-        return result;
+		return InterpreterUtils.javaStyleVariableName(propertyName);
+	}
+	
+	public String buildClassName(String propertyName) {
+		return buildSubClassName("", propertyName);
 	}
 	
 	/**
@@ -49,33 +45,29 @@ public class ObjectiveCInterpreter implements JsonLanguageInterpreter {
 	}
 	
 	/**
-	 * 
+	 * Not used.
 	 */
 	public String createSerializeConstantSymbolName(String propertyName) {
-		StringBuilder serName = new StringBuilder("SERIALIZE_");
-		boolean lastLower = true;
-		for(int i=0; i<propertyName.length(); i++) {
-			char c = propertyName.charAt(i);
-			if(c>='A' && c<='Z') {
-				if(lastLower) {
-					serName.append('_');
-				}
-				serName.append(c);
-				lastLower = false;
-			} else {
-				lastLower = true;
-				serName.append(("" + c).toUpperCase());
-			}
-		}
-		
-		return serName.toString();
+		return "";
 	}
 
 	public String buildFilenameFromClassname(String className) {
 		return className;
 	}
+	
+	public String buildServiceFilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "Service";
+	}
+	
+	public String buildViewFilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "View";
+	}
+	
+	public String buildTestfilenameFromClassname(String className) {
+		return buildFilenameFromClassname(className) + "Test";
+	}
 
 	public String buildGetterAndSetterName(String propertyName) {
-		return null;
+		return buildSubClassName("", propertyName);
 	}
 }
