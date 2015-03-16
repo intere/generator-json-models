@@ -9,11 +9,13 @@
 #
 #
 class JsonModel
-  def initialize(json)
-    if json.class == String
-      json = JSON.parse(json)
-    end
-    @json = json
+  def initialize(init_json)
+    if init_json.class == String
+      @json = JSON.parse(init_json)
+    else
+      @json = init_json
+    end    
+    @json.symbolize_keys!
   end
 
   def json

@@ -1,0 +1,36 @@
+[
+  {
+    "uniqueId": "ou812",
+    "className": "Contest",
+    "fileName": "Contest.java",
+    "testClassName": "ContestTest",
+    "viewClassName": "ContestView",
+    "serviceClassName": "ContestService",
+    "restServiceClassName": "ContestRestService",
+    "readonly": false,
+    "namespace": "com.intere.generated",
+    "hasSubClasses": true,
+    "property": [
+      {
+        "name": "id",
+        "value": "JSON Node Value",
+        "isKey": true,
+        "type": "String",
+        "alias": "String",
+        "isPrimitive": false,
+        "isTransient": false,
+        "isVisible": true,
+        "isReadonly": true,
+        "isArray": true,
+        "arraySubType": "String"
+      }
+    ],
+    "restUrl": "/contest",
+    "imports": [
+      {
+        "importName": "com.intere.generator.builder.orchestration",
+        "targetClassName": "Enumeration"
+      }
+    ]
+  }
+]

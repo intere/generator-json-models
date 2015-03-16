@@ -17,6 +17,21 @@ import org.codehaus.jackson.JsonNode;
 public class JsonNodeUtils {
 	private static final DateFormat ZULU_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 	private static final DateFormat ISO_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+	
+	/**
+	 * Does the provided class have any child node objects?
+	 * @param node
+	 * @return
+	 */
+	public static boolean hasChildObjects(JsonNode node) {
+		for (Iterator<JsonNode> iterator = node.getElements(); iterator.hasNext();) {
+			JsonNode childNode = iterator.next();
+			if(childNode.isObject()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Is the provided node an Array of Objects?

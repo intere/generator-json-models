@@ -18,8 +18,8 @@ public class RubyInterpreterTest {
 	
 	@Test
 	public void testCleanVariableName() {
-		String []inputs = {"MyProp", "propOne", "_props", "props", "this_isThe_End"};
-		String []expected = {"my_prop", "prop_one", "props", "props", "this_is_the_end"};
+		String []inputs = {"MyProp", "propOne", "_props", "props", "this_isThe_End", "SomeID"};
+		String []expected = {"my_prop", "prop_one", "props", "props", "this_is_the_end", "some_id"};
 		
 		for(int i=0; i<inputs.length; i++) {
 			assertEquals(expected[i], interpreter.cleanVariableName(inputs[i]));

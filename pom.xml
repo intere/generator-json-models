@@ -4,9 +4,8 @@
 	<groupId>com.intere.generator</groupId>
 	<artifactId>objective-c</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Objective-C Code Generator</name>
-	<description>Generates Objective C code.</description>
-
+	<name>JSON Based Code Generator</name>
+	<description>Generates code from JSON.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,6 +41,16 @@
 	</build>
 
 	<dependencies>
+	  <dependency>
+	    <groupId>org.apache.logging.log4j</groupId>
+	    <artifactId>log4j-api</artifactId>
+	    <version>2.2</version>
+	  </dependency>
+	  <dependency>
+	    <groupId>org.apache.logging.log4j</groupId>
+	    <artifactId>log4j-core</artifactId>
+	    <version>2.2</version>
+	  </dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>

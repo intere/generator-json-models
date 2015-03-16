@@ -1,0 +1,11 @@
+{
+  "name" : "id",
+  "isKey" : true,
+  "type" : "String",
+  "isPrimitive" : false,
+  "isTransient" : false,
+  "isVisible" : true,
+  "isReadonly" : true,
+  "isArray" : true,
+  "arraySubType" : "String"
+}

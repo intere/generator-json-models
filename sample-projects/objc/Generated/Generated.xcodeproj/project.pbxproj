@@ -1,0 +1,785 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3615896A1AADE75800FFE84C /* ContestResultsSponsorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589551AADE75800FFE84C /* ContestResultsSponsorView.m */; };
+		3615896B1AADE75800FFE84C /* ContestResultsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589571AADE75800FFE84C /* ContestResultsView.m */; };
+		3615896C1AADE75800FFE84C /* ContestSponsorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589591AADE75800FFE84C /* ContestSponsorView.m */; };
+		3615896D1AADE75800FFE84C /* ContestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615895B1AADE75800FFE84C /* ContestView.m */; };
+		3615896E1AADE75800FFE84C /* EnumerationPurseTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615895D1AADE75800FFE84C /* EnumerationPurseTypesView.m */; };
+		3615896F1AADE75800FFE84C /* EnumerationSkillLevelsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615895F1AADE75800FFE84C /* EnumerationSkillLevelsView.m */; };
+		361589701AADE75800FFE84C /* EnumerationTournamentSizesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589611AADE75800FFE84C /* EnumerationTournamentSizesView.m */; };
+		361589711AADE75800FFE84C /* EnumerationTournamentStatesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589631AADE75800FFE84C /* EnumerationTournamentStatesView.m */; };
+		361589721AADE75800FFE84C /* EnumerationTournamentTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589651AADE75800FFE84C /* EnumerationTournamentTypesView.m */; };
+		361589731AADE75800FFE84C /* EnumerationUserTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589671AADE75800FFE84C /* EnumerationUserTypesView.m */; };
+		361589741AADE75800FFE84C /* EnumerationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589691AADE75800FFE84C /* EnumerationView.m */; };
+		361FB5751AAF2DF6009F9F03 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 361FB5721AAF2DF6009F9F03 /* UIHelper.m */; };
+		361FB5761AAF2DF6009F9F03 /* UITheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 361FB5741AAF2DF6009F9F03 /* UITheme.m */; };
+		3665CA171AA7CFDD00EE4255 /* Contest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA001AA7CFDD00EE4255 /* Contest.m */; };
+		3665CA181AA7CFDD00EE4255 /* ContestResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA021AA7CFDD00EE4255 /* ContestResults.m */; };
+		3665CA191AA7CFDD00EE4255 /* ContestResultsSponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA041AA7CFDD00EE4255 /* ContestResultsSponsor.m */; };
+		3665CA1A1AA7CFDD00EE4255 /* ContestSponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA061AA7CFDD00EE4255 /* ContestSponsor.m */; };
+		3665CA1B1AA7CFDD00EE4255 /* Enumeration.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA081AA7CFDD00EE4255 /* Enumeration.m */; };
+		3665CA1C1AA7CFDD00EE4255 /* EnumerationPurseTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA0A1AA7CFDD00EE4255 /* EnumerationPurseTypes.m */; };
+		3665CA1D1AA7CFDD00EE4255 /* EnumerationSkillLevels.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA0C1AA7CFDD00EE4255 /* EnumerationSkillLevels.m */; };
+		3665CA1E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA0E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m */; };
+		3665CA1F1AA7CFDD00EE4255 /* EnumerationTournamentStates.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA101AA7CFDD00EE4255 /* EnumerationTournamentStates.m */; };
+		3665CA201AA7CFDD00EE4255 /* EnumerationTournamentTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA121AA7CFDD00EE4255 /* EnumerationTournamentTypes.m */; };
+		3665CA211AA7CFDD00EE4255 /* EnumerationUserTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA141AA7CFDD00EE4255 /* EnumerationUserTypes.m */; };
+		3665CA221AA7CFDD00EE4255 /* Serializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA161AA7CFDD00EE4255 /* Serializer.m */; };
+		3665CA491AA7F52500EE4255 /* ContestResultsSponsorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA3E1AA7F52500EE4255 /* ContestResultsSponsorTest.m */; };
+		3665CA4A1AA7F52500EE4255 /* ContestResultsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA3F1AA7F52500EE4255 /* ContestResultsTest.m */; };
+		3665CA4B1AA7F52500EE4255 /* ContestSponsorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA401AA7F52500EE4255 /* ContestSponsorTest.m */; };
+		3665CA4C1AA7F52500EE4255 /* ContestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA411AA7F52500EE4255 /* ContestTest.m */; };
+		3665CA4D1AA7F52500EE4255 /* EnumerationPurseTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA421AA7F52500EE4255 /* EnumerationPurseTypesTest.m */; };
+		3665CA4E1AA7F52500EE4255 /* EnumerationSkillLevelsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA431AA7F52500EE4255 /* EnumerationSkillLevelsTest.m */; };
+		3665CA4F1AA7F52500EE4255 /* EnumerationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA441AA7F52500EE4255 /* EnumerationTest.m */; };
+		3665CA501AA7F52500EE4255 /* EnumerationTournamentSizesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA451AA7F52500EE4255 /* EnumerationTournamentSizesTest.m */; };
+		3665CA511AA7F52500EE4255 /* EnumerationTournamentStatesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA461AA7F52500EE4255 /* EnumerationTournamentStatesTest.m */; };
+		3665CA521AA7F52500EE4255 /* EnumerationTournamentTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA471AA7F52500EE4255 /* EnumerationTournamentTypesTest.m */; };
+		3665CA531AA7F52500EE4255 /* EnumerationUserTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA481AA7F52500EE4255 /* EnumerationUserTypesTest.m */; };
+		3665CA561AA8A19300EE4255 /* SerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA551AA8A19300EE4255 /* SerializerTest.m */; };
+		367668F01AB076520012B7FF /* ContestResultsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668DB1AB076520012B7FF /* ContestResultsService.m */; };
+		367668F11AB076520012B7FF /* ContestResultsSponsorService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668DD1AB076520012B7FF /* ContestResultsSponsorService.m */; };
+		367668F21AB076520012B7FF /* ContestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668DF1AB076520012B7FF /* ContestService.m */; };
+		367668F31AB076520012B7FF /* ContestSponsorService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E11AB076520012B7FF /* ContestSponsorService.m */; };
+		367668F41AB076520012B7FF /* EnumerationPurseTypesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E31AB076520012B7FF /* EnumerationPurseTypesService.m */; };
+		367668F51AB076520012B7FF /* EnumerationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E51AB076520012B7FF /* EnumerationService.m */; };
+		367668F61AB076520012B7FF /* EnumerationSkillLevelsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E71AB076520012B7FF /* EnumerationSkillLevelsService.m */; };
+		367668F71AB076520012B7FF /* EnumerationTournamentSizesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E91AB076520012B7FF /* EnumerationTournamentSizesService.m */; };
+		367668F81AB076520012B7FF /* EnumerationTournamentStatesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668EB1AB076520012B7FF /* EnumerationTournamentStatesService.m */; };
+		367668F91AB076520012B7FF /* EnumerationTournamentTypesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668ED1AB076520012B7FF /* EnumerationTournamentTypesService.m */; };
+		367668FA1AB076520012B7FF /* EnumerationUserTypesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668EF1AB076520012B7FF /* EnumerationUserTypesService.m */; };
+		368FA33A1A9E077D0037193C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 368FA3391A9E077D0037193C /* main.m */; };
+		368FA33D1A9E077D0037193C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 368FA33C1A9E077D0037193C /* AppDelegate.m */; };
+		368FA3401A9E077D0037193C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 368FA33F1A9E077D0037193C /* ViewController.m */; };
+		368FA3431A9E077D0037193C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 368FA3411A9E077D0037193C /* Main.storyboard */; };
+		368FA3451A9E077D0037193C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 368FA3441A9E077D0037193C /* Images.xcassets */; };
+		368FA3481A9E077D0037193C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368FA3461A9E077D0037193C /* LaunchScreen.xib */; };
+		36BDAD041AB1CCB200201F7E /* contests.json in Resources */ = {isa = PBXBuildFile; fileRef = 36BDAD031AB1CCB200201F7E /* contests.json */; };
+		36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD061AB1CD8500201F7E /* MockDataService.m */; };
+		36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		368FA34E1A9E077D0037193C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 368FA32C1A9E077D0037193C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 368FA3331A9E077D0037193C;
+			remoteInfo = Generated;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		361589541AADE75800FFE84C /* ContestResultsSponsorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsorView.h; sourceTree = "<group>"; };
+		361589551AADE75800FFE84C /* ContestResultsSponsorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorView.m; sourceTree = "<group>"; };
+		361589561AADE75800FFE84C /* ContestResultsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsView.h; sourceTree = "<group>"; };
+		361589571AADE75800FFE84C /* ContestResultsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsView.m; sourceTree = "<group>"; };
+		361589581AADE75800FFE84C /* ContestSponsorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsorView.h; sourceTree = "<group>"; };
+		361589591AADE75800FFE84C /* ContestSponsorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorView.m; sourceTree = "<group>"; };
+		3615895A1AADE75800FFE84C /* ContestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestView.h; sourceTree = "<group>"; };
+		3615895B1AADE75800FFE84C /* ContestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestView.m; sourceTree = "<group>"; };
+		3615895C1AADE75800FFE84C /* EnumerationPurseTypesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypesView.h; sourceTree = "<group>"; };
+		3615895D1AADE75800FFE84C /* EnumerationPurseTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesView.m; sourceTree = "<group>"; };
+		3615895E1AADE75800FFE84C /* EnumerationSkillLevelsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevelsView.h; sourceTree = "<group>"; };
+		3615895F1AADE75800FFE84C /* EnumerationSkillLevelsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsView.m; sourceTree = "<group>"; };
+		361589601AADE75800FFE84C /* EnumerationTournamentSizesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizesView.h; sourceTree = "<group>"; };
+		361589611AADE75800FFE84C /* EnumerationTournamentSizesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesView.m; sourceTree = "<group>"; };
+		361589621AADE75800FFE84C /* EnumerationTournamentStatesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStatesView.h; sourceTree = "<group>"; };
+		361589631AADE75800FFE84C /* EnumerationTournamentStatesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesView.m; sourceTree = "<group>"; };
+		361589641AADE75800FFE84C /* EnumerationTournamentTypesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypesView.h; sourceTree = "<group>"; };
+		361589651AADE75800FFE84C /* EnumerationTournamentTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesView.m; sourceTree = "<group>"; };
+		361589661AADE75800FFE84C /* EnumerationUserTypesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypesView.h; sourceTree = "<group>"; };
+		361589671AADE75800FFE84C /* EnumerationUserTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesView.m; sourceTree = "<group>"; };
+		361589681AADE75800FFE84C /* EnumerationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationView.h; sourceTree = "<group>"; };
+		361589691AADE75800FFE84C /* EnumerationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationView.m; sourceTree = "<group>"; };
+		361FB5711AAF2DF6009F9F03 /* UIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHelper.h; sourceTree = "<group>"; };
+		361FB5721AAF2DF6009F9F03 /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
+		361FB5731AAF2DF6009F9F03 /* UITheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITheme.h; sourceTree = "<group>"; };
+		361FB5741AAF2DF6009F9F03 /* UITheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITheme.m; sourceTree = "<group>"; };
+		3665C9FF1AA7CFDD00EE4255 /* Contest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contest.h; sourceTree = "<group>"; };
+		3665CA001AA7CFDD00EE4255 /* Contest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contest.m; sourceTree = "<group>"; };
+		3665CA011AA7CFDD00EE4255 /* ContestResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResults.h; sourceTree = "<group>"; };
+		3665CA021AA7CFDD00EE4255 /* ContestResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResults.m; sourceTree = "<group>"; };
+		3665CA031AA7CFDD00EE4255 /* ContestResultsSponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsor.h; sourceTree = "<group>"; };
+		3665CA041AA7CFDD00EE4255 /* ContestResultsSponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsor.m; sourceTree = "<group>"; };
+		3665CA051AA7CFDD00EE4255 /* ContestSponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsor.h; sourceTree = "<group>"; };
+		3665CA061AA7CFDD00EE4255 /* ContestSponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsor.m; sourceTree = "<group>"; };
+		3665CA071AA7CFDD00EE4255 /* Enumeration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enumeration.h; sourceTree = "<group>"; };
+		3665CA081AA7CFDD00EE4255 /* Enumeration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enumeration.m; sourceTree = "<group>"; };
+		3665CA091AA7CFDD00EE4255 /* EnumerationPurseTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypes.h; sourceTree = "<group>"; };
+		3665CA0A1AA7CFDD00EE4255 /* EnumerationPurseTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypes.m; sourceTree = "<group>"; };
+		3665CA0B1AA7CFDD00EE4255 /* EnumerationSkillLevels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevels.h; sourceTree = "<group>"; };
+		3665CA0C1AA7CFDD00EE4255 /* EnumerationSkillLevels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevels.m; sourceTree = "<group>"; };
+		3665CA0D1AA7CFDD00EE4255 /* EnumerationTournamentSizes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizes.h; sourceTree = "<group>"; };
+		3665CA0E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizes.m; sourceTree = "<group>"; };
+		3665CA0F1AA7CFDD00EE4255 /* EnumerationTournamentStates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStates.h; sourceTree = "<group>"; };
+		3665CA101AA7CFDD00EE4255 /* EnumerationTournamentStates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStates.m; sourceTree = "<group>"; };
+		3665CA111AA7CFDD00EE4255 /* EnumerationTournamentTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypes.h; sourceTree = "<group>"; };
+		3665CA121AA7CFDD00EE4255 /* EnumerationTournamentTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypes.m; sourceTree = "<group>"; };
+		3665CA131AA7CFDD00EE4255 /* EnumerationUserTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypes.h; sourceTree = "<group>"; };
+		3665CA141AA7CFDD00EE4255 /* EnumerationUserTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypes.m; sourceTree = "<group>"; };
+		3665CA151AA7CFDD00EE4255 /* Serializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serializer.h; sourceTree = "<group>"; };
+		3665CA161AA7CFDD00EE4255 /* Serializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Serializer.m; sourceTree = "<group>"; };
+		3665CA3E1AA7F52500EE4255 /* ContestResultsSponsorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorTest.m; sourceTree = "<group>"; };
+		3665CA3F1AA7F52500EE4255 /* ContestResultsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsTest.m; sourceTree = "<group>"; };
+		3665CA401AA7F52500EE4255 /* ContestSponsorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorTest.m; sourceTree = "<group>"; };
+		3665CA411AA7F52500EE4255 /* ContestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestTest.m; sourceTree = "<group>"; };
+		3665CA421AA7F52500EE4255 /* EnumerationPurseTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesTest.m; sourceTree = "<group>"; };
+		3665CA431AA7F52500EE4255 /* EnumerationSkillLevelsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsTest.m; sourceTree = "<group>"; };
+		3665CA441AA7F52500EE4255 /* EnumerationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTest.m; sourceTree = "<group>"; };
+		3665CA451AA7F52500EE4255 /* EnumerationTournamentSizesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesTest.m; sourceTree = "<group>"; };
+		3665CA461AA7F52500EE4255 /* EnumerationTournamentStatesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesTest.m; sourceTree = "<group>"; };
+		3665CA471AA7F52500EE4255 /* EnumerationTournamentTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesTest.m; sourceTree = "<group>"; };
+		3665CA481AA7F52500EE4255 /* EnumerationUserTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesTest.m; sourceTree = "<group>"; };
+		3665CA541AA8000900EE4255 /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		3665CA551AA8A19300EE4255 /* SerializerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerializerTest.m; sourceTree = "<group>"; };
+		367668DA1AB076520012B7FF /* ContestResultsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsService.h; sourceTree = "<group>"; };
+		367668DB1AB076520012B7FF /* ContestResultsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsService.m; sourceTree = "<group>"; };
+		367668DC1AB076520012B7FF /* ContestResultsSponsorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsorService.h; sourceTree = "<group>"; };
+		367668DD1AB076520012B7FF /* ContestResultsSponsorService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorService.m; sourceTree = "<group>"; };
+		367668DE1AB076520012B7FF /* ContestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestService.h; sourceTree = "<group>"; };
+		367668DF1AB076520012B7FF /* ContestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestService.m; sourceTree = "<group>"; };
+		367668E01AB076520012B7FF /* ContestSponsorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsorService.h; sourceTree = "<group>"; };
+		367668E11AB076520012B7FF /* ContestSponsorService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorService.m; sourceTree = "<group>"; };
+		367668E21AB076520012B7FF /* EnumerationPurseTypesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypesService.h; sourceTree = "<group>"; };
+		367668E31AB076520012B7FF /* EnumerationPurseTypesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesService.m; sourceTree = "<group>"; };
+		367668E41AB076520012B7FF /* EnumerationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationService.h; sourceTree = "<group>"; };
+		367668E51AB076520012B7FF /* EnumerationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationService.m; sourceTree = "<group>"; };
+		367668E61AB076520012B7FF /* EnumerationSkillLevelsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevelsService.h; sourceTree = "<group>"; };
+		367668E71AB076520012B7FF /* EnumerationSkillLevelsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsService.m; sourceTree = "<group>"; };
+		367668E81AB076520012B7FF /* EnumerationTournamentSizesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizesService.h; sourceTree = "<group>"; };
+		367668E91AB076520012B7FF /* EnumerationTournamentSizesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesService.m; sourceTree = "<group>"; };
+		367668EA1AB076520012B7FF /* EnumerationTournamentStatesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStatesService.h; sourceTree = "<group>"; };
+		367668EB1AB076520012B7FF /* EnumerationTournamentStatesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesService.m; sourceTree = "<group>"; };
+		367668EC1AB076520012B7FF /* EnumerationTournamentTypesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypesService.h; sourceTree = "<group>"; };
+		367668ED1AB076520012B7FF /* EnumerationTournamentTypesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesService.m; sourceTree = "<group>"; };
+		367668EE1AB076520012B7FF /* EnumerationUserTypesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypesService.h; sourceTree = "<group>"; };
+		367668EF1AB076520012B7FF /* EnumerationUserTypesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesService.m; sourceTree = "<group>"; };
+		368FA3341A9E077D0037193C /* Generated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Generated.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		368FA3381A9E077D0037193C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		368FA3391A9E077D0037193C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		368FA33B1A9E077D0037193C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		368FA33C1A9E077D0037193C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		368FA33E1A9E077D0037193C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		368FA33F1A9E077D0037193C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		368FA3421A9E077D0037193C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		368FA3441A9E077D0037193C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		368FA3471A9E077D0037193C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		368FA34D1A9E077D0037193C /* GeneratedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeneratedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		368FA3521A9E077D0037193C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36BDAD031AB1CCB200201F7E /* contests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = contests.json; sourceTree = "<group>"; };
+		36BDAD051AB1CD8500201F7E /* MockDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockDataService.h; sourceTree = "<group>"; };
+		36BDAD061AB1CD8500201F7E /* MockDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockDataService.m; sourceTree = "<group>"; };
+		36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockDataServiceTest.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		368FA3311A9E077D0037193C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		368FA34A1A9E077D0037193C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		361589521AADE70800FFE84C /* views */ = {
+			isa = PBXGroup;
+			children = (
+				361589531AADE71300FFE84C /* generated */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		361589531AADE71300FFE84C /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				361FB5711AAF2DF6009F9F03 /* UIHelper.h */,
+				361FB5721AAF2DF6009F9F03 /* UIHelper.m */,
+				361FB5731AAF2DF6009F9F03 /* UITheme.h */,
+				361FB5741AAF2DF6009F9F03 /* UITheme.m */,
+				361589541AADE75800FFE84C /* ContestResultsSponsorView.h */,
+				361589551AADE75800FFE84C /* ContestResultsSponsorView.m */,
+				361589561AADE75800FFE84C /* ContestResultsView.h */,
+				361589571AADE75800FFE84C /* ContestResultsView.m */,
+				361589581AADE75800FFE84C /* ContestSponsorView.h */,
+				361589591AADE75800FFE84C /* ContestSponsorView.m */,
+				3615895A1AADE75800FFE84C /* ContestView.h */,
+				3615895B1AADE75800FFE84C /* ContestView.m */,
+				3615895C1AADE75800FFE84C /* EnumerationPurseTypesView.h */,
+				3615895D1AADE75800FFE84C /* EnumerationPurseTypesView.m */,
+				3615895E1AADE75800FFE84C /* EnumerationSkillLevelsView.h */,
+				3615895F1AADE75800FFE84C /* EnumerationSkillLevelsView.m */,
+				361589601AADE75800FFE84C /* EnumerationTournamentSizesView.h */,
+				361589611AADE75800FFE84C /* EnumerationTournamentSizesView.m */,
+				361589621AADE75800FFE84C /* EnumerationTournamentStatesView.h */,
+				361589631AADE75800FFE84C /* EnumerationTournamentStatesView.m */,
+				361589641AADE75800FFE84C /* EnumerationTournamentTypesView.h */,
+				361589651AADE75800FFE84C /* EnumerationTournamentTypesView.m */,
+				361589661AADE75800FFE84C /* EnumerationUserTypesView.h */,
+				361589671AADE75800FFE84C /* EnumerationUserTypesView.m */,
+				361589681AADE75800FFE84C /* EnumerationView.h */,
+				361589691AADE75800FFE84C /* EnumerationView.m */,
+			);
+			name = generated;
+			sourceTree = "<group>";
+		};
+		3665C9FD1AA7CFC800EE4255 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				3665C9FE1AA7CFD000EE4255 /* generated */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		3665C9FE1AA7CFD000EE4255 /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				3665C9FF1AA7CFDD00EE4255 /* Contest.h */,
+				3665CA001AA7CFDD00EE4255 /* Contest.m */,
+				3665CA011AA7CFDD00EE4255 /* ContestResults.h */,
+				3665CA021AA7CFDD00EE4255 /* ContestResults.m */,
+				3665CA031AA7CFDD00EE4255 /* ContestResultsSponsor.h */,
+				3665CA041AA7CFDD00EE4255 /* ContestResultsSponsor.m */,
+				3665CA051AA7CFDD00EE4255 /* ContestSponsor.h */,
+				3665CA061AA7CFDD00EE4255 /* ContestSponsor.m */,
+				3665CA071AA7CFDD00EE4255 /* Enumeration.h */,
+				3665CA081AA7CFDD00EE4255 /* Enumeration.m */,
+				3665CA091AA7CFDD00EE4255 /* EnumerationPurseTypes.h */,
+				3665CA0A1AA7CFDD00EE4255 /* EnumerationPurseTypes.m */,
+				3665CA0B1AA7CFDD00EE4255 /* EnumerationSkillLevels.h */,
+				3665CA0C1AA7CFDD00EE4255 /* EnumerationSkillLevels.m */,
+				3665CA0D1AA7CFDD00EE4255 /* EnumerationTournamentSizes.h */,
+				3665CA0E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m */,
+				3665CA0F1AA7CFDD00EE4255 /* EnumerationTournamentStates.h */,
+				3665CA101AA7CFDD00EE4255 /* EnumerationTournamentStates.m */,
+				3665CA111AA7CFDD00EE4255 /* EnumerationTournamentTypes.h */,
+				3665CA121AA7CFDD00EE4255 /* EnumerationTournamentTypes.m */,
+				3665CA131AA7CFDD00EE4255 /* EnumerationUserTypes.h */,
+				3665CA141AA7CFDD00EE4255 /* EnumerationUserTypes.m */,
+				3665CA151AA7CFDD00EE4255 /* Serializer.h */,
+				3665CA161AA7CFDD00EE4255 /* Serializer.m */,
+				3665CA541AA8000900EE4255 /* Log.h */,
+			);
+			name = generated;
+			sourceTree = "<group>";
+		};
+		3665CA231AA7D00600EE4255 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				3665CA241AA7D00C00EE4255 /* generated */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		3665CA241AA7D00C00EE4255 /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				3665CA3E1AA7F52500EE4255 /* ContestResultsSponsorTest.m */,
+				3665CA3F1AA7F52500EE4255 /* ContestResultsTest.m */,
+				3665CA401AA7F52500EE4255 /* ContestSponsorTest.m */,
+				3665CA411AA7F52500EE4255 /* ContestTest.m */,
+				3665CA421AA7F52500EE4255 /* EnumerationPurseTypesTest.m */,
+				3665CA431AA7F52500EE4255 /* EnumerationSkillLevelsTest.m */,
+				3665CA441AA7F52500EE4255 /* EnumerationTest.m */,
+				3665CA451AA7F52500EE4255 /* EnumerationTournamentSizesTest.m */,
+				3665CA461AA7F52500EE4255 /* EnumerationTournamentStatesTest.m */,
+				3665CA471AA7F52500EE4255 /* EnumerationTournamentTypesTest.m */,
+				3665CA481AA7F52500EE4255 /* EnumerationUserTypesTest.m */,
+				3665CA551AA8A19300EE4255 /* SerializerTest.m */,
+			);
+			name = generated;
+			sourceTree = "<group>";
+		};
+		367668D81AB076330012B7FF /* services */ = {
+			isa = PBXGroup;
+			children = (
+				367668D91AB076390012B7FF /* generated */,
+				36BDAD051AB1CD8500201F7E /* MockDataService.h */,
+				36BDAD061AB1CD8500201F7E /* MockDataService.m */,
+			);
+			name = services;
+			sourceTree = "<group>";
+		};
+		367668D91AB076390012B7FF /* generated */ = {
+			isa = PBXGroup;
+			children = (
+				367668DA1AB076520012B7FF /* ContestResultsService.h */,
+				367668DB1AB076520012B7FF /* ContestResultsService.m */,
+				367668DC1AB076520012B7FF /* ContestResultsSponsorService.h */,
+				367668DD1AB076520012B7FF /* ContestResultsSponsorService.m */,
+				367668DE1AB076520012B7FF /* ContestService.h */,
+				367668DF1AB076520012B7FF /* ContestService.m */,
+				367668E01AB076520012B7FF /* ContestSponsorService.h */,
+				367668E11AB076520012B7FF /* ContestSponsorService.m */,
+				367668E21AB076520012B7FF /* EnumerationPurseTypesService.h */,
+				367668E31AB076520012B7FF /* EnumerationPurseTypesService.m */,
+				367668E41AB076520012B7FF /* EnumerationService.h */,
+				367668E51AB076520012B7FF /* EnumerationService.m */,
+				367668E61AB076520012B7FF /* EnumerationSkillLevelsService.h */,
+				367668E71AB076520012B7FF /* EnumerationSkillLevelsService.m */,
+				367668E81AB076520012B7FF /* EnumerationTournamentSizesService.h */,
+				367668E91AB076520012B7FF /* EnumerationTournamentSizesService.m */,
+				367668EA1AB076520012B7FF /* EnumerationTournamentStatesService.h */,
+				367668EB1AB076520012B7FF /* EnumerationTournamentStatesService.m */,
+				367668EC1AB076520012B7FF /* EnumerationTournamentTypesService.h */,
+				367668ED1AB076520012B7FF /* EnumerationTournamentTypesService.m */,
+				367668EE1AB076520012B7FF /* EnumerationUserTypesService.h */,
+				367668EF1AB076520012B7FF /* EnumerationUserTypesService.m */,
+			);
+			name = generated;
+			sourceTree = "<group>";
+		};
+		368FA32B1A9E077D0037193C = {
+			isa = PBXGroup;
+			children = (
+				368FA3361A9E077D0037193C /* Generated */,
+				368FA3501A9E077D0037193C /* GeneratedTests */,
+				368FA3351A9E077D0037193C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		368FA3351A9E077D0037193C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				368FA3341A9E077D0037193C /* Generated.app */,
+				368FA34D1A9E077D0037193C /* GeneratedTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		368FA3361A9E077D0037193C /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				36BDAD021AB1CC5F00201F7E /* Sample Data */,
+				367668D81AB076330012B7FF /* services */,
+				361589521AADE70800FFE84C /* views */,
+				3665C9FD1AA7CFC800EE4255 /* models */,
+				368FA33B1A9E077D0037193C /* AppDelegate.h */,
+				368FA33C1A9E077D0037193C /* AppDelegate.m */,
+				368FA33E1A9E077D0037193C /* ViewController.h */,
+				368FA33F1A9E077D0037193C /* ViewController.m */,
+				368FA3411A9E077D0037193C /* Main.storyboard */,
+				368FA3441A9E077D0037193C /* Images.xcassets */,
+				368FA3461A9E077D0037193C /* LaunchScreen.xib */,
+				368FA3371A9E077D0037193C /* Supporting Files */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		368FA3371A9E077D0037193C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				368FA3381A9E077D0037193C /* Info.plist */,
+				368FA3391A9E077D0037193C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		368FA3501A9E077D0037193C /* GeneratedTests */ = {
+			isa = PBXGroup;
+			children = (
+				36BDAD081AB1CFA900201F7E /* services */,
+				3665CA231AA7D00600EE4255 /* models */,
+				368FA3511A9E077D0037193C /* Supporting Files */,
+			);
+			path = GeneratedTests;
+			sourceTree = "<group>";
+		};
+		368FA3511A9E077D0037193C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				368FA3521A9E077D0037193C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		36BDAD021AB1CC5F00201F7E /* Sample Data */ = {
+			isa = PBXGroup;
+			children = (
+				36BDAD031AB1CCB200201F7E /* contests.json */,
+			);
+			name = "Sample Data";
+			sourceTree = "<group>";
+		};
+		36BDAD081AB1CFA900201F7E /* services */ = {
+			isa = PBXGroup;
+			children = (
+				36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */,
+			);
+			name = services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		368FA3331A9E077D0037193C /* Generated */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 368FA3571A9E077D0037193C /* Build configuration list for PBXNativeTarget "Generated" */;
+			buildPhases = (
+				368FA3301A9E077D0037193C /* Sources */,
+				368FA3311A9E077D0037193C /* Frameworks */,
+				368FA3321A9E077D0037193C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Generated;
+			productName = Generated;
+			productReference = 368FA3341A9E077D0037193C /* Generated.app */;
+			productType = "com.apple.product-type.application";
+		};
+		368FA34C1A9E077D0037193C /* GeneratedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 368FA35A1A9E077D0037193C /* Build configuration list for PBXNativeTarget "GeneratedTests" */;
+			buildPhases = (
+				368FA3491A9E077D0037193C /* Sources */,
+				368FA34A1A9E077D0037193C /* Frameworks */,
+				368FA34B1A9E077D0037193C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				368FA34F1A9E077D0037193C /* PBXTargetDependency */,
+			);
+			name = GeneratedTests;
+			productName = GeneratedTests;
+			productReference = 368FA34D1A9E077D0037193C /* GeneratedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		368FA32C1A9E077D0037193C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = intere;
+				TargetAttributes = {
+					368FA3331A9E077D0037193C = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					368FA34C1A9E077D0037193C = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 368FA3331A9E077D0037193C;
+					};
+				};
+			};
+			buildConfigurationList = 368FA32F1A9E077D0037193C /* Build configuration list for PBXProject "Generated" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 368FA32B1A9E077D0037193C;
+			productRefGroup = 368FA3351A9E077D0037193C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				368FA3331A9E077D0037193C /* Generated */,
+				368FA34C1A9E077D0037193C /* GeneratedTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		368FA3321A9E077D0037193C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36BDAD041AB1CCB200201F7E /* contests.json in Resources */,
+				368FA3431A9E077D0037193C /* Main.storyboard in Resources */,
+				368FA3481A9E077D0037193C /* LaunchScreen.xib in Resources */,
+				368FA3451A9E077D0037193C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		368FA34B1A9E077D0037193C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		368FA3301A9E077D0037193C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3665CA1A1AA7CFDD00EE4255 /* ContestSponsor.m in Sources */,
+				36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */,
+				367668F71AB076520012B7FF /* EnumerationTournamentSizesService.m in Sources */,
+				3665CA1E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m in Sources */,
+				3665CA171AA7CFDD00EE4255 /* Contest.m in Sources */,
+				3665CA181AA7CFDD00EE4255 /* ContestResults.m in Sources */,
+				368FA3401A9E077D0037193C /* ViewController.m in Sources */,
+				361589731AADE75800FFE84C /* EnumerationUserTypesView.m in Sources */,
+				368FA33D1A9E077D0037193C /* AppDelegate.m in Sources */,
+				361589721AADE75800FFE84C /* EnumerationTournamentTypesView.m in Sources */,
+				3615896D1AADE75800FFE84C /* ContestView.m in Sources */,
+				367668F91AB076520012B7FF /* EnumerationTournamentTypesService.m in Sources */,
+				3665CA221AA7CFDD00EE4255 /* Serializer.m in Sources */,
+				3615896A1AADE75800FFE84C /* ContestResultsSponsorView.m in Sources */,
+				3665CA191AA7CFDD00EE4255 /* ContestResultsSponsor.m in Sources */,
+				361589701AADE75800FFE84C /* EnumerationTournamentSizesView.m in Sources */,
+				3665CA201AA7CFDD00EE4255 /* EnumerationTournamentTypes.m in Sources */,
+				3615896C1AADE75800FFE84C /* ContestSponsorView.m in Sources */,
+				367668FA1AB076520012B7FF /* EnumerationUserTypesService.m in Sources */,
+				367668F41AB076520012B7FF /* EnumerationPurseTypesService.m in Sources */,
+				3615896F1AADE75800FFE84C /* EnumerationSkillLevelsView.m in Sources */,
+				367668F51AB076520012B7FF /* EnumerationService.m in Sources */,
+				368FA33A1A9E077D0037193C /* main.m in Sources */,
+				361FB5751AAF2DF6009F9F03 /* UIHelper.m in Sources */,
+				3665CA1F1AA7CFDD00EE4255 /* EnumerationTournamentStates.m in Sources */,
+				3615896B1AADE75800FFE84C /* ContestResultsView.m in Sources */,
+				3665CA1C1AA7CFDD00EE4255 /* EnumerationPurseTypes.m in Sources */,
+				3615896E1AADE75800FFE84C /* EnumerationPurseTypesView.m in Sources */,
+				367668F21AB076520012B7FF /* ContestService.m in Sources */,
+				367668F31AB076520012B7FF /* ContestSponsorService.m in Sources */,
+				3665CA1D1AA7CFDD00EE4255 /* EnumerationSkillLevels.m in Sources */,
+				3665CA211AA7CFDD00EE4255 /* EnumerationUserTypes.m in Sources */,
+				361589711AADE75800FFE84C /* EnumerationTournamentStatesView.m in Sources */,
+				361FB5761AAF2DF6009F9F03 /* UITheme.m in Sources */,
+				361589741AADE75800FFE84C /* EnumerationView.m in Sources */,
+				367668F01AB076520012B7FF /* ContestResultsService.m in Sources */,
+				367668F81AB076520012B7FF /* EnumerationTournamentStatesService.m in Sources */,
+				367668F11AB076520012B7FF /* ContestResultsSponsorService.m in Sources */,
+				367668F61AB076520012B7FF /* EnumerationSkillLevelsService.m in Sources */,
+				3665CA1B1AA7CFDD00EE4255 /* Enumeration.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		368FA3491A9E077D0037193C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3665CA4A1AA7F52500EE4255 /* ContestResultsTest.m in Sources */,
+				3665CA491AA7F52500EE4255 /* ContestResultsSponsorTest.m in Sources */,
+				3665CA4C1AA7F52500EE4255 /* ContestTest.m in Sources */,
+				3665CA501AA7F52500EE4255 /* EnumerationTournamentSizesTest.m in Sources */,
+				3665CA531AA7F52500EE4255 /* EnumerationUserTypesTest.m in Sources */,
+				3665CA511AA7F52500EE4255 /* EnumerationTournamentStatesTest.m in Sources */,
+				3665CA4F1AA7F52500EE4255 /* EnumerationTest.m in Sources */,
+				3665CA521AA7F52500EE4255 /* EnumerationTournamentTypesTest.m in Sources */,
+				36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */,
+				3665CA4E1AA7F52500EE4255 /* EnumerationSkillLevelsTest.m in Sources */,
+				3665CA561AA8A19300EE4255 /* SerializerTest.m in Sources */,
+				3665CA4B1AA7F52500EE4255 /* ContestSponsorTest.m in Sources */,
+				3665CA4D1AA7F52500EE4255 /* EnumerationPurseTypesTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		368FA34F1A9E077D0037193C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 368FA3331A9E077D0037193C /* Generated */;
+			targetProxy = 368FA34E1A9E077D0037193C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		368FA3411A9E077D0037193C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				368FA3421A9E077D0037193C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		368FA3461A9E077D0037193C /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				368FA3471A9E077D0037193C /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		368FA3551A9E077D0037193C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		368FA3561A9E077D0037193C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		368FA3581A9E077D0037193C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Generated/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		368FA3591A9E077D0037193C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Generated/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		368FA35B1A9E077D0037193C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GeneratedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Generated.app/Generated";
+			};
+			name = Debug;
+		};
+		368FA35C1A9E077D0037193C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GeneratedTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Generated.app/Generated";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		368FA32F1A9E077D0037193C /* Build configuration list for PBXProject "Generated" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				368FA3551A9E077D0037193C /* Debug */,
+				368FA3561A9E077D0037193C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		368FA3571A9E077D0037193C /* Build configuration list for PBXNativeTarget "Generated" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				368FA3581A9E077D0037193C /* Debug */,
+				368FA3591A9E077D0037193C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		368FA35A1A9E077D0037193C /* Build configuration list for PBXNativeTarget "GeneratedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				368FA35B1A9E077D0037193C /* Debug */,
+				368FA35C1A9E077D0037193C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 368FA32C1A9E077D0037193C /* Project object */;
+}

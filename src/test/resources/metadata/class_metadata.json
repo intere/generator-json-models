@@ -1,0 +1,74 @@
+{
+  "language": "java",
+  "namespace": "com.intere.generator.metadata",
+  "classes": [
+    {
+      "className": "Metadata",
+      "jsonFile": "metadata.json",
+      "readonly": false,
+      "urlPath": "",
+      "propertyMap": [
+        {
+          "mapClassName": "",
+          "mapClassProperty": ""
+        }
+      ],
+      "transientProperty": [
+        {
+          "className": "Metadata",
+          "name": "self",
+          "type": "Metadata"
+        }
+      ],
+      "imports": [
+        {
+          "importName": "java.lang.String",
+          "targetClassName": "Metadata"
+        }
+      ]
+    },
+    {
+      "className": "ModelClass",
+      "jsonFile": "class.json",
+      "readonly": false,
+      "urlPath": "",
+      "propertyMap": [
+        {
+          "mapClassName": "",
+          "mapClassProperty": ""
+        }
+      ],
+      "transientProperty": [
+        {
+          "className": "ModelClassProperty",
+          "name": "arraySubTypeProperty",
+          "type": "ModelClassProperty"
+        },
+        {
+          "className": "ModelClassProperty",
+          "name": "parentModel",
+          "type": "ModelClass"
+        },
+        {
+          "className": "ModelClassProperty",
+          "name": "dataType",
+          "type": "OrchestrationDataType"
+        }
+      ],
+      "imports": [
+        {
+          "importName": "com.intere.generator.builder.orchestration.OrchestrationDataType",
+          "targetClassName": "ModelClassProperty"
+        }
+      ]
+    }
+  ],
+  "generate": {
+    "models": true,
+    "tests": true,
+    "views": true,
+    "services": true,
+    "restServices": true
+  }
+
+}

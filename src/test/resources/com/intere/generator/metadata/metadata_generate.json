@@ -1,0 +1,7 @@
+{
+  "models" : true,
+  "tests" : true,
+  "views" : true,
+  "services" : true,
+  "restServices" : true
+}

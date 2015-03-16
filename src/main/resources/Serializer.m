@@ -107,7 +107,7 @@ static NSDateFormatter *ZULU_FORMATTER;
     if([object isKindOfClass:[NSNumber class]]) {
         NSNumber *value = [dict objectForKey:key];
         if(value && ![[NSNull null] isEqual:value]) {
-            NSInteger secondsSinceEpoch = (NSInteger)([value longLongValue]/1000);
+            double secondsSinceEpoch = ([value doubleValue]/1000.0);
             return [NSDate dateWithTimeIntervalSince1970:secondsSinceEpoch];
         }
     } else if([object isKindOfClass:[NSString class]]) {
@@ -138,7 +138,7 @@ static NSDateFormatter *ZULU_FORMATTER;
     
     
     if (! jsonData) {
-        EILogError(@"Serializer jsonStringFromDictionary: error: %@", error.localizedDescription);
+        NSLog(@"Serializer jsonStringFromDictionary: error: %@", error.localizedDescription);
     } else {
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
@@ -247,5 +247,46 @@ static NSDateFormatter *ZULU_FORMATTER;
     
     return ISO_FORMATTER;
 }
+
+#pragma mark Date Utility Methods
+
++(NSString *)formatZuluDateToString:(NSString *)dateString {
+    NSDateFormatter *dateFormat = [NSDateFormatter new];
+    dateFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZ";
+    NSDate *parsedDate = [dateFormat dateFromString:dateString];
+    return [dateFormat stringFromDate:parsedDate];
+}
+
++(NSString *)formatDateToZuluString:(NSDate *)date {
+    NSDateFormatter *dateFormat = [NSDateFormatter new];
+    dateFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZ";
+    return [dateFormat stringFromDate:date];
+}
+
++(NSString *)formatIsoDateToString:(NSString *)dateString {
+    NSDateFormatter *dateFormat = [NSDateFormatter new];
+    dateFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+    NSDate *parsedDate = [dateFormat dateFromString:dateString];
+    return [dateFormat stringFromDate:parsedDate];
+}
+
++(NSString *)formatDateToIsoString:(NSDate *)date {
+    NSDateFormatter *dateFormat = [NSDateFormatter new];
+    dateFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+    return [dateFormat stringFromDate:date];
+}
+
++(NSDate *)zuluDateStringToNSDate:(NSString *)dateString {
+    NSDateFormatter *dateFormat = [NSDateFormatter new];
+    dateFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZ";
+    return [dateFormat dateFromString:dateString];
+}
+
++(NSDate *)isoDateStringToNSDate:(NSString *)dateString {
+    NSDateFormatter *dateFormat = [NSDateFormatter new];
+    dateFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+    return [dateFormat dateFromString:dateString];
+}
+
 
 @end
