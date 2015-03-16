@@ -2,79 +2,61 @@ generator-json-models
 =====================
 Multi-Language (currently Objective-C, Ruby and Java) JSON Model Class Creator.
 
-## TODO
-* Find UIHelper.h and UIHelper.m and copy / alter as necessary for code generation.
+## Objective
+Using JSON files as a starting point, generated models, services, views, unit tests, etc that will jumpstart you into the building blocks for your application.
 
+## Supported Languages
+* Objective-C
+* Java
+* Ruby
 
-## Project Management
+## Project Management / Feature Roadmap
 Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1295722
 
-## Context
-* I'm currently working on revamping the entire structure for code generation.  Here is the strategy:
-  * Orchestrate everything (via orchestration):
-1. ~~The metadata is what initializes the configuration for classes, names, relationships, etc.~~
-2. ~~Next is to then begin building a model (of the generated model objects [see ModelClass.java generated via class.json]) using JSON and then performing the mappings necessary to start adding additional metadata (relationships between the models)~~
-  * ~~Phase 1 is in progress (I have the models and their properties being created).~~
-3. ~~Build language specific generators that handle a given ModelClassProperty, ModelClass, etc.~~
-4. PROFIT!  (Okay, not really)
-
-TODO:
-* ``IN PROGRESS`` - Build Tests for everything (Java, Obj-C, Ruby)
-* ``COMPLETE`` - Build Services for everything (Java, Obj-C, Ruby)
-  * Think: Singletons to manage collections, single instances, etc (This will likely require more metadata).
-* ``IN PROGRESS`` - Build Views (for Obj-C, Ruby, Java?)
-* ``TODO`` Build REST Clients for everything (Obj-C, Ruby, Java)
-* ``TODO`` - Build REST Services (Ruby, Java)
-* ``TODO`` - Convert everything to Spring and build a Spring Shell (see: https://github.com/intere/spring-shell-sample)
-
-For Objective-C: Essentially it takes JSON and a Class Name, and generates .h and .m files that will have properties and serialization/deserialization methods implemented.
+### Roadmap (high level)
+* Migrate to using Spring
+* Refactor the LanguageUtility interfaces
+* Create a Spring Shell Interface
+* Create View, Service, Rest Service, Rest Client code for all supported languages
 
 ## Background
 I was / am in the process of building a full stack application that has an Objective-C
 front end.  It became apparent that it was a lot of work to create JSON serializing / deserializing classes in Objective-C (not difficult, just tedious).  I wanted to build a tool that would save me a lot of time by reading a JSON file and generating an Objective-C class that was capable of the following:
 1.  Representing that JSON as a model
-2.  Deserializing that JSON into the model (including collections)
-3.  Serializing the Model into the same style JSON.
-4.  Support nested classes (not a feature of ObjC, so I've created a class naming mechanism to work around this)
+2.  Serializing / Deserializing that JSON into the model (including collections)
+3.  Support nested classes (not a feature of ObjC, so I've created a class naming mechanism to work around this)
+4.  Create Unit Tests that validate the ability to serialize / deserialize properly
+
+## Strategy
+Early on, I was just generating a set of classes from a single json file, but quickly realized that this didn't cut it.  I wanted to be able to generate a full set of JSON for a full set of related JSON files, and I wanted to be able to add transient properties, override data, etc.  So I came up with the following strategy:
+
+* Create a ``Metdata JSON`` File (the orchestration file)
+    * References all of the JSON files that we're going to generate code for
+    * Configures the Language
+    * Configures "what" to generate
+    * Configures the "namespace" (unused in Obj-C, package in Java, Module in Ruby)
+* Generates *all* of the code that's referenced in the ``Metadata JSON`` file
+
+## Use Cases
+* See the Sample Projects for use cases (below).  I have setup 3 sample projects (which don't do a heck of a lot yet), but do demonstrate the code generation
+
+## Dog Food?
+* This project "eats it's own dog food".  I have literally used the code in this project to generate code *for* this project.  I have a "dog-food.sh" script that generates code that is used by this project.  This has helped me drive additional use cases (like the addition of "transient properties" to the models).
 
 ## Usage
 ### App Usage Information:
 ```
 usage: code-generator
- -cn,--className <arg>        What is the name for the base class?  You
-                              must provide this
- -f,--input-file <arg>        The Input (JSON) File to read to generate
-                              the class
- -l,--language <arg>          What Language you would like to use, can be
-                              one of: objc (Objective-C), ruby, java
- -ns,--namespace <arg>        The Namespace (ruby) or Package (java) that
-                              the generated code should live in
  -o,--output-location <arg>   Where do you want the generated code to go?
  -or,--orchestrate <arg>      Specify a metadata.json file to use to
                               orchestrate the code generation (overrides
                               most command line options)
- -svcs,--generate-services    Additionally, you'd like to generate
-                              services to go along with the models
- -vw,--generate-views         Additionally, you'd like to generate views
-                              to go along with the models
 ```
 
 ### Building / Running
 ```bash
 # First you need to compile the code and ensure it's up to date:
 mvn clean install
-
-# Now you can run it - there are 3 sample JSON files provided to demonstrate
-# the capabilities / limitations of the project:
-
-# The first - is a "user"
-mvn exec:java -Dexec.args="--className User --input-file src/test/resources/user.json"
-
-# The second is an array - this demonstrates (current) limitations of the project
-mvn exec:java -Dexec.args="-cn TrackList -f src/test/resources/track-list.json"
-
-# The third is a track
-mvn exec:java -Dexec.args="-cn Track -f src/test/resources/track.json"
 ```
 
 ## Sample Projects
@@ -99,14 +81,6 @@ cd sample-projects
 # Generates Ruby Code
 ./run.sh --orchestrate ${PWD}/sample-projects/metadata-ruby.json \
     -o ${PWD}/tmp/ruby
-```
-
-### Early Usage
-```bash
-./run.sh -f src/test/resources/contests.json \
-  -cn Contest \
-  -l objc \
-  -o tmp/objc
 ```
 
 ## License
