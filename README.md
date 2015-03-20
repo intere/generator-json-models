@@ -67,12 +67,6 @@ cd sample-projects
 ./setup.sh
 ```
 
-## Branches
-* master - stable baseline
-* feature/UnitTests - Generation of Unit Tests to validate serialization / deserialization of the generated code (this is pretty close for Obj-C)
-* feature/Services - Generation of various Services to manage (currently only for Objective-C)
-* feature/Views - Generation of View code for managing data (experimental)
-
 ## Sample Usage
 ### New Usage
 ```bash
