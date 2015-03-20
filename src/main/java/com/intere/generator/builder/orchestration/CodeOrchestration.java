@@ -4,6 +4,7 @@ import static com.intere.generator.io.FileIOUtils.ensureExists;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
 
@@ -13,11 +14,16 @@ import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
  * <li>Read the OrchestrationFile and build an {@link OrchestrationTree} from it.</li>
  * <li>Based on the Orchestration File configuration, generate code</li>
  * </ol>
- * 
  */
 public class CodeOrchestration {
 	private File outputDirectory;
 	private OrchestrationTree tree;
+	private LanguageOrchestrator orchestrator;
+	
+	/** Default Constructor, no initialization. */
+	public CodeOrchestration() {
+		super();
+	}
 
 	/**
 	 * Constructor that takes the Path to the Orchestration File, and a Base output directory.
@@ -26,25 +32,28 @@ public class CodeOrchestration {
 	 * @throws IOException
 	 */
 	public CodeOrchestration(String orchestrationFilePath, File outputDirectory) throws IOException {
-		this.outputDirectory = outputDirectory;
-		tree = new OrchestrationTree(orchestrationFilePath);
-		generateCode();
+		initialize(orchestrationFilePath, outputDirectory);
 	}
 	
 	/**
-	 * Getter for the Tree.
-	 * @return The {@link OrchestrationTree} object.
+	 * Sets the output directory and builds the {@link OrchestrationTree} from the provided Orchestration File Path.
+	 * @param orchestrationFilePath
+	 * @param outputDirectory
+	 * @throws IOException
 	 */
-	public OrchestrationTree getTree() {
-		return tree;
+	public void initialize(String orchestrationFilePath, File outputDirectory) throws IOException {
+		this.outputDirectory = outputDirectory;
+		this.tree = new OrchestrationTree(orchestrationFilePath);
 	}
 	
 	/**
 	 * This method handles the delegation of the code.
 	 * @throws IOException
 	 */
-	private void generateCode() throws IOException {
-		LanguageOrchestrator orchestrator = OrchestrationUtils.getLanguageOrchestrator(tree.getMetadata());
+	public void generateCode() throws IOException {
+		if(null == orchestrator) {
+			throw new IllegalStateException("We don't have a code orchestrator yet, please set this before calling generateCode()");
+		}
 		orchestrator.review(tree);
 		
 		if(shouldGeenerateModels()) {
@@ -83,6 +92,22 @@ public class CodeOrchestration {
 				orchestrator.generateRestServices(restPath, tree);
 			}
 		}
+	}
+	
+	/**
+	 * Setter for the {@link LanguageOrchestrator}.
+	 * @param orchestrator
+	 */
+	public void setOrchestrator(LanguageOrchestrator orchestrator) {
+		this.orchestrator = orchestrator;
+	}
+	
+	/**
+	 * Getter for the Tree.
+	 * @return The {@link OrchestrationTree} object.
+	 */
+	public OrchestrationTree getTree() {
+		return tree;
 	}
 	
 	private boolean shouldGenerateRestServices() {

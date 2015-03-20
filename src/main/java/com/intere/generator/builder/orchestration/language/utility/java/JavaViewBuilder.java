@@ -1,12 +1,21 @@
 package com.intere.generator.builder.orchestration.language.utility.java;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseViewBuilder;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
+@Service(value="JavaViewBuilder")
 public class JavaViewBuilder extends BaseViewBuilder {
+	@Autowired @Qualifier("CStyle")
+	protected CommentBuilder commentBuilder;
+	@Autowired @Qualifier("JavaInterpreter")
+	protected JsonLanguageInterpreter interpreter;
 
 	@Override
 	public String buildNamespace(ModelClass modelClass) {

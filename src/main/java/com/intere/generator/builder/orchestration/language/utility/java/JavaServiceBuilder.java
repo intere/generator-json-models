@@ -1,5 +1,9 @@
 package com.intere.generator.builder.orchestration.language.utility.java;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.ServiceBuilder;
@@ -7,9 +11,13 @@ import com.intere.generator.builder.orchestration.language.utility.base.BaseMode
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
-public class JavaServiceBuilder extends BaseModelBuilder implements
-		ServiceBuilder {
-
+@Service(value="JavaServiceBuilder")
+public class JavaServiceBuilder extends BaseModelBuilder implements ServiceBuilder {
+	@Autowired @Qualifier("CStyle")
+	protected CommentBuilder commentBuilder;
+	@Autowired @Qualifier("JavaInterpreter")
+	protected JsonLanguageInterpreter interpreter;
+	
 	@Override
 	public String buildNamespace(ModelClass modelClass) {
 		// TODO Auto-generated method stub

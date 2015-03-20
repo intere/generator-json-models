@@ -10,14 +10,21 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
 import com.intere.generator.builder.orchestration.language.utility.RubyLanguageUtility;
 import com.intere.generator.metadata.ModelClass;
 
+@Service(value="RubyOrchestration")
 public class RubyOrchestration implements LanguageOrchestrator {
 	private static final Logger LOGGER = LogManager.getLogger(RubyOrchestration.class);
+	
+	@Autowired
+	@Qualifier("RubyLanguage")
 	LanguageUtility languageUtil = new RubyLanguageUtility();
 		
 	@Override

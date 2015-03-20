@@ -10,16 +10,21 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
-import com.intere.generator.builder.orchestration.language.utility.ObjectiveCLanguageUtility;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.ServiceBuilder;
 import com.intere.generator.metadata.ModelClass;
 
+@Service(value="ObjectiveCOrchestration")
 public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	private static final Logger LOGGER = LogManager.getLogger(ObjectiveCOrchestration.class);
-	LanguageUtility languageUtil = new ObjectiveCLanguageUtility();
+	
+	@Autowired @Qualifier("ObjectiveCLanguage")
+	LanguageUtility languageUtil;
 	
 	@Override
 	public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {

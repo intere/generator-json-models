@@ -1,6 +1,8 @@
 package com.intere.generator.builder.orchestration.language.utility.comments;
 
+import org.springframework.stereotype.Service;
 
+@Service("ShellStyle")
 public class ShellStyleCommentBuilder extends CommonCommentBuilder {
 	@Override
 	public String singleLineComment(String comment, int tabCount) {

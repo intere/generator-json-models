@@ -1,10 +1,23 @@
 package com.intere.generator.builder.orchestration.language.utility.ruby;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.ServiceBuilder;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
+@Service("RubyServiceBuilder")
 public class RubyServiceBuilder implements ServiceBuilder {
+	
+	@Autowired @Qualifier("ShellStyle")
+	CommentBuilder commentBuilder;
+	
+	@Autowired @Qualifier("RubyInterpreter")
+	JsonLanguageInterpreter interpreter;
 
 	@Override
 	public String buildNamespace(ModelClass modelClass) {

@@ -1,6 +1,9 @@
 package com.intere.generator.builder.orchestration.language.utility.comments;
 
+import org.springframework.stereotype.Service;
 
+
+@Service("CStyle")
 public class CStyleCommentBuilder extends CommonCommentBuilder {
 	
 	@Override

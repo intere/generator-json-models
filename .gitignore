@@ -6,3 +6,4 @@ target
 *.m
 .DS_Store
 tmp/
+.springBeans

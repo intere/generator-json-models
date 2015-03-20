@@ -3,6 +3,10 @@ package com.intere.generator.builder.orchestration.language.utility.java;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
@@ -17,9 +21,12 @@ import com.intere.generator.metadata.ModelClassProperty;
  * This is the Model Builder for Java.
  * @author einternicola
  */
+@Service(value="JavaModelBuilder")
 public class JavaModelBuilder extends BaseModelBuilder {
-	protected CommentBuilder commentBuilder = new CStyleCommentBuilder();
-	protected JsonLanguageInterpreter interpreter = new JavaModelInterpreter();
+	@Autowired @Qualifier("CStyle")
+	protected CommentBuilder commentBuilder;
+	@Autowired @Qualifier("JavaInterpreter")
+	protected JsonLanguageInterpreter interpreter;
 	
 	@Override
 	public CommentBuilder getCommentBuilder() {

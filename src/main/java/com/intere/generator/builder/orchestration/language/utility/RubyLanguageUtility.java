@@ -5,22 +5,30 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
-import com.intere.generator.builder.orchestration.language.utility.ruby.RubyModelBuilder;
-import com.intere.generator.builder.orchestration.language.utility.ruby.RubyServiceBuilder;
-import com.intere.generator.builder.orchestration.language.utility.ruby.RubyTestBuilder;
-import com.intere.generator.builder.orchestration.language.utility.ruby.RubyViewBuilder;
 import com.intere.generator.metadata.ModelClass;
 
+@Service("RubyLanguage")
 public class RubyLanguageUtility extends AbstractLanguageUtility {
-	JsonLanguageInterpreter interpreter = new RubyModelInterpreter();
-	ModelBuilder modelBuilder = new RubyModelBuilder();
-	TestBuilder testBuilder = new RubyTestBuilder();
-	ViewBuilder viewBuilder = new RubyViewBuilder();
-	ServiceBuilder serviceBuilder = new RubyServiceBuilder();
+	@Autowired @Qualifier("RubyInterpreter")
+	JsonLanguageInterpreter interpreter;
 	
+	@Autowired @Qualifier("RubyModelBuilder")
+	ModelBuilder modelBuilder;
+	
+	@Autowired @Qualifier("RubyTestBuilder")
+	TestBuilder testBuilder;
+	
+	@Autowired @Qualifier("RubyViewBuilder")
+	ViewBuilder viewBuilder;
+	
+	@Autowired @Qualifier("RubyServiceBuilder")
+	ServiceBuilder serviceBuilder;
 
 	@Override
 	public ModelBuilder getModelBuilder() {

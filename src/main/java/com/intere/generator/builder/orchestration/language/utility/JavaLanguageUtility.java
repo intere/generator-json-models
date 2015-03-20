@@ -6,17 +6,22 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.intere.generator.builder.orchestration.OrchestrationTree;
-import com.intere.generator.builder.orchestration.language.utility.java.JavaModelBuilder;
-import com.intere.generator.builder.orchestration.language.utility.java.JavaServiceBuilder;
-import com.intere.generator.builder.orchestration.language.utility.java.JavaTestBuilder;
-import com.intere.generator.builder.orchestration.language.utility.java.JavaViewBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+import com.intere.generator.builder.orchestration.OrchestrationTree;
+
+@Service(value="JavaLanguage")
 public class JavaLanguageUtility extends AbstractLanguageUtility {	
-	ModelBuilder modelBuilder = new JavaModelBuilder();
-	TestBuilder testBuilder = new JavaTestBuilder();
-	ViewBuilder viewBuilder = new JavaViewBuilder();
-	ServiceBuilder serviceBuilder = new JavaServiceBuilder();
+	@Autowired @Qualifier("JavaModelBuilder")
+	ModelBuilder modelBuilder;
+	@Autowired @Qualifier("JavaTestBuilder")
+	TestBuilder testBuilder;
+	@Autowired @Qualifier("JavaViewBuilder")
+	ViewBuilder viewBuilder;
+	@Autowired @Qualifier("JavaServiceBuilder")
+	ServiceBuilder serviceBuilder;
 	
 	@Override
 	public ModelBuilder getModelBuilder() {

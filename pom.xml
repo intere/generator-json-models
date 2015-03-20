@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.intere.generator</groupId>
-	<artifactId>objective-c</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>json-models</artifactId>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>JSON Based Code Generator</name>
 	<description>Generates code from JSON.</description>
 
@@ -77,10 +77,25 @@
 			<version>1.2</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>4.1.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.1.5.RELEASE</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>LATEST</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.1.5.RELEASE</version>
 		</dependency>
 	</dependencies>
 

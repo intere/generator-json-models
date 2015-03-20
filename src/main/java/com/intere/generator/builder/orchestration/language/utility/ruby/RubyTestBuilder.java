@@ -1,16 +1,23 @@
 package com.intere.generator.builder.orchestration.language.utility.ruby;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseTestBuilder;
-import com.intere.generator.builder.orchestration.language.utility.comments.ShellStyleCommentBuilder;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
+@Service("RubyTestBuilder")
 public class RubyTestBuilder extends BaseTestBuilder {
-	CommentBuilder commentBuilder = new ShellStyleCommentBuilder();
-	JsonLanguageInterpreter interpreter = new RubyModelInterpreter();
+	
+	@Autowired @Qualifier("ShellStyle")
+	CommentBuilder commentBuilder;
+	
+	@Autowired @Qualifier("RubyInterpreter")
+	JsonLanguageInterpreter interpreter;
 	
 	@Override
 	public CommentBuilder getCommentBuilder() {

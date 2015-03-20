@@ -2,6 +2,9 @@ package com.intere.generator.builder.orchestration.language.utility.objc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
@@ -12,10 +15,13 @@ import com.intere.generator.builder.orchestration.language.utility.comments.CSty
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
+@Service("ObjectiveCModelBuilder")
 public class ObjectiveCModelBuilder extends BaseModelBuilder {
 	private static final Logger LOGGER = LogManager.getLogger(ObjectiveCModelBuilder.class);
-	protected CommentBuilder commentBuilder = new CStyleCommentBuilder();
-	protected JsonLanguageInterpreter interpreter = new ObjectiveCModelInterpreter();
+	@Autowired @Qualifier("CStyle")
+	protected CommentBuilder commentBuilder;
+	@Autowired @Qualifier("ObjectiveCInterpreter")
+	protected JsonLanguageInterpreter interpreter;
 	
 	@Override
 	public CommentBuilder getCommentBuilder() {

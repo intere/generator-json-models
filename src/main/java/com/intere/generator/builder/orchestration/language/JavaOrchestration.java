@@ -11,15 +11,19 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.intere.generator.builder.orchestration.OrchestrationTree;
-import com.intere.generator.builder.orchestration.language.utility.JavaLanguageUtility;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
 import com.intere.generator.metadata.ModelClass;
 
+@Service(value="JavaOrchestration")
 public class JavaOrchestration implements LanguageOrchestrator {
 	private static final Logger LOGGER = LogManager.getLogger(JavaOrchestration.class);
-	LanguageUtility languageUtil = new JavaLanguageUtility();
+	@Autowired @Qualifier("JavaLanguage")
+	LanguageUtility languageUtil;
 
 	@Override
 	public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {

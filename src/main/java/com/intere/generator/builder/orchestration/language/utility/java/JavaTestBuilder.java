@@ -5,20 +5,24 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseTestBuilder;
-import com.intere.generator.builder.orchestration.language.utility.comments.CStyleCommentBuilder;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
+@Service(value="JavaTestBuilder")
 public class JavaTestBuilder extends BaseTestBuilder {
 	private static final Logger LOGGER = LogManager.getLogger(JavaTestBuilder.class);
-	protected CommentBuilder commentBuilder = new CStyleCommentBuilder();
-	protected JsonLanguageInterpreter interpreter = new JavaModelInterpreter();
+	@Autowired @Qualifier("CStyle")
+	protected CommentBuilder commentBuilder;
+	@Autowired @Qualifier("JavaInterpreter")
+	protected JsonLanguageInterpreter interpreter;
 	
 	@Override
 	public CommentBuilder getCommentBuilder() {

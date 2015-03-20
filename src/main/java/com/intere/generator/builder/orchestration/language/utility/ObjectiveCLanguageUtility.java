@@ -5,17 +5,25 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.intere.generator.builder.orchestration.OrchestrationTree;
-import com.intere.generator.builder.orchestration.language.utility.objc.ObjectiveCModelBuilder;
-import com.intere.generator.builder.orchestration.language.utility.objc.ObjectiveCServiceBuilder;
-import com.intere.generator.builder.orchestration.language.utility.objc.ObjectiveCTestBuilder;
-import com.intere.generator.builder.orchestration.language.utility.objc.ObjectiveCViewBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {	
-	ModelBuilder modelBuilder = new ObjectiveCModelBuilder();
-	TestBuilder testBuilder = new ObjectiveCTestBuilder();
-	ViewBuilder viewBuilder = new ObjectiveCViewBuilder();
-	ServiceBuilder serviceBuilder = new ObjectiveCServiceBuilder();
+import com.intere.generator.builder.orchestration.OrchestrationTree;
+
+@Service(value="ObjectiveCLanguage")
+public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
+	@Autowired @Qualifier("ObjectiveCModelBuilder")
+	ModelBuilder modelBuilder;
+	
+	@Autowired @Qualifier("ObjectiveCTestBuilder")
+	TestBuilder testBuilder;
+	
+	@Autowired @Qualifier("ObjectiveCViewBuilder")
+	ViewBuilder viewBuilder;
+	
+	@Autowired @Qualifier("ObjectiveCServiceBuilder")
+	ServiceBuilder serviceBuilder;
 	
 	@Override
 	public ModelBuilder getModelBuilder() {

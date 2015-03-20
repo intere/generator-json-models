@@ -1,18 +1,23 @@
 package com.intere.generator.builder.orchestration.language.utility.objc;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseViewBuilder;
-import com.intere.generator.builder.orchestration.language.utility.comments.CStyleCommentBuilder;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
-
+@Service(value="ObjectiveCViewBuilder")
 public class ObjectiveCViewBuilder extends BaseViewBuilder {
-	protected CommentBuilder commentBuilder = new CStyleCommentBuilder();
-	protected JsonLanguageInterpreter interpreter = new ObjectiveCModelInterpreter();
+	@Autowired @Qualifier("CStyle")
+	protected CommentBuilder commentBuilder;
+	@Autowired @Qualifier("ObjectiveCInterpreter")
+	protected JsonLanguageInterpreter interpreter;
+
 
 	@Override
 	public String buildNamespace(ModelClass modelClass) {

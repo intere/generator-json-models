@@ -1,8 +1,12 @@
 package com.intere.generator.builder.interpreter.models;
 
+import org.springframework.stereotype.Service;
+
 import com.intere.generator.builder.interpreter.InterpreterUtils;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 
+
+@Service("ObjectiveCInterpreter")
 public class ObjectiveCModelInterpreter implements JsonLanguageInterpreter {
 	
 	public String humanReadableName(String propertyName) {
