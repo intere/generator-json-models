@@ -10,6 +10,9 @@ Using JSON files as a starting point, generated models, services, views, unit te
 * Java
 * Ruby
 
+## Documentation
+See: [docs/README.md](docs/README.md)
+
 ## Project Management / Feature Roadmap
 Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1295722
 
