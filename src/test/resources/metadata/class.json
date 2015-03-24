@@ -5,6 +5,8 @@
     "fileName": "Contest.java",
     "testClassName": "ContestTest",
     "viewClassName": "ContestView",
+    "singleControllerName": "ContestViewController",
+    "listControllerName": "ContestListViewController",
     "serviceClassName": "ContestService",
     "restServiceClassName": "ContestRestService",
     "readonly": false,

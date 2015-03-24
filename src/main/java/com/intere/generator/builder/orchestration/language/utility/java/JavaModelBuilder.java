@@ -108,7 +108,7 @@ public class JavaModelBuilder extends BaseModelBuilder {
 	}
 	
 	@Override
-	public String buildModelUtilityDefinitionMethods(ModelClass modelClass) {
+	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		
 		// hashCode method

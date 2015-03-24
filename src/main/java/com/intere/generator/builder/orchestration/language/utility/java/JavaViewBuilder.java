@@ -60,7 +60,7 @@ public class JavaViewBuilder extends BaseViewBuilder {
 	}
 
 	@Override
-	public String buildModelUtilityDefinitionMethods(ModelClass modelClass) {
+	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}

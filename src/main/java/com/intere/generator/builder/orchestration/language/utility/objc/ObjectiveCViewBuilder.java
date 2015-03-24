@@ -18,12 +18,6 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 	@Autowired @Qualifier("ObjectiveCInterpreter")
 	protected JsonLanguageInterpreter interpreter;
 
-
-	@Override
-	public String buildNamespace(ModelClass modelClass) {
-		return "";
-	}
-
 	@Override
 	public String buildHeaderFileComment(ModelClass modelClass) {
 		return buildFileComment(modelClass.getViewClassName() + ".h");
@@ -42,11 +36,6 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		
 		builder.append("\n");
 		return builder.toString();
-	}
-
-	@Override
-	public String buildSerializationConstants(ModelClass modelClass) {
-		return null;
 	}
 
 	@Override
@@ -88,13 +77,7 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 	}
 
 	@Override
-	public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
-		// TODO
-		return "";
-	}
-
-	@Override
-	public String buildModelUtilityDefinitionMethods(ModelClass modelClass) {
+	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("#pragma mark Private Methods\n");
 		builder.append("-(void)configureAndAddPropertyLabel:(UILabel *)propertyLabel {\n");
@@ -156,21 +139,6 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		return "@end" + singleLineComment("End of " + modelClass.getViewClassName() + " Class", 3);
 	}
 
-	@Override
-	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
-		return null;
-	}
-
-	@Override
-	public String buildGetterAndSetter(ModelClassProperty prop) {
-		// TODO
-		return "";
-	}
-
-	@Override
-	public String getPropertyType(ModelClassProperty property) {
-		return null;
-	}
 
 	@Override
 	public CommentBuilder getCommentBuilder() {
@@ -346,5 +314,41 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public String buildNamespace(ModelClass modelClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String buildSerializationConstants(ModelClass modelClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String buildGetterAndSetter(ModelClassProperty prop) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPropertyType(ModelClassProperty property) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

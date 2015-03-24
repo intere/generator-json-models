@@ -90,6 +90,8 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		for(ModelClass modelClass : tree.getModelClasses()) {
 			viewClasses.add(buildViewHeaderFile(viewPath, modelClass));
 			viewClasses.add(buildViewImplementationFile(viewPath, modelClass));
+			viewClasses.add(buildSingleControllerHeaderFile(viewPath, modelClass));
+			viewClasses.add(buildSingleControllerImplementationFile(viewPath, modelClass));
 		}
 		return viewClasses;
 	}
@@ -185,6 +187,20 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		return writeFile(outputFile, fileContents);
 	}
 
+	/** Builds the UIViewController Header File for a single model view. */
+	private File buildSingleControllerHeaderFile(File viewPath, ModelClass modelClass) throws IOException {
+		String fileContents = buildSingleControllerClassDeclaration(modelClass);
+		File outputFile = new File(viewPath, modelClass.getSingleControllerName() + ".h");
+		return writeFile(outputFile, fileContents);
+	}
+	
+	/** Builds the UIViewController Implementation File for a single view model.  */
+	private File buildSingleControllerImplementationFile(File viewPath,ModelClass modelClass) throws IOException {
+		String fileContents = buildSingleControllerClassImplementation(modelClass);
+		File outputFile = new File(viewPath, modelClass.getSingleControllerName() + ".m");
+		return writeFile(outputFile, fileContents);
+	}
+
 	private String buildServiceClassHeader(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		ServiceBuilder serviceBuilder = languageUtil.getServiceBuilder();
@@ -201,7 +217,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		ServiceBuilder serviceBuilder = languageUtil.getServiceBuilder();
 		builder.append(serviceBuilder.buildImplementationFileComment(modelClass));
 		builder.append(serviceBuilder.buildClassImplementation(modelClass));
-		builder.append(serviceBuilder.buildModelUtilityDefinitionMethods(modelClass));
+		builder.append(serviceBuilder.buildViewUtilityDefinitionMethods(modelClass));
 		builder.append(serviceBuilder.finishClass(modelClass));
 		return builder.toString();
 	}
@@ -211,7 +227,6 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.getViewBuilder().buildHeaderFileComment(modelClass));
 		builder.append(languageUtil.getViewBuilder().buildImports(modelClass));
 		builder.append(languageUtil.getViewBuilder().buildClassDeclaration(modelClass));
-		builder.append(languageUtil.getViewBuilder().buildModelUtilityDeclarationMethods(modelClass));
 		builder.append(languageUtil.getViewBuilder().finishClass(modelClass));
 		return builder.toString();
 	}
@@ -220,9 +235,28 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		StringBuilder builder = new StringBuilder();
 		builder.append(languageUtil.getViewBuilder().buildImplementationFileComment(modelClass));
 		builder.append(languageUtil.getViewBuilder().buildClassImplementation(modelClass));
-		builder.append(languageUtil.getViewBuilder().buildGettersAndSetters(modelClass));
-		builder.append(languageUtil.getViewBuilder().buildModelUtilityDefinitionMethods(modelClass));
+//		builder.append(languageUtil.getViewBuilder().buildGettersAndSetters(modelClass));
+		builder.append(languageUtil.getViewBuilder().buildViewUtilityDefinitionMethods(modelClass));
 		builder.append(languageUtil.getViewBuilder().finishClass(modelClass));
+		return builder.toString();
+	}
+	
+	private String buildSingleControllerClassDeclaration(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(languageUtil.getSingleViewControllerBuilder().buildHeaderFileComment(modelClass));
+		builder.append(languageUtil.getSingleViewControllerBuilder().buildImports(modelClass));
+		builder.append(languageUtil.getSingleViewControllerBuilder().buildClassDeclaration(modelClass));
+		builder.append(languageUtil.getSingleViewControllerBuilder().buildUtilityDeclarationMethods(modelClass));
+		builder.append(languageUtil.getSingleViewControllerBuilder().finishClass(modelClass));
+		return builder.toString();
+	}
+
+	private String buildSingleControllerClassImplementation(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(languageUtil.getSingleViewControllerBuilder().buildImplementationFileComment(modelClass));
+		builder.append(languageUtil.getSingleViewControllerBuilder().buildClassImplementation(modelClass));
+		builder.append(languageUtil.getSingleViewControllerBuilder().buildUtilityDefinitionMethods(modelClass));
+		builder.append(languageUtil.getSingleViewControllerBuilder().finishClass(modelClass));
 		return builder.toString();
 	}
 
@@ -267,7 +301,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.getModelBuilder().buildImplementationFileComment(modelClass));
 		builder.append(languageUtil.getModelBuilder().buildSerializationConstants(modelClass));
 		builder.append(languageUtil.getModelBuilder().buildClassImplementation(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildModelUtilityDefinitionMethods(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildViewUtilityDefinitionMethods(modelClass));
 		builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
 		
 		return builder.toString();

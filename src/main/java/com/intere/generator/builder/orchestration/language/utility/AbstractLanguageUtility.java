@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -20,6 +19,18 @@ public abstract class AbstractLanguageUtility implements LanguageUtility {
 	
 	/** The Property Mappings you'd like to take place.  */
 	public abstract Map<String, String> getPropertyMappings();
+	
+	@Override
+	public SingleViewControllerBuilder getSingleViewControllerBuilder() {
+		// Default Implementation - returns null.
+		return null;
+	}
+	
+	@Override
+	public ListViewControllerBuilder getListViewControllerBuilder() {
+		// Default Implementation - returns null.
+		return null;
+	}
 
 	/**
 	 * Reads a resource (from the classpath) to a string for you.

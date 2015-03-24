@@ -25,6 +25,9 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	@Autowired @Qualifier("ObjectiveCServiceBuilder")
 	ServiceBuilder serviceBuilder;
 	
+	@Autowired @Qualifier("ObjectiveCSingleViewControllerBuilder")
+	SingleViewControllerBuilder singleViewControlerBuilder;
+	
 	@Override
 	public ModelBuilder getModelBuilder() {
 		return modelBuilder;
@@ -43,6 +46,11 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public ServiceBuilder getServiceBuilder() {
 		return serviceBuilder;
+	}
+	
+	@Override
+	public SingleViewControllerBuilder getSingleViewControllerBuilder() {
+		return singleViewControlerBuilder;
 	}
 	
 	@Override

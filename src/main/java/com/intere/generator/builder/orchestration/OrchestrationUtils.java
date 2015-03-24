@@ -218,7 +218,9 @@ public class OrchestrationUtils {
 		model.getImports().addAll(getImports(clazz, model));
 		model.setFileName(interpreter.buildFilenameFromClassname(className));
 		model.setTestClassName(interpreter.buildClassName(className) + "Test");
-		model.setViewClassName(interpreter.buildClassName(className) + "View");	
+		model.setViewClassName(interpreter.buildClassName(className) + "View");
+		model.setSingleControllerName(interpreter.buildClassName(className) + "ViewController");
+		model.setListControllerName(interpreter.buildClassName(className) + "TableViewController");
 		model.setServiceClassName(interpreter.buildClassName(className) + "Service");
 		model.setRestServiceClassName(interpreter.buildClassName(className) + "RestService");
 		modelClasses.add(model);

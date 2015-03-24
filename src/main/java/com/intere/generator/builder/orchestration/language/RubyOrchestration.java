@@ -100,7 +100,7 @@ public class RubyOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.getModelBuilder().buildClassDeclaration(modelClass));
 		builder.append(languageUtil.getModelBuilder().buildPropertyDeclarations(modelClass));
 		builder.append(languageUtil.getModelBuilder().buildGettersAndSetters(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildModelUtilityDefinitionMethods(modelClass));
+		builder.append(languageUtil.getModelBuilder().buildViewUtilityDefinitionMethods(modelClass));
 		builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
 		return builder.toString();
 	}

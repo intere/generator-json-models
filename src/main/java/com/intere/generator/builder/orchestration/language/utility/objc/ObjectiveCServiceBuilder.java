@@ -99,7 +99,7 @@ public class ObjectiveCServiceBuilder extends BaseModelBuilder implements Servic
 	}
 
 	@Override
-	public String buildModelUtilityDefinitionMethods(ModelClass modelClass) {
+	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("+(" + modelClass.getServiceClassName() + " *)getSharedInstance {\n");
 		builder.append(tabs(1) + "if(!shared" + modelClass.getServiceClassName() + ") {\n");

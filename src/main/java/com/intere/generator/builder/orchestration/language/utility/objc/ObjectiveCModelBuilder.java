@@ -97,7 +97,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 	}
 	
 	@Override
-	public String buildModelUtilityDefinitionMethods(ModelClass modelClass) {
+	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("#pragma mark Serialization Methods\n\n");
 		

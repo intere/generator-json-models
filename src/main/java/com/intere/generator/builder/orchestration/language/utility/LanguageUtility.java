@@ -27,6 +27,12 @@ public interface LanguageUtility {
 	/** Gets you the Service Builder for this class.  */
 	ServiceBuilder getServiceBuilder();
 	
+	/** Gets you the Single View Controller Builder for this class.  */
+	SingleViewControllerBuilder getSingleViewControllerBuilder();
+	
+	/** Gets you the List View Controller Builder for this class.  */
+	ListViewControllerBuilder getListViewControllerBuilder();
+	
 	/** Enforces the filenames based on the model class names.  */
 	void enforceFilenames(OrchestrationTree tree);
 	
@@ -82,7 +88,7 @@ public interface LanguageUtility {
 		String buildModelUtilityDeclarationMethods(ModelClass modelClass);
 		
 		/** Build the Utility Method definitions for this class.  */
-		String buildModelUtilityDefinitionMethods(ModelClass modelClass);
+		String buildViewUtilityDefinitionMethods(ModelClass modelClass);
 
 		/** Build me a class declaration for the provided model class.  */
 		String buildClassDeclaration(ModelClass modelClass);
@@ -106,7 +112,7 @@ public interface LanguageUtility {
 		String getPropertyType(ModelClassProperty property);
 	}
 	
-	public interface TestBuilder extends ModelBuilder {
+	public interface TestBuilder {
 		/** Builds the Test Class Declaration. */
 		String buildTestClassDeclaration(ModelClass modelClass);
 
@@ -117,15 +123,62 @@ public interface LanguageUtility {
 		String buildTestSetupMethod(ModelClass modelClass);
 		
 		/** Builds the test methods for this class.  */
+		
 		String buildTestMethods(ModelClass modelClass);
+		/** Builds the file comment for this class.  */
+		String buildImplementationFileComment(ModelClass modelClass);
+		
+		/** Wrap up the class.  */
+		String finishClass(ModelClass modelClass);
+		
+		/** Give me a namespace definition for the provided model class.  */
+		String buildNamespace(ModelClass modelClass);
 	}
 	
-	public interface ViewBuilder extends ModelBuilder {
-		
+	public interface ViewBuilder {
+
+		String buildHeaderFileComment(ModelClass modelClass);
+
+		String buildImports(ModelClass modelClass);
+
+		String buildClassDeclaration(ModelClass modelClass);
+
+		String finishClass(ModelClass modelClass);
+
+		String buildImplementationFileComment(ModelClass modelClass);
+
+		String buildClassImplementation(ModelClass modelClass);
+
+		String buildGettersAndSetters(ModelClass modelClass);
+
+		String buildViewUtilityDefinitionMethods(ModelClass modelClass);		
 	}
 	
 	public interface ServiceBuilder extends ModelBuilder {
 		
 	}
+	
+	public interface SingleViewControllerBuilder {
 
+		String buildHeaderFileComment(ModelClass modelClass);
+
+		String buildImports(ModelClass modelClass);
+
+		String buildClassDeclaration(ModelClass modelClass);
+
+		String buildUtilityDeclarationMethods(ModelClass modelClass);
+
+		String finishClass(ModelClass modelClass);
+
+		String buildImplementationFileComment(ModelClass modelClass);
+
+		String buildClassImplementation(ModelClass modelClass);
+
+		String buildUtilityDefinitionMethods(ModelClass modelClass);
+		
+	}
+	
+	public interface ListViewControllerBuilder {
+		
+	}
 }
