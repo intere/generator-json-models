@@ -32,6 +32,15 @@
           "importName": "com.intere.generator.builder.orchestration",
           "targetClassName": "Enumeration"
         }
+      ],
+      "listSummary": [
+        {
+          "className": "Metadata",
+          "propertyList": [
+            "className",
+            "jsonFile"
+          ]
+        }
       ]
     },
     {

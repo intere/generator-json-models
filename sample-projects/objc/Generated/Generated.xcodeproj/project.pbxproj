@@ -72,6 +72,18 @@
 		36B6E2CD1AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2C01AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m */; };
 		36B6E2CE1AC21AE10085EF90 /* EnumerationUserTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2C21AC21AE10085EF90 /* EnumerationUserTypesViewController.m */; };
 		36B6E2CF1AC21AE10085EF90 /* EnumerationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2C41AC21AE10085EF90 /* EnumerationViewController.m */; };
+		36B6E2D31AC269C20085EF90 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2D21AC269C20085EF90 /* MyTableViewController.m */; };
+		36BAAC9A1AC4546100A19071 /* ContestResultsSponsorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC851AC4546100A19071 /* ContestResultsSponsorTableViewController.m */; };
+		36BAAC9B1AC4546100A19071 /* ContestResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC871AC4546100A19071 /* ContestResultsTableViewController.m */; };
+		36BAAC9C1AC4546100A19071 /* ContestSponsorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC891AC4546100A19071 /* ContestSponsorTableViewController.m */; };
+		36BAAC9D1AC4546100A19071 /* ContestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC8B1AC4546100A19071 /* ContestTableViewController.m */; };
+		36BAAC9E1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC8D1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m */; };
+		36BAAC9F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC8F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m */; };
+		36BAACA01AC4546100A19071 /* EnumerationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC911AC4546100A19071 /* EnumerationTableViewController.m */; };
+		36BAACA11AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC931AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m */; };
+		36BAACA21AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC951AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m */; };
+		36BAACA31AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC971AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m */; };
+		36BAACA41AC4546100A19071 /* EnumerationUserTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC991AC4546100A19071 /* EnumerationUserTypesTableViewController.m */; };
 		36BDAD041AB1CCB200201F7E /* contests.json in Resources */ = {isa = PBXBuildFile; fileRef = 36BDAD031AB1CCB200201F7E /* contests.json */; };
 		36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD061AB1CD8500201F7E /* MockDataService.m */; };
 		36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */; };
@@ -207,6 +219,30 @@
 		36B6E2C21AC21AE10085EF90 /* EnumerationUserTypesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesViewController.m; sourceTree = "<group>"; };
 		36B6E2C31AC21AE10085EF90 /* EnumerationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationViewController.h; sourceTree = "<group>"; };
 		36B6E2C41AC21AE10085EF90 /* EnumerationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationViewController.m; sourceTree = "<group>"; };
+		36B6E2D11AC269C20085EF90 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
+		36B6E2D21AC269C20085EF90 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
+		36BAAC841AC4546100A19071 /* ContestResultsSponsorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsorTableViewController.h; sourceTree = "<group>"; };
+		36BAAC851AC4546100A19071 /* ContestResultsSponsorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorTableViewController.m; sourceTree = "<group>"; };
+		36BAAC861AC4546100A19071 /* ContestResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsTableViewController.h; sourceTree = "<group>"; };
+		36BAAC871AC4546100A19071 /* ContestResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsTableViewController.m; sourceTree = "<group>"; };
+		36BAAC881AC4546100A19071 /* ContestSponsorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsorTableViewController.h; sourceTree = "<group>"; };
+		36BAAC891AC4546100A19071 /* ContestSponsorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorTableViewController.m; sourceTree = "<group>"; };
+		36BAAC8A1AC4546100A19071 /* ContestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestTableViewController.h; sourceTree = "<group>"; };
+		36BAAC8B1AC4546100A19071 /* ContestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestTableViewController.m; sourceTree = "<group>"; };
+		36BAAC8C1AC4546100A19071 /* EnumerationPurseTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypesTableViewController.h; sourceTree = "<group>"; };
+		36BAAC8D1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesTableViewController.m; sourceTree = "<group>"; };
+		36BAAC8E1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevelsTableViewController.h; sourceTree = "<group>"; };
+		36BAAC8F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsTableViewController.m; sourceTree = "<group>"; };
+		36BAAC901AC4546100A19071 /* EnumerationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTableViewController.h; sourceTree = "<group>"; };
+		36BAAC911AC4546100A19071 /* EnumerationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTableViewController.m; sourceTree = "<group>"; };
+		36BAAC921AC4546100A19071 /* EnumerationTournamentSizesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizesTableViewController.h; sourceTree = "<group>"; };
+		36BAAC931AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesTableViewController.m; sourceTree = "<group>"; };
+		36BAAC941AC4546100A19071 /* EnumerationTournamentStatesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStatesTableViewController.h; sourceTree = "<group>"; };
+		36BAAC951AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesTableViewController.m; sourceTree = "<group>"; };
+		36BAAC961AC4546100A19071 /* EnumerationTournamentTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypesTableViewController.h; sourceTree = "<group>"; };
+		36BAAC971AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesTableViewController.m; sourceTree = "<group>"; };
+		36BAAC981AC4546100A19071 /* EnumerationUserTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypesTableViewController.h; sourceTree = "<group>"; };
+		36BAAC991AC4546100A19071 /* EnumerationUserTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesTableViewController.m; sourceTree = "<group>"; };
 		36BDAD031AB1CCB200201F7E /* contests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = contests.json; sourceTree = "<group>"; };
 		36BDAD051AB1CD8500201F7E /* MockDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockDataService.h; sourceTree = "<group>"; };
 		36BDAD061AB1CD8500201F7E /* MockDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockDataService.m; sourceTree = "<group>"; };
@@ -235,6 +271,8 @@
 			isa = PBXGroup;
 			children = (
 				361589531AADE71300FFE84C /* generated */,
+				36B6E2D11AC269C20085EF90 /* MyTableViewController.h */,
+				36B6E2D21AC269C20085EF90 /* MyTableViewController.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -242,6 +280,28 @@
 		361589531AADE71300FFE84C /* generated */ = {
 			isa = PBXGroup;
 			children = (
+				36BAAC841AC4546100A19071 /* ContestResultsSponsorTableViewController.h */,
+				36BAAC851AC4546100A19071 /* ContestResultsSponsorTableViewController.m */,
+				36BAAC861AC4546100A19071 /* ContestResultsTableViewController.h */,
+				36BAAC871AC4546100A19071 /* ContestResultsTableViewController.m */,
+				36BAAC881AC4546100A19071 /* ContestSponsorTableViewController.h */,
+				36BAAC891AC4546100A19071 /* ContestSponsorTableViewController.m */,
+				36BAAC8A1AC4546100A19071 /* ContestTableViewController.h */,
+				36BAAC8B1AC4546100A19071 /* ContestTableViewController.m */,
+				36BAAC8C1AC4546100A19071 /* EnumerationPurseTypesTableViewController.h */,
+				36BAAC8D1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m */,
+				36BAAC8E1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.h */,
+				36BAAC8F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m */,
+				36BAAC901AC4546100A19071 /* EnumerationTableViewController.h */,
+				36BAAC911AC4546100A19071 /* EnumerationTableViewController.m */,
+				36BAAC921AC4546100A19071 /* EnumerationTournamentSizesTableViewController.h */,
+				36BAAC931AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m */,
+				36BAAC941AC4546100A19071 /* EnumerationTournamentStatesTableViewController.h */,
+				36BAAC951AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m */,
+				36BAAC961AC4546100A19071 /* EnumerationTournamentTypesTableViewController.h */,
+				36BAAC971AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m */,
+				36BAAC981AC4546100A19071 /* EnumerationUserTypesTableViewController.h */,
+				36BAAC991AC4546100A19071 /* EnumerationUserTypesTableViewController.m */,
 				36B6E2AF1AC21AE10085EF90 /* ContestResultsSponsorViewController.h */,
 				36B6E2B01AC21AE10085EF90 /* ContestResultsSponsorViewController.m */,
 				36B6E2B11AC21AE10085EF90 /* ContestResultsViewController.h */,
@@ -582,8 +642,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3665CA1A1AA7CFDD00EE4255 /* ContestSponsor.m in Sources */,
+				36BAAC9B1AC4546100A19071 /* ContestResultsTableViewController.m in Sources */,
 				36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */,
 				367668F71AB076520012B7FF /* EnumerationTournamentSizesService.m in Sources */,
+				36B6E2D31AC269C20085EF90 /* MyTableViewController.m in Sources */,
 				3665CA1E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m in Sources */,
 				3665CA171AA7CFDD00EE4255 /* Contest.m in Sources */,
 				3665CA181AA7CFDD00EE4255 /* ContestResults.m in Sources */,
@@ -593,11 +655,15 @@
 				361589721AADE75800FFE84C /* EnumerationTournamentTypesView.m in Sources */,
 				3615896D1AADE75800FFE84C /* ContestView.m in Sources */,
 				367668F91AB076520012B7FF /* EnumerationTournamentTypesService.m in Sources */,
+				36BAAC9F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m in Sources */,
+				36BAACA11AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m in Sources */,
 				3665CA221AA7CFDD00EE4255 /* Serializer.m in Sources */,
 				3615896A1AADE75800FFE84C /* ContestResultsSponsorView.m in Sources */,
 				36B6E2CD1AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m in Sources */,
 				3665CA191AA7CFDD00EE4255 /* ContestResultsSponsor.m in Sources */,
+				36BAACA31AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m in Sources */,
 				36B6E2C91AC21AE10085EF90 /* EnumerationPurseTypesViewController.m in Sources */,
+				36BAACA01AC4546100A19071 /* EnumerationTableViewController.m in Sources */,
 				361589701AADE75800FFE84C /* EnumerationTournamentSizesView.m in Sources */,
 				3665CA201AA7CFDD00EE4255 /* EnumerationTournamentTypes.m in Sources */,
 				36B6E2CB1AC21AE10085EF90 /* EnumerationTournamentSizesViewController.m in Sources */,
@@ -616,10 +682,13 @@
 				3665CA1C1AA7CFDD00EE4255 /* EnumerationPurseTypes.m in Sources */,
 				3615896E1AADE75800FFE84C /* EnumerationPurseTypesView.m in Sources */,
 				36B6E2C81AC21AE10085EF90 /* ContestViewController.m in Sources */,
+				36BAAC9A1AC4546100A19071 /* ContestResultsSponsorTableViewController.m in Sources */,
 				367668F21AB076520012B7FF /* ContestService.m in Sources */,
 				367668F31AB076520012B7FF /* ContestSponsorService.m in Sources */,
 				3665CA1D1AA7CFDD00EE4255 /* EnumerationSkillLevels.m in Sources */,
+				36BAACA41AC4546100A19071 /* EnumerationUserTypesTableViewController.m in Sources */,
 				3665CA211AA7CFDD00EE4255 /* EnumerationUserTypes.m in Sources */,
+				36BAACA21AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m in Sources */,
 				361589711AADE75800FFE84C /* EnumerationTournamentStatesView.m in Sources */,
 				36B6E2CF1AC21AE10085EF90 /* EnumerationViewController.m in Sources */,
 				361FB5761AAF2DF6009F9F03 /* UITheme.m in Sources */,
@@ -627,10 +696,13 @@
 				367668F01AB076520012B7FF /* ContestResultsService.m in Sources */,
 				36B6E2C51AC21AE10085EF90 /* ContestResultsSponsorViewController.m in Sources */,
 				367668F81AB076520012B7FF /* EnumerationTournamentStatesService.m in Sources */,
+				36BAAC9E1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m in Sources */,
 				36B6E2C61AC21AE10085EF90 /* ContestResultsViewController.m in Sources */,
+				36BAAC9C1AC4546100A19071 /* ContestSponsorTableViewController.m in Sources */,
 				367668F11AB076520012B7FF /* ContestResultsSponsorService.m in Sources */,
 				367668F61AB076520012B7FF /* EnumerationSkillLevelsService.m in Sources */,
 				3665CA1B1AA7CFDD00EE4255 /* Enumeration.m in Sources */,
+				36BAAC9D1AC4546100A19071 /* ContestTableViewController.m in Sources */,
 				36B6E2CE1AC21AE10085EF90 /* EnumerationUserTypesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

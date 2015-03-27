@@ -28,6 +28,9 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	@Autowired @Qualifier("ObjectiveCSingleViewControllerBuilder")
 	SingleViewControllerBuilder singleViewControlerBuilder;
 	
+	@Autowired @Qualifier("ObjectiveCListViewControllerGenerator")
+	ListViewControllerBuilder listViewControllerBuilder;
+	
 	@Override
 	public ModelBuilder getModelBuilder() {
 		return modelBuilder;
@@ -51,6 +54,11 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public SingleViewControllerBuilder getSingleViewControllerBuilder() {
 		return singleViewControlerBuilder;
+	}
+	
+	@Override
+	public ListViewControllerBuilder getListViewControllerBuilder() {
+		return listViewControllerBuilder;
 	}
 	
 	@Override

@@ -179,6 +179,22 @@ public interface LanguageUtility {
 	}
 	
 	public interface ListViewControllerBuilder {
+
+		String buildHeaderFileComment(ModelClass modelClass);
+
+		String buildImports(ModelClass modelClass);
+
+		String buildClassDeclaration(ModelClass modelClass);
+
+		String buildUtilityDeclarationMethods(ModelClass modelClass);
+
+		String finishClass(ModelClass modelClass);
+
+		String buildImplementationFileComment(ModelClass modelClass);
+
+		String buildClassImplementation(ModelClass modelClass);
+
+		String buildUtilityDefinitionMethods(ModelClass modelClass);
 		
 	}
 }

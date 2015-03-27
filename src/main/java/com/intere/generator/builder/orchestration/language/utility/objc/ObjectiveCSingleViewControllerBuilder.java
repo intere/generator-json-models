@@ -24,7 +24,7 @@ public class ObjectiveCSingleViewControllerBuilder implements SingleViewControll
 	@Override
 	public String buildImports(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("#import <UIKit/UIKit.h>i\n");
+		builder.append("#import <UIKit/UIKit.h>\n");
 		builder.append("#import \"" + modelClass.getViewClassName() + ".h\"\n\n");		
 		return builder.toString();
 	}

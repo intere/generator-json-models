@@ -33,7 +33,6 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 			generatedClasses.add(buildModelHeaderFile(outputDirectory, modelClass));
 			generatedClasses.add(buildModelImplementationFile(outputDirectory, modelClass));
 		}
-		
 		return generatedClasses;
 	}
 
@@ -92,6 +91,8 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 			viewClasses.add(buildViewImplementationFile(viewPath, modelClass));
 			viewClasses.add(buildSingleControllerHeaderFile(viewPath, modelClass));
 			viewClasses.add(buildSingleControllerImplementationFile(viewPath, modelClass));
+			viewClasses.add(buildListControllerHeaderFile(viewPath, modelClass));
+			viewClasses.add(buildListControllerImplementationFile(viewPath, modelClass));
 		}
 		return viewClasses;
 	}
@@ -200,6 +201,18 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		File outputFile = new File(viewPath, modelClass.getSingleControllerName() + ".m");
 		return writeFile(outputFile, fileContents);
 	}
+	
+	private File buildListControllerHeaderFile(File viewPath, ModelClass modelClass) throws IOException {
+		String fileContents = buildListControllerClassDeclaration(modelClass);
+		File outputFile = new File(viewPath, modelClass.getListControllerName() + ".h");
+		return writeFile(outputFile, fileContents);
+	}
+
+	private File buildListControllerImplementationFile(File viewPath,ModelClass modelClass) throws IOException {
+		String fileContents = buildListControllerClassImplementation(modelClass);
+		File outputFile = new File(viewPath, modelClass.getListControllerName() + ".m");
+		return writeFile(outputFile, fileContents);
+	}
 
 	private String buildServiceClassHeader(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
@@ -257,6 +270,25 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		builder.append(languageUtil.getSingleViewControllerBuilder().buildClassImplementation(modelClass));
 		builder.append(languageUtil.getSingleViewControllerBuilder().buildUtilityDefinitionMethods(modelClass));
 		builder.append(languageUtil.getSingleViewControllerBuilder().finishClass(modelClass));
+		return builder.toString();
+	}
+
+	private String buildListControllerClassDeclaration(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(languageUtil.getListViewControllerBuilder().buildHeaderFileComment(modelClass));
+		builder.append(languageUtil.getListViewControllerBuilder().buildImports(modelClass));
+		builder.append(languageUtil.getListViewControllerBuilder().buildClassDeclaration(modelClass));
+		builder.append(languageUtil.getListViewControllerBuilder().buildUtilityDeclarationMethods(modelClass));
+		builder.append(languageUtil.getListViewControllerBuilder().finishClass(modelClass));
+		return builder.toString();
+	}
+
+	private String buildListControllerClassImplementation(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(languageUtil.getListViewControllerBuilder().buildImplementationFileComment(modelClass));
+		builder.append(languageUtil.getListViewControllerBuilder().buildClassImplementation(modelClass));
+		builder.append(languageUtil.getListViewControllerBuilder().buildUtilityDefinitionMethods(modelClass));
+		builder.append(languageUtil.getListViewControllerBuilder().finishClass(modelClass));
 		return builder.toString();
 	}
 

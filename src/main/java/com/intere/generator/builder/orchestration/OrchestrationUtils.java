@@ -26,6 +26,7 @@ import com.intere.generator.deserializer.JsonNodeUtils;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
 import com.intere.generator.metadata.MetadataClassesImports;
+import com.intere.generator.metadata.MetadataClassesListSummary;
 import com.intere.generator.metadata.MetadataClassesTransientProperty;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassImports;
@@ -132,6 +133,15 @@ public class OrchestrationUtils {
 		return props;
 	}
 	
+	private static Collection<? extends String> getSummaryProperties(MetadataClasses clazz, ModelClass model) {
+		for(MetadataClassesListSummary prop : clazz.getListSummary()) {
+			if(prop.getClassName().equals(model.getClassName())) {
+				return prop.getPropertyList();
+			}
+		}
+		return new ArrayList<>();
+	}
+	
 	/**
 	 * This method is responsible for filling in the details of the Property object you pass to it.  It uses delegation to fill in the data for Array Sub Type properties too.
 	 * @param interpreter
@@ -216,6 +226,7 @@ public class OrchestrationUtils {
 		model.getProperty().addAll(populateProperties(interpreter, className, metadata, clazz, node, model));
 		model.getProperty().addAll(addTransientProperties(clazz, model));
 		model.getImports().addAll(getImports(clazz, model));
+		model.getSummaryProperties().addAll(getSummaryProperties(clazz, model));
 		model.setFileName(interpreter.buildFilenameFromClassname(className));
 		model.setTestClassName(interpreter.buildClassName(className) + "Test");
 		model.setViewClassName(interpreter.buildClassName(className) + "View");

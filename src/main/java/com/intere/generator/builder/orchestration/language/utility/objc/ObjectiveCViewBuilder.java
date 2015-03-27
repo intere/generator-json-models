@@ -33,6 +33,7 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		StringBuilder builder = new StringBuilder();
 		builder.append("#import <UIKit/UIKit.h>\n");
 		builder.append("#import \"" + modelClass.getClassName() + ".h\"\n");
+		builder.append("#import \"" + modelClass.getServiceClassName() + ".h\"\n");
 		
 		builder.append("\n");
 		return builder.toString();
@@ -200,6 +201,9 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		
 		builder.append(tabs(1) + "frame = CGRectMake(0.0, 0.0, self.frame.size.width, y + height + 40.0);\n"); 
 		builder.append(tabs(1) + "[self setFrame:frame];\n");
+		builder.append(tabs(1) + modelClass.getClassName() + " *selected = [[" + modelClass.getServiceClassName() + " getSharedInstance].named" 
+				+ modelClass.getClassName() + "Objects objectForKey:@\"selected" + modelClass.getClassName() + "\"];\n");
+		builder.append(tabs(1) + "[self set" + modelClass.getClassName() + ":selected];\n");
 		builder.append("}\n\n");
 
 		return builder.toString();

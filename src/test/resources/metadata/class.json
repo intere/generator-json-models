@@ -33,6 +33,10 @@
         "importName": "com.intere.generator.builder.orchestration",
         "targetClassName": "Enumeration"
       }
+    ],
+    "summaryProperties": [
+      "className",
+      "jsonFile"
     ]
   }
 ]

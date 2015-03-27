@@ -26,6 +26,16 @@
           "name": "",
           "type": ""
         }
+      ],
+      "listSummary": [
+        {
+          "className": "Contest",
+          "propertyList": [
+            "title",
+            "stateName",
+            "startDate"
+          ]
+        }
       ]
     },
     {
