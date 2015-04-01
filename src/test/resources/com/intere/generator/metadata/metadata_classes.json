@@ -1,25 +1,32 @@
 {
-  "className" : "Contest",
-  "jsonFile" : "contest.json",
-  "key" : "id",
-  "urlPath" : "/contest",
-  "readonly" : false,
-  "propertyMap" : [ {
-    "property" : "state",
-    "mapClassName" : "EnumerationTournamentStates",
-    "mapClassProperty" : "value"
-  }, {
-    "property" : "stateName",
-    "mapClassName" : "EnumerationTournamentStates",
-    "mapClassProperty" : "name"
-  } ],
-  "transientProperty" : [ {
-    "className" : "Contest",
-    "name" : "transientProperty",
-    "type" : "String"
-  } ],
-  "imports" : [ {
-    "importName" : "com.intere.generator.builder.orchestration",
-    "targetClassName" : "Enumeration"
-  } ]
+    "className": "Contest",
+    "imports": [
+        {
+            "importName": "com.intere.generator.builder.orchestration",
+            "targetClassName": "Enumeration"
+        }
+    ],
+    "jsonFile": "contest.json",
+    "key": "id",
+    "propertyMap": [
+        {
+            "mapClassName": "EnumerationTournamentStates",
+            "mapClassProperty": "value",
+            "property": "state"
+        },
+        {
+            "mapClassName": "EnumerationTournamentStates",
+            "mapClassProperty": "name",
+            "property": "stateName"
+        }
+    ],
+    "readonly": false,
+    "transientProperty": [
+        {
+            "className": "Contest",
+            "name": "transientProperty",
+            "type": "String"
+        }
+    ],
+    "urlPath": "/contest"
 }

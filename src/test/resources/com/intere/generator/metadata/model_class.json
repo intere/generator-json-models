@@ -1,22 +1,26 @@
 {
-  "uniqueId" : "ou812",
-  "className" : "Contest",
-  "fileName" : "Contest.java",
-  "testClassName" : "ContestTest",
-  "readonly" : false,
-  "namespace" : "com.intere.generated",
-  "hasSubClasses" : true,
-  "property" : [ {
-    "name" : "id",
-    "isKey" : true,
-    "type" : "String",
-    "isPrimitive" : false,
-    "isTransient" : false,
-    "isVisible" : true,
-    "isReadonly" : true,
-    "isArray" : true,
-    "arraySubType" : "String"
-  } ],
-  "restUrl" : "/contest",
-  "imports" : [ "Enumeration" ]
+    "className": "Contest",
+    "fileName": "Contest.java",
+    "hasSubClasses": true,
+    "imports": [
+        "Enumeration"
+    ],
+    "namespace": "com.intere.generated",
+    "property": [
+        {
+            "arraySubType": "String",
+            "isArray": true,
+            "isKey": true,
+            "isPrimitive": false,
+            "isReadonly": true,
+            "isTransient": false,
+            "isVisible": true,
+            "name": "id",
+            "type": "String"
+        }
+    ],
+    "readonly": false,
+    "restUrl": "/contest",
+    "testClassName": "ContestTest",
+    "uniqueId": "ou812"
 }

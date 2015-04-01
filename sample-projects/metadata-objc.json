@@ -1,32 +1,9 @@
 {
-  "language": "Objective-C",
-  "namespace": null,
   "classes": [
     {
       "className": "Contest",
       "jsonFile": "contest.json",
       "key": "id",
-      "urlPath": "/contest",
-      "readonly": false,
-      "propertyMap": [
-        {
-          "property": "state",
-          "mapClassName": "EnumerationTournamentStates",
-          "mapClassProperty": "value"
-        },
-        {
-          "property": "stateName",
-          "mapClassName": "EnumerationTournamentStates",
-          "mapClassProperty": "name"
-        }
-      ],
-      "transientProperty": [
-        {
-          "className": "",
-          "name": "",
-          "type": ""
-        }
-      ],
       "listSummary": [
         {
           "className": "Contest",
@@ -35,21 +12,66 @@
             "stateName",
             "startDate"
           ]
+        },
+        {
+          "className": "ContestResults",
+          "propertyList": [
+            "",
+            ""
+          ]
         }
-      ]
+      ],
+      "propertyMap": [
+        {
+          "mapClassFrom": "ContestResults",
+          "mapPropertyFrom": "userId",
+          "mapClassTo": "User",
+          "mapPropertyTo": "id"
+        },
+        {
+          "mapClassFrom": "Contest",
+          "mapPropertyFrom": "state",
+          "mapClassTo": "EnumerationTournamentStates",
+          "mapPropertyTo": "value"
+        },
+        {
+          "mapClassFrom": "Contest",
+          "mapPropertyFrom": "stateName",
+          "mapClassTo": "EnumerationTournamentStates",
+          "mapPropertyTo": "name"
+        }
+      ],
+      "readonly": false,
+      "transientProperty": [
+        {
+          "className": "ContestResults",
+          "name": "user",
+          "type": "User"
+        }
+      ],
+      "urlPath": "/contest"
     },
     {
       "className": "Enumeration",
       "jsonFile": "enumerations.json",
       "readonly": true,
       "urlPath": "/enumerations"
+    },
+    {
+      "className": "User",
+      "jsonFile": "user.json",
+      "propertyMap": [],
+      "readonly": false,
+      "urlPath": "/user"
     }
   ],
   "generate": {
     "models": true,
-    "tests": true,
-    "views": true,
+    "restServices": true,
     "services": true,
-    "restServices": true
-  }
+    "tests": true,
+    "views": true
+  },
+  "language": "Objective-C",
+  "namespace": null
 }

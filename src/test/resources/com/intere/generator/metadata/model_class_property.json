@@ -1,11 +1,11 @@
 {
-  "name" : "id",
-  "isKey" : true,
-  "type" : "String",
-  "isPrimitive" : false,
-  "isTransient" : false,
-  "isVisible" : true,
-  "isReadonly" : true,
-  "isArray" : true,
-  "arraySubType" : "String"
+    "arraySubType": "String",
+    "isArray": true,
+    "isKey": true,
+    "isPrimitive": false,
+    "isReadonly": true,
+    "isTransient": false,
+    "isVisible": true,
+    "name": "id",
+    "type": "String"
 }

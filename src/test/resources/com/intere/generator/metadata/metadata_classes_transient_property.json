@@ -1,5 +1,5 @@
 {
-  "className" : "Contest",
-  "name" : "transientProperty",
-  "type" : "String"
+    "className": "Contest",
+    "name": "transientProperty",
+    "type": "String"
 }

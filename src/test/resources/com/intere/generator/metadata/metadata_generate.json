@@ -1,7 +1,7 @@
 {
-  "models" : true,
-  "tests" : true,
-  "views" : true,
-  "services" : true,
-  "restServices" : true
+    "models": true,
+    "restServices": true,
+    "services": true,
+    "tests": true,
+    "views": true
 }

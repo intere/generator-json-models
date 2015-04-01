@@ -56,8 +56,10 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 	public String buildSerializationConstants(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		for(ModelClassProperty prop : modelClass.getProperty()) {
-			builder.append("#define " + interpreter.createSerializeConstantSymbolName(prop.getName()) 
-					+ " @\"" + prop.getName() + "\"\n");
+			if(!prop.getIsTransient()) {
+				builder.append("#define " + interpreter.createSerializeConstantSymbolName(prop.getName()) 
+						+ " @\"" + prop.getName() + "\"\n");
+			}
 		}
 		builder.append("\n");
 		return builder.toString();
@@ -105,7 +107,9 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 		builder.append("-(NSDictionary *)toDictionary {\n"
 				+ tabs(1) + "NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];\n");
 		for(ModelClassProperty prop : modelClass.getProperty()) {
-			builder.append(addSerializeProperty(prop));
+			if(!prop.getIsTransient()) {
+				builder.append(addSerializeProperty(prop));
+			}
 		}
 		builder.append(tabs(1) + "return dict;\n");
 		builder.append("}\n\n");
@@ -123,7 +127,9 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 		builder.append("+(" + modelClass.getClassName() + "*)fromDictionary:(NSDictionary *)dict {\n");
 		builder.append(tabs(1) + modelClass.getClassName() + " *object = [[" + modelClass.getClassName() + " alloc]init];\n");
 		for(ModelClassProperty prop : modelClass.getProperty()) {
-			builder.append(addDeserializeProperty(prop));
+			if(!prop.getIsTransient()) {
+				builder.append(addDeserializeProperty(prop));
+			}
 		}
 		builder.append(tabs(1) + "return object;\n");
 		builder.append("}\n\n");

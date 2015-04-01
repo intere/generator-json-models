@@ -27,10 +27,12 @@ import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
 import com.intere.generator.metadata.MetadataClassesImports;
 import com.intere.generator.metadata.MetadataClassesListSummary;
+import com.intere.generator.metadata.MetadataClassesPropertyMap;
 import com.intere.generator.metadata.MetadataClassesTransientProperty;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassImports;
 import com.intere.generator.metadata.ModelClassProperty;
+import com.intere.generator.metadata.ModelClassRelatedClassList;
 
 public class OrchestrationUtils {
 	private static final Logger LOGGER = LogManager.getLogger(OrchestrationUtils.class);
@@ -97,6 +99,13 @@ public class OrchestrationUtils {
 			property.setName(name);
 			property.setParentModel(modelClass);
 			configureNodeType(interpreter, className, name, child, property);
+			if(OrchestrationDataType.ARRAY == OrchestrationDataType.fromModelProperty(property)) {
+				if(null != property.getArraySubType()) {
+					property.setInitializer("new ArrayList<" + property.getArraySubType() + ">()");
+				} else {
+					property.setInitializer("new ArrayList<>()");
+				}
+			}			
 			properties.add(property);
 		}		
 		return properties;
@@ -117,7 +126,10 @@ public class OrchestrationUtils {
 					property.setType(prop.getType());
 					property.setIsArray(false);
 					property.setIsKey(false);
+					property.setIsPrimitive(false);
 					property.setDataType(OrchestrationDataType.fromModelProperty(property));
+					property.setInitializer(prop.getInitializer());
+					property.setParentModel(clazz);
 					props.add(property);
 				}
 			} else {
@@ -207,12 +219,6 @@ public class OrchestrationUtils {
 
 	/**
 	 * This method is responsible for the creation and population of the Model Classes.
-	 * @param metadata
-	 * @param clazz
-	 * @param className
-	 * @param node
-	 * @param restUrl
-	 * @return
 	 */
 	private static List<ModelClass> createAndPopulateModelClass(Metadata metadata, MetadataClasses clazz, String className, JsonNode node, String restUrl) {
 		JsonLanguageInterpreter interpreter = getInterpreterFromMetadata(metadata);
@@ -224,6 +230,7 @@ public class OrchestrationUtils {
 		model.setReadonly(clazz.getReadonly());
 		model.setRestUrl(restUrl);
 		model.getProperty().addAll(populateProperties(interpreter, className, metadata, clazz, node, model));
+		model.getRelatedClassList().addAll(findRelatedClassList(model, clazz));
 		model.getProperty().addAll(addTransientProperties(clazz, model));
 		model.getImports().addAll(getImports(clazz, model));
 		model.getSummaryProperties().addAll(getSummaryProperties(clazz, model));
@@ -240,6 +247,25 @@ public class OrchestrationUtils {
 		}
 		
 		return modelClasses;
+	}
+
+	/**
+	 * Reads the propertyMap from the metadata JSON and maps it to the appropriate model classes.  NOTE: This is only the first step, 
+	 * to track those properties, later on, we need to select the classes.
+	 */
+	private static List<ModelClassRelatedClassList> findRelatedClassList(ModelClass model, MetadataClasses clazz) {
+		List<ModelClassRelatedClassList> list = new ArrayList<>();
+		for(MetadataClassesPropertyMap relation : clazz.getPropertyMap()) {
+			if(relation.getMapClassTo().equals(model.getClassName())) {
+				ModelClassRelatedClassList obj = new ModelClassRelatedClassList();
+				obj.setMapClassFrom(relation.getMapClassFrom());
+				obj.setMapClassTo(relation.getMapClassTo());
+				obj.setMapPropertyFrom(relation.getMapPropertyFrom());
+				obj.setMapPropertyTo(relation.getMapPropertyTo());
+				list.add(obj);
+			}
+		}
+		return list;
 	}
 
 	private static Collection<? extends ModelClassImports> getImports(MetadataClasses clazz, ModelClass model) {

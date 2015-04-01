@@ -75,6 +75,7 @@ public class ObjectiveCListViewControllerGenerator implements ListViewController
 		builder.append("@implementation " + modelClass.getListControllerName() + "\n");
 		builder.append("- (void)viewDidLoad {\n");
 		builder.append(tabs(1) + "[super viewDidLoad];\n");
+		builder.append(tabs(1) + "[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CELL_ID];\n");
 		builder.append(tabs(1) + "[self set" + modelClass.getClassName() + "Array:[" + modelClass.getServiceClassName() + " getSharedInstance].all" + modelClass.getClassName() + "];\n");
 		builder.append(tabs(1) + "self.tableView.delegate = self;\n");
 		builder.append(tabs(1) + "self.tableView.dataSource = self;\n");

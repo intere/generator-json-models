@@ -24,7 +24,19 @@
         "isVisible": true,
         "isReadonly": true,
         "isArray": true,
-        "arraySubType": "String"
+        "arraySubType": "String",
+        "isMapped": false,
+        "mapClass": "ClassName",
+        "mapProperty": "PropertyName",
+        "initializer": "new SomethingOrOther()"
+      }
+    ],
+    "relatedClassList": [
+      {
+        "mapClassFrom": "ContestResults",
+        "mapPropertyFrom": "userId",
+        "mapClassTo": "User",
+        "mapPropertyTo": "username"
       }
     ],
     "restUrl": "/contest",

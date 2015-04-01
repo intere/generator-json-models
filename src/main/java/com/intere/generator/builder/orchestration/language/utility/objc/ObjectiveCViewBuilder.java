@@ -156,32 +156,34 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		String modelInstanceName = "self." + getInterpreter().cleanVariableName(modelClass.getClassName());
 		builder.append("-(void)updateValues {\n");
 		for(ModelClassProperty prop : modelClass.getProperty()) {
-			String propertyName = interpreter.cleanVariableName(prop.getName());
-			switch(prop.getDataType()) {
-			case IMAGE:
-				builder.append(tabs(1) + "[UIHelper loadImageInBackground:" + propertyName + " fromUrl:" + modelInstanceName + "." + propertyName + "];\n");
-				break;
-			case DATE:
-				builder.append(tabs(1) + "if(self." + modelInstanceName + "." + propertyName + ") {\n" );
-				builder.append(tabs(2) + "[self->" + propertyName + " setDate:" + modelInstanceName + "." + propertyName + "];\n");
-				builder.append(tabs(1) + "}\n");
-				break;
-			case STRING:
-			case TEXT:
-				builder.append(tabs(1) + "[self->" + propertyName + " setText:" + modelInstanceName + "." + propertyName + "];\n");
-				break;
-			case LONG:
-				builder.append(tabs(1) + "[self->" + propertyName + " setText:[NSString stringWithFormat:@\"%li\", (NSInteger)" + modelInstanceName + "." + propertyName + "]];\n");
-				break;
-			case BOOLEAN:
-				builder.append(tabs(1) + "[self->" + propertyName + " setSelected:" + modelInstanceName + "." + propertyName + "];\n");
-				break;
-			case DOUBLE:
-				builder.append(tabs(1) + "[self->" + propertyName + " setText:[NSString stringWithFormat:@\"%1.2f\", " + modelInstanceName + "." + propertyName + "]];\n");
-				break;
-			default:
-				// Do Nothing
-				break;
+			if(!prop.getIsTransient()) {
+				String propertyName = interpreter.cleanVariableName(prop.getName());
+				switch(prop.getDataType()) {
+				case IMAGE:
+					builder.append(tabs(1) + "[UIHelper loadImageInBackground:" + propertyName + " fromUrl:" + modelInstanceName + "." + propertyName + "];\n");
+					break;
+				case DATE:
+					builder.append(tabs(1) + "if(self." + modelInstanceName + "." + propertyName + ") {\n" );
+					builder.append(tabs(2) + "[self->" + propertyName + " setDate:" + modelInstanceName + "." + propertyName + "];\n");
+					builder.append(tabs(1) + "}\n");
+					break;
+				case STRING:
+				case TEXT:
+					builder.append(tabs(1) + "[self->" + propertyName + " setText:" + modelInstanceName + "." + propertyName + "];\n");
+					break;
+				case LONG:
+					builder.append(tabs(1) + "[self->" + propertyName + " setText:[NSString stringWithFormat:@\"%li\", (NSInteger)" + modelInstanceName + "." + propertyName + "]];\n");
+					break;
+				case BOOLEAN:
+					builder.append(tabs(1) + "[self->" + propertyName + " setSelected:" + modelInstanceName + "." + propertyName + "];\n");
+					break;
+				case DOUBLE:
+					builder.append(tabs(1) + "[self->" + propertyName + " setText:[NSString stringWithFormat:@\"%1.2f\", " + modelInstanceName + "." + propertyName + "]];\n");
+					break;
+				default:
+					// Do Nothing
+					break;
+				}
 			}
 		}
 		builder.append("}\n\n");
@@ -213,40 +215,42 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		StringBuilder builder = new StringBuilder();
 		boolean first = true;
 		for(ModelClassProperty prop : modelClass.getProperty()) {
-			String propertyName = getInterpreter().cleanVariableName(prop.getName());
-			String controlType = prop.getDataType().getObjectiveCViewClass();
-			String controlHeight = getHeightForControl(controlType, prop.getValue());
-			String humanReadableName = getInterpreter().humanReadableName(prop.getName());
-			
-			builder.append(singleLineComment(humanReadableName + " info", 1) + "\n");
-			if(first) {
-				first = false;
-				builder.append(tabs(1) + "double x=10.0, y=5.0, width=self.frame.size.width - 20.0, height = 30.0;\n");
-				builder.append(tabs(1) + "CGRect frame = CGRectMake(x, y, width, height);\n");
-				builder.append(tabs(1) + "UILabel *propertyLabel = [[UILabel alloc]initWithFrame:frame];\n");
-			} else {
-				builder.append(tabs(1) + "x=10.0, y += height + 20.0, height = 30.0;\n");
+			if(!prop.getIsTransient()) {
+				String propertyName = getInterpreter().cleanVariableName(prop.getName());
+				String controlType = prop.getDataType().getObjectiveCViewClass();
+				String controlHeight = getHeightForControl(controlType, prop.getValue());
+				String humanReadableName = getInterpreter().humanReadableName(prop.getName());
+				
+				builder.append(singleLineComment(humanReadableName + " info", 1) + "\n");
+				if(first) {
+					first = false;
+					builder.append(tabs(1) + "double x=10.0, y=5.0, width=self.frame.size.width - 20.0, height = 30.0;\n");
+					builder.append(tabs(1) + "CGRect frame = CGRectMake(x, y, width, height);\n");
+					builder.append(tabs(1) + "UILabel *propertyLabel = [[UILabel alloc]initWithFrame:frame];\n");
+				} else {
+					builder.append(tabs(1) + "x=10.0, y += height + 20.0, height = 30.0;\n");
+					builder.append(tabs(1) + "frame = CGRectMake(x, y, width, height);\n");
+					builder.append(tabs(1) + "propertyLabel = [[UILabel alloc]initWithFrame:frame];\n");
+				}
+				
+				builder.append(tabs(1) + "[propertyLabel setText:@\"" + humanReadableName + "\"];\n");
+				builder.append(tabs(1) + "[self configureAndAddPropertyLabel:propertyLabel];\n");
+				int x = 10;
+				if("UIDatePicker".equals(controlType)) {
+					x = 0;
+				}
+				builder.append(tabs(1) + "x = " + x + ".0,y += height + 10.0, height = " + controlHeight + ";\n");
 				builder.append(tabs(1) + "frame = CGRectMake(x, y, width, height);\n");
-				builder.append(tabs(1) + "propertyLabel = [[UILabel alloc]initWithFrame:frame];\n");
+				
+				if("UIButton".equals(controlType)) {
+					builder.append(tabs(1) + "" + propertyName + " = [UITheme createUIButtonWithFrame:frame andText:@\"Manage " + humanReadableName + "\"];\n");
+					builder.append(tabs(1) + "[" + propertyName + " addTarget:self action:@selector(buttonPressed:) " + 
+							"forControlEvents:UIControlEventTouchUpInside];\n");
+				} else {
+					builder.append(tabs(1) + "" + propertyName + " = [[" + controlType + " alloc]initWithFrame:frame];\n");
+				}
+				builder.append(tabs(1) + "[self configureAndAdd" + controlType.replace("UI", "") + ":" + propertyName + "];\n\n");
 			}
-			
-			builder.append(tabs(1) + "[propertyLabel setText:@\"" + humanReadableName + "\"];\n");
-			builder.append(tabs(1) + "[self configureAndAddPropertyLabel:propertyLabel];\n");
-			int x = 10;
-			if("UIDatePicker".equals(controlType)) {
-				x = 0;
-			}
-			builder.append(tabs(1) + "x = " + x + ".0,y += height + 10.0, height = " + controlHeight + ";\n");
-			builder.append(tabs(1) + "frame = CGRectMake(x, y, width, height);\n");
-			
-			if("UIButton".equals(controlType)) {
-				builder.append(tabs(1) + "" + propertyName + " = [UITheme createUIButtonWithFrame:frame andText:@\"Manage " + humanReadableName + "\"];\n");
-				builder.append(tabs(1) + "[" + propertyName + " addTarget:self action:@selector(buttonPressed:) " + 
-						"forControlEvents:UIControlEventTouchUpInside];\n");
-			} else {
-				builder.append(tabs(1) + "" + propertyName + " = [[" + controlType + " alloc]initWithFrame:frame];\n");
-			}
-			builder.append(tabs(1) + "[self configureAndAdd" + controlType.replace("UI", "") + ":" + propertyName + "];\n\n");
 		}
 		
 		return builder.toString();

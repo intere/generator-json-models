@@ -17,6 +17,8 @@ import com.intere.generator.Language;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
 import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.metadata.ModelClassProperty;
+import com.intere.generator.metadata.ModelClassRelatedClassList;
 
 public class OrchestrationTree {
 	private static final Logger LOGGER = LogManager.getLogger(OrchestrationTree.class);
@@ -30,8 +32,41 @@ public class OrchestrationTree {
 		LOGGER.info("Reading Metadata File: " + metadataPath);
 		readMetadata(metadataPath);
 		buildTree(new File(metadataPath).getParent());
+		stitchRelationsTogether();
 	}
 	
+	/** Inspects the properties for the "mapClass" and "mapProperty" and attempts to stitch those relations together. */
+	private void stitchRelationsTogether() {
+		for(ModelClass clazz : modelClasses) {
+			for(ModelClassProperty property : clazz.getProperty()) {
+				if(null != property.getMapClass() && null != property.getMapProperty()) {
+					ModelClass relatedClass = modelClassMap.get(property.getMapClass());
+					if(null == relatedClass) {
+						LOGGER.warn("Relation: No class found with name: " + property.getMapClass());
+					} else {
+						ModelClassProperty relatedProperty = getPropertyFromClass(relatedClass, property.getMapProperty());
+						if(null == relatedProperty) {
+							LOGGER.warn("Relation: No property '" + property.getMapProperty() + "' found for class: " + property.getMapClass());
+						} else {
+							property.setRelatedClass(relatedClass);
+						}
+					}
+				}
+			}			
+		}
+	}
+
+	/** Helper Method: Given a class and property name, grabs you that ModelClassProperty object.  */
+	private ModelClassProperty getPropertyFromClass(ModelClass clazz, String mapPropertyTo) {
+		for(ModelClassProperty prop : clazz.getProperty()) {
+			if(prop.getName().equals(mapPropertyTo)) {
+				return prop;
+			}
+		}
+		return null;
+	}
+
+	/** Builds the tree by reading the Metadata JSON file.  */
 	private void buildTree(String metadataPath) throws JsonProcessingException, IOException {
 		for(MetadataClasses clazz : metadata.getClasses()) {
 			metadataMap.put(clazz.getClassName(), clazz);

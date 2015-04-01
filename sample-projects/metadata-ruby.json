@@ -1,45 +1,45 @@
 {
-  "language": "Ruby",
-  "namespace": null,
-  "classes": [
-    {
-      "className": "Contest",
-      "jsonFile": "contest.json",
-      "key": "id",
-      "urlPath": "/contest",
-      "readonly": false,
-      "propertyMap": [
+    "classes": [
         {
-          "property": "state",
-          "mapClassName": "EnumerationTournamentStates",
-          "mapClassProperty": "value"
+            "className": "Contest",
+            "jsonFile": "contest.json",
+            "key": "id",
+            "propertyMap": [
+                {
+                    "mapClassName": "EnumerationTournamentStates",
+                    "mapClassProperty": "value",
+                    "property": "state"
+                },
+                {
+                    "mapClassName": "EnumerationTournamentStates",
+                    "mapClassProperty": "name",
+                    "property": "stateName"
+                }
+            ],
+            "readonly": false,
+            "transientProperty": [
+                {
+                    "className": "",
+                    "name": "",
+                    "type": ""
+                }
+            ],
+            "urlPath": "/contest"
         },
         {
-          "property": "stateName",
-          "mapClassName": "EnumerationTournamentStates",
-          "mapClassProperty": "name"
+            "className": "Enumeration",
+            "jsonFile": "enumerations.json",
+            "readonly": true,
+            "urlPath": "/enumerations"
         }
-      ],
-      "transientProperty": [
-        {
-          "className": "",
-          "name": "",
-          "type": ""
-        }
-      ]
+    ],
+    "generate": {
+        "models": true,
+        "restServices": true,
+        "services": true,
+        "tests": true,
+        "views": true
     },
-    {
-      "className": "Enumeration",
-      "jsonFile": "enumerations.json",
-      "readonly": true,
-      "urlPath": "/enumerations"
-    }
-  ],
-  "generate": {
-    "models": true,
-    "tests": true,
-    "views": true,
-    "services": true,
-    "restServices": true
-  }
+    "language": "Ruby",
+    "namespace": null
 }

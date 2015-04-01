@@ -165,12 +165,8 @@ public class JavaModelBuilder extends BaseModelBuilder {
 			builder.append(tabs(1) + "@JsonIgnore\n");
 		}
 		builder.append(tabs(1) + "private " + propertyType + " " + property.getName());
-		if(OrchestrationDataType.ARRAY == OrchestrationDataType.fromModelProperty(property)) {
-			if(null != property.getArraySubType()) {
-				builder.append(" = new ArrayList<" + property.getArraySubType() + ">()" );
-			} else {
-				builder.append(" = new ArrayList()");
-			}
+		if(null != property.getInitializer()) {
+			builder.append(" = " + property.getInitializer());
 		}
 		builder.append(";" + (property.getIsTransient() ? tabs(2) + singleLineComment("Transient Property") : "") + "\n");
 		

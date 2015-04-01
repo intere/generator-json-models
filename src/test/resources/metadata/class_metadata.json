@@ -9,8 +9,10 @@
       "urlPath": "",
       "propertyMap": [
         {
-          "mapClassName": "",
-          "mapClassProperty": ""
+          "mapClassFrom": "",
+          "mapPropertyFrom": "",
+          "mapClassTo": "",
+          "mapPropertyTo": ""
         }
       ],
       "transientProperty": [
@@ -34,8 +36,10 @@
       "urlPath": "",
       "propertyMap": [
         {
-          "mapClassName": "",
-          "mapClassProperty": ""
+          "mapClassFrom": "",
+          "mapPropertyFrom": "",
+          "mapClassTo": "",
+          "mapPropertyTo": ""
         }
       ],
       "transientProperty": [
@@ -53,11 +57,32 @@
           "className": "ModelClassProperty",
           "name": "dataType",
           "type": "OrchestrationDataType"
+        },
+        {
+          "className": "ModelClassProperty",
+          "name": "relatedClass",
+          "type": "ModelClass"
         }
       ],
       "imports": [
         {
           "importName": "com.intere.generator.builder.orchestration.OrchestrationDataType",
+          "targetClassName": "ModelClassProperty"
+        },
+        {
+          "importName": "java.util.Map",
+          "targetClassName": "ModelClassProperty"
+        },
+        {
+          "importName": "java.util.HashMap",
+          "targetClassName": "ModelClassProperty"
+        },
+        {
+          "importName": "java.util.List",
+          "targetClassName": "ModelClassProperty"
+        },
+        {
+          "importName": "java.util.ArrayList",
           "targetClassName": "ModelClassProperty"
         }
       ]

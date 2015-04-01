@@ -1,41 +1,68 @@
 {
-  "language" : "Java",
-  "namespace" : "com.intere.test",
-  "classes" : [ {
-    "className" : "Contest",
-    "jsonFile" : "contest.json",
-    "key" : "id",
-    "urlPath" : "/contest",
-    "readonly" : false,
-    "propertyMap" : [ {
-      "property" : "state",
-      "mapClassName" : "EnumerationTournamentStates",
-      "mapClassProperty" : "value"
-    }, {
-      "property" : "stateName",
-      "mapClassName" : "EnumerationTournamentStates",
-      "mapClassProperty" : "name"
-    } ],
-    "transientProperty" : [ {
-      "className" : "Contest",
-      "name" : "transientProperty",
-      "type" : "String"
-    } ],
-    "imports" : [ {
-      "importName" : "com.intere.generator.builder.orchestration",
-      "targetClassName" : "Enumeration"
-    } ]
-  }, {
-    "className" : "Enumeration",
-    "jsonFile" : "enumerations.json",
-    "readonly" : true,
-    "urlPath" : "/enumerations"
-  } ],
-  "generate" : {
-    "models" : true,
-    "tests" : true,
-    "views" : true,
-    "services" : true,
-    "restServices" : true
+  "language": "Java",
+  "namespace": "com.intere.test",
+  "classes": [
+    {
+      "className": "Contest",
+      "jsonFile": "contest.json",
+      "key": "id",
+      "urlPath": "/contest",
+      "readonly": false,
+      "propertyMap": [
+        {
+          "mapClassFrom": "ContestResults",
+          "mapPropertyFrom": "userId",
+          "mapClassTo": "User",
+          "mapPropertyTo": "username"
+        },
+        {
+          "mapClassFrom": "Contest",
+          "mapPropertyFrom": "state",
+          "mapClassTo": "EnumerationTournamentStates",
+          "mapPropertyTo": "value"
+        },
+        {
+          "mapClassFrom": "Contest",
+          "mapPropertyFrom": "stateName",
+          "mapClassTo": "EnumerationTournamentStates",
+          "mapPropertyTo": "name"
+        }
+      ],
+      "transientProperty": [
+        {
+          "className": "Contest",
+          "name": "transientProperty",
+          "type": "String"
+        }
+      ],
+      "imports": [
+        {
+          "importName": "com.intere.generator.builder.orchestration",
+          "targetClassName": "Enumeration"
+        }
+      ],
+      "listSummary": [
+        {
+          "className": "Metadata",
+          "propertyList": [
+            "className",
+            "jsonFile"
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Enumeration",
+      "jsonFile": "enumerations.json",
+      "readonly": true,
+      "urlPath": "/enumerations"
+    }
+  ],
+  "generate": {
+    "models": true,
+    "tests": true,
+    "views": true,
+    "services": true,
+    "restServices": true
   }
 }

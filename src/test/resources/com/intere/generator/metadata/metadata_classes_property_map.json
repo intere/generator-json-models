@@ -1,5 +1,5 @@
 {
-  "property" : "state",
-  "mapClassName" : "EnumerationTournamentStates",
-  "mapClassProperty" : "value"
+    "mapClassName": "EnumerationTournamentStates",
+    "mapClassProperty": "value",
+    "property": "state"
 }

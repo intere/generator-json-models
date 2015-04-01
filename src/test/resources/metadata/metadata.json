@@ -10,21 +10,30 @@
       "readonly": false,
       "propertyMap": [
         {
-          "property": "state",
-          "mapClassName": "EnumerationTournamentStates",
-          "mapClassProperty": "value"
+          "mapClassFrom": "ContestResults",
+          "mapPropertyFrom": "userId",
+          "mapClassTo": "User",
+          "mapPropertyTo": "username"
         },
         {
-          "property": "stateName",
-          "mapClassName": "EnumerationTournamentStates",
-          "mapClassProperty": "name"
+          "mapClassFrom": "Contest",
+          "mapPropertyFrom": "state",
+          "mapClassTo": "EnumerationTournamentStates",
+          "mapPropertyTo": "value"
+        },
+        {
+          "mapClassFrom": "Contest",
+          "mapPropertyFrom": "stateName",
+          "mapClassTo": "EnumerationTournamentStates",
+          "mapPropertyTo": "name"
         }
       ],
       "transientProperty": [
         {
           "className": "Contest",
           "name": "transientProperty",
-          "type": "String"
+          "type": "String",
+          "initializer": ""
         }
       ],
       "imports": [

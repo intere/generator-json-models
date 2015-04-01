@@ -1,4 +1,4 @@
 {
-  "importName" : "com.intere.generator.builder.orchestration",
-  "targetClassName" : "Enumeration"
+    "importName": "com.intere.generator.builder.orchestration",
+    "targetClassName": "Enumeration"
 }
