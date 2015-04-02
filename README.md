@@ -17,7 +17,7 @@ See: [docs/README.md](docs/README.md)
 Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1295722
 
 ### Roadmap (high level)
-* Migrate to using Spring
+* ~~Migrate to using Spring~~ - Complete
 * Refactor the LanguageUtility interfaces
 * Create a Spring Shell Interface
 * Create View, Service, Rest Service, Rest Client code for all supported languages
@@ -71,7 +71,6 @@ cd sample-projects
 ```
 
 ## Sample Usage
-### New Usage
 ```bash
 # Generates Objective-C Code
 ./run.sh --orchestrate ${PWD}/sample-projects/metadata-objc.json \

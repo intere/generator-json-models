@@ -29,6 +29,9 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 	
 	@Autowired @Qualifier("RubyServiceBuilder")
 	ServiceBuilder serviceBuilder;
+	
+	@Autowired @Qualifier("RubyRestClientBuilder")
+	RestClientBuilder restClientBuilder;
 
 	@Override
 	public ModelBuilder getModelBuilder() {
@@ -48,6 +51,11 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public ServiceBuilder getServiceBuilder() {
 		return serviceBuilder;
+	}
+	
+	@Override
+	public RestClientBuilder getRestClientBuilder() {
+		return restClientBuilder;
 	}
 
 	@Override

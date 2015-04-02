@@ -46,12 +46,6 @@ public class JavaTestBuilder extends BaseTestBuilder {
 	public String buildImplementationFileComment(ModelClass modelClass) {
 		return buildFileComment(modelClass.getTestClassName() + ".java");
 	}
-	
-	@Override
-	public String buildSerializationConstants(ModelClass modelClass) {
-		// Not Used for this language
-		return null;
-	}	
 
 	@Override
 	public String buildTestClassDeclaration(ModelClass modelClass) {
@@ -210,13 +204,6 @@ public class JavaTestBuilder extends BaseTestBuilder {
 		return "}\t" + singleLineComment("end " + modelClass.getTestClassName()) + "\n\n";
 	}
 
-	@Override
-	public String buildHeaderFileComment(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String buildImports(ModelClass modelClass) {
 		Map<String, String> imports = new HashMap<>();
 		for(ModelClassProperty prop : modelClass.getProperty()) {
@@ -235,46 +222,4 @@ public class JavaTestBuilder extends BaseTestBuilder {
 		}
 		return builder.toString();
 	}
-
-	@Override
-	public String buildClassImplementation(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildClassDeclaration(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildGetterAndSetter(ModelClassProperty prop) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPropertyType(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
-	}	
 }

@@ -6,13 +6,12 @@ import org.springframework.stereotype.Service;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
-import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.ServiceBuilder;
-import com.intere.generator.builder.orchestration.language.utility.base.BaseModelBuilder;
+import com.intere.generator.builder.orchestration.language.utility.base.BaseServiceBuilder;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
 @Service(value="ObjectiveCServiceBuilder")
-public class ObjectiveCServiceBuilder extends BaseModelBuilder implements ServiceBuilder {
+public class ObjectiveCServiceBuilder extends BaseServiceBuilder {
 	@Autowired @Qualifier("CStyle")
 	protected CommentBuilder commentBuilder;
 	@Autowired @Qualifier("ObjectiveCInterpreter")
@@ -42,17 +41,6 @@ public class ObjectiveCServiceBuilder extends BaseModelBuilder implements Servic
 	@Override
 	public String buildImplementationFileComment(ModelClass modelClass) {
 		return buildFileComment(modelClass.getServiceClassName() + ".m");
-	}
-
-	@Override
-	public String buildImports(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildSerializationConstants(ModelClass modelClass) {
-		return null;
 	}
 
 	@Override
@@ -91,7 +79,7 @@ public class ObjectiveCServiceBuilder extends BaseModelBuilder implements Servic
 	}
 
 	@Override
-	public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
+	public String buildUtilityDeclarationMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(multiLineComment("Singleton Accessor method for " + modelClass.getServiceClassName() + " instance.") + "\n");
 		builder.append("+(" + modelClass.getServiceClassName() + " *)getSharedInstance;\n");
@@ -99,7 +87,7 @@ public class ObjectiveCServiceBuilder extends BaseModelBuilder implements Servic
 	}
 
 	@Override
-	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
+	public String buildUtilityDefinitionMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("+(" + modelClass.getServiceClassName() + " *)getSharedInstance {\n");
 		builder.append(tabs(1) + "if(!shared" + modelClass.getServiceClassName() + ") {\n");
@@ -114,23 +102,5 @@ public class ObjectiveCServiceBuilder extends BaseModelBuilder implements Servic
 	@Override
 	public String finishClass(ModelClass modelClass) {
 		return "@end" + singleLineComment("End of " + modelClass.getServiceClassName() + " class", 3) + "\n\n";
-	}
-
-	@Override
-	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildGetterAndSetter(ModelClassProperty prop) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPropertyType(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

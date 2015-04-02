@@ -8,16 +8,27 @@ import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.ServiceBuilder;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseModelBuilder;
+import com.intere.generator.builder.orchestration.language.utility.base.BaseServiceBuilder;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
 @Service(value="JavaServiceBuilder")
-public class JavaServiceBuilder extends BaseModelBuilder implements ServiceBuilder {
+public class JavaServiceBuilder extends BaseServiceBuilder {
 	@Autowired @Qualifier("CStyle")
 	protected CommentBuilder commentBuilder;
 	@Autowired @Qualifier("JavaInterpreter")
 	protected JsonLanguageInterpreter interpreter;
 	
+	@Override
+	public CommentBuilder getCommentBuilder() {
+		return commentBuilder;
+	}
+	
+	@Override
+	public JsonLanguageInterpreter getInterpreter() {
+		return interpreter;
+	}
+
 	@Override
 	public String buildNamespace(ModelClass modelClass) {
 		// TODO Auto-generated method stub
@@ -37,13 +48,13 @@ public class JavaServiceBuilder extends BaseModelBuilder implements ServiceBuild
 	}
 
 	@Override
-	public String buildImports(ModelClass modelClass) {
+	public String buildClassDeclaration(ModelClass modelClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String buildSerializationConstants(ModelClass modelClass) {
+	public String buildPropertyDeclarations(ModelClass modelClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -55,19 +66,13 @@ public class JavaServiceBuilder extends BaseModelBuilder implements ServiceBuild
 	}
 
 	@Override
-	public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
+	public String buildUtilityDeclarationMethods(ModelClass modelClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildClassDeclaration(ModelClass modelClass) {
+	public String buildUtilityDefinitionMethods(ModelClass modelClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -77,35 +82,4 @@ public class JavaServiceBuilder extends BaseModelBuilder implements ServiceBuild
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildGetterAndSetter(ModelClassProperty prop) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPropertyType(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CommentBuilder getCommentBuilder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public JsonLanguageInterpreter getInterpreter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

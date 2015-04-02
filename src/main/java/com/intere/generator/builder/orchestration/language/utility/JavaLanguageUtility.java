@@ -22,6 +22,8 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	ViewBuilder viewBuilder;
 	@Autowired @Qualifier("JavaServiceBuilder")
 	ServiceBuilder serviceBuilder;
+	@Autowired @Qualifier("JavaRestClientBuilder")
+	RestClientBuilder restClientBuilder;
 	
 	@Override
 	public ModelBuilder getModelBuilder() {
@@ -41,6 +43,11 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public ServiceBuilder getServiceBuilder() {
 		return serviceBuilder;
+	}
+	
+	@Override
+	public RestClientBuilder getRestClientBuilder() {
+		return restClientBuilder;
 	}
 
 	@Override

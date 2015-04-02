@@ -31,6 +31,9 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	@Autowired @Qualifier("ObjectiveCListViewControllerGenerator")
 	ListViewControllerBuilder listViewControllerBuilder;
 	
+	@Autowired @Qualifier("ObjectiveCRestClientBuilder")
+	RestClientBuilder restClientBuilder;
+	
 	@Override
 	public ModelBuilder getModelBuilder() {
 		return modelBuilder;
@@ -59,6 +62,11 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	@Override
 	public ListViewControllerBuilder getListViewControllerBuilder() {
 		return listViewControllerBuilder;
+	}
+	
+	@Override
+	public RestClientBuilder getRestClientBuilder() {
+		return restClientBuilder;
 	}
 	
 	@Override

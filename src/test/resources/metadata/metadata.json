@@ -64,6 +64,7 @@
     "tests": true,
     "views": true,
     "services": true,
-    "restServices": true
+    "restServices": true,
+    "restClients": true
   }
 }

@@ -28,7 +28,6 @@ public class RubyModelBuilder extends BaseModelBuilder {
 		return interpreter;
 	}
 	
-
 	@Override
 	public String buildHeaderFileComment(ModelClass modelClass) {
 		throw new IllegalAccessError("You're doing it wrong");

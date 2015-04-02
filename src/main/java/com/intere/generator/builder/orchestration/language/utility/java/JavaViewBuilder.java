@@ -8,7 +8,6 @@ import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseViewBuilder;
 import com.intere.generator.metadata.ModelClass;
-import com.intere.generator.metadata.ModelClassProperty;
 
 @Service(value="JavaViewBuilder")
 public class JavaViewBuilder extends BaseViewBuilder {
@@ -16,11 +15,15 @@ public class JavaViewBuilder extends BaseViewBuilder {
 	protected CommentBuilder commentBuilder;
 	@Autowired @Qualifier("JavaInterpreter")
 	protected JsonLanguageInterpreter interpreter;
-
+	
 	@Override
-	public String buildNamespace(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
+	public CommentBuilder getCommentBuilder() {
+		return commentBuilder;
+	}
+	
+	@Override
+	public JsonLanguageInterpreter getInterpreter() {
+		return interpreter;
 	}
 
 	@Override
@@ -42,19 +45,7 @@ public class JavaViewBuilder extends BaseViewBuilder {
 	}
 
 	@Override
-	public String buildSerializationConstants(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String buildClassImplementation(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -73,36 +64,6 @@ public class JavaViewBuilder extends BaseViewBuilder {
 
 	@Override
 	public String finishClass(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildGetterAndSetter(ModelClassProperty prop) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPropertyType(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CommentBuilder getCommentBuilder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public JsonLanguageInterpreter getInterpreter() {
 		// TODO Auto-generated method stub
 		return null;
 	}

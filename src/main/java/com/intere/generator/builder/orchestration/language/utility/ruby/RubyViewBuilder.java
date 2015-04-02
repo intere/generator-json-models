@@ -20,12 +20,6 @@ public class RubyViewBuilder extends BaseViewBuilder {
 	JsonLanguageInterpreter interpreter;
 
 	@Override
-	public String buildNamespace(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String buildHeaderFileComment(ModelClass modelClass) {
 		// TODO Auto-generated method stub
 		return null;
@@ -44,19 +38,7 @@ public class RubyViewBuilder extends BaseViewBuilder {
 	}
 
 	@Override
-	public String buildSerializationConstants(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String buildClassImplementation(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -75,24 +57,6 @@ public class RubyViewBuilder extends BaseViewBuilder {
 
 	@Override
 	public String finishClass(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildGetterAndSetter(ModelClassProperty prop) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPropertyType(ModelClassProperty property) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -66,6 +66,12 @@ public class RubyOrchestration implements LanguageOrchestrator {
 	}
 	
 	@Override
+	public List<File> generateRestClients(File restClientPath, OrchestrationTree tree) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public void review(OrchestrationTree tree) {
 		languageUtil.enforceFilenames(tree);
 		languageUtil.enforcePropertyMappings(tree);

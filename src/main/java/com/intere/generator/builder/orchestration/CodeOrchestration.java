@@ -4,7 +4,6 @@ import static com.intere.generator.io.FileIOUtils.ensureExists;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
 
 import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
 
@@ -86,14 +85,21 @@ public class CodeOrchestration {
 			}
 		}
 		
+		if(shouldGenerateRestClients()) {
+			File restClientPath = new File(outputDirectory, "rest-clients");
+			if(ensureExists(restClientPath)) {
+				orchestrator.generateRestClients(restClientPath, tree);
+			}
+		}
+		
 		if(shouldGenerateRestServices()) {
-			File restPath = new File(outputDirectory, "rest-services");
-			if(ensureExists(restPath)) {
-				orchestrator.generateRestServices(restPath, tree);
+			File restServicePath = new File(outputDirectory, "rest-services");
+			if(ensureExists(restServicePath)) {
+				orchestrator.generateRestServices(restServicePath, tree);
 			}
 		}
 	}
-	
+
 	/**
 	 * Setter for the {@link LanguageOrchestrator}.
 	 * @param orchestrator
@@ -110,23 +116,43 @@ public class CodeOrchestration {
 		return tree;
 	}
 	
+	private boolean hasTree() {
+		return null != tree;
+	}
+	
+	private boolean hasMetadata() {
+		return hasTree() && null != tree.getMetadata();
+	}
+	
+	private boolean hasGenerate() {
+		return hasMetadata() && null != tree.getMetadata().getGenerate();
+	}
+	
+	private boolean checkValue(Boolean value) {
+		return null != value && value.booleanValue();
+	}
+	
+	private boolean shouldGenerateRestClients() {
+		return hasGenerate() && checkValue(tree.getMetadata().getGenerate().getRestClients());			
+	}
+	
 	private boolean shouldGenerateRestServices() {
-		return tree.getMetadata().getGenerate().getRestServices();
+		return hasGenerate() && checkValue(tree.getMetadata().getGenerate().getRestServices());
 	}
 
 	private boolean shouldGenerateViews() {
-		return tree.getMetadata().getGenerate().getViews();
+		return hasGenerate() && checkValue(tree.getMetadata().getGenerate().getViews());
 	}
 
 	private boolean shouldGenerateServices() {
-		return tree.getMetadata().getGenerate().getServices();
+		return hasGenerate() && checkValue(tree.getMetadata().getGenerate().getServices());
 	}
 
 	private boolean shouldGenerateTests() {
-		return tree.getMetadata().getGenerate().getTests();
+		return hasGenerate() && checkValue(tree.getMetadata().getGenerate().getTests());
 	}
 
 	private boolean shouldGeenerateModels() {
-		return tree.getMetadata().getGenerate().getModels();
+		return hasGenerate() && checkValue(tree.getMetadata().getGenerate().getModels());
 	}
 }

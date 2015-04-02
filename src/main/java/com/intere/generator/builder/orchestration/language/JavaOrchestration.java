@@ -62,6 +62,12 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		return null;
 	}
 	
+	@Override
+	public List<File> generateRestClients(File restClientPath, OrchestrationTree tree) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	/**
 	 * Builds the Model Class File (in the provided output directory).
 	 * @param outputDirectory

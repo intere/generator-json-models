@@ -98,72 +98,12 @@ public class RubyTestBuilder extends BaseTestBuilder {
 	}
 
 	@Override
-	public String buildHeaderFileComment(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String buildImplementationFileComment(ModelClass modelClass) {
 		return buildFileComment(modelClass.getFileName() + "_spec.rb");
 	}
 
 	@Override
-	public String buildImports(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildSerializationConstants(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildClassImplementation(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildClassDeclaration(ModelClass modelClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public String finishClass(ModelClass modelClass) {
 		return "end" + tabs(2) + singleLineComment("End of " + modelClass.getClassName() + " Spec") + "\n\n";
-	}
-
-	@Override
-	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String buildGetterAndSetter(ModelClassProperty prop) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getPropertyType(ModelClassProperty property) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

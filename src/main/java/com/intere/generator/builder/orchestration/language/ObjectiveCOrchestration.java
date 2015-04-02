@@ -104,6 +104,12 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	}
 	
 	@Override
+	public List<File> generateRestClients(File restClientPath, OrchestrationTree tree) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public void review(OrchestrationTree tree) {
 		languageUtil.enforcePropertyMappings(tree);
 	}
@@ -220,7 +226,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		builder.append(serviceBuilder.buildHeaderFileComment(modelClass));
 		builder.append(serviceBuilder.buildClassDeclaration(modelClass));
 		builder.append(serviceBuilder.buildPropertyDeclarations(modelClass));
-		builder.append(serviceBuilder.buildModelUtilityDeclarationMethods(modelClass));
+		builder.append(serviceBuilder.buildUtilityDeclarationMethods(modelClass));
 		builder.append(serviceBuilder.finishClass(modelClass));
 		return builder.toString();
 	}
@@ -230,7 +236,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		ServiceBuilder serviceBuilder = languageUtil.getServiceBuilder();
 		builder.append(serviceBuilder.buildImplementationFileComment(modelClass));
 		builder.append(serviceBuilder.buildClassImplementation(modelClass));
-		builder.append(serviceBuilder.buildViewUtilityDefinitionMethods(modelClass));
+		builder.append(serviceBuilder.buildUtilityDefinitionMethods(modelClass));
 		builder.append(serviceBuilder.finishClass(modelClass));
 		return builder.toString();
 	}
