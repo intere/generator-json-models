@@ -49,7 +49,7 @@ public class ObjectiveCRestClientBuilder extends BaseRestClientBuilder {
 	public String buildUtilityDeclarationMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(multiLineComment("Gets you all of the " + modelClass.getClassName() + " objects from the service using default options") + "\n");
-		builder.append("+(NSArray *)getDefault" + modelClass.getClassName() + ";\n\n");
+		builder.append("+(NSArray *)getDefault" + modelClass.getClassName() + "Array;\n\n");
 		
 		builder.append(multiLineComment("Gets you the " + modelClass.getClassName() + " objects that match the parameters you provide") + "\n");
 		builder.append("+(NSArray *)get" + modelClass.getClassName() + "WithOptions:(NSDictionary *)options;\n\n");
@@ -92,7 +92,7 @@ public class ObjectiveCRestClientBuilder extends BaseRestClientBuilder {
 	@Override
 	public String buildUtilityDefinitionMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
-		builder.append("+(NSArray *)getDefault" + modelClass.getClassName() + " {\n");
+		builder.append("+(NSArray *)getDefault" + modelClass.getClassName() + "Array {\n");
 		builder.append(tabs(1) + "NSString *url = [RestUtils buildUrlWithBase:[self getBaseUrl] andContext:[self getUrlContext] andPath:REST_ENDPOINT];\n");
 		builder.append(tabs(1) + "return [self get" + modelClass.getClassName() + "ArrayFromUrl:url];\n");
 		builder.append("}\n\n");

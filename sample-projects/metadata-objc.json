@@ -62,7 +62,15 @@
       "jsonFile": "user.json",
       "propertyMap": [],
       "readonly": false,
-      "urlPath": "/user"
+      "urlPath": "/user",
+      "listSummary": [
+        {
+          "className": "User",
+          "propertyList": [
+            "name"
+          ]
+        }
+      ]
     }
   ],
   "generate": {

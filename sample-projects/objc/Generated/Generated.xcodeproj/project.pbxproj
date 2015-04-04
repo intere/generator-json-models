@@ -82,7 +82,6 @@
 		36B6E2CD1AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2C01AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m */; };
 		36B6E2CE1AC21AE10085EF90 /* EnumerationUserTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2C21AC21AE10085EF90 /* EnumerationUserTypesViewController.m */; };
 		36B6E2CF1AC21AE10085EF90 /* EnumerationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2C41AC21AE10085EF90 /* EnumerationViewController.m */; };
-		36B6E2D31AC269C20085EF90 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2D21AC269C20085EF90 /* MyTableViewController.m */; };
 		36BAAC9A1AC4546100A19071 /* ContestResultsSponsorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC851AC4546100A19071 /* ContestResultsSponsorTableViewController.m */; };
 		36BAAC9B1AC4546100A19071 /* ContestResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC871AC4546100A19071 /* ContestResultsTableViewController.m */; };
 		36BAAC9C1AC4546100A19071 /* ContestSponsorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC891AC4546100A19071 /* ContestSponsorTableViewController.m */; };
@@ -99,6 +98,7 @@
 		36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */; };
 		36E999A71ACED49B00D659D6 /* RestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E999A61ACED49B00D659D6 /* RestUtils.m */; };
 		36E999AB1ACEDE7C00D659D6 /* ContestRestClientTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E999AA1ACEDE7C00D659D6 /* ContestRestClientTest.m */; };
+		36EDE9381AD0262600F9EA7B /* DataLoadingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EDE9371AD0262600F9EA7B /* DataLoadingService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,8 +249,6 @@
 		36B6E2C21AC21AE10085EF90 /* EnumerationUserTypesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesViewController.m; sourceTree = "<group>"; };
 		36B6E2C31AC21AE10085EF90 /* EnumerationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationViewController.h; sourceTree = "<group>"; };
 		36B6E2C41AC21AE10085EF90 /* EnumerationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationViewController.m; sourceTree = "<group>"; };
-		36B6E2D11AC269C20085EF90 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
-		36B6E2D21AC269C20085EF90 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
 		36BAAC841AC4546100A19071 /* ContestResultsSponsorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsorTableViewController.h; sourceTree = "<group>"; };
 		36BAAC851AC4546100A19071 /* ContestResultsSponsorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorTableViewController.m; sourceTree = "<group>"; };
 		36BAAC861AC4546100A19071 /* ContestResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsTableViewController.h; sourceTree = "<group>"; };
@@ -280,6 +278,8 @@
 		36E999A51ACED49B00D659D6 /* RestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestUtils.h; sourceTree = "<group>"; };
 		36E999A61ACED49B00D659D6 /* RestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestUtils.m; sourceTree = "<group>"; };
 		36E999AA1ACEDE7C00D659D6 /* ContestRestClientTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestRestClientTest.m; sourceTree = "<group>"; };
+		36EDE9361AD0262600F9EA7B /* DataLoadingService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLoadingService.h; sourceTree = "<group>"; };
+		36EDE9371AD0262600F9EA7B /* DataLoadingService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLoadingService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,8 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				361589531AADE71300FFE84C /* generated */,
-				36B6E2D11AC269C20085EF90 /* MyTableViewController.h */,
-				36B6E2D21AC269C20085EF90 /* MyTableViewController.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -489,6 +487,7 @@
 		367668D81AB076330012B7FF /* services */ = {
 			isa = PBXGroup;
 			children = (
+				36EDE9351AD0260400F9EA7B /* DataLoadingService */,
 				367668D91AB076390012B7FF /* generated */,
 				36BDAD051AB1CD8500201F7E /* MockDataService.h */,
 				36BDAD061AB1CD8500201F7E /* MockDataService.m */,
@@ -626,6 +625,15 @@
 			name = generated;
 			sourceTree = "<group>";
 		};
+		36EDE9351AD0260400F9EA7B /* DataLoadingService */ = {
+			isa = PBXGroup;
+			children = (
+				36EDE9361AD0262600F9EA7B /* DataLoadingService.h */,
+				36EDE9371AD0262600F9EA7B /* DataLoadingService.m */,
+			);
+			name = DataLoadingService;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -732,7 +740,6 @@
 				36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */,
 				367668F71AB076520012B7FF /* EnumerationTournamentSizesService.m in Sources */,
 				361289F61ACEE22300412600 /* User.m in Sources */,
-				36B6E2D31AC269C20085EF90 /* MyTableViewController.m in Sources */,
 				3665CA1E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m in Sources */,
 				3665CA171AA7CFDD00EE4255 /* Contest.m in Sources */,
 				3665CA181AA7CFDD00EE4255 /* ContestResults.m in Sources */,
@@ -768,6 +775,7 @@
 				361FB5751AAF2DF6009F9F03 /* UIHelper.m in Sources */,
 				3665CA1F1AA7CFDD00EE4255 /* EnumerationTournamentStates.m in Sources */,
 				3615896B1AADE75800FFE84C /* ContestResultsView.m in Sources */,
+				36EDE9381AD0262600F9EA7B /* DataLoadingService.m in Sources */,
 				36B6E2CC1AC21AE10085EF90 /* EnumerationTournamentStatesViewController.m in Sources */,
 				36B6E2C71AC21AE10085EF90 /* ContestSponsorViewController.m in Sources */,
 				3665CA1C1AA7CFDD00EE4255 /* EnumerationPurseTypes.m in Sources */,
