@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
+import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.RestClientBuilder;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.ServiceBuilder;
 import com.intere.generator.metadata.ModelClass;
 
@@ -54,6 +55,20 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	public List<File> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException {
 		List<File> generatedResources = new ArrayList<>();
 		Map<File, String> resources = languageUtil.copyViewResources(viewPath, tree);
+		for(File f : resources.keySet()) {
+			LOGGER.info("About to copy resource: " + f.getAbsolutePath());
+			FileOutputStream fout = new FileOutputStream(f);
+			IOUtils.write(resources.get(f), fout);
+			fout.close();
+			generatedResources.add(f);
+		}
+		return generatedResources;
+	}
+	
+	@Override
+	public List<File> copyRestClientResources(File restClientPath, OrchestrationTree tree) throws IOException {
+		List<File> generatedResources = new ArrayList<>();
+		Map<File, String> resources = languageUtil.copyRestClientResources(restClientPath, tree);
 		for(File f : resources.keySet()) {
 			LOGGER.info("About to copy resource: " + f.getAbsolutePath());
 			FileOutputStream fout = new FileOutputStream(f);
@@ -105,10 +120,17 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	
 	@Override
 	public List<File> generateRestClients(File restClientPath, OrchestrationTree tree) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		List<File> restClientClasses = new ArrayList<>();
+		for(ModelClass modelClass : tree.getModelClasses()) {
+			// TODO
+			if(null != modelClass.getRestUrl()) {
+				restClientClasses.add(buildRestClientHeaderFile(restClientPath, modelClass));
+				restClientClasses.add(buildRestClientImplementationFile(restClientPath, modelClass));
+			}
+		}
+		return restClientClasses;
 	}
-	
+
 	@Override
 	public void review(OrchestrationTree tree) {
 		languageUtil.enforcePropertyMappings(tree);
@@ -218,6 +240,39 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		String fileContents = buildListControllerClassImplementation(modelClass);
 		File outputFile = new File(viewPath, modelClass.getListControllerName() + ".m");
 		return writeFile(outputFile, fileContents);
+	}
+	
+	private File buildRestClientImplementationFile(File restClientPath, ModelClass modelClass) throws IOException {
+		String fileContents = buildRestClientClassImplementation(modelClass);
+		File outputFile = new File(restClientPath, modelClass.getRestClientClassName() + ".m");
+		return writeFile(outputFile, fileContents);
+	}
+
+	private File buildRestClientHeaderFile(File restClientPath, ModelClass modelClass) throws IOException {
+		String fileContents = buildRestClientClassDeclaration(modelClass);
+		File outputFile = new File(restClientPath, modelClass.getRestClientClassName() + ".h");
+		return writeFile(outputFile, fileContents);
+	}
+
+	private String buildRestClientClassDeclaration(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		RestClientBuilder restClientBuilder = languageUtil.getRestClientBuilder();
+		builder.append(restClientBuilder.buildHeaderFileComment(modelClass));
+		builder.append(restClientBuilder.buildImports(modelClass));
+		builder.append(restClientBuilder.buildClassDeclaration(modelClass));
+		builder.append(restClientBuilder.buildUtilityDeclarationMethods(modelClass));
+		builder.append(restClientBuilder.finishClass(modelClass));
+		return builder.toString();
+	}
+
+	private String buildRestClientClassImplementation(ModelClass modelClass) {
+		StringBuilder builder = new StringBuilder();
+		RestClientBuilder restClientBuilder = languageUtil.getRestClientBuilder();
+		builder.append(restClientBuilder.buildImplementationFileComment(modelClass));
+		builder.append(restClientBuilder.buildClassImplementation(modelClass));
+		builder.append(restClientBuilder.buildUtilityDefinitionMethods(modelClass));
+		builder.append(restClientBuilder.finishClass(modelClass));
+		return builder.toString();
 	}
 
 	private String buildServiceClassHeader(ModelClass modelClass) {

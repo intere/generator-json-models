@@ -48,6 +48,9 @@ public interface LanguageUtility {
 	/** Copies the View Resource files into the provided viewPath.  */
 	Map<File, String> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException;
 	
+	/** Copies the Rest Client Resource files into the provided REST Client Path.  */
+	Map<File, String> copyRestClientResources(File restClientPath, OrchestrationTree tree) throws IOException;
+	
 	public interface CommentBuilder {
 		/** Give me some number of tabs.  */
 		String tabs(int tabCount);
@@ -168,6 +171,7 @@ public interface LanguageUtility {
 		String buildImplementationFileComment(ModelClass modelClass);
 		String buildClassImplementation(ModelClass modelClass);
 		String buildUtilityDefinitionMethods(ModelClass modelClass);
+		String buildHeaderFileComment(ModelClass modelClass);
 	}
 	
 	public interface SingleViewControllerBuilder {

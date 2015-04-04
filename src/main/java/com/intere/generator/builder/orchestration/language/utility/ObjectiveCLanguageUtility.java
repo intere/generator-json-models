@@ -89,6 +89,14 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	}
 	
 	@Override
+	public Map<File, String> copyRestClientResources(File restClientPath, OrchestrationTree tree) throws IOException {
+		Map<File, String> resources = new HashMap<>();
+		resources.put(new File(restClientPath, "RestUtils.h"), readResource("/RestUtils.h"));
+		resources.put(new File(restClientPath, "RestUtils.m"), readResourceAndReplaceHeaders("/RestUtils.m"));
+		return resources;
+	}
+	
+	@Override
 	public void enforceFilenames(OrchestrationTree tree) {
 		// No-Op for Objective C		
 	}

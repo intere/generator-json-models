@@ -8,6 +8,7 @@
     "singleControllerName": "ContestViewController",
     "listControllerName": "ContestListViewController",
     "serviceClassName": "ContestService",
+    "restClientClassName": "ContestRestClient",
     "restServiceClassName": "ContestRestService",
     "readonly": false,
     "namespace": "com.intere.generated",

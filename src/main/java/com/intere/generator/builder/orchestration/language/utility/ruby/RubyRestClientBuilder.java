@@ -57,6 +57,12 @@ public class RubyRestClientBuilder extends BaseRestClientBuilder {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String buildHeaderFileComment(ModelClass modelClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public String buildClassImplementation(ModelClass modelClass) {

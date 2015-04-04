@@ -89,6 +89,7 @@ public class CodeOrchestration {
 			File restClientPath = new File(outputDirectory, "rest-clients");
 			if(ensureExists(restClientPath)) {
 				orchestrator.generateRestClients(restClientPath, tree);
+				orchestrator.copyRestClientResources(restClientPath, tree);
 			}
 		}
 		

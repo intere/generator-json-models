@@ -152,6 +152,13 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	}
 	
 	@Override
+	public List<File> copyRestClientResources(File restClientPath,
+			OrchestrationTree tree) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public void review(OrchestrationTree tree) {
 		languageUtil.enforcePropertyMappings(tree);
 	}

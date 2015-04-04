@@ -60,6 +60,11 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 		// Currently a No-Op for Java;
 		return new HashMap<>();
 	}
+	
+	@Override
+	public Map<File, String> copyRestClientResources(File restClientPath, OrchestrationTree tree) throws IOException {
+		return new HashMap<>();
+	}
 
 	@Override
 	public void enforceFilenames(OrchestrationTree tree) {

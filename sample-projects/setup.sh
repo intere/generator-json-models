@@ -45,6 +45,7 @@ generateObjectiveC() {
   cp ${CUR_DIR}/tmp/src/* objc/Generated/Generated/
   cp ${CUR_DIR}/tmp/views/* objc/Generated/Generated/
   cp ${CUR_DIR}/tmp/services/* objc/Generated/Generated/
+  cp ${CUR_DIR}/tmp/rest-clients/* objc/Generated/Generated/
   cp ${CUR_DIR}/tmp/test/* objc/Generated/GeneratedTests/
 }
 

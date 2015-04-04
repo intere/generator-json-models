@@ -77,6 +77,11 @@ public class RubyLanguageUtility extends AbstractLanguageUtility {
 		// Currently a No-Op for Ruby;
 		return new HashMap<>();
 	}
+	
+	@Override
+	public Map<File, String> copyRestClientResources(File restClientPath, OrchestrationTree tree) throws IOException {
+		return new HashMap<>();
+	}
 
 	private String readJsonModelFile() throws IOException {
 		return readResourceAndReplaceHeaders("/json_model.rb");

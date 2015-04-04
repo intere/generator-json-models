@@ -84,4 +84,13 @@ public interface LanguageOrchestrator {
 	 */
 	List<File> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException;
 
+	/**
+	 * Copies the resource files associated with the rest clients.
+	 * @param restClientPath
+	 * @param tree
+	 * @return
+	 * @throws IOException
+	 */
+	List<File> copyRestClientResources(File restClientPath, OrchestrationTree tree) throws IOException;
+
 }

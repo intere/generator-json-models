@@ -70,7 +70,8 @@
     "restServices": true,
     "services": true,
     "tests": true,
-    "views": true
+    "views": true,
+    "restClients": true
   },
   "language": "Objective-C",
   "namespace": null

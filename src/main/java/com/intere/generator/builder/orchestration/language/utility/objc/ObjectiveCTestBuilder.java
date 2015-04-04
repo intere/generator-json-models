@@ -67,7 +67,9 @@ public class ObjectiveCTestBuilder extends BaseTestBuilder {
 	public String buildTestMethods(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
 		for(ModelClassProperty prop : modelClass.getProperty()) {
-			builder.append(buildTestMethod(prop));
+			if(!prop.getIsTransient()) {
+				builder.append(buildTestMethod(prop));
+			}
 		}
 		return builder.toString();
 	}

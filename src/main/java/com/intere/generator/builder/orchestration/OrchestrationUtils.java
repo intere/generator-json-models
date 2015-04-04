@@ -241,6 +241,7 @@ public class OrchestrationUtils {
 		model.setListControllerName(interpreter.buildClassName(className) + "TableViewController");
 		model.setServiceClassName(interpreter.buildClassName(className) + "Service");
 		model.setRestServiceClassName(interpreter.buildClassName(className) + "RestService");
+		model.setRestClientClassName(interpreter.buildClassName(className) + "RestClient");
 		modelClasses.add(model);
 		if(model.getHasSubClasses()) {
 			modelClasses.addAll(getSubClasses(interpreter, metadata, clazz, node, model.getClassName()));
