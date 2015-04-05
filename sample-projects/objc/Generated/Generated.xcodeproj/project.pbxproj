@@ -94,8 +94,6 @@
 		36BAACA31AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC971AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m */; };
 		36BAACA41AC4546100A19071 /* EnumerationUserTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC991AC4546100A19071 /* EnumerationUserTypesTableViewController.m */; };
 		36BDAD041AB1CCB200201F7E /* contests.json in Resources */ = {isa = PBXBuildFile; fileRef = 36BDAD031AB1CCB200201F7E /* contests.json */; };
-		36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD061AB1CD8500201F7E /* MockDataService.m */; };
-		36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */; };
 		36E999A71ACED49B00D659D6 /* RestUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E999A61ACED49B00D659D6 /* RestUtils.m */; };
 		36E999AB1ACEDE7C00D659D6 /* ContestRestClientTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E999AA1ACEDE7C00D659D6 /* ContestRestClientTest.m */; };
 		36EDE9381AD0262600F9EA7B /* DataLoadingService.m in Sources */ = {isa = PBXBuildFile; fileRef = 36EDE9371AD0262600F9EA7B /* DataLoadingService.m */; };
@@ -272,9 +270,6 @@
 		36BAAC981AC4546100A19071 /* EnumerationUserTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypesTableViewController.h; sourceTree = "<group>"; };
 		36BAAC991AC4546100A19071 /* EnumerationUserTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesTableViewController.m; sourceTree = "<group>"; };
 		36BDAD031AB1CCB200201F7E /* contests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = contests.json; sourceTree = "<group>"; };
-		36BDAD051AB1CD8500201F7E /* MockDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockDataService.h; sourceTree = "<group>"; };
-		36BDAD061AB1CD8500201F7E /* MockDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockDataService.m; sourceTree = "<group>"; };
-		36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockDataServiceTest.m; sourceTree = "<group>"; };
 		36E999A51ACED49B00D659D6 /* RestUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestUtils.h; sourceTree = "<group>"; };
 		36E999A61ACED49B00D659D6 /* RestUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestUtils.m; sourceTree = "<group>"; };
 		36E999AA1ACEDE7C00D659D6 /* ContestRestClientTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestRestClientTest.m; sourceTree = "<group>"; };
@@ -489,8 +484,6 @@
 			children = (
 				36EDE9351AD0260400F9EA7B /* DataLoadingService */,
 				367668D91AB076390012B7FF /* generated */,
-				36BDAD051AB1CD8500201F7E /* MockDataService.h */,
-				36BDAD061AB1CD8500201F7E /* MockDataService.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -603,7 +596,6 @@
 		36BDAD081AB1CFA900201F7E /* services */ = {
 			isa = PBXGroup;
 			children = (
-				36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -737,7 +729,6 @@
 			files = (
 				3665CA1A1AA7CFDD00EE4255 /* ContestSponsor.m in Sources */,
 				36BAAC9B1AC4546100A19071 /* ContestResultsTableViewController.m in Sources */,
-				36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */,
 				367668F71AB076520012B7FF /* EnumerationTournamentSizesService.m in Sources */,
 				361289F61ACEE22300412600 /* User.m in Sources */,
 				3665CA1E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m in Sources */,
@@ -825,7 +816,6 @@
 				36128A041ACEE2FE00412600 /* UserTest.m in Sources */,
 				360D596A1AD01E5E00B8E986 /* RestUtilsTest.m in Sources */,
 				3665CA521AA7F52500EE4255 /* EnumerationTournamentTypesTest.m in Sources */,
-				36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */,
 				3665CA4E1AA7F52500EE4255 /* EnumerationSkillLevelsTest.m in Sources */,
 				3665CA561AA8A19300EE4255 /* SerializerTest.m in Sources */,
 				3665CA4B1AA7F52500EE4255 /* ContestSponsorTest.m in Sources */,

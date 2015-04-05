@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "ContestView.h"
-#import "MockDataService.h"
 
 @interface ViewController () {
     ContestView *contestView;
@@ -22,7 +21,6 @@
     contestView = [[ContestView alloc]initWithFrame:self.view.frame];
     [self.scrollView addSubview:contestView];
     [self.scrollView setContentSize:contestView.frame.size];
-    contestView.contest = [[MockDataService getSharedInstance].contests objectAtIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {

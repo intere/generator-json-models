@@ -43,9 +43,18 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 	public String buildClassImplementation(ModelClass modelClass) {
 		String instanceName = getInterpreter().cleanVariableName(modelClass.getClassName());
 		StringBuilder builder = new StringBuilder();
-		builder.append("#import \"" + modelClass.getViewClassName() + ".h\"\n\n");
+		builder.append("#import \"" + modelClass.getViewClassName() + ".h\"\n");
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			if(!prop.getIsTransient() && prop.getDataType()==OrchestrationDataType.CLASS) {
+				String propClass = interpreter.buildSubClassName(modelClass.getClassName(), prop.getName());
+				builder.append("#import \"" + propClass + "Service.h\"\n");
+				builder.append("#import \"" + propClass + "ViewController.h\"\n");
+			}
+		}
+		builder.append("\n");
 		builder.append("#import \"UITheme.h\"\n");
 		builder.append("#import \"UIHelper.h\"\n\n");
+		builder.append("\n");
 		
 		// "Private" Interface Methods
 		builder.append(buildPrivateInterface(modelClass));
@@ -79,6 +88,8 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 
 	@Override
 	public String buildViewUtilityDefinitionMethods(ModelClass modelClass) {
+		String instanceName = interpreter.cleanVariableName(modelClass.getClassName());
+		
 		StringBuilder builder = new StringBuilder();
 		builder.append("#pragma mark Private Methods\n");
 		builder.append("-(void)configureAndAddPropertyLabel:(UILabel *)propertyLabel {\n");
@@ -116,8 +127,32 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		builder.append(tabs(1) + "[self addSubview:imageView];\n");
 		builder.append("}\n\n");
 		
+		builder.append("-(UIViewController *)getViewController {\n");
+		builder.append(tabs(1) + "UIResponder *responder = self.nextResponder;\n");
+		builder.append(tabs(1) + "while(![responder isKindOfClass:[UIViewController class]]) {\n");
+		builder.append(tabs(2) + "responder = responder.nextResponder;\n");
+		builder.append(tabs(1) + "}\n");
+		builder.append(tabs(1) + "return (UIViewController *)responder;\n");
+		builder.append("}\n\n");
+		
 		builder.append("-(void)buttonPressed:(UIButton *)button {\n");
-		builder.append("#warning NOT YET IMPLEMENTED\n");
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			if(!prop.getIsTransient()) {
+				if(prop.getDataType()==OrchestrationDataType.ARRAY) {
+					
+				} else if(prop.getDataType()==OrchestrationDataType.CLASS) {
+					String variableName = interpreter.cleanVariableName(prop.getName());
+					String propClass = interpreter.buildSubClassName(modelClass.getClassName(), prop.getName());
+					String propViewController = propClass + "ViewController";
+					
+					builder.append(tabs(1) + "if(button == self->" + variableName + ") {\n");
+					builder.append(tabs(2) + "[[" + propClass + "Service getSharedInstance].named" + propClass + "Objects setObject:self." + instanceName + "." + variableName + " forKey:@\"selected" + propClass + "\"];\n");
+					builder.append(tabs(2) + propViewController + " *vc = [[" + propViewController + " alloc]init];\n");
+					builder.append(tabs(2) + "[[self getViewController].navigationController pushViewController:vc animated:YES];\n");
+					builder.append(tabs(1) + "}\n");
+				}
+			}
+		}
 		builder.append("}\n\n");
 		
 		return builder.toString();
