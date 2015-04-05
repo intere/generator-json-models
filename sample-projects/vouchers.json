@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Nothing",
+    "description": "You get nothing with your college degree.",
+    "image": "image:http://everybestof.com/images/Frank-Zappa-006.jpg",
+    "value": "$0",
+    "winner": false,
+    "awardDate": 1425772800000,
+    "code": "9EGJZE30AK",
+    "redeemed": false,
+    "redemptionDate": 1425772800000,
+    "sponsor": {
+      "name": "Brothers Magoo",
+      "logo": "image:http://www.brothersmagoo.com/images/BroMagooWhite.png",
+      "siteUrl": "http://www.brothersmagoo.com/",
+      "city": "Denver",
+      "state": "CO",
+      "zip": "80238",
+      "address1": "",
+      "address2": "",
+      "contactName": "",
+      "contactTitle": "",
+      "phoneNumber": "707-238-2237",
+      "contactEmail": "info@brothersmagoo.com",
+      "category": "Miscellaneous",
+      "id": "54da096689a884d54466d769"
+    },
+    "contestId": "54fb9120e4b0449bdb9c062d",
+    "userId": "5300e4f2aec0858466a69b3e",
+    "id": "54fb9120e4b0449bdb9c062f"
+  }
+]

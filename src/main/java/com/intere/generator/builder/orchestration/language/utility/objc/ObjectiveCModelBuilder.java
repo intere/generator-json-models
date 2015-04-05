@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseModelBuilder;
-import com.intere.generator.builder.orchestration.language.utility.comments.CStyleCommentBuilder;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 
@@ -57,8 +55,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 		StringBuilder builder = new StringBuilder();
 		for(ModelClassProperty prop : modelClass.getProperty()) {
 			if(!prop.getIsTransient()) {
-				builder.append("#define " + interpreter.createSerializeConstantSymbolName(prop.getName()) 
-						+ " @\"" + prop.getName() + "\"\n");
+				builder.append("#define " + interpreter.createSerializeConstantSymbolName(prop.getName()) + " @\"" + prop.getName() + "\"\n");
 			}
 		}
 		builder.append("\n");
@@ -281,9 +278,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 					tabs(1) + BASE + "[" + subClassName + " fromDictionary:[dict objectForKey:" + serConstant + "]];\n" + 
 					tabs(1) + "}\n";
 		case ARRAY:
-			OrchestrationDataType subType = OrchestrationDataType.fromString(prop.getArraySubType());
-			if(null != subType) {
-				switch(subType) {
+				switch(prop.getArraySubTypeProperty().getDataType()) {
 				case STRING:
 				case BOOLEAN:
 				case DATE:
@@ -298,10 +293,10 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 					return BASE + "[[NSMutableArray alloc]initWithArray:[Serializer getArrayFromDict:dict forKey:" + serConstant + "]];\n";
 				case CLASS:
 					return BASE + "[" + prop.getArraySubType() + " fromArrayOfDictionaries:[Serializer getArrayFromDict:dict forKey:" + serConstant + "]];\n";
+					
+				default:
+					LOGGER.warn("No Subtype for: " + prop.getArraySubType());
 				}
-			} else {
-				LOGGER.warn("No Subtype for: " + prop.getArraySubType());
-			}
 			return "\n";
 		default:
 			break;	

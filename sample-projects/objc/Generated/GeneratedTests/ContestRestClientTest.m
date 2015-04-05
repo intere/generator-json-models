@@ -34,8 +34,13 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    NSArray *array = [ContestRestClient getDefaultContestArray];
+- (void)testGetData {
+    NSDictionary *options = [[NSDictionary alloc]initWithObjectsAndKeys:@"true", @"all",
+                             @"peuts4ev6ba1Huc7eB4jiaJ0Ki3wued5uj0Ik2uf", @"apiKey",
+                             @"Thu%20Feb%2005%202015%2009:09:40%20GMT-0700%20(MST)", @"startDate",
+                             @"Sun%20Apr%2005%202015%2009:09:40%20GMT-0600%20(MDT)", @"endDate",
+                             nil];
+    NSArray *array = [ContestRestClient getContestWithOptions:options];
     XCTAssertNotNil(array);
     XCTAssertTrue(array.count > 0);
 }

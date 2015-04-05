@@ -34,7 +34,6 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		builder.append("#import <UIKit/UIKit.h>\n");
 		builder.append("#import \"" + modelClass.getClassName() + ".h\"\n");
 		builder.append("#import \"" + modelClass.getServiceClassName() + ".h\"\n");
-		
 		builder.append("\n");
 		return builder.toString();
 	}
@@ -45,10 +44,26 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		StringBuilder builder = new StringBuilder();
 		builder.append("#import \"" + modelClass.getViewClassName() + ".h\"\n");
 		for(ModelClassProperty prop : modelClass.getProperty()) {
-			if(!prop.getIsTransient() && prop.getDataType()==OrchestrationDataType.CLASS) {
+			if(!prop.getIsTransient()) {
 				String propClass = interpreter.buildSubClassName(modelClass.getClassName(), prop.getName());
-				builder.append("#import \"" + propClass + "Service.h\"\n");
-				builder.append("#import \"" + propClass + "ViewController.h\"\n");
+				
+				switch(prop.getDataType()) {
+				case CLASS:	
+					builder.append("#import \"" + propClass + "Service.h\"\n");
+					builder.append("#import \"" + propClass + "ViewController.h\"\n");
+					break;
+					
+				case ARRAY:
+					if(OrchestrationDataType.CLASS==prop.getArraySubTypeProperty().getDataType()) {
+						builder.append("#import \"" + propClass + "Service.h\"\n");
+						builder.append("#import \"" + propClass + "TableViewController.h\"\n");
+					}
+					break;
+					
+				default:
+					// Do Nothing
+					break;
+				}
 			}
 		}
 		builder.append("\n");
@@ -138,11 +153,21 @@ public class ObjectiveCViewBuilder extends BaseViewBuilder {
 		builder.append("-(void)buttonPressed:(UIButton *)button {\n");
 		for(ModelClassProperty prop : modelClass.getProperty()) {
 			if(!prop.getIsTransient()) {
+				String variableName = interpreter.cleanVariableName(prop.getName());
+				String propClass = interpreter.buildSubClassName(modelClass.getClassName(), prop.getName());
+				
 				if(prop.getDataType()==OrchestrationDataType.ARRAY) {
-					
-				} else if(prop.getDataType()==OrchestrationDataType.CLASS) {
-					String variableName = interpreter.cleanVariableName(prop.getName());
-					String propClass = interpreter.buildSubClassName(modelClass.getClassName(), prop.getName());
+					if(OrchestrationDataType.CLASS==prop.getArraySubTypeProperty().getDataType()) {
+						String propViewController = propClass + "TableViewController";
+						builder.append(tabs(1) + "if(button == self->" + variableName + ") {\n");
+						builder.append(tabs(2) + "[" + propClass + "Service getSharedInstance].all" + propClass + " = self." + instanceName + "." + variableName + ";\n");
+						builder.append(tabs(2) + propViewController + " *vc = [[" + propViewController + " alloc]init];\n");
+						builder.append(tabs(2) + "[[self getViewController].navigationController pushViewController:vc animated:YES];\n");
+						builder.append(tabs(1) + "}\n");
+					} else {
+						
+					}
+				} else if(OrchestrationDataType.CLASS==prop.getDataType()) {					
 					String propViewController = propClass + "ViewController";
 					
 					builder.append(tabs(1) + "if(button == self->" + variableName + ") {\n");

@@ -55,7 +55,33 @@
       "className": "Enumeration",
       "jsonFile": "enumerations.json",
       "readonly": true,
-      "urlPath": "/enumerations"
+      "urlPath": "/enumerations",
+      "listSummary": [
+        {
+          "className": "EnumerationPurseTypes",
+          "propertyList": ["title"]
+        },
+        {
+          "className": "EnumerationSkillLevels",
+          "propertyList": ["name"]
+        },
+        {
+          "className": "EnumerationTournamentSizes",
+          "propertyList": ["name"]
+        },
+        {
+          "className": "EnumerationTournamentStates",
+          "propertyList": ["name"]
+        },
+        {
+          "className": "EnumerationTournamentTypes",
+          "propertyList": ["name"]
+        },
+        {
+          "className": "EnumerationUserTypes",
+          "propertyList": ["name"]
+        }
+      ]
     },
     {
       "className": "User",
@@ -66,9 +92,46 @@
       "listSummary": [
         {
           "className": "User",
-          "propertyList": [
-            "name"
-          ]
+          "propertyList": ["name"]
+        }
+      ]
+    },
+    {
+      "className": "Property",
+      "jsonFile": "property.json",
+      "propertyMap": [],
+      "readonly": false,
+      "urlPath": "/property",
+      "listSummary": [
+        {
+          "className": "Property",
+          "propertyList": ["key"]
+        }
+      ]
+    },
+    {
+      "className": "Voucher",
+      "jsonFile": "vouchers.json",
+      "propertyMap": [],
+      "readonly": false,
+      "urlPath": "/voucher",
+      "listSummary": [
+        {
+          "className": "Voucher",
+          "propertyList": ["title", "value", "awardDate"]
+        }
+      ]
+    },
+    {
+      "className": "Vendor",
+      "jsonFile": "vendor.json",
+      "propertyMap": [],
+      "readonly": false,
+      "urlPath": "/vendor",
+      "listSummary": [
+        {
+          "className": "Vendor",
+          "propertyList": ["name", "city", "state"]
         }
       ]
     }

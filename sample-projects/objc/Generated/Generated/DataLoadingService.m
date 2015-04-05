@@ -13,6 +13,10 @@
 #import "ContestService.h"
 #import "EnumerationRestClient.h"
 #import "EnumerationService.h"
+#import "VendorRestClient.h"
+#import "VendorService.h"
+#import "PropertyRestClient.h"
+#import "PropertyService.h"
 
 static DataLoadingService *sharedDataLoadingService;
 
@@ -27,13 +31,14 @@ static DataLoadingService *sharedDataLoadingService;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{[self loadAllUsers];});
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{[self loadAllContests];});
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{[self loadEnumerationData];});
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{[self loadAllVendors];});
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{[self loadAllProperties];});
     }
     return self;
 }
 
 -(void)loadAllUsers {
-    NSDictionary *options = DEFAULT_OPTIONS;
-    NSArray *arrayOfUsers = [UserRestClient getUserWithOptions:options];
+    NSArray *arrayOfUsers = [UserRestClient getUserWithOptions:DEFAULT_OPTIONS];
     [UserService getSharedInstance].allUser = [[NSMutableArray alloc]initWithArray:arrayOfUsers];
 }
 
@@ -51,6 +56,16 @@ static DataLoadingService *sharedDataLoadingService;
 -(void)loadEnumerationData {
     Enumeration *object = [EnumerationRestClient getEnumerationById:@""];
     [[EnumerationService getSharedInstance].namedEnumerationObjects setObject:object forKey:@"selectedEnumeration"];
+}
+
+-(void)loadAllVendors {
+    NSArray *arrayOfVendors = [VendorRestClient getVendorWithOptions:DEFAULT_OPTIONS];
+    [VendorService getSharedInstance].allVendor = [[NSMutableArray alloc]initWithArray:arrayOfVendors];
+}
+
+-(void)loadAllProperties {
+    NSArray *allProperties = [PropertyRestClient getPropertyWithOptions:DEFAULT_OPTIONS];
+    [PropertyService getSharedInstance].allProperty = [[NSMutableArray alloc]initWithArray:allProperties];
 }
 
 #pragma mark Static Methods

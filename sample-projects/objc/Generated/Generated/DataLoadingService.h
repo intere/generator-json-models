@@ -19,6 +19,12 @@
 /** This method loads all of the (default) enumeration data and stores it in the EnumerationService.allEnumeration array.  */
 -(void)loadEnumerationData;
 
+/** This method loads all of the (default) vendor data and stores it in the VendorService.allVendor array.  */
+-(void)loadAllVendors;
+
+/** This method loads all of the (default) property data and stores it in the PropertyService.allProperty array.  */
+-(void)loadAllProperties;
+
 /** Singleton Accessor Method.  */
 +(DataLoadingService *)getSharedInstance;
 

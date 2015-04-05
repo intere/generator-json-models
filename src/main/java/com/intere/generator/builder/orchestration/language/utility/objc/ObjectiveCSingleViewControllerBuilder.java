@@ -78,6 +78,7 @@ public class ObjectiveCSingleViewControllerBuilder implements SingleViewControll
 		builder.append(tabs(1) + "[self.scrollView addSubview:" + viewProperty + "];\n");
 		builder.append(tabs(1) + "[self.scrollView setContentSize:" + viewProperty + ".frame.size];\n");
 		builder.append(tabs(1) + "[self.view setBackgroundColor:[UITheme getBackgroundColor]];\n");
+		builder.append(tabs(1) + "[self setTitle:@\"" + interpreter.humanReadableName(modelClass.getClassName()) + "\"];\n");
 		builder.append("}\n\n");		
 		return builder.toString();
 	}
