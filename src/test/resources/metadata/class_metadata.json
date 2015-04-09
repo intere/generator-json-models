@@ -50,6 +50,16 @@
         },
         {
           "className": "ModelClassProperty",
+          "name": "arraySubTypeClass",
+          "type": "ModelClass"
+        },
+        {
+          "className": "ModelClassProperty",
+          "name": "propertyClassType",
+          "type": "ModelClass"
+        },
+        {
+          "className": "ModelClassProperty",
           "name": "parentModel",
           "type": "ModelClass"
         },

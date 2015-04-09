@@ -6,8 +6,10 @@ import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,8 +48,43 @@ public class OrchestrationUtils {
 	 * @return A Collection of {@link ModelClass} objects.
 	 */
 	public static List<ModelClass> readBuildClasses(Metadata metadata, MetadataClasses clazz, JsonNode node) {
-		return createAndPopulateModelClass(metadata, clazz, clazz.getClassName(), node, clazz.getUrlPath());
+		List<ModelClass> classList = createAndPopulateModelClass(metadata, clazz, clazz.getClassName(), node, clazz.getUrlPath());
+		return classList;
 	}
+	
+	/**
+	 * This method is responsible for wiring up the classes for arrays of generated types and sub object types.  The 
+	 * assumption is that the provided class list has *all* of the objects we need to know about.
+	 * @param classList
+	 */
+	public static void wireArrayAndObjectProperties(List<ModelClass> classList) {
+		Map<String, ModelClass> map = toMap(classList);		
+		for(ModelClass mc : classList) {
+			for(ModelClassProperty prop : mc.getProperty()) {
+				if(prop.getIsArray() && OrchestrationDataType.CLASS == prop.getArraySubTypeProperty().getDataType()) {
+					prop.setArraySubTypeClass(map.get(prop.getArraySubType()));
+					if(null == prop.getArraySubTypeClass()) {
+						LOGGER.warn("Property Class Not Found: " + prop.getArraySubType());
+					}
+				} else if(OrchestrationDataType.CLASS==prop.getDataType()) {
+					prop.setPropertyClassType(map.get(prop.getType()));
+					if(null == prop.getPropertyClassType()) {
+						LOGGER.warn("Property Class Not Found: " + prop.getType());
+					}
+				}
+			}
+		}
+	}
+	
+	protected static Map<String, ModelClass> toMap(List<ModelClass> classList) {
+		Map<String, ModelClass> classMap = new HashMap<String, ModelClass>();
+		for(ModelClass mc : classList) {
+			classMap.put(mc.getClassName(), mc);
+		}
+		return classMap;
+	}
+	
+	
 	
 	/**
 	 * This method is responsible for providing you with a {@link LanguageOrchestrator} object based on what the provided {@link Metadata} object requires.
@@ -110,7 +147,7 @@ public class OrchestrationUtils {
 		}		
 		return properties;
 	}
-	
+
 	private static List<ModelClassProperty> addTransientProperties(MetadataClasses parent, ModelClass clazz) {
 		List<ModelClassProperty> props = new ArrayList<>();
 		for(MetadataClassesTransientProperty prop : parent.getTransientProperty()) {

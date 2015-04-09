@@ -72,6 +72,7 @@ public class OrchestrationTree {
 			metadataMap.put(clazz.getClassName(), clazz);
 			readAndConfigureClasses(metadataPath, clazz);
 		}
+		OrchestrationUtils.wireArrayAndObjectProperties(modelClasses);
 	}
 	
 	private void readAndConfigureClasses(String metadataPath, MetadataClasses clazz) throws JsonProcessingException, IOException {
