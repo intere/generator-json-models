@@ -3,6 +3,7 @@ package com.intere.generator.builder.orchestration.language.utility;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.Map;
 /**
  * Created by einternicola on 8/9/15.
  */
+@Service("SwiftLanguage")
 public class SwiftLanguageUtility extends AbstractLanguageUtility {
 
     @Autowired @Qualifier("SwiftModelBuilder")
@@ -29,12 +31,12 @@ public class SwiftLanguageUtility extends AbstractLanguageUtility {
 
     @Override
     public ModelBuilder getModelBuilder() {
-        return null;
+        return modelBuilder;
     }
 
     @Override
     public TestBuilder getTestBuilder() {
-        return null;
+        return testBuilder;
     }
 
     @Override
@@ -44,12 +46,12 @@ public class SwiftLanguageUtility extends AbstractLanguageUtility {
 
     @Override
     public ServiceBuilder getServiceBuilder() {
-        return null;
+        return serviceBuilder;
     }
 
     @Override
     public void enforceFilenames(OrchestrationTree tree) {
-
+        
     }
 
     @Override
