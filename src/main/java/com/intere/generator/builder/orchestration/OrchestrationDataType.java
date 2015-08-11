@@ -22,46 +22,47 @@ import com.intere.generator.metadata.ModelClassProperty;
  */
 public enum OrchestrationDataType {
 	/** It's really just a string, but starts with one of the following: "image:", "image16x9:", or "image4x3:" */
-	IMAGE("Image", "String", "NSString", "UIImageView"),
+	IMAGE("Image", "String", "NSString", "String", "UIImageView"),
 	
 	/** Probably a string, could be a number, but determined to be a Date. */
-	DATE("Date", "Date", "NSDate", "UIDatePicker"),
+	DATE("Date", "Date", "NSDate", "NSDate", "UIDatePicker"),
 	
 	/** A String that's not greater than 25 characters.  */
-	STRING("String", "String", "NSString", "UITextField"),
+	STRING("String", "String", "NSString", "String", "UITextField"),
 	
 	/** A String that's longer than 25 characters.  */
-	TEXT("Text", "String", "NSString", "UITextView"),
+	TEXT("Text", "String", "NSString", "String", "UITextView"),
 	
 	/** An Integer. */
-	LONG("Long", "Long", "NSInteger", "UITextField"),
+	LONG("Long", "Long", "NSInteger", "Int", "UITextField"),
 	
 	/** A Decimal number */
-	DOUBLE("Double", "Double", "double", "UITextField"),
+	DOUBLE("Double", "Double", "double", "Double", "UITextField"),
 	
 	/** True / False */
-	BOOLEAN("Boolean", "Boolean", "BOOL", "UISwitch"),
+	BOOLEAN("Boolean", "Boolean", "BOOL", "Bool", "UISwitch"),
 	
 	/** A collection of other objects, strings, numbers, etc. */
-	ARRAY("Array", "List", "NSArray", "UIButton"),
+	ARRAY("Array", "List", "NSArray", "Array", "UIButton"),
 	
 	/** An abstract data type, a "child class" */
-	CLASS(null, null, null, "UIButton"),
+	CLASS(null, null, null, null, "UIButton"),
 	
 	/** Type could not be determined, hopefully we don't have too many of these. */
-	UNKNOWN("Unknown", "String", "NSString", null);
+	UNKNOWN("Unknown", "String", "NSString", "String", null);
 	
 	private static final Logger LOGGER = LogManager.getLogger(OrchestrationDataType.class);
 	private String internalName;
 	private String javaName;
 	private String objcName;
+	private String swiftName;
 	private String objcViewName;
 	
 	/** Default Constructor.  */
 	private OrchestrationDataType() {}
 	
 	/** Constructor that set the internal name. */
-	private OrchestrationDataType(String internalName, String javaName, String objcName, String objcViewName) {
+	private OrchestrationDataType(String internalName, String javaName, String objcName, String swiftName, String objcViewName) {
 		this.internalName = internalName;
 		this.javaName = javaName;
 		this.objcName = objcName;
@@ -157,14 +158,34 @@ public enum OrchestrationDataType {
 		return UNKNOWN;
 	}
 
+	/**
+	 * Gets the type in the "Java Dialect".
+	 * @return
+	 */
 	public String getJavaName() {
 		return javaName;
 	}
 
+	/**
+	 * Gets the type in the "Obj-C Dialect".
+	 * @return
+	 */
 	public String getObjectiveCName() {
 		return objcName;
 	}
 
+	/**
+	 * Gets the type in the "Swift Dialect".
+	 * @return The type name in Swift.
+	 */
+	public String getSwiftName() {
+		return swiftName;
+	}
+
+	/**
+	 * Gets the type in the "Obj-C View Dialect".
+	 * @return
+	 */
 	public String getObjectiveCViewClass() {
 		return objcViewName;
 	}

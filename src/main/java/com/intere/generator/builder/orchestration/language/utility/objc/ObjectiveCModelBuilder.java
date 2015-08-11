@@ -180,7 +180,7 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 		return builder.toString();
 	}
 
-	private String getPropertyDecorations(ModelClassProperty property) {
+	protected String getPropertyDecorations(ModelClassProperty property) {
 		OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(property);
 		if(null != dt) {
 			switch(dt) {

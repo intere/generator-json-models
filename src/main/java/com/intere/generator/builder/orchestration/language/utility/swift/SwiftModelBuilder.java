@@ -1,6 +1,7 @@
 package com.intere.generator.builder.orchestration.language.utility.swift;
 
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+import com.intere.generator.builder.orchestration.OrchestrationDataType;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
 import com.intere.generator.builder.orchestration.language.utility.base.BaseModelBuilder;
 import com.intere.generator.metadata.ModelClass;
@@ -21,17 +22,17 @@ public class SwiftModelBuilder extends BaseModelBuilder {
 
     @Override
     public LanguageUtility.CommentBuilder getCommentBuilder() {
-        return null;
+        return commentBuilder;
     }
 
     @Override
     public JsonLanguageInterpreter getInterpreter() {
-        return null;
+        return interpreter;
     }
 
     @Override
     public String buildNamespace(ModelClass modelClass) {
-        return null;
+        return "";
     }
 
     @Override
@@ -41,22 +42,34 @@ public class SwiftModelBuilder extends BaseModelBuilder {
 
     @Override
     public String buildImplementationFileComment(ModelClass modelClass) {
-        return null;
+        return buildFileComment(modelClass.getClassName() + ".swift");
     }
 
     @Override
     public String buildImports(ModelClass modelClass) {
-        return null;
+        return "";
     }
 
     @Override
     public String buildSerializationConstants(ModelClass modelClass) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        builder.append(tabs(1) + commentBuilder.singleLineComment("") + "\n");
+        builder.append(tabs(1) + commentBuilder.singleLineComment("Serialization Values: ") + "\n");
+        builder.append(tabs(1) + commentBuilder.singleLineComment("") + "\n");
+
+        for(ModelClassProperty prop : modelClass.getProperty()) {
+            builder.append(tabs(1) + "static let " + interpreter.createSerializeConstantSymbolName(prop.getName())
+                    + ": String = \"" + prop.getName() + "\"\n");
+        }
+
+        return builder.toString();
     }
 
     @Override
     public String buildClassImplementation(ModelClass modelClass) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        builder.append("public class " + modelClass.getClassName() + " : NSObject {\n");
+        return builder.toString();
     }
 
     @Override
@@ -76,12 +89,20 @@ public class SwiftModelBuilder extends BaseModelBuilder {
 
     @Override
     public String finishClass(ModelClass modelClass) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        builder.append("\n");
+        builder.append("}\n");
+        builder.append(singleLineComment("End of " + modelClass.getClassName() + " Class") + "\n");
+        return builder.toString();
     }
 
     @Override
     public String buildSinglePropertyDeclaration(ModelClassProperty property) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        String propertyType = getPropertyType(property);
+        String comment = (property.getIsArray() ? tabs(2) + singleLineComment("Array of " + property.getArraySubType()) : "");
+        builder.append("var " + property.getAlias() + ": " + propertyType + comment + "\n");
+        return builder.toString();
     }
 
     @Override
@@ -91,6 +112,14 @@ public class SwiftModelBuilder extends BaseModelBuilder {
 
     @Override
     public String getPropertyType(ModelClassProperty property) {
-        return null;
+        OrchestrationDataType type = OrchestrationDataType.fromModelProperty(property);
+        if(OrchestrationDataType.CLASS == type) {
+            return property.getType();
+        }
+        switch(type) {
+            default:
+                return type.getSwiftName();
+        }
     }
+
 }
