@@ -51,7 +51,7 @@ public class SwiftLanguageUtility extends AbstractLanguageUtility {
 
     @Override
     public void enforceFilenames(OrchestrationTree tree) {
-        
+
     }
 
     @Override

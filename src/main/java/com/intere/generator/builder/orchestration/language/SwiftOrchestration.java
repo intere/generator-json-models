@@ -86,7 +86,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
      * @throws IOException
      */
     private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException {
-        File completePath = new File(outputDirectory, modelClass.getNamespace().replaceAll("\\.",  File.separator));
+        File completePath = outputDirectory;
         if(ensureExists(completePath)) {
             String fileContents = buildModelClass(modelClass);
             File outputFile = new File(completePath, modelClass.getFileName() + ".java");
@@ -108,7 +108,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
      * @return
      */
     private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException {
-        File completePath = new File(outputDirectory, modelClass.getNamespace().replaceAll("\\.",  File.separator));
+        File completePath = outputDirectory;
         if(ensureExists(completePath)) {
             String fileContents = buildTestClass(modelClass);
             File outputFile = new File(completePath, modelClass.getTestClassName() + ".java");

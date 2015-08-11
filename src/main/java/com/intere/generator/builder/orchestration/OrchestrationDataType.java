@@ -66,6 +66,7 @@ public enum OrchestrationDataType {
 		this.internalName = internalName;
 		this.javaName = javaName;
 		this.objcName = objcName;
+		this.swiftName = swiftName;
 		this.objcViewName = objcViewName;
 	}
 	

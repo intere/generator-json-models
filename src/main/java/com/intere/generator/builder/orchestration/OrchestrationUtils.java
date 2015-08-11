@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import com.intere.generator.builder.interpreter.models.SwiftModelInterpreter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
@@ -266,6 +267,9 @@ public class OrchestrationUtils {
 			
 		case Ruby:
 			return new RubyModelInterpreter();
+
+		case Swift:
+			return new SwiftModelInterpreter();
 			
 			default:
 				LOGGER.error("ERROR: No Interpreter for type: " + lang.name());
