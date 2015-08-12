@@ -21,17 +21,17 @@ public class SwiftTestBuilder extends BaseTestBuilder {
 
     @Override
     public LanguageUtility.CommentBuilder getCommentBuilder() {
-        return null;
+        return commentBuilder;
     }
 
     @Override
     public JsonLanguageInterpreter getInterpreter() {
-        return null;
+        return interpreter;
     }
 
     @Override
     public String buildNamespace(ModelClass modelClass) {
-        return null;
+        return modelClass.getNamespace() + "Test";
     }
 
     @Override
@@ -41,27 +41,32 @@ public class SwiftTestBuilder extends BaseTestBuilder {
 
     @Override
     public String buildTestClassDeclaration(ModelClass modelClass) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        builder.append("public class " + modelClass.getTestClassName() + " : XCTest {\n");
+        return builder.toString();
     }
 
     @Override
     public String buildTestImports(ModelClass modelClass) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        builder.append("import XCTest\n");
+        builder.append("import " + modelClass.getNamespace() + "\n\n");
+        return builder.toString();
     }
 
     @Override
     public String buildTestSetupMethod(ModelClass modelClass) {
-        return null;
+        return tabs(1) + "// TODO: Setup Method\n";
     }
 
     @Override
     public String buildTestMethods(ModelClass modelClass) {
-        return null;
+        return tabs(1) + "// TODO: Test Methods\n";
     }
 
     @Override
     public String buildImplementationFileComment(ModelClass modelClass) {
-        return null;
+        return buildFileComment(modelClass.getTestClassName() + ".swift");
     }
 
     @Override
@@ -96,7 +101,11 @@ public class SwiftTestBuilder extends BaseTestBuilder {
 
     @Override
     public String finishClass(ModelClass modelClass) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        builder.append("\n");
+        builder.append("}\n");
+        builder.append(singleLineComment("End of " + modelClass.getTestClassName() + " Class") + "\n");
+        return builder.toString();
     }
 
     @Override

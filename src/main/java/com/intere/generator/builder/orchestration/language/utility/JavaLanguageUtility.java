@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.metadata.ModelClassProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -61,7 +63,17 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 
 	@Override
 	public void enforcePropertyMappings(OrchestrationTree tree) {
-		// no-op for Java (unless we find keywords).
+		Map<String, String> propertyMapping = getPropertyMappings();
+
+		for(ModelClass clazz : tree.getModelClasses()) {
+			for(ModelClassProperty prop : clazz.getProperty()) {
+				if(propertyMapping.containsKey(prop.getName())) {
+					prop.setAlias(propertyMapping.get(prop.getName()));
+				} else {
+					prop.setAlias(prop.getName());
+				}
+			}
+		}
 	}
 	
 	@Override

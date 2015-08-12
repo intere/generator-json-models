@@ -49,8 +49,8 @@ generateObjectiveC() {
 }
 
 main() {
-  # generateJava;
-  generateObjectiveC;
+  generateJava;
+  # generateObjectiveC;
   # generateRuby;
 }
 

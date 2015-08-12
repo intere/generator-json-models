@@ -9,6 +9,7 @@ Using JSON files as a starting point, generated models, services, views, unit te
 * Objective-C
 * Java
 * Ruby
+* Swift
 
 ## Documentation
 See: [docs/README.md](docs/README.md)
@@ -17,8 +18,9 @@ See: [docs/README.md](docs/README.md)
 Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1295722
 
 ### Roadmap (high level)
-* Migrate to using Spring
-* Refactor the LanguageUtility interfaces
+* ~~Migrate to using Spring~~
+* ~~Refactor the LanguageUtility interfaces~~
+* Add Swift Support - IN PROGRESS
 * Create a Spring Shell Interface
 * Create View, Service, Rest Service, Rest Client code for all supported languages
 

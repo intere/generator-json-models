@@ -47,7 +47,7 @@ public class SwiftModelBuilder extends BaseModelBuilder {
 
     @Override
     public String buildImports(ModelClass modelClass) {
-        return "";
+        return "import Foundation\n";
     }
 
     @Override
@@ -99,15 +99,62 @@ public class SwiftModelBuilder extends BaseModelBuilder {
     @Override
     public String buildSinglePropertyDeclaration(ModelClassProperty property) {
         StringBuilder builder = new StringBuilder();
-        String propertyType = getPropertyType(property);
-        String comment = (property.getIsArray() ? tabs(2) + singleLineComment("Array of " + property.getArraySubType()) : "");
-        builder.append("var " + property.getAlias() + ": " + propertyType + comment + "\n");
+        String propertyType = getPropertyType(property) + "?";
+        if(OrchestrationDataType.ARRAY == OrchestrationDataType.fromModelProperty(property)) {
+            propertyType = getArrayType(property);
+        }
+        builder.append(tabs(1) + "var " + property.getAlias() + ": " + propertyType + "\n");
         return builder.toString();
+    }
+
+    /**
+     * Gets you the deeply nested array type (think: Array of Array of Array of Double).
+     * @param property
+     * @return
+     */
+    protected String getArrayType(ModelClassProperty property) {
+        return getArrayType(property, 0);
+    }
+
+    /**
+     * Helper Method that performs the work to build the deeply nested array.
+     * @param property
+     * @param level
+     * @return
+     */
+    protected String getArrayType(ModelClassProperty property, int level) {
+        String result = property.getType();
+
+        if(OrchestrationDataType.ARRAY == property.getArraySubTypeProperty().getDataType()) {
+            result += "<" + getArrayType(property.getArraySubTypeProperty(), level + 1) + ">";
+        } else {
+            result += "<" + property.getArraySubType() + ">";
+        }
+
+        if(level == 0) {
+            result += "?";
+        }
+
+        return result;
     }
 
     @Override
     public String buildGetterAndSetter(ModelClassProperty prop) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+
+//        String propMethodBase = getInterpreter().buildGetterAndSetterName(prop.getName());
+//        String type = getPropertyType(prop);
+//        builder.append(commentBuilder.multiLineComment("Setter for " + prop.getName() + " property", 1) + "\n");
+//        builder.append(tabs(1) + "public func set" + propMethodBase + "( " + prop.getAlias() + ": " + type + " ) {\n");
+//        builder.append(tabs(2) + "self." + prop.getAlias() + " = " + prop.getAlias() + "\n");
+//        builder.append(tabs(1) + "}\n");
+//
+//        builder.append(commentBuilder.multiLineComment("Getter for " + prop.getName() + " property", 1) + "\n");
+//        builder.append(tabs(1) + "public func get" + propMethodBase + "() -> " + type + " {\n");
+//        builder.append(tabs(2) + "return self." + prop.getAlias() + "\n");
+//        builder.append(tabs(1) + "}\n");
+
+        return builder.toString();
     }
 
     @Override

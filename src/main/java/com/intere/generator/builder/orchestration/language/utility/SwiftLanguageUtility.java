@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -26,7 +27,10 @@ public class SwiftLanguageUtility extends AbstractLanguageUtility {
 
     @Override
     public Map<String, String> getPropertyMappings() {
-        return null;
+        Map<String, String> mappings = new HashMap<>();
+        mappings.put("id", "theId");
+        mappings.put("description", "theDescription");
+        return mappings;
     }
 
     @Override

@@ -1,5 +1,6 @@
 {
   "language": "Swift",
+  "namespace": "GeneratedSwift",
   "classes": [
     {
       "className": "Track",

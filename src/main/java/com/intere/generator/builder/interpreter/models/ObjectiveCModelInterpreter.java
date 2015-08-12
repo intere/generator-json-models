@@ -94,6 +94,6 @@ public class ObjectiveCModelInterpreter implements JsonLanguageInterpreter {
 	}
 
 	public String buildGetterAndSetterName(String propertyName) {
-		return null;
+		return buildSubClassName("", propertyName);
 	}
 }
