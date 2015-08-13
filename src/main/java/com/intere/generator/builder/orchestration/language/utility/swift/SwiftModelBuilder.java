@@ -103,7 +103,7 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         if(OrchestrationDataType.ARRAY == OrchestrationDataType.fromModelProperty(property)) {
             propertyType = getArrayType(property);
         }
-        builder.append(tabs(1) + "var " + property.getAlias() + ": " + propertyType + "\n");
+        builder.append(tabs(1) + "public var " + property.getAlias() + ": " + propertyType + "\n");
         return builder.toString();
     }
 

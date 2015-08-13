@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.intere.generator.io.FileIOUtils.ensureExists;
 
@@ -65,6 +66,16 @@ public class SwiftOrchestration implements LanguageOrchestrator {
 
     @Override
     public List<File> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException {
+//        List<File> generatedResources = new ArrayList<>();
+//        Map<File, String> resources = languageUtil.copyModelResources(sourcePath, tree);
+//        for(File f : resources.keySet()) {
+//            LOGGER.info("About to copy resource: " + f.getAbsolutePath());
+//            FileOutputStream fout = new FileOutputStream(f);
+//            IOUtils.write(resources.get(f), fout);
+//            fout.close();
+//            generatedResources.add(f);
+//        }
+//        return generatedResources;
         return null;
     }
 

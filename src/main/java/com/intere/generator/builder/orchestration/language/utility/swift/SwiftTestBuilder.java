@@ -42,7 +42,7 @@ public class SwiftTestBuilder extends BaseTestBuilder {
     @Override
     public String buildTestClassDeclaration(ModelClass modelClass) {
         StringBuilder builder = new StringBuilder();
-        builder.append("public class " + modelClass.getTestClassName() + " : XCTest {\n");
+        builder.append("public class    " + modelClass.getTestClassName() + " : XCTestCase {\n");
         return builder.toString();
     }
 
