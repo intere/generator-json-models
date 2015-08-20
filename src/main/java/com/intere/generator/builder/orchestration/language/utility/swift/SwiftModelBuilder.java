@@ -52,17 +52,7 @@ public class SwiftModelBuilder extends BaseModelBuilder {
 
     @Override
     public String buildSerializationConstants(ModelClass modelClass) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(tabs(1) + commentBuilder.singleLineComment("") + "\n");
-        builder.append(tabs(1) + commentBuilder.singleLineComment("Serialization Values: ") + "\n");
-        builder.append(tabs(1) + commentBuilder.singleLineComment("") + "\n");
-
-        for(ModelClassProperty prop : modelClass.getProperty()) {
-            builder.append(tabs(1) + "static let " + interpreter.createSerializeConstantSymbolName(prop.getName())
-                    + ": String = \"" + prop.getName() + "\"\n");
-        }
-
-        return builder.toString();
+        throw new IllegalArgumentException("No need to call this for swift");
     }
 
     @Override
@@ -74,7 +64,46 @@ public class SwiftModelBuilder extends BaseModelBuilder {
 
     @Override
     public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        builder.append(commentBuilder.multiLineComment("This method converts this " + modelClass.getClassName()
+                + " to a Map for serialization", 1) + "\n");
+        builder.append(tabs(1) + "public func toMap() -> [String:AnyObject] {\n");
+        builder.append(tabs(2) + "var nullableMap:[String:AnyObject?] = [:]\n");
+        for(ModelClassProperty prop : modelClass.getProperty()) {
+            if(!prop.getIsTransient()) {
+                switch (prop.getDataType()) {
+                    case CLASS:
+                        builder.append(tabs(2) + "nullableMap[\"" + prop.getName() + "\"] = (nil != self." + prop.getAlias() + ") ? self." + prop.getAlias() + "!.toMap() : nil\n");
+                        break;
+
+                    case ARRAY:
+                        // TODO: Handle Array
+                        builder.append(tabs(2) + commentBuilder.singleLineComment("TODO: to the appropriate array type for " + prop.getType()) + "\n");
+                        break;
+
+                    case DATE:
+                        // TODO: Handle Date
+                        break;
+
+                    default:
+                        builder.append(tabs(2) + "nullableMap[\"" + prop.getName() + "\"] = self." + prop.getAlias() + "\n");
+                        break;
+                }
+            }
+        }
+        builder.append(singleLineComment("Produce a Non-Null Map to return", 2) + "\n");
+        builder.append(tabs(2) + "var nonNilMap: [String:AnyObject] = [:]\n");
+        builder.append(tabs(2) + "for(key, value) in nullableMap {\n");
+        builder.append(tabs(3) +"if nil != value {\n");
+        builder.append(tabs(4) + "nonNilMap[key] = value\n");
+        builder.append(tabs(3) + "}\n");
+        builder.append(tabs(2) + "}\n");
+        builder.append(tabs(2) + "return nonNilMap\n");
+        builder.append(tabs(1) + "}\n\n");
+
+        // TODO: fromMap Method
+
+        return builder.toString();
     }
 
     @Override
@@ -107,6 +136,27 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         return builder.toString();
     }
 
+    @Override
+    public String buildGetterAndSetter(ModelClassProperty prop) {
+        throw new IllegalArgumentException("No need to call this for swift");
+    }
+
+    @Override
+    public String getPropertyType(ModelClassProperty property) {
+        OrchestrationDataType type = OrchestrationDataType.fromModelProperty(property);
+        if(OrchestrationDataType.CLASS == type) {
+            return property.getType();
+        }
+        switch(type) {
+            default:
+                return type.getSwiftName();
+        }
+    }
+
+    //
+    // Helper Methods
+    //
+
     /**
      * Gets you the deeply nested array type (think: Array of Array of Array of Double).
      * @param property
@@ -136,37 +186,6 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         }
 
         return result;
-    }
-
-    @Override
-    public String buildGetterAndSetter(ModelClassProperty prop) {
-        StringBuilder builder = new StringBuilder();
-
-//        String propMethodBase = getInterpreter().buildGetterAndSetterName(prop.getName());
-//        String type = getPropertyType(prop);
-//        builder.append(commentBuilder.multiLineComment("Setter for " + prop.getName() + " property", 1) + "\n");
-//        builder.append(tabs(1) + "public func set" + propMethodBase + "( " + prop.getAlias() + ": " + type + " ) {\n");
-//        builder.append(tabs(2) + "self." + prop.getAlias() + " = " + prop.getAlias() + "\n");
-//        builder.append(tabs(1) + "}\n");
-//
-//        builder.append(commentBuilder.multiLineComment("Getter for " + prop.getName() + " property", 1) + "\n");
-//        builder.append(tabs(1) + "public func get" + propMethodBase + "() -> " + type + " {\n");
-//        builder.append(tabs(2) + "return self." + prop.getAlias() + "\n");
-//        builder.append(tabs(1) + "}\n");
-
-        return builder.toString();
-    }
-
-    @Override
-    public String getPropertyType(ModelClassProperty property) {
-        OrchestrationDataType type = OrchestrationDataType.fromModelProperty(property);
-        if(OrchestrationDataType.CLASS == type) {
-            return property.getType();
-        }
-        switch(type) {
-            default:
-                return type.getSwiftName();
-        }
     }
 
 }

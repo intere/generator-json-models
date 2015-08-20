@@ -1,19 +1,16 @@
 package com.intere.generator.builder.orchestration.language.utility.objc;
 
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+import com.intere.generator.builder.orchestration.OrchestrationDataType;
+import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
+import com.intere.generator.builder.orchestration.language.utility.base.BaseModelBuilder;
+import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.metadata.ModelClassProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
-import com.intere.generator.builder.orchestration.OrchestrationDataType;
-import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
-import com.intere.generator.builder.orchestration.language.utility.base.BaseModelBuilder;
-import com.intere.generator.builder.orchestration.language.utility.comments.CStyleCommentBuilder;
-import com.intere.generator.metadata.ModelClass;
-import com.intere.generator.metadata.ModelClassProperty;
 
 @Service("ObjectiveCModelBuilder")
 public class ObjectiveCModelBuilder extends BaseModelBuilder {
