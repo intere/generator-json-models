@@ -78,7 +78,7 @@ public class SwiftModelBuilder extends BaseModelBuilder {
 
                     case ARRAY:
                         // TODO: Handle Array
-                        builder.append(tabs(2) + commentBuilder.singleLineComment("TODO: to the appropriate array type for " + prop.getType()) + "\n");
+                        builder.append(tabs(2) + commentBuilder.singleLineComment("TODO: to the appropriate array type for " + prop.getAlias()) + "\n");
                         break;
 
                     case DATE:
