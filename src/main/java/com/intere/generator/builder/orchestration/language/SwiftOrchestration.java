@@ -155,7 +155,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
         builder.append(languageUtil.getModelBuilder().buildImplementationFileComment(modelClass));
         builder.append(languageUtil.getModelBuilder().buildImports(modelClass));
         builder.append(languageUtil.getModelBuilder().buildClassImplementation(modelClass));
-//        builder.append(languageUtil.getModelBuilder().buildSerializationConstants(modelClass));
+        builder.append(languageUtil.getModelBuilder().buildSerializationConstants(modelClass));
         builder.append(languageUtil.getModelBuilder().buildPropertyDeclarations(modelClass));
 //        builder.append(languageUtil.getModelBuilder().buildGettersAndSetters(modelClass));
 //        builder.append(languageUtil.getModelBuilder().buildViewUtilityDefinitionMethods(modelClass));

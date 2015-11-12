@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 @Service("ObjectiveCModelBuilder")
 public class ObjectiveCModelBuilder extends BaseModelBuilder {
@@ -172,6 +173,8 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 		StringBuilder builder = new StringBuilder();
 		String propertyType = getPropertyType(property);
 		String comment = (property.getIsArray() ? "\t\t" + singleLineComment("Array of " + property.getArraySubType()) : "");
+		Assert.notNull(property.getIsPrimitive());
+		Assert.notNull(property.getAlias());
 		builder.append("@property " + getPropertyDecorations(property) + propertyType + " " 
 				+ (property.getIsPrimitive() ? "" : "*") + property.getAlias() + ";" + comment + "\n");
 		return builder.toString();

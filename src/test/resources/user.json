@@ -1,7 +1,15 @@
 {
     "accountCreationDate": null,
+    "admin": true,
+    "age": 34,
+    "email": "intere@alum.rpi.edu",
+    "facebookId": "17508335",
     "id": "5300e4f2aec0858466a69b3e",
     "lastLoggedIn": null,
     "name": "Eric Internicola",
-    "username": "intere"
+    "prototype": true,
+    "skillLevel": 3,
+    "type": 0,
+    "username": "intere",
+    "weightInKg": 100.24
 }

@@ -1,12 +1,12 @@
 {
-  "language": "Swift",
-  "namespace": "GeneratedSwift",
+  "language": "Objective-C",
+  "namespace": "GeneratedObjc",
   "classes": [
     {
       "className": "Track",
       "jsonFile": "track.json",
       "key": "id",
-      "urlPath": "/tracks",
+      "urlPath": "/track",
       "readonly": false,
       "propertyMap": [
 
@@ -19,7 +19,7 @@
       "className": "Contest",
       "jsonFile": "contests.json",
       "key": "id",
-      "urlPath": "/contests",
+      "urlPath": "/contest",
       "readonly": false,
       "propertyMap": [
         {
@@ -35,7 +35,7 @@
       ],
       "transientProperty": [
         {
-          "className": "Contest",
+          "className": "",
           "name": "transientProperty",
           "type": "String"
         }
@@ -46,12 +46,6 @@
       "jsonFile": "enumerations.json",
       "readonly": true,
       "urlPath": "/enumerations"
-    },
-    {
-      "className": "User",
-      "jsonFile": "user.json",
-      "readonly": false,
-      "urlPath": "/users"
     }
   ],
   "generate": {

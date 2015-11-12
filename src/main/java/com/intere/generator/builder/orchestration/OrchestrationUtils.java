@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.intere.generator.builder.interpreter.models.SwiftModelInterpreter;
+import com.intere.generator.builder.orchestration.language.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
@@ -19,10 +20,6 @@ import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
-import com.intere.generator.builder.orchestration.language.JavaOrchestration;
-import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
-import com.intere.generator.builder.orchestration.language.ObjectiveCOrchestration;
-import com.intere.generator.builder.orchestration.language.RubyOrchestration;
 import com.intere.generator.deserializer.JsonNodeUtils;
 import com.intere.generator.metadata.Metadata;
 import com.intere.generator.metadata.MetadataClasses;
@@ -32,6 +29,7 @@ import com.intere.generator.metadata.MetadataClassesTransientProperty;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassImports;
 import com.intere.generator.metadata.ModelClassProperty;
+import org.springframework.util.Assert;
 
 public class OrchestrationUtils {
 	private static final Logger LOGGER = LogManager.getLogger(OrchestrationUtils.class);
@@ -58,11 +56,15 @@ public class OrchestrationUtils {
 		switch(lang) {
 		case Java:
 			return new JavaOrchestration();
+
 		case ObjC:
 			return new ObjectiveCOrchestration();
 			
 		case Ruby:
 			return new RubyOrchestration();
+
+		case Swift:
+			return new SwiftOrchestration();
 			
 		default:
 			LOGGER.warn("No Language Orchestrator for language: " + lang.getFullName());
@@ -99,6 +101,17 @@ public class OrchestrationUtils {
 			property.setParentModel(modelClass);
 			configureNodeType(interpreter, className, name, child, property);
 			properties.add(property);
+
+			Assert.notNull(property.getIsPrimitive());
+			Assert.notNull(property.getIsArray());
+//			Assert.notNull(property.getAlias());
+			Assert.notNull(property.getName());
+			Assert.notNull(property.getIsKey());
+			Assert.notNull(property.getIsReadonly());
+			Assert.notNull(property.getIsTransient());
+			Assert.notNull(property.getIsVisible());
+			Assert.notNull(property.getType());
+
 		}		
 		return properties;
 	}

@@ -30,6 +30,7 @@ public class SwiftLanguageUtility extends AbstractLanguageUtility {
         Map<String, String> mappings = new HashMap<>();
         mappings.put("id", "theId");
         mappings.put("description", "theDescription");
+        mappings.put("type", "theType");
         return mappings;
     }
 

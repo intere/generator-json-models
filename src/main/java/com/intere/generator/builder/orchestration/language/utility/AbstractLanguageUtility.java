@@ -41,8 +41,10 @@ public abstract class AbstractLanguageUtility implements LanguageUtility {
 	public String readResource(String resourceName) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		InputStream in = App.class.getResourceAsStream(resourceName);
+		if(null == in ) {
+			throw new IOException("Failed to open resource: " + resourceName);
+		}
 		IOUtils.copy(in, out);
-		
 		return new String(out.toByteArray());
 	}
 	

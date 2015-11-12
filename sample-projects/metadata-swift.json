@@ -1,25 +1,12 @@
 {
   "language": "Swift",
-  "namespace": "GeneratedSwift",
+  "namespace": null,
   "classes": [
     {
-      "className": "Track",
-      "jsonFile": "track.json",
-      "key": "id",
-      "urlPath": "/tracks",
-      "readonly": false,
-      "propertyMap": [
-
-      ],
-      "transientProperty": [
-
-      ]
-    },
-    {
       "className": "Contest",
-      "jsonFile": "contests.json",
+      "jsonFile": "contest.json",
       "key": "id",
-      "urlPath": "/contests",
+      "urlPath": "/contest",
       "readonly": false,
       "propertyMap": [
         {
@@ -35,9 +22,19 @@
       ],
       "transientProperty": [
         {
+          "className": "",
+          "name": "",
+          "type": ""
+        }
+      ],
+      "listSummary": [
+        {
           "className": "Contest",
-          "name": "transientProperty",
-          "type": "String"
+          "propertyList": [
+            "title",
+            "stateName",
+            "startDate"
+          ]
         }
       ]
     },
@@ -46,19 +43,13 @@
       "jsonFile": "enumerations.json",
       "readonly": true,
       "urlPath": "/enumerations"
-    },
-    {
-      "className": "User",
-      "jsonFile": "user.json",
-      "readonly": false,
-      "urlPath": "/users"
     }
   ],
   "generate": {
     "models": true,
     "tests": true,
-    "views": false,
-    "services": false,
-    "restServices": false
+    "views": true,
+    "services": true,
+    "restServices": true
   }
 }

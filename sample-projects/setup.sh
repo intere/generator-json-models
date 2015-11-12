@@ -48,10 +48,18 @@ generateObjectiveC() {
   cp ${CUR_DIR}/tmp/test/* objc/Generated/GeneratedTests/
 }
 
+generateSwift() {
+  nukeTmp;
+  ../run.sh --orchestrate ${CUR_DIR}/metadata-swift.json \
+	-o ${CUR_DIR}/tmp
+  
+}
+
 main() {
-  generateJava;
-  # generateObjectiveC;
+  # generateJava;
+  generateObjectiveC;
   # generateRuby;
+  # generateSwift;
 }
 
 main;
