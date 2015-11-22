@@ -16,6 +16,15 @@
       ]
     },
     {
+      "className": "TrackSummary",
+      "jsonFile": "track-list.json",
+      "key": "trackId",
+      "urlPath": "/tracks",
+      "readonly": true,
+      "propertyMap": [],
+      "transientProperty": []
+    },
+    {
       "className": "Contest",
       "jsonFile": "contests.json",
       "key": "id",
