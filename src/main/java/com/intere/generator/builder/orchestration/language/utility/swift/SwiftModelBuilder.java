@@ -79,6 +79,7 @@ public class SwiftModelBuilder extends BaseModelBuilder {
     @Override
     public String buildModelUtilityDeclarationMethods(ModelClass modelClass) {
         StringBuilder builder = new StringBuilder();
+
         builder.append(tabs(1) + commentBuilder.singleLineComment("MARK:- Serialization Methods\n\n"));
 
         //
@@ -204,8 +205,34 @@ public class SwiftModelBuilder extends BaseModelBuilder {
                 if (OrchestrationDataType.ARRAY == OrchestrationDataType.fromModelProperty(prop)) {
                     propertyType = getArrayType(prop);
                 }
-                builder.append(tabs(3) + "model." + prop.getAlias() + " = map[" + modelClass.getClassName() + "." + firstLetterUppercase(prop.getAlias())
-                        + "] as? " + propertyType + " ?? Default" + firstLetterUppercase(prop.getAlias()) + "\n");
+                switch(prop.getDataType()) {
+
+                    case ARRAY:
+                        switch(prop.getArraySubTypeProperty().getDataType()) {
+                            case CLASS:
+                                String classType = prop.getArraySubType();
+                                builder.append(tabs(3) + "model." + prop.getAlias() + " = " + classType
+                                        + ".fromArrayOfMaps(map[" + modelClass.getClassName() + "." + firstLetterUppercase(prop.getAlias())
+                                        + "] as? [[String:AnyObject]])\n");
+                                break;
+                            default:
+                                builder.append(tabs(3) + "model." + prop.getAlias() + " = map[" + modelClass.getClassName() + "." + firstLetterUppercase(prop.getAlias())
+                                        + "] as? " + getArrayType(prop,1) + " ?? Default" + firstLetterUppercase(prop.getAlias()) + "\n");
+                                break;
+                        }
+                        break;
+
+                    case DATE:
+                        // fromIsoDate
+                        builder.append(tabs(3) + "model." + prop.getAlias() + " = fromIsoDate(map[" + modelClass.getClassName() + "." + firstLetterUppercase(prop.getAlias())
+                                + "] as? Int)\n");
+                        break;
+
+                    default:
+                        builder.append(tabs(3) + "model." + prop.getAlias() + " = map[" + modelClass.getClassName() + "." + firstLetterUppercase(prop.getAlias())
+                                + "] as? " + propertyType + " ?? Default" + firstLetterUppercase(prop.getAlias()) + "\n");
+                        break;
+                }
             }
         }
         builder.append(tabs(3) + "return model\n");
@@ -219,11 +246,13 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         builder.append(multiLineComment("Creates an Array of " + modelClass.getClassName() + " objects for the provided Array of Maps.\n"
                 + "- Parameter mapArray: An array of Maps, assumes that each map is a serialized " + modelClass.getClassName() + ".\n"
                 + "- Returns: An array of " + modelClass.getClassName() + " objects (should be 1 to 1).", 1) + "\n");
-        builder.append(tabs(1) + "public class func fromArrayOfMaps(mapArray: [[String:AnyObject]]) -> [" + modelClass.getClassName() + "] {\n");
+        builder.append(tabs(1) + "public class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [" + modelClass.getClassName() + "] {\n");
         builder.append(tabs(2) + "var modelArray = [" + modelClass.getClassName() + "]()\n\n");
-        builder.append(tabs(2) + "for map in mapArray {\n");
-        builder.append(tabs(3) + "if let model = fromMap(map) {\n");
-        builder.append(tabs(4) + "modelArray.append(model)\n");
+        builder.append(tabs(2) + "if let mapArray = mapArray {\n");
+        builder.append(tabs(3) + "for map in mapArray {\n");
+        builder.append(tabs(4) + "if let model = fromMap(map) {\n");
+        builder.append(tabs(5) + "modelArray.append(model)\n");
+        builder.append(tabs(4) + "}\n");
         builder.append(tabs(3) + "}\n");
         builder.append(tabs(2) + "}\n\n");
         builder.append(tabs(2) + "return modelArray\n");
@@ -269,6 +298,17 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         builder.append(tabs(2) + "return fromData(data)\n");
         builder.append(tabs(1) + "}\n\n");
 
+
+        builder.append("// MARK: - Utility Methods\n\n");
+
+        builder.append(tabs(1) + "public class func fromIsoDate(dateInt: Int?) -> NSDate? {\n");
+        builder.append(tabs(2) + "if let dateInt = dateInt {\n");
+        builder.append(tabs(3) + "let dateDouble = NSTimeInterval(Double(dateInt) / 1000)\n");
+        builder.append(tabs(3) + "return NSDate(timeIntervalSince1970: dateDouble)\n");
+        builder.append(tabs(2) + "}\n");
+        builder.append(tabs(2) + "return nil\n");
+        builder.append(tabs(1) + "}\n\n");
+
         return builder.toString();
     }
 
@@ -305,56 +345,82 @@ public class SwiftModelBuilder extends BaseModelBuilder {
             propertyType = getArrayType(property);
         }
 
-        if(property.getDataType() == OrchestrationDataType.DATE) {
-            builder.append(tabs(1) + "public static var Default" + firstLetterUppercase(property.getAlias()) + ": "
-                    + propertyType + getDefaultValue(property) + "\n");
-        } else {
-            builder.append(tabs(1) + "public static let Default" + firstLetterUppercase(property.getAlias()) + ": "
-                    + propertyType + getDefaultValue(property) + "\n");
+        switch(property.getDataType()) {
+            case DATE:
+            case CLASS:
+                builder.append(tabs(1) + "public static var Default" + firstLetterUppercase(property.getAlias()) + ": "
+                        + propertyType + "?" + getDefaultValue(property) + "\n");
+                break;
+
+
+            default:
+                builder.append(tabs(1) + "public static let Default" + firstLetterUppercase(property.getAlias()) + ": "
+                        + propertyType + getDefaultValue(property) + "\n");
         }
+
         return builder.toString();
     }
 
     protected String getDefaultValue(ModelClassProperty property) {
-        StringBuilder builder = new StringBuilder(" = ");
 
         switch(property.getDataType()) {
-            case ARRAY:
-                builder.append("[]");
-                break;
-
-            case BOOLEAN:
-                builder.append("false");
-                break;
-
-            case CLASS:
-                builder.append(property.getType() + "()");
-                break;
-
-            case DATE:
-                builder = new StringBuilder("{ return NSDate() }");
-                break;
-
-            case DOUBLE:
-                builder.append("0.0");
-                break;
-
-            case LONG:
-                builder.append("0");
-                break;
-
             case STRING:
             case TEXT:
             case IMAGE:
-                builder.append("\"\"");
-                break;
+                return " = \"\"";
+
+            case BOOLEAN:
+                return " = false";
+
+            case LONG:
+                return " = 0";
+
+            case DOUBLE:
+                return " = 0.0";
+
 
             default:
-                builder.append("\"\"");
-                break;
+                return " = nil";
         }
-
-        return builder.toString();
+//        StringBuilder builder = new StringBuilder(" = ");
+//
+//        switch(property.getDataType()) {
+//            case ARRAY:
+//                builder.append("[]");
+//                break;
+//
+//            case BOOLEAN:
+//                builder.append("false");
+//                break;
+//
+//            case CLASS:
+//                builder.append(property.getType() + "()");
+//                break;
+//
+//            case DATE:
+//                builder = new StringBuilder("{ return NSDate() }");
+//                break;
+//
+//            case DOUBLE:
+//                builder.append("0.0");
+//                break;
+//
+//            case LONG:
+//                builder.append("0");
+//                break;
+//
+//            case STRING:
+//            case TEXT:
+//            case IMAGE:
+//                builder.append("\"\"");
+//                break;
+//
+//            default:
+//                builder.append("\"\"");
+//                break;
+//        }
+//
+//        return builder.toString();
     }
 
     @Override

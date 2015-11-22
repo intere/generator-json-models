@@ -1,9 +1,8 @@
 package com.intere.generator.builder.interpreter.models;
 
-import org.springframework.stereotype.Service;
-
 import com.intere.generator.builder.interpreter.InterpreterUtils;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+import org.springframework.stereotype.Service;
 
 
 @Service("ObjectiveCInterpreter")
