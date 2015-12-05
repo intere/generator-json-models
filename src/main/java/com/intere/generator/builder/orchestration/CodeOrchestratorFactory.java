@@ -13,13 +13,16 @@ import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
 public class CodeOrchestratorFactory {
 	
 	@Autowired @Qualifier("JavaOrchestration")
-	LanguageOrchestrator javaOrchestration;
+	private LanguageOrchestrator javaOrchestration;
 	
 	@Autowired @Qualifier("ObjectiveCOrchestration")
-	LanguageOrchestrator objcOrchestration;
+	private LanguageOrchestrator objcOrchestration;
 	
 	@Autowired @Qualifier("RubyOrchestration")
-	LanguageOrchestrator rubyOrchestration;
+	private LanguageOrchestrator rubyOrchestration;
+
+	@Autowired @Qualifier("SwiftOrchestration")
+	private LanguageOrchestrator swiftOrchestration;
 
 	public void beginOrchestration(String orchestrationFilePath, File outputDirectory) throws IOException {
 		CodeOrchestration orchestrator = new CodeOrchestration(orchestrationFilePath, outputDirectory);
@@ -34,6 +37,10 @@ public class CodeOrchestratorFactory {
 			
 		case Ruby:
 			orchestrator.setOrchestrator(rubyOrchestration);
+			break;
+
+		case Swift:
+			orchestrator.setOrchestrator(swiftOrchestration);
 			break;
 			
 		default:

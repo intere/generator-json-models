@@ -1,19 +1,17 @@
 package com.intere.generator.builder.orchestration.language.utility.objc;
 
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+import com.intere.generator.builder.orchestration.OrchestrationDataType;
+import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
+import com.intere.generator.builder.orchestration.language.utility.base.BaseModelBuilder;
+import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.metadata.ModelClassProperty;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-
-import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
-import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
-import com.intere.generator.builder.orchestration.OrchestrationDataType;
-import com.intere.generator.builder.orchestration.language.utility.LanguageUtility.CommentBuilder;
-import com.intere.generator.builder.orchestration.language.utility.base.BaseModelBuilder;
-import com.intere.generator.builder.orchestration.language.utility.comments.CStyleCommentBuilder;
-import com.intere.generator.metadata.ModelClass;
-import com.intere.generator.metadata.ModelClassProperty;
+import org.springframework.util.Assert;
 
 @Service("ObjectiveCModelBuilder")
 public class ObjectiveCModelBuilder extends BaseModelBuilder {
@@ -175,12 +173,14 @@ public class ObjectiveCModelBuilder extends BaseModelBuilder {
 		StringBuilder builder = new StringBuilder();
 		String propertyType = getPropertyType(property);
 		String comment = (property.getIsArray() ? "\t\t" + singleLineComment("Array of " + property.getArraySubType()) : "");
+		Assert.notNull(property.getIsPrimitive());
+		Assert.notNull(property.getAlias());
 		builder.append("@property " + getPropertyDecorations(property) + propertyType + " " 
 				+ (property.getIsPrimitive() ? "" : "*") + property.getAlias() + ";" + comment + "\n");
 		return builder.toString();
 	}
 
-	private String getPropertyDecorations(ModelClassProperty property) {
+	protected String getPropertyDecorations(ModelClassProperty property) {
 		OrchestrationDataType dt = OrchestrationDataType.fromModelProperty(property);
 		if(null != dt) {
 			switch(dt) {

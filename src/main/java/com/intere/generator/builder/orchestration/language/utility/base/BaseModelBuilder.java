@@ -30,6 +30,7 @@ public abstract class BaseModelBuilder implements LanguageUtility.ModelBuilder, 
 	@Override
 	public String buildPropertyDeclarations(ModelClass modelClass) {
 		StringBuilder builder = new StringBuilder();
+
 		for(ModelClassProperty prop : modelClass.getProperty()) {
 			builder.append(buildSinglePropertyDeclaration(prop));
 		}

@@ -1,0 +1,55 @@
+{
+  "language": "Swift",
+  "namespace": null,
+  "classes": [
+    {
+      "className": "Contest",
+      "jsonFile": "contest.json",
+      "key": "id",
+      "urlPath": "/contest",
+      "readonly": false,
+      "propertyMap": [
+        {
+          "property": "state",
+          "mapClassName": "EnumerationTournamentStates",
+          "mapClassProperty": "value"
+        },
+        {
+          "property": "stateName",
+          "mapClassName": "EnumerationTournamentStates",
+          "mapClassProperty": "name"
+        }
+      ],
+      "transientProperty": [
+        {
+          "className": "",
+          "name": "",
+          "type": ""
+        }
+      ],
+      "listSummary": [
+        {
+          "className": "Contest",
+          "propertyList": [
+            "title",
+            "stateName",
+            "startDate"
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Enumeration",
+      "jsonFile": "enumerations.json",
+      "readonly": true,
+      "urlPath": "/enumerations"
+    }
+  ],
+  "generate": {
+    "models": true,
+    "tests": true,
+    "views": true,
+    "services": true,
+    "restServices": true
+  }
+}

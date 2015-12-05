@@ -161,20 +161,45 @@ public class JavaModelBuilder extends BaseModelBuilder {
 	public String buildSinglePropertyDeclaration(ModelClassProperty property) {
 		StringBuilder builder = new StringBuilder();
 		String propertyType = getPropertyType(property);
+		if(OrchestrationDataType.ARRAY == OrchestrationDataType.fromModelProperty(property)) {
+			propertyType = getArrayType(property);
+		}
 		if(property.getIsTransient()) {
 			builder.append(tabs(1) + "@JsonIgnore\n");
 		}
 		builder.append(tabs(1) + "private " + propertyType + " " + property.getName());
 		if(OrchestrationDataType.ARRAY == OrchestrationDataType.fromModelProperty(property)) {
-			if(null != property.getArraySubType()) {
-				builder.append(" = new ArrayList<" + property.getArraySubType() + ">()" );
-			} else {
-				builder.append(" = new ArrayList()");
-			}
+				builder.append(" = new ArrayList<>()" );
 		}
 		builder.append(";" + (property.getIsTransient() ? tabs(2) + singleLineComment("Transient Property") : "") + "\n");
 		
 		return builder.toString();
+	}
+
+	/**
+	 * Gets you the deeply nested array type (think: Array of Array of Array of Double).
+	 * @param property
+	 * @return
+	 */
+	protected String getArrayType(ModelClassProperty property) {
+		return getArrayType(property, 0);
+	}
+
+	/**
+	 * Helper Method that performs the work to build the deeply nested array.
+	 * @param property
+	 * @param level
+	 * @return
+	 */
+	protected String getArrayType(ModelClassProperty property, int level) {
+		String result = property.getDataType().getJavaName();
+
+		if(OrchestrationDataType.ARRAY == property.getArraySubTypeProperty().getDataType()) {
+			result += "<" + getArrayType(property.getArraySubTypeProperty(), level + 1) + ">";
+		} else {
+			result += "<" + property.getArraySubType() + ">";
+		}
+		return result;
 	}
 
 	@Override
@@ -185,12 +210,12 @@ public class JavaModelBuilder extends BaseModelBuilder {
 		
 		builder.append(multiLineComment("Setter for " + prop.getName() + " property", 1) + "\n");
 		builder.append(tabs(1) + "public void set" + propMethodBase + "(" + type + " " + prop.getName() + ") {\n");
-		builder.append(tabs(2) + "this." + prop.getName() + " = " + prop.getName() + ";\n");
+		builder.append(tabs(2) + "this." + prop.getAlias() + " = " + prop.getAlias() + ";\n");
 		builder.append(tabs(1) + "}\n\n");
 		
 		builder.append(multiLineComment("Getter for " + prop.getName() + " property", 1) + "\n");
 		builder.append(tabs(1) + "public " + type + " get" + propMethodBase + "() {\n");
-		builder.append(tabs(2) + "return this." + prop.getName() + ";\n");
+		builder.append(tabs(2) + "return this." + prop.getAlias() + ";\n");
 		builder.append(tabs(1) + "}\n\n");
 
 		return builder.toString();

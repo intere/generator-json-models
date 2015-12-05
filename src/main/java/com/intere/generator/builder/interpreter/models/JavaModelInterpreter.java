@@ -1,5 +1,7 @@
 package com.intere.generator.builder.interpreter.models;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.intere.generator.builder.interpreter.InterpreterUtils;
@@ -7,6 +9,7 @@ import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 
 @Service("JavaInterpreter")
 public class JavaModelInterpreter implements JsonLanguageInterpreter {
+	private static final Logger LOG = LogManager.getLogger(JavaModelInterpreter.class);
 	
 	public String humanReadableName(String propertyName) {
 		return InterpreterUtils.humanReadableString(propertyName);
@@ -42,9 +45,14 @@ public class JavaModelInterpreter implements JsonLanguageInterpreter {
 	 * @return The <Parent Name><Child Name> class name.
 	 */
 	public String buildSubClassName(String parentClassName, String propertyName) {
-		char[] stringArray = cleanVariableName(propertyName.trim()).toCharArray();
-		stringArray[0] = Character.toUpperCase(stringArray[0]);
-        return parentClassName + new String(stringArray);
+		if(null != parentClassName && null != propertyName) {
+			char[] stringArray = cleanVariableName(propertyName.trim()).toCharArray();
+			stringArray[0] = Character.toUpperCase(stringArray[0]);
+			return parentClassName + new String(stringArray);
+		} else {
+			LOG.warn("Attempted to build a class name from a null parent or property name");
+			return "";
+		}
 	}
 	
 	/**
@@ -55,7 +63,7 @@ public class JavaModelInterpreter implements JsonLanguageInterpreter {
 	}
 
 	public String buildFilenameFromClassname(String className) {
-		return className;
+		return null != className ? className : "";
 	}
 	
 	public String buildServiceFilenameFromClassname(String className) {

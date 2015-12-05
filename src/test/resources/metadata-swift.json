@@ -1,0 +1,73 @@
+{
+  "language": "Swift",
+  "namespace": "GeneratedSwift",
+  "classes": [
+    {
+      "className": "Track",
+      "jsonFile": "track.json",
+      "key": "id",
+      "urlPath": "/tracks",
+      "readonly": false,
+      "propertyMap": [
+
+      ],
+      "transientProperty": [
+
+      ]
+    },
+    {
+      "className": "TrackSummary",
+      "jsonFile": "track-list.json",
+      "key": "trackId",
+      "urlPath": "/tracks",
+      "readonly": true,
+      "propertyMap": [],
+      "transientProperty": []
+    },
+    {
+      "className": "Contest",
+      "jsonFile": "contests.json",
+      "key": "id",
+      "urlPath": "/contests",
+      "readonly": false,
+      "propertyMap": [
+        {
+          "property": "state",
+          "mapClassName": "EnumerationTournamentStates",
+          "mapClassProperty": "value"
+        },
+        {
+          "property": "stateName",
+          "mapClassName": "EnumerationTournamentStates",
+          "mapClassProperty": "name"
+        }
+      ],
+      "transientProperty": [
+        {
+          "className": "Contest",
+          "name": "transientProperty",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "className": "Enumeration",
+      "jsonFile": "enumerations.json",
+      "readonly": true,
+      "urlPath": "/enumerations"
+    },
+    {
+      "className": "User",
+      "jsonFile": "user.json",
+      "readonly": false,
+      "urlPath": "/users"
+    }
+  ],
+  "generate": {
+    "models": true,
+    "tests": true,
+    "views": false,
+    "services": false,
+    "restServices": false
+  }
+}

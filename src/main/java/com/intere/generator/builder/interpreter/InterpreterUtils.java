@@ -1,9 +1,15 @@
 package com.intere.generator.builder.interpreter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.LoggerConfig;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class InterpreterUtils {
+
+	private static final Logger LOG = LogManager.getLogger(InterpreterUtils.class);
 	
 	public static String humanReadableString(String propertyName) {
 		propertyName = propertyName.replaceAll("^_", "");		// Remove leading underscore
@@ -65,18 +71,22 @@ public class InterpreterUtils {
 	}
 
 	public static String javaStyleVariableName(String propertyName) {
-		propertyName = propertyName.replaceAll("^_", "");		// Remove leading underscore
-		char[] stringArray = propertyName.trim().toCharArray();			
-        stringArray[0] = Character.toLowerCase(stringArray[0]);	// ensure the first character is lower case
-        
-        for(int i=1;i<stringArray.length;i++) {
-        	if(stringArray[i] == '_' && stringArray.length>i) {
-        		stringArray[i+1] = Character.toUpperCase(stringArray[i+1]);
-        	}
-        }
-        String result = new String(stringArray).replaceAll("_", "");
-        
-        return result;
+		if(null != propertyName) {
+			propertyName = propertyName.replaceAll("^_", "");        // Remove leading underscore
+			char[] stringArray = propertyName.trim().toCharArray();
+			stringArray[0] = Character.toLowerCase(stringArray[0]);    // ensure the first character is lower case
+
+			for (int i = 1; i < stringArray.length; i++) {
+				if (stringArray[i] == '_' && stringArray.length > i+1) {
+					stringArray[i + 1] = Character.toUpperCase(stringArray[i + 1]);
+				}
+			}
+			String result = new String(stringArray).replaceAll("_", "");
+
+			return result;
+		}
+		LOG.warn("Requested Java Style Variable Name for null property name");
+		return "";
 	}
 	
 	

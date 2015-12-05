@@ -1,15 +1,14 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.intere.generator.builder.orchestration.OrchestrationTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.intere.generator.builder.orchestration.OrchestrationTree;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service(value="ObjectiveCLanguage")
 public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
@@ -69,7 +68,7 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 		resources.put(new File(sourcePath, "Log.h"), readResourceAndReplaceHeaders("/Log.h"));
 		return resources;
 	}
-	
+
 	@Override
 	public Map<File, String> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException {
 		Map<File, String> resources = new HashMap<>();
