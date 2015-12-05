@@ -87,14 +87,14 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         //
         builder.append(commentBuilder.multiLineComment("Serializes this " + modelClass.getClassName()
                 + " object into a Map\n- Returns: A Map (of String:AnyObject) which is the (map) serialized version of this " + modelClass.getClassName(), 1) + "\n");
-        builder.append(tabs(1) + "public func toMap() -> [String:AnyObject?] {\n");
-        builder.append(tabs(2) + "var dict = [String:AnyObject?]()\n\n");
+        builder.append(tabs(1) + "public func toMap() -> [String:AnyObject] {\n");
+        builder.append(tabs(2) + "var dict = [String:AnyObject]()\n\n");
 
         for(ModelClassProperty prop : modelClass.getProperty()) {
             if(!prop.getIsTransient()) {
                 switch (prop.getDataType()) {
                     case CLASS:
-                        builder.append(tabs(2) + "dict[" + prop.getParentModel().getClassName() + "." + firstLetterUppercase(prop.getAlias()) + "] = " + prop.getAlias() + "?.toMap() as! AnyObject?\n");
+                        builder.append(tabs(2) + "dict[" + prop.getParentModel().getClassName() + "." + firstLetterUppercase(prop.getAlias()) + "] = " + prop.getAlias() + "?.toMap() ?? [:]\n");
                         break;
 
 //                    case ARRAY:
@@ -137,7 +137,7 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         //
         builder.append(multiLineComment("Converts this model to JSON Data.\n-Returns: Optional JSON Data (returns nil if there's a problem serializing the map).", 1) + "\n");
         builder.append(tabs(1) + "public func toJsonData() -> NSData? {\n");
-        builder.append(tabs(2) + "let dict = toMap() as! AnyObject\n");
+        builder.append(tabs(2) + "let dict = toMap()\n");
         builder.append(tabs(2) + "do {\n");
         builder.append(tabs(3) + "return try NSJSONSerialization.dataWithJSONObject(dict, options: .PrettyPrinted)\n");
         builder.append(tabs(2) + "} catch {\n");

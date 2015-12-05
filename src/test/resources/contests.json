@@ -1,12 +1,12 @@
 [
     {
-        "createdDate": null,
+        "createdDate": 1419206400000,
         "description": "Think you can rip the most powder runs today?  Let's see what you're made of.  Get the most vertical and win!",
         "endDate": 1419206400000,
         "id": "54970d8be4b04c8251d4300c",
         "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgF4_RB9f3unm7-qLqrUvyjU20Hp2RZyjdMogES-W8tPT6x2Z5XQ",
-        "latitude": null,
-        "longitude": null,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "purseDescription": "A free dinner, courtesy of Fontenot's.  Not to exceed $35.",
         "purseImageUrl": "http://www.fontenotswp.com/images/bg_o926.jpg",
         "pursePrizeValue": "$35",
@@ -20,7 +20,7 @@
         "size": 50,
         "sponsor": {
             "address1": "78336 US Hwy 40",
-            "address2": null,
+            "address2": "",
             "category": "Pub & Grub",
             "city": "Winter Park",
             "contactEmail": "chrismoore11@msn.com",
