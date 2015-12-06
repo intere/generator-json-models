@@ -207,11 +207,18 @@ public class SwiftModelBuilder extends BaseModelBuilder {
                 }
                 switch(prop.getDataType()) {
 
+                    case CLASS:
+                        String classType = prop.getType();
+                        builder.append(tabs(3) + "model." + prop.getAlias() + " = " + classType
+                                + ".fromMap(map[" + modelClass.getClassName() + "." + firstLetterUppercase(prop.getAlias())
+                                + "] as? [String:AnyObject])\n");
+                        break;
+
                     case ARRAY:
                         switch(prop.getArraySubTypeProperty().getDataType()) {
                             case CLASS:
-                                String classType = prop.getArraySubType();
-                                builder.append(tabs(3) + "model." + prop.getAlias() + " = " + classType
+                                String arrayClassType = prop.getArraySubType();
+                                builder.append(tabs(3) + "model." + prop.getAlias() + " = " + arrayClassType
                                         + ".fromArrayOfMaps(map[" + modelClass.getClassName() + "." + firstLetterUppercase(prop.getAlias())
                                         + "] as? [[String:AnyObject]])\n");
                                 break;
