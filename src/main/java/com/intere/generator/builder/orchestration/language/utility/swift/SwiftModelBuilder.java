@@ -94,7 +94,26 @@ public class SwiftModelBuilder extends BaseModelBuilder {
             if(!prop.getIsTransient()) {
                 switch (prop.getDataType()) {
                     case CLASS:
-                        builder.append(tabs(2) + "dict[" + prop.getParentModel().getClassName() + "." + firstLetterUppercase(prop.getAlias()) + "] = " + prop.getAlias() + "?.toMap() ?? [:]\n");
+                        builder.append(tabs(2) + "dict[" + prop.getParentModel().getClassName() + "." + firstLetterUppercase(prop.getAlias()) + "] = "
+                                + prop.getAlias() + "?.toMap() ?? [:]\n");
+                        break;
+
+                    case DATE:
+                        builder.append(tabs(2) + "dict[" + prop.getParentModel().getClassName() + "." + firstLetterUppercase(prop.getAlias()) + "] = "
+                            + modelClass.getClassName() + ".toIsoDate(" + prop.getAlias() + ")\n" );
+                        break;
+
+                    case ARRAY:
+                        switch(prop.getArraySubTypeProperty().getDataType()) {
+                            case CLASS:
+                                String arrayClassType = prop.getArraySubType();
+                                builder.append(tabs(2) + "dict[" + prop.getParentModel().getClassName() + "." + firstLetterUppercase(prop.getAlias()) + "] = "
+                                        + arrayClassType + ".toMapArray(" + prop.getAlias() + ")\n" );
+                                break;
+                            default:
+                                builder.append(tabs(2) + "dict[" +  modelClass.getClassName() + "." + firstLetterUppercase(prop.getAlias()) + "] = " + prop.getAlias() + "\n");
+                                break;
+                        }
                         break;
 
 //                    case ARRAY:
@@ -124,12 +143,15 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         builder.append(multiLineComment("Converts the provided Array of " + modelClass.getClassName() + " Objects to an Array of Dictionaries.\n"
                 + "- Parameter models: An Array of " + modelClass.getClass() + " Objects to be converted to an Array of Dictionaries.\n"
                 + "- Returns: An array of Dictionaries.", 1) + "\n");
-        builder.append(tabs(1) + "public class func toMapArray(models: [" + modelClass.getClassName() + "]) -> [[String:AnyObject?]] {\n");
-        builder.append(tabs(2) + "var maps = [[String:AnyObject?]]()\n\n");
-        builder.append(tabs(2) + "for model in models {\n");
-        builder.append(tabs(3) + "maps.append(model.toMap())\n");
-        builder.append(tabs(2) + "}\n\n");
-        builder.append(tabs(2) + "return maps\n");
+        builder.append(tabs(1) + "public class func toMapArray(models: [" + modelClass.getClassName() + "]?) -> [[String:AnyObject]]? {\n");
+        builder.append(tabs(2) + "if let models = models {\n");
+        builder.append(tabs(3) + "var maps = [[String:AnyObject]]()\n\n");
+        builder.append(tabs(3) + "for model in models {\n");
+        builder.append(tabs(4) + "maps.append(model.toMap())\n");
+        builder.append(tabs(3) + "}\n\n");
+        builder.append(tabs(3) + "return maps\n");
+        builder.append(tabs(2) + "}\n");
+        builder.append(tabs(2) + "return nil\n");
         builder.append(tabs(1) + "}\n\n");
 
         //
@@ -306,7 +328,7 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         builder.append(tabs(1) + "}\n\n");
 
 
-        builder.append("// MARK: - Utility Methods\n\n");
+        builder.append(tabs(1) + "// MARK: - Utility Methods\n\n");
 
         builder.append(tabs(1) + "public class func fromIsoDate(dateInt: Int?) -> NSDate? {\n");
         builder.append(tabs(2) + "if let dateInt = dateInt {\n");
@@ -315,6 +337,13 @@ public class SwiftModelBuilder extends BaseModelBuilder {
         builder.append(tabs(2) + "}\n");
         builder.append(tabs(2) + "return nil\n");
         builder.append(tabs(1) + "}\n\n");
+
+        builder.append(tabs(1) + "public class func toIsoDate(date: NSDate?) -> Int? {\n");
+        builder.append(tabs(2) + "if let date = date {\n");
+        builder.append(tabs(3) + "return Int(date.timeIntervalSince1970 * 1000)\n");
+        builder.append(tabs(2) + "}\n");
+        builder.append(tabs(2) + "return nil\n");
+        builder.append(tabs(1) + "}");
 
         return builder.toString();
     }

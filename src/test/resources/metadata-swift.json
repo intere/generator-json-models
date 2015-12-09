@@ -61,6 +61,12 @@
       "jsonFile": "user.json",
       "readonly": false,
       "urlPath": "/users"
+    },
+    {
+      "className": "ContestRegistration",
+      "jsonFile": "register-contest.json",
+      "readonly": false,
+      "urlPath": "/registration"
     }
   ],
   "generate": {
