@@ -1,5 +1,6 @@
 package com.intere.generator.builder.interpreter.models;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,6 +10,7 @@ import static org.junit.Assert.*;
  */
 public class RubyModelInterpreterTest {
     // TODO
+    @Ignore
     @Test
     public void testSomething() {
         fail("Not Yet Tested");
