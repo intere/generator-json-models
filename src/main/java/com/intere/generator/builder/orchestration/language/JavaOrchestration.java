@@ -8,9 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
 import com.intere.generator.metadata.ModelClassImports;
 import com.intere.generator.metadata.ModelClassProperty;
+import com.intere.generator.metadata.models.LanguageModelClassProperty;
 import com.intere.generator.templates.TemplateConfig;
 import freemarker.template.TemplateException;
 import org.apache.commons.io.IOUtils;
@@ -30,6 +32,9 @@ public class JavaOrchestration implements LanguageOrchestrator {
 
 	@Autowired @Qualifier("JavaLanguage")
 	LanguageUtility languageUtil;
+
+	@Autowired @Qualifier("JavaInterpreter")
+	JsonLanguageInterpreter interpreter;
 
 	@Autowired TemplateConfig template;
 
@@ -98,6 +103,7 @@ public class JavaOrchestration implements LanguageOrchestrator {
 			model.put("model", modelClass);
 			model.put("filename", modelClass.getFileName() + ".java");
 			model.put("imports", determineImports(modelClass));
+			model.put("properties", getProperties(modelClass));
 
 			template.generateFile(model, "JavaClass.ftlh", new FileWriter(outputFile));
 
@@ -173,6 +179,18 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		languageUtil.enforcePropertyMappings(tree);
 	}
 
+	//
+	// Helpers
+	//
+
+	private List<LanguageModelClassProperty> getProperties(ModelClass modelClass) {
+		List<LanguageModelClassProperty> list = new ArrayList<>();
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			list.add(new LanguageModelClassProperty(prop, interpreter));
+		}
+
+		return list;
+	}
 
 	private Collection<String> determineImports(ModelClass modelClass) {
 

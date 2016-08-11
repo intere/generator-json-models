@@ -15,7 +15,58 @@ import ${import};
 
 class ${model.className} implements Serializable {
 
-    <#list model.property as property>
-    <#if property.isTransient>@JsonIgnore </#if>${property.type} ${property.alias};
+    <#list properties as property>
+    <#if property.isTransient>@JsonIgnore </#if>private ${property.type} ${property.alias};
     </#list>
+
+    <#list properties as property>
+    /** Setter for ${property.name} property.  */
+    public void set${property.methodName}(${property.type} ${property.alias}) {
+        this.${property.alias} = ${property.alias};
+    }
+
+    /** Getter for ${property.name} property.  */
+    public ${property.type} get${property.methodName}() {
+        return this.${property.alias};
+    }
+    </#list>
+
+    //
+    // Override Object Methods
+    //
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        <#list properties as property>
+        <#if !property.isTransient>
+        result = prime * result + ((${property.alias} == null) ? 0 : ${property.alias}.hashCode());
+        </#if>
+        </#list>
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ${model.className} other = (${model.className}) obj;
+
+        <#list properties as property>
+        <#if !property.isTransient>
+        if(${property.alias} == null) {
+            if(other.${property.alias} != null)
+                return false;
+        } else if(!${property.alias}.equals(other.${property.alias}))
+            return false;
+        </#if>
+        </#list>
+
+        return true;
+    }
 }
