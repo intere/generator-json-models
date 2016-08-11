@@ -3,6 +3,7 @@ package com.intere.generator.builder.orchestration.language;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
 import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.templates.TemplateConfig;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,9 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.intere.generator.io.FileIOUtils.ensureExists;
 
@@ -29,6 +28,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     @Autowired @Qualifier("SwiftLanguage")
     private LanguageUtility languageUtil;
 
+    @Autowired TemplateConfig templateConfig;
 
     @Override
     public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {
@@ -99,6 +99,11 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException {
         File completePath = outputDirectory;
         if(ensureExists(completePath)) {
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("date", new Date());
+            model.put("filename", modelClass.getFileName() + ".swift");
+
             String fileContents = buildModelClass(modelClass);
             File outputFile = new File(completePath, modelClass.getFileName() + ".swift");
             LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());

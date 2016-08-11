@@ -4,10 +4,15 @@ import static com.intere.generator.io.FileIOUtils.ensureExists;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+import com.intere.generator.builder.orchestration.OrchestrationDataType;
+import com.intere.generator.metadata.ModelClassImports;
+import com.intere.generator.metadata.ModelClassProperty;
+import com.intere.generator.templates.TemplateConfig;
+import freemarker.template.TemplateException;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,14 +27,21 @@ import com.intere.generator.metadata.ModelClass;
 @Service(value="JavaOrchestration")
 public class JavaOrchestration implements LanguageOrchestrator {
 	private static final Logger LOGGER = LogManager.getLogger(JavaOrchestration.class);
+
 	@Autowired @Qualifier("JavaLanguage")
 	LanguageUtility languageUtil;
+
+	@Autowired TemplateConfig template;
 
 	@Override
 	public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {
 		List<File> generatedClasses = new ArrayList<>();
 		for(ModelClass modelClass : tree.getModelClasses()) {
-			generatedClasses.add(buildModelClassFile(outputDirectory, modelClass));
+			try {
+				generatedClasses.add(buildModelClassFile(outputDirectory, modelClass));
+			} catch (TemplateException e) {
+				throw new IOException(e);
+			}
 		}
 		return generatedClasses;
 	}
@@ -69,15 +81,26 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	 * @return
 	 * @throws IOException
 	 */
-	private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException {
+	private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException, TemplateException {
 		File completePath = new File(outputDirectory, modelClass.getNamespace().replaceAll("\\.",  File.separator));
 		if(ensureExists(completePath)) {
-			String fileContents = buildModelClass(modelClass);
+
 			File outputFile = new File(completePath, modelClass.getFileName() + ".java");
 			LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
-			FileOutputStream fout = new FileOutputStream(outputFile);
-			IOUtils.write(fileContents, fout);
-			fout.close();
+
+//			String fileContents = buildModelClass(modelClass);
+//			FileOutputStream fout = new FileOutputStream(outputFile);
+//			IOUtils.write(fileContents, fout);
+//			fout.close();
+
+			Map<String, Object> model = new HashMap<>();
+			model.put("date", new Date());
+			model.put("model", modelClass);
+			model.put("filename", modelClass.getFileName() + ".java");
+			model.put("imports", determineImports(modelClass));
+
+			template.generateFile(model, "JavaClass.ftlh", new FileWriter(outputFile));
+
 			return outputFile;
 		} else {
 			LOGGER.error("Could not create directory: " + completePath);
@@ -148,6 +171,42 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	@Override
 	public void review(OrchestrationTree tree) {
 		languageUtil.enforcePropertyMappings(tree);
+	}
+
+
+	private Collection<String> determineImports(ModelClass modelClass) {
+
+		Map<String, String> imports = new HashMap<>();
+
+		imports.put("Serializable", "java.io.Serializable");
+
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			OrchestrationDataType type = OrchestrationDataType.fromModelProperty(prop);
+			if(OrchestrationDataType.DATE == type) {
+				imports.put("Date", "java.util.Date");
+			} else if(OrchestrationDataType.ARRAY == type) {
+				imports.put("List", "java.util.List");
+				imports.put("ArrayList", "java.util.ArrayList");
+			}
+		}
+
+		if(hasTransientProperties(modelClass)) {
+			imports.put("JsonIgnore", "org.codehaus.jackson.annotate.JsonIgnore");
+		}
+		for(ModelClassImports theImport : modelClass.getImports()) {
+			imports.put(theImport.getImportName(), theImport.getImportName());
+		}
+
+		return imports.values();
+	}
+
+	private boolean hasTransientProperties(ModelClass modelClass) {
+		for(ModelClassProperty prop: modelClass.getProperty()) {
+			if(prop.getIsTransient()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
