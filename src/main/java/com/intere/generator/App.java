@@ -51,14 +51,39 @@ public class App {
 		Options options = new Options();
 		options.addOption("or", "orchestrate", true, "Specify a metadata.json file to use to orchestrate the code generation (overrides most command line options)");
 		options.addOption("o", "output-location", true, "Where do you want the generated code to go?");
+		options.addOption("td", "template-directory", true, "Where should the templates be read from?");
+		options.addOption("ct", "custom-template", true, "What custom template would you like to execute?");
+		options.addOption("pre", "custom-prefix", true, "A prefix to be added to each class name (for custom templates only)");
+		options.addOption("suf", "class-suffix", true, "A suffix to be added to each class name (for custom templates only)");
 		return options;
 	}
 	
 	private static void executeOrchestrationMode(CommandLine cmd, String[] args) throws IOException {
 		String orchestrationFilePath = cmd.getOptionValue("orchestrate");
 		File outputDirectory = FileIOUtils.createFolderIfNotExists(cmd.getOptionValue('o', "tmp"));
-		
-		if(cmd.hasOption("or")) {
+
+		if(cmd.hasOption("template-directory")) {
+			File templateDirectory = new File(cmd.getOptionValue("template-directory"));
+			if(!templateDirectory.exists()) {
+				throw new IllegalArgumentException("ERROR!  " + templateDirectory.getAbsolutePath() + " doesn't exist");
+			}
+			factory.setTemplateDirectory(templateDirectory);
+		}
+		if(cmd.hasOption("custom-template")) {
+			factory.setTemplateFile(cmd.getOptionValue("custom-template"));
+
+			if(!cmd.hasOption("custom-prefix") && !cmd.hasOption("custom-suffix")) {
+				System.err.println("\n\nWARNING: it is recommended that you use a prefix or a suffix if you're using a custom template\n\n");
+			}
+		}
+		if(cmd.hasOption("custom-prefix")) {
+			factory.setClassPrefix(cmd.getOptionValue("custom-prefix"));
+		}
+		if(cmd.hasOption("custom-suffix")) {
+			factory.setClassSuffix(cmd.getOptionValue("custom-suffix"));
+		}
+
+		if(cmd.hasOption("output-location")) {
 			factory.beginOrchestration(orchestrationFilePath, outputDirectory);
 		} else {
 			usage();

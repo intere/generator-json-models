@@ -17,10 +17,15 @@ See: [docs/README.md](docs/README.md)
 ## Project Management / Feature Roadmap
 Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1295722
 
+### TODO
+* Update Documentation
+* Complete Freeemarker Template changeover
+* Update / Document the Freemarker template / variables
+
 ### Roadmap (high level)
 * ~~Migrate to using Spring~~
 * ~~Refactor the LanguageUtility interfaces~~
-* Add Swift Support - IN PROGRESS
+* ~~Add Swift Support~~
 * Create a Spring Shell Interface
 * Create View, Service, Rest Service, Rest Client code for all supported languages
 
@@ -75,6 +80,13 @@ cd sample-projects
 ## Sample Usage
 ### New Usage
 ```bash
+# Generates Swift code based on (externally defined) custom templates:
+./run.sh --output-location tmp/swift \
+  --orchestrate sample-projects/metadata-swift.json \
+  --template-directory sample-projects/templates \
+  --custom-template RealmSwift.ftlh \
+  --custom-prefix Realm
+
 # Generates Objective-C Code
 ./run.sh --orchestrate ${PWD}/sample-projects/metadata-objc.json \
     -o ${PWD}/tmp/obj-c
@@ -88,7 +100,7 @@ cd sample-projects
     -o ${PWD}/tmp/ruby
 ```
 
-# Generates Swift Code
+# Generates Swift Code (2.2)
 ```
 ./run --orchestrate ${PWD}/sample-projects/metadata-swift.json \
     -o ${PWD}/tmp/swift

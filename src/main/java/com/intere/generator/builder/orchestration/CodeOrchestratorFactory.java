@@ -24,8 +24,18 @@ public class CodeOrchestratorFactory {
 	@Autowired @Qualifier("SwiftOrchestration")
 	private LanguageOrchestrator swiftOrchestration;
 
+	private File templateDirectory;
+	private String templateFile;
+	private String classPrefix;
+	private String classSuffix;
+
 	public void beginOrchestration(String orchestrationFilePath, File outputDirectory) throws IOException {
 		CodeOrchestration orchestrator = new CodeOrchestration(orchestrationFilePath, outputDirectory);
+		orchestrator.setCustomTemplatePath(templateDirectory);
+		orchestrator.setCustomTemplateFile(templateFile);
+		orchestrator.setClassPrefix(classPrefix);
+		orchestrator.setClassSuffix(classSuffix);
+
 		switch (orchestrator.getTree().getLanguage()) {
 		case Java:
 			orchestrator.setOrchestrator(javaOrchestration);
@@ -49,5 +59,21 @@ public class CodeOrchestratorFactory {
 		}
 		
 		orchestrator.generateCode();
-	}	
+	}
+
+	public void setTemplateDirectory(File templateDirectory) {
+		this.templateDirectory = templateDirectory;
+	}
+
+	public void setTemplateFile(String templateFile) {
+		this.templateFile = templateFile;
+	}
+
+	public void setClassPrefix(String classPrefix) {
+		this.classPrefix = classPrefix;
+	}
+
+	public void setClassSuffix(String classSuffix) {
+		this.classSuffix = classSuffix;
+	}
 }

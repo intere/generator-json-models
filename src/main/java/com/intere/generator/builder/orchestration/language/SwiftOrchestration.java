@@ -40,6 +40,20 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     @Autowired TemplateConfig template;
 
     @Override
+    public List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile, String classPrefix, String classSuffix) throws IOException {
+        template.setDirectoryForTemplateLoading(templateSourceDir);
+        List<File> generatedClasses = new ArrayList<>();
+        for(ModelClass modelClass : tree.getModelClasses()) {
+            try {
+                generatedClasses.add(buildCustomClass(outputDirectory, modelClass, templateFile, classPrefix, classSuffix));
+            } catch(TemplateException ex) {
+                throw new IOException(ex);
+            }
+        }
+        return generatedClasses;
+    }
+
+    @Override
     public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {
         List<File> generatedClasses = new ArrayList<>();
         for(ModelClass modelClass : tree.getModelClasses()) {
@@ -103,6 +117,33 @@ public class SwiftOrchestration implements LanguageOrchestrator {
 
     @Override
     public List<File> copyViewResources(File viewPath, OrchestrationTree tree) throws IOException {
+        return null;
+    }
+
+    private File buildCustomClass(File outputDirectory, ModelClass modelClass, String customTemplateFilename, String prefix, String suffix) throws IOException, TemplateException {
+        assert null != prefix || null != suffix;
+        assert !prefix.isEmpty() || !suffix.isEmpty();
+
+        File completePath = outputDirectory;
+        String filename = modelClass.getFileName();
+        if(null != prefix && !prefix.isEmpty()) {
+            filename = prefix + filename;
+        }
+        if(null != suffix && !suffix.isEmpty()) {
+            filename = filename + suffix;
+        }
+        File outputFile = new File(completePath, filename + ".swift");
+        if(ensureExists(completePath)) {
+            LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
+
+            Map<String, Object> model = buildFreemarkerModel(modelClass);
+
+            template.generateFile(model, customTemplateFilename, new FileWriter(outputFile));
+
+            return outputFile;
+        } else {
+            LOGGER.error("Could not create directory: " + completePath);
+        }
         return null;
     }
 

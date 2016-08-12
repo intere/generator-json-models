@@ -21,9 +21,9 @@ public class TemplateConfig {
 
     protected TemplateConfig() {
         templateConfiguration = new Configuration();
-        templateConfiguration.setClassForTemplateLoading(getClass(), "/templates/");
         templateConfiguration.setDefaultEncoding("UTF-8");
         templateConfiguration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        reset();
     }
 
     public Configuration getTemplateConfiguration() {
@@ -32,7 +32,9 @@ public class TemplateConfig {
 
     /** Lets you override the path to get the files from).  */
     public void setDirectoryForTemplateLoading(File file) throws IOException {
-        templateConfiguration.setDirectoryForTemplateLoading(file);
+        if(null != file) {
+            templateConfiguration.setDirectoryForTemplateLoading(file);
+        }
     }
 
     /**
@@ -46,6 +48,10 @@ public class TemplateConfig {
     public void generateFile(Map<String, Object> model, String templateName, Writer out) throws IOException, TemplateException {
         Template template = templateConfiguration.getTemplate(templateName);
         template.process(model, out);
+    }
+
+    public void reset() {
+        templateConfiguration.setClassForTemplateLoading(getClass(), "/templates/");
     }
 
 }

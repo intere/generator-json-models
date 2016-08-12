@@ -14,6 +14,7 @@ import com.intere.generator.metadata.ModelClassImports;
 import com.intere.generator.metadata.ModelClassProperty;
 import com.intere.generator.metadata.models.LanguageModelClassProperty;
 import com.intere.generator.templates.TemplateConfig;
+import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -37,6 +38,11 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	JsonLanguageInterpreter interpreter;
 
 	@Autowired TemplateConfig template;
+
+	@Override
+	public List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile, String classPrefix, String classSuffix) throws IOException {
+		throw new RuntimeException("Not yet implemented");
+	}
 
 	@Override
 	public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {
@@ -76,6 +82,40 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	@Override
 	public List<File> generateRestServices(File restPath, OrchestrationTree tree) throws IOException {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private File buildCustomClass(File outputDirectory, ModelClass modelClass, String customTemplateFilename, String prefix, String suffix) throws IOException, TemplateException {
+		assert null != prefix || null != suffix;
+		assert !prefix.isEmpty() || !suffix.isEmpty();
+
+		File completePath = new File(outputDirectory, modelClass.getNamespace().replaceAll("\\.",  File.separator));
+		if(ensureExists(completePath)) {
+
+			String filename = modelClass.getFileName();
+			if(!prefix.isEmpty()) {
+				filename = prefix + filename;
+			}
+			if(!suffix.isEmpty()) {
+				filename = filename + suffix;
+			}
+			File outputFile = new File(completePath, filename + ".java");
+			LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
+
+
+			Map<String, Object> model = new HashMap<>();
+			model.put("date", new Date());
+			model.put("model", modelClass);
+			model.put("filename", modelClass.getFileName() + ".java");
+			model.put("imports", determineImports(modelClass));
+			model.put("properties", getProperties(modelClass));
+
+			template.generateFile(model, "JavaClass.ftlh", new FileWriter(outputFile));
+
+			return outputFile;
+		} else {
+			LOGGER.error("Could not create directory: " + completePath);
+		}
 		return null;
 	}
 	

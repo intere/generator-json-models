@@ -4,7 +4,6 @@ import static com.intere.generator.io.FileIOUtils.ensureExists;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
 
 import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
 
@@ -19,7 +18,11 @@ public class CodeOrchestration {
 	private File outputDirectory;
 	private OrchestrationTree tree;
 	private LanguageOrchestrator orchestrator;
-	
+	private File customTemplatePath;
+	private String customTemplateFile;
+	private String classPrefix;
+	private String classSuffix;
+
 	/** Default Constructor, no initialization. */
 	public CodeOrchestration() {
 		super();
@@ -55,8 +58,17 @@ public class CodeOrchestration {
 			throw new IllegalStateException("We don't have a code orchestrator yet, please set this before calling generateCode()");
 		}
 		orchestrator.review(tree);
+
+		if(shouldGenerateCustomClasses()) {
+			File srcPath = new File(outputDirectory, "src");
+			if(ensureExists(srcPath)) {
+				orchestrator.generateCustomClasses(srcPath, tree, customTemplatePath, customTemplateFile, classPrefix, classSuffix);
+			}
+
+			return;
+		}
 		
-		if(shouldGeenerateModels()) {
+		if(shouldGenerateModels()) {
 			File srcPath = new File(outputDirectory, "src");
 			if(ensureExists(srcPath)) {
 				orchestrator.generateModels(srcPath, tree);
@@ -109,6 +121,26 @@ public class CodeOrchestration {
 	public OrchestrationTree getTree() {
 		return tree;
 	}
+
+	public File getCustomTemplatePath() {
+		return customTemplatePath;
+	}
+
+	public void setCustomTemplatePath(File customTemplatePath) {
+		this.customTemplatePath = customTemplatePath;
+	}
+
+	public String getCustomTemplateFile() {
+		return customTemplateFile;
+	}
+
+	public void setCustomTemplateFile(String customTemplateFile) {
+		this.customTemplateFile = customTemplateFile;
+	}
+
+	private boolean shouldGenerateCustomClasses() {
+		return null != tree && null != customTemplatePath && null != customTemplateFile;
+	}
 	
 	private boolean shouldGenerateRestServices() {
 		return tree.getMetadata().getGenerate().getRestServices();
@@ -126,7 +158,15 @@ public class CodeOrchestration {
 		return tree.getMetadata().getGenerate().getTests();
 	}
 
-	private boolean shouldGeenerateModels() {
+	private boolean shouldGenerateModels() {
 		return tree.getMetadata().getGenerate().getModels();
+	}
+
+	public void setClassPrefix(String classPrefix) {
+		this.classPrefix = classPrefix;
+	}
+
+	public void setClassSuffix(String classSuffix) {
+		this.classSuffix = classSuffix;
 	}
 }
