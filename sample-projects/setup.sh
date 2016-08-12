@@ -34,6 +34,7 @@ generateJava() {
     -o ${CUR_DIR}/tmp
 
   rm -rf ${JAVA_DIR}/src/main/java ${JAVA_DIR}/src/test/java
+  mkdir -p ${JAVA_DIR}/src/main/java/com/intere/test ${JAVA_DIR}/src/test/java/com/intere/test
   cp -r ${CUR_DIR}/tmp/src ${JAVA_DIR}/src/main/java
   cp -r ${CUR_DIR}/tmp/test ${JAVA_DIR}/src/test/java
 }
@@ -65,11 +66,11 @@ build() {
 }
 
 main() {
-  build;
-  # generateJava;
+  # build;
+  generateJava;
   # generateObjectiveC;
   # generateRuby;
-  generateSwift;
+  # generateSwift;
 }
 
 main;

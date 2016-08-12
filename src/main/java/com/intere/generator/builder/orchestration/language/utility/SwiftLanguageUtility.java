@@ -16,10 +16,10 @@ import java.util.Map;
 @Service("SwiftLanguage")
 public class SwiftLanguageUtility extends AbstractLanguageUtility {
 
-    @Autowired @Qualifier("SwiftModelBuilder")
-    ModelBuilder modelBuilder;
-    @Autowired @Qualifier("SwiftTestBuilder")
-    TestBuilder testBuilder;
+//    @Autowired @Qualifier("SwiftModelBuilder")
+//    ModelBuilder modelBuilder;
+//    @Autowired @Qualifier("SwiftTestBuilder")
+//    TestBuilder testBuilder;
     @Autowired @Qualifier("SwiftViewBuilder")
     ViewBuilder viewBuilder;
     @Autowired @Qualifier("SwiftServiceBuilder")
@@ -36,12 +36,12 @@ public class SwiftLanguageUtility extends AbstractLanguageUtility {
 
     @Override
     public ModelBuilder getModelBuilder() {
-        return modelBuilder;
+        return null;
     }
 
     @Override
     public TestBuilder getTestBuilder() {
-        return testBuilder;
+        return null;
     }
 
     @Override

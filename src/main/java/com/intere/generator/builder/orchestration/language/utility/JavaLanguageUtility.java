@@ -16,8 +16,8 @@ import com.intere.generator.builder.orchestration.OrchestrationTree;
 
 @Service(value="JavaLanguage")
 public class JavaLanguageUtility extends AbstractLanguageUtility {	
-	@Autowired @Qualifier("JavaModelBuilder")
-	ModelBuilder modelBuilder;
+//	@Autowired @Qualifier("JavaModelBuilder")
+//	ModelBuilder modelBuilder;
 	@Autowired @Qualifier("JavaTestBuilder")
 	TestBuilder testBuilder;
 	@Autowired @Qualifier("JavaViewBuilder")
@@ -27,7 +27,7 @@ public class JavaLanguageUtility extends AbstractLanguageUtility {
 	
 	@Override
 	public ModelBuilder getModelBuilder() {
-		return modelBuilder;
+		return null;
 	}
 	
 	@Override
