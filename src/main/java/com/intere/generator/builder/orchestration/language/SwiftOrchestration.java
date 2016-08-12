@@ -1,5 +1,6 @@
 package com.intere.generator.builder.orchestration.language;
 
+import com.intere.generator.builder.generation.utils.SwiftDataGenerator;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
@@ -55,7 +56,11 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     public List<File> generateModelUnitTests(File outputDirectory, OrchestrationTree tree) throws IOException {
         List<File> generatedClasses = new ArrayList<>();
         for(ModelClass modelClass : tree.getModelClasses()) {
-            generatedClasses.add(buildTestFile(outputDirectory, modelClass));
+            try {
+                generatedClasses.add(buildTestFile(outputDirectory, modelClass));
+            } catch (TemplateException ex) {
+                throw new IOException(ex);
+            }
         }
 
         return generatedClasses;
@@ -115,19 +120,9 @@ public class SwiftOrchestration implements LanguageOrchestrator {
         if(ensureExists(completePath)) {
             LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
 
-            Map<String, Object> model = new HashMap<>();
-
-            model.put("date", new Date());
-            model.put("model", modelClass);
-            model.put("filename", modelClass.getFileName() + ".swift");
-            model.put("properties", getProperties(modelClass));
+            Map<String, Object> model = buildFreemarkerModel(modelClass);
 
             template.generateFile(model, "SwiftClass.ftlh", new FileWriter(outputFile));
-
-//            String fileContents = buildModelClass(modelClass);
-//            FileOutputStream fout = new FileOutputStream(outputFile);
-//            IOUtils.write(fileContents, fout);
-//            fout.close();
 
             return outputFile;
         } else {
@@ -142,15 +137,15 @@ public class SwiftOrchestration implements LanguageOrchestrator {
      * @param modelClass
      * @return
      */
-    private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException {
+    private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException, TemplateException {
         File completePath = outputDirectory;
         if(ensureExists(completePath)) {
-            String fileContents = buildTestClass(modelClass);
             File outputFile = new File(completePath, modelClass.getTestClassName() + ".swift");
             LOGGER.info("About to create Test Class: " + outputFile.getAbsolutePath());
-            FileOutputStream fout = new FileOutputStream(outputFile);
-            IOUtils.write(fileContents, fout);
-            fout.close();
+
+            Map<String, Object> model = buildFreemarkerModel(modelClass);
+            template.generateFile(model, "SwiftTestClass.ftlh", new FileWriter(outputFile));
+
             return outputFile;
         } else {
             LOGGER.error("Could not create directory: " + completePath);
@@ -161,6 +156,18 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     //
     // Helper Methods
     //
+
+    private Map<String, Object> buildFreemarkerModel(ModelClass modelClass) {
+        Map<String, Object> model = new HashMap<>();
+
+        model.put("date", new Date());
+        model.put("model", modelClass);
+        model.put("filename", modelClass.getFileName() + ".swift");
+        model.put("properties", getProperties(modelClass));
+        model.put("generator", new SwiftDataGenerator());
+
+        return model;
+    }
 
     private String buildTestClass(ModelClass modelClass) {
         StringBuilder builder = new StringBuilder();

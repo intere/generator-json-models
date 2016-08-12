@@ -180,8 +180,8 @@ extension ${model.className} {
                 <#break>
 
                 <#case "ARRAY">
-                <#if property.arraySubType == "CLASS">
-        model.${property.alias} = ${model.className}.fromArrayOfMaps(map["${property.name}"] as? [[String: AnyObject]])
+                <#if property.arraySubTypeProperty.dataType == "CLASS">
+        model.${property.alias} = ${property.arraySubType}.fromArrayOfMaps(map["${property.name}"] as? [[String: AnyObject]])
                 <#else>
         model.${property.alias} = map["${property.name}"] as? [${property.arraySubType}]
                 </#if>
@@ -201,9 +201,9 @@ extension ${model.className} {
     - Parameter mapArray: An array of Maps, assumes that each map is a serialized ${model.className}.
     - Returns: An array of ${model.className} objects (should be 1 to 1).
     */
-    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [${model.className}] {
+    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [${model.className}]? {
         guard let mapArray = mapArray else {
-            return []
+            return nil
         }
 
         var modelArray = [${model.className}]()
@@ -223,7 +223,7 @@ extension ${model.className} {
     - Parameter data: The NSData (optional) to pull the objects from.
     - Returns: An array of ${model.className} objects that were deserialized from the provided data.
     */
-    class func fromData(data: NSData?) -> [${model.className}] {
+    class func fromData(data: NSData?) -> [${model.className}]? {
         guard let data = data else {
             return []
         }
@@ -253,13 +253,14 @@ extension ${model.className} {
 	 - Parameter json: The (UTF-8) JSON String to deserialize into ${model.className} objects.
 	 - Returns: An Array of ${model.className} objects.
 	*/
-	class func fromJson(json: String) -> [${model.className}] {
+	class func fromJson(json: String) -> [${model.className}]? {
 		let data = (json as NSString).dataUsingEncoding(NSUTF8StringEncoding)
 		return fromData(data)
 	}
 
 }
 
+<#if model.hasDate()>
 // MARK: - Date Methods
 
 extension ${model.className} {
@@ -282,3 +283,4 @@ extension ${model.className} {
     	}
 
 }
+</#if>

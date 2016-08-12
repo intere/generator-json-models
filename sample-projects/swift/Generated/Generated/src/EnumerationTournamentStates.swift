@@ -132,9 +132,9 @@ extension EnumerationTournamentStates {
     - Parameter mapArray: An array of Maps, assumes that each map is a serialized EnumerationTournamentStates.
     - Returns: An array of EnumerationTournamentStates objects (should be 1 to 1).
     */
-    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [EnumerationTournamentStates] {
+    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [EnumerationTournamentStates]? {
         guard let mapArray = mapArray else {
-            return []
+            return nil
         }
 
         var modelArray = [EnumerationTournamentStates]()
@@ -154,7 +154,7 @@ extension EnumerationTournamentStates {
     - Parameter data: The NSData (optional) to pull the objects from.
     - Returns: An array of EnumerationTournamentStates objects that were deserialized from the provided data.
     */
-    class func fromData(data: NSData?) -> [EnumerationTournamentStates] {
+    class func fromData(data: NSData?) -> [EnumerationTournamentStates]? {
         guard let data = data else {
             return []
         }
@@ -184,32 +184,10 @@ extension EnumerationTournamentStates {
 	 - Parameter json: The (UTF-8) JSON String to deserialize into EnumerationTournamentStates objects.
 	 - Returns: An Array of EnumerationTournamentStates objects.
 	*/
-	class func fromJson(json: String) -> [EnumerationTournamentStates] {
+	class func fromJson(json: String) -> [EnumerationTournamentStates]? {
 		let data = (json as NSString).dataUsingEncoding(NSUTF8StringEncoding)
 		return fromData(data)
 	}
 
 }
 
-// MARK: - Date Methods
-
-extension EnumerationTournamentStates {
-
-    	class func fromEpochDateInt(dateInt: Int?) -> NSDate? {
-    	    guard let dateInt = dateInt else {
-    	        return nil
-    	    }
-
-    		let dateDouble = NSTimeInterval(Double(dateInt) / 1000)
-    		return NSDate(timeIntervalSince1970: dateDouble)
-    	}
-
-    	class func toEpochDateInt(date: NSDate?) -> Int? {
-    	    guard let date = date else {
-    			return nil
-    		}
-
-    		return Int(date.timeIntervalSince1970 * 1000)
-    	}
-
-}

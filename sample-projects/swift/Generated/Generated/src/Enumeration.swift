@@ -130,12 +130,12 @@ extension Enumeration {
         }
 
         let model = Enumeration()
-        model.purseTypes = map["purseTypes"] as? [EnumerationPurseTypes]
-        model.skillLevels = map["skillLevels"] as? [EnumerationSkillLevels]
-        model.tournamentSizes = map["tournamentSizes"] as? [EnumerationTournamentSizes]
-        model.tournamentStates = map["tournamentStates"] as? [EnumerationTournamentStates]
-        model.tournamentTypes = map["tournamentTypes"] as? [EnumerationTournamentTypes]
-        model.userTypes = map["userTypes"] as? [EnumerationUserTypes]
+        model.purseTypes = EnumerationPurseTypes.fromArrayOfMaps(map["purseTypes"] as? [[String: AnyObject]])
+        model.skillLevels = EnumerationSkillLevels.fromArrayOfMaps(map["skillLevels"] as? [[String: AnyObject]])
+        model.tournamentSizes = EnumerationTournamentSizes.fromArrayOfMaps(map["tournamentSizes"] as? [[String: AnyObject]])
+        model.tournamentStates = EnumerationTournamentStates.fromArrayOfMaps(map["tournamentStates"] as? [[String: AnyObject]])
+        model.tournamentTypes = EnumerationTournamentTypes.fromArrayOfMaps(map["tournamentTypes"] as? [[String: AnyObject]])
+        model.userTypes = EnumerationUserTypes.fromArrayOfMaps(map["userTypes"] as? [[String: AnyObject]])
         return model
     }
 
@@ -144,9 +144,9 @@ extension Enumeration {
     - Parameter mapArray: An array of Maps, assumes that each map is a serialized Enumeration.
     - Returns: An array of Enumeration objects (should be 1 to 1).
     */
-    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [Enumeration] {
+    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [Enumeration]? {
         guard let mapArray = mapArray else {
-            return []
+            return nil
         }
 
         var modelArray = [Enumeration]()
@@ -166,7 +166,7 @@ extension Enumeration {
     - Parameter data: The NSData (optional) to pull the objects from.
     - Returns: An array of Enumeration objects that were deserialized from the provided data.
     */
-    class func fromData(data: NSData?) -> [Enumeration] {
+    class func fromData(data: NSData?) -> [Enumeration]? {
         guard let data = data else {
             return []
         }
@@ -196,32 +196,10 @@ extension Enumeration {
 	 - Parameter json: The (UTF-8) JSON String to deserialize into Enumeration objects.
 	 - Returns: An Array of Enumeration objects.
 	*/
-	class func fromJson(json: String) -> [Enumeration] {
+	class func fromJson(json: String) -> [Enumeration]? {
 		let data = (json as NSString).dataUsingEncoding(NSUTF8StringEncoding)
 		return fromData(data)
 	}
 
 }
 
-// MARK: - Date Methods
-
-extension Enumeration {
-
-    	class func fromEpochDateInt(dateInt: Int?) -> NSDate? {
-    	    guard let dateInt = dateInt else {
-    	        return nil
-    	    }
-
-    		let dateDouble = NSTimeInterval(Double(dateInt) / 1000)
-    		return NSDate(timeIntervalSince1970: dateDouble)
-    	}
-
-    	class func toEpochDateInt(date: NSDate?) -> Int? {
-    	    guard let date = date else {
-    			return nil
-    		}
-
-    		return Int(date.timeIntervalSince1970 * 1000)
-    	}
-
-}

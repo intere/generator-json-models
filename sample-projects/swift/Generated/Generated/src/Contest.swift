@@ -60,7 +60,6 @@ extension Contest {
         dict["description"] = theDescription
         dict["startDate"] = Contest.toEpochDateInt(startDate)
         dict["endDate"] = Contest.toEpochDateInt(endDate)
-        // Array Subtype = String
         dict["userIDs"] = userIDs
         dict["results"] =  ContestResults.toMapArray(results)
         dict["createdDate"] = Contest.toEpochDateInt(createdDate)
@@ -81,7 +80,6 @@ extension Contest {
             dict["sponsor"] = sponsor.toMap()
         }
         dict["state"] = state
-        // Array Subtype = String
         dict["trackIDs"] = trackIDs
         dict["type"] = theType
 
@@ -187,7 +185,7 @@ extension Contest {
         model.startDate = Contest.fromEpochDateInt(map["startDate"] as? Int)
         model.endDate = Contest.fromEpochDateInt(map["endDate"] as? Int)
         model.userIDs = map["userIDs"] as? [String]
-        model.results = map["results"] as? [ContestResults]
+        model.results = ContestResults.fromArrayOfMaps(map["results"] as? [[String: AnyObject]])
         model.createdDate = Contest.fromEpochDateInt(map["createdDate"] as? Int)
         model.latitude = map["latitude"] as? Double
         model.longitude = map["longitude"] as? Double
@@ -214,9 +212,9 @@ extension Contest {
     - Parameter mapArray: An array of Maps, assumes that each map is a serialized Contest.
     - Returns: An array of Contest objects (should be 1 to 1).
     */
-    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [Contest] {
+    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [Contest]? {
         guard let mapArray = mapArray else {
-            return []
+            return nil
         }
 
         var modelArray = [Contest]()
@@ -236,7 +234,7 @@ extension Contest {
     - Parameter data: The NSData (optional) to pull the objects from.
     - Returns: An array of Contest objects that were deserialized from the provided data.
     */
-    class func fromData(data: NSData?) -> [Contest] {
+    class func fromData(data: NSData?) -> [Contest]? {
         guard let data = data else {
             return []
         }
@@ -266,7 +264,7 @@ extension Contest {
 	 - Parameter json: The (UTF-8) JSON String to deserialize into Contest objects.
 	 - Returns: An Array of Contest objects.
 	*/
-	class func fromJson(json: String) -> [Contest] {
+	class func fromJson(json: String) -> [Contest]? {
 		let data = (json as NSString).dataUsingEncoding(NSUTF8StringEncoding)
 		return fromData(data)
 	}

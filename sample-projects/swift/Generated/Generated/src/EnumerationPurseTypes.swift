@@ -129,9 +129,9 @@ extension EnumerationPurseTypes {
     - Parameter mapArray: An array of Maps, assumes that each map is a serialized EnumerationPurseTypes.
     - Returns: An array of EnumerationPurseTypes objects (should be 1 to 1).
     */
-    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [EnumerationPurseTypes] {
+    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [EnumerationPurseTypes]? {
         guard let mapArray = mapArray else {
-            return []
+            return nil
         }
 
         var modelArray = [EnumerationPurseTypes]()
@@ -151,7 +151,7 @@ extension EnumerationPurseTypes {
     - Parameter data: The NSData (optional) to pull the objects from.
     - Returns: An array of EnumerationPurseTypes objects that were deserialized from the provided data.
     */
-    class func fromData(data: NSData?) -> [EnumerationPurseTypes] {
+    class func fromData(data: NSData?) -> [EnumerationPurseTypes]? {
         guard let data = data else {
             return []
         }
@@ -181,32 +181,10 @@ extension EnumerationPurseTypes {
 	 - Parameter json: The (UTF-8) JSON String to deserialize into EnumerationPurseTypes objects.
 	 - Returns: An Array of EnumerationPurseTypes objects.
 	*/
-	class func fromJson(json: String) -> [EnumerationPurseTypes] {
+	class func fromJson(json: String) -> [EnumerationPurseTypes]? {
 		let data = (json as NSString).dataUsingEncoding(NSUTF8StringEncoding)
 		return fromData(data)
 	}
 
 }
 
-// MARK: - Date Methods
-
-extension EnumerationPurseTypes {
-
-    	class func fromEpochDateInt(dateInt: Int?) -> NSDate? {
-    	    guard let dateInt = dateInt else {
-    	        return nil
-    	    }
-
-    		let dateDouble = NSTimeInterval(Double(dateInt) / 1000)
-    		return NSDate(timeIntervalSince1970: dateDouble)
-    	}
-
-    	class func toEpochDateInt(date: NSDate?) -> Int? {
-    	    guard let date = date else {
-    			return nil
-    		}
-
-    		return Int(date.timeIntervalSince1970 * 1000)
-    	}
-
-}

@@ -138,9 +138,9 @@ extension EnumerationSkillLevels {
     - Parameter mapArray: An array of Maps, assumes that each map is a serialized EnumerationSkillLevels.
     - Returns: An array of EnumerationSkillLevels objects (should be 1 to 1).
     */
-    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [EnumerationSkillLevels] {
+    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [EnumerationSkillLevels]? {
         guard let mapArray = mapArray else {
-            return []
+            return nil
         }
 
         var modelArray = [EnumerationSkillLevels]()
@@ -160,7 +160,7 @@ extension EnumerationSkillLevels {
     - Parameter data: The NSData (optional) to pull the objects from.
     - Returns: An array of EnumerationSkillLevels objects that were deserialized from the provided data.
     */
-    class func fromData(data: NSData?) -> [EnumerationSkillLevels] {
+    class func fromData(data: NSData?) -> [EnumerationSkillLevels]? {
         guard let data = data else {
             return []
         }
@@ -190,32 +190,10 @@ extension EnumerationSkillLevels {
 	 - Parameter json: The (UTF-8) JSON String to deserialize into EnumerationSkillLevels objects.
 	 - Returns: An Array of EnumerationSkillLevels objects.
 	*/
-	class func fromJson(json: String) -> [EnumerationSkillLevels] {
+	class func fromJson(json: String) -> [EnumerationSkillLevels]? {
 		let data = (json as NSString).dataUsingEncoding(NSUTF8StringEncoding)
 		return fromData(data)
 	}
 
 }
 
-// MARK: - Date Methods
-
-extension EnumerationSkillLevels {
-
-    	class func fromEpochDateInt(dateInt: Int?) -> NSDate? {
-    	    guard let dateInt = dateInt else {
-    	        return nil
-    	    }
-
-    		let dateDouble = NSTimeInterval(Double(dateInt) / 1000)
-    		return NSDate(timeIntervalSince1970: dateDouble)
-    	}
-
-    	class func toEpochDateInt(date: NSDate?) -> Int? {
-    	    guard let date = date else {
-    			return nil
-    		}
-
-    		return Int(date.timeIntervalSince1970 * 1000)
-    	}
-
-}

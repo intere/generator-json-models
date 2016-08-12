@@ -9,6 +9,8 @@ package com.intere.generator.metadata;
  * The generator tool is licensed under the LGPL: http://www.gnu.org/licenses/lgpl-3.0.html#content
 */
 
+import com.intere.generator.builder.orchestration.OrchestrationDataType;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,15 @@ public class ModelClass implements Serializable {
 	private String restUrl;
 	private List<ModelClassImports> imports = new ArrayList<ModelClassImports>();
 	private List<String> summaryProperties = new ArrayList<String>();
+
+	public boolean hasDate() {
+		for(ModelClassProperty prop : property) {
+			if(prop.getDataType() == OrchestrationDataType.DATE) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Setter for uniqueId property
