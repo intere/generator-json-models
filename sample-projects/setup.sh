@@ -52,14 +52,24 @@ generateSwift() {
   nukeTmp;
   ../run.sh --orchestrate ${CUR_DIR}/metadata-swift.json \
 	-o ${CUR_DIR}/tmp
+
+  cp ${CUR_DIR}/tmp/src/* swift/Generated/Generated/src/
+  cp ${CUR_DIR}/tmp/test/* swift/Generated/GeneratedTests/test/
   
 }
 
+build() {
+  cd ../
+  mvn clean install -DskipTests
+  cd sample-projects
+}
+
 main() {
+  build;
   # generateJava;
-  generateObjectiveC;
+  # generateObjectiveC;
   # generateRuby;
-  # generateSwift;
+  generateSwift;
 }
 
 main;

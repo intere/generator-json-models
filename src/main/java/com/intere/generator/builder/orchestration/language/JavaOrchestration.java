@@ -44,8 +44,8 @@ public class JavaOrchestration implements LanguageOrchestrator {
 		for(ModelClass modelClass : tree.getModelClasses()) {
 			try {
 				generatedClasses.add(buildModelClassFile(outputDirectory, modelClass));
-			} catch (TemplateException e) {
-				throw new IOException(e);
+			} catch (TemplateException ex) {
+				throw new IOException(ex);
 			}
 		}
 		return generatedClasses;

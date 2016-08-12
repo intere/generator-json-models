@@ -88,6 +88,12 @@ cd sample-projects
     -o ${PWD}/tmp/ruby
 ```
 
+# Generates Swift Code
+```
+./run --orchestrate ${PWD}/sample-projects/metadata-swift.json \
+    -o ${PWD}/tmp/swift
+```
+
 ## License
 This tool is Licensed under the LGPL: http://www.gnu.org/licenses/lgpl-3.0.html#content
 My intent is to allow you to use this tool for personal and/or commercial purposes.

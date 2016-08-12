@@ -1,9 +1,13 @@
 package com.intere.generator.builder.orchestration.language;
 
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
 import com.intere.generator.metadata.ModelClass;
+import com.intere.generator.metadata.ModelClassProperty;
+import com.intere.generator.metadata.models.LanguageModelClassProperty;
 import com.intere.generator.templates.TemplateConfig;
+import freemarker.template.TemplateException;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -28,13 +33,20 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     @Autowired @Qualifier("SwiftLanguage")
     private LanguageUtility languageUtil;
 
-    @Autowired TemplateConfig templateConfig;
+    @Autowired @Qualifier("SwiftInterpreter")
+    JsonLanguageInterpreter interpreter;
+
+    @Autowired TemplateConfig template;
 
     @Override
     public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {
         List<File> generatedClasses = new ArrayList<>();
         for(ModelClass modelClass : tree.getModelClasses()) {
-            generatedClasses.add(buildModelClassFile(outputDirectory, modelClass));
+            try {
+                generatedClasses.add(buildModelClassFile(outputDirectory, modelClass));
+            } catch(TemplateException ex) {
+                throw new IOException(ex);
+            }
         }
         return generatedClasses;
     }
@@ -96,20 +108,27 @@ public class SwiftOrchestration implements LanguageOrchestrator {
      * @return
      * @throws IOException
      */
-    private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException {
+    private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException, TemplateException {
         File completePath = outputDirectory;
+        File outputFile = new File(completePath, modelClass.getFileName() + ".swift");
+
         if(ensureExists(completePath)) {
+            LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
 
             Map<String, Object> model = new HashMap<>();
-            model.put("date", new Date());
-            model.put("filename", modelClass.getFileName() + ".swift");
 
-            String fileContents = buildModelClass(modelClass);
-            File outputFile = new File(completePath, modelClass.getFileName() + ".swift");
-            LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
-            FileOutputStream fout = new FileOutputStream(outputFile);
-            IOUtils.write(fileContents, fout);
-            fout.close();
+            model.put("date", new Date());
+            model.put("model", modelClass);
+            model.put("filename", modelClass.getFileName() + ".swift");
+            model.put("properties", getProperties(modelClass));
+
+            template.generateFile(model, "SwiftClass.ftlh", new FileWriter(outputFile));
+
+//            String fileContents = buildModelClass(modelClass);
+//            FileOutputStream fout = new FileOutputStream(outputFile);
+//            IOUtils.write(fileContents, fout);
+//            fout.close();
+
             return outputFile;
         } else {
             LOGGER.error("Could not create directory: " + completePath);
@@ -167,6 +186,20 @@ public class SwiftOrchestration implements LanguageOrchestrator {
         builder.append(languageUtil.getModelBuilder().buildModelUtilityDeclarationMethods(modelClass));
         builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
         return builder.toString();
+    }
+
+
+    //
+    // Helpers
+    //
+
+    private List<LanguageModelClassProperty> getProperties(ModelClass modelClass) {
+        List<LanguageModelClassProperty> list = new ArrayList<>();
+        for(ModelClassProperty prop : modelClass.getProperty()) {
+            list.add(new LanguageModelClassProperty(prop, interpreter));
+        }
+
+        return list;
     }
 
 }

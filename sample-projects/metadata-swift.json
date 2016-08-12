@@ -1,6 +1,6 @@
 {
   "language": "Swift",
-  "namespace": null,
+  "namespace": "Generated",
   "classes": [
     {
       "className": "Contest",
