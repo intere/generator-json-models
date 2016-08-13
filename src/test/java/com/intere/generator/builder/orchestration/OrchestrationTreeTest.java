@@ -24,7 +24,7 @@ public class OrchestrationTreeTest {
 
 	@Test
 	public void testCreation() throws Exception {
-		OrchestrationTree tree = new OrchestrationTree(metadataPath);
+		OrchestrationTree tree = new OrchestrationTree(metadataPath, null, null);
 		assertNotNull(tree);
 		
 		// Perform Assertions that we actually do have some classes in the collection:
@@ -50,7 +50,7 @@ public class OrchestrationTreeTest {
 	
 	@Test
 	public void testPropertyDataTypes() throws Exception {
-		OrchestrationTree tree = new OrchestrationTree(metadataPath);
+		OrchestrationTree tree = new OrchestrationTree(metadataPath, null, null);
 		assertNotNull(tree);
 		for(ModelClass model : tree.getModelClasses()) {
 			assertNotNull(model);
@@ -65,7 +65,7 @@ public class OrchestrationTreeTest {
 	
 	@Test
 	public void testArraySubTypes() throws Exception {
-		OrchestrationTree tree = new OrchestrationTree(metadataPath);
+		OrchestrationTree tree = new OrchestrationTree(metadataPath, null, null);
 		assertNotNull(tree);
 		
 		for(ModelClass clazz : tree.getModelClasses()) {
@@ -80,7 +80,7 @@ public class OrchestrationTreeTest {
 	
 	@Test
 	public void testOverlays() throws Exception {
-		OrchestrationTree tree = new OrchestrationTree(metadataPath);
+		OrchestrationTree tree = new OrchestrationTree(metadataPath, null, null);
 		assertNotNull(tree);
 		// TODO
 		assertNotNull(tree.getModelClassMap().get("Contest").getProperty());

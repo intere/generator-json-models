@@ -4,6 +4,7 @@ import com.intere.generator.builder.generation.utils.SwiftDataGenerator;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 import com.intere.generator.builder.orchestration.language.utility.LanguageUtility;
+import com.intere.generator.metadata.CustomClass;
 import com.intere.generator.metadata.ModelClass;
 import com.intere.generator.metadata.ModelClassProperty;
 import com.intere.generator.metadata.models.LanguageModelClassProperty;
@@ -40,12 +41,12 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     @Autowired TemplateConfig template;
 
     @Override
-    public List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile, String classPrefix, String classSuffix) throws IOException {
+    public List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile) throws IOException {
         template.setDirectoryForTemplateLoading(templateSourceDir);
         List<File> generatedClasses = new ArrayList<>();
-        for(ModelClass modelClass : tree.getModelClasses()) {
+        for(CustomClass modelClass : tree.getModelClasses()) {
             try {
-                generatedClasses.add(buildCustomClass(outputDirectory, modelClass, templateFile, classPrefix, classSuffix));
+                generatedClasses.add(buildCustomClass(outputDirectory, modelClass, templateFile, tree.getPrefix(), tree.getSuffix()));
             } catch(TemplateException ex) {
                 throw new IOException(ex);
             }
@@ -56,7 +57,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     @Override
     public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {
         List<File> generatedClasses = new ArrayList<>();
-        for(ModelClass modelClass : tree.getModelClasses()) {
+        for(CustomClass modelClass : tree.getModelClasses()) {
             try {
                 generatedClasses.add(buildModelClassFile(outputDirectory, modelClass));
             } catch(TemplateException ex) {
@@ -69,7 +70,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     @Override
     public List<File> generateModelUnitTests(File outputDirectory, OrchestrationTree tree) throws IOException {
         List<File> generatedClasses = new ArrayList<>();
-        for(ModelClass modelClass : tree.getModelClasses()) {
+        for(CustomClass modelClass : tree.getModelClasses()) {
             try {
                 generatedClasses.add(buildTestFile(outputDirectory, modelClass));
             } catch (TemplateException ex) {
@@ -120,7 +121,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
         return null;
     }
 
-    private File buildCustomClass(File outputDirectory, ModelClass modelClass, String customTemplateFilename, String prefix, String suffix) throws IOException, TemplateException {
+    private File buildCustomClass(File outputDirectory, CustomClass modelClass, String customTemplateFilename, String prefix, String suffix) throws IOException, TemplateException {
         assert null != prefix || null != suffix;
         assert !prefix.isEmpty() || !suffix.isEmpty();
 
@@ -136,7 +137,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
         if(ensureExists(completePath)) {
             LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
 
-            Map<String, Object> model = buildFreemarkerModel(modelClass);
+            Map<String, Object> model = buildFreemarkerModel(modelClass, filename, prefix, suffix);
 
             template.generateFile(model, customTemplateFilename, new FileWriter(outputFile));
 
@@ -154,7 +155,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
      * @return
      * @throws IOException
      */
-    private File buildModelClassFile(File outputDirectory, ModelClass modelClass) throws IOException, TemplateException {
+    private File buildModelClassFile(File outputDirectory, CustomClass modelClass) throws IOException, TemplateException {
         File completePath = outputDirectory;
         File outputFile = new File(completePath, modelClass.getFileName() + ".swift");
 
@@ -178,7 +179,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
      * @param modelClass
      * @return
      */
-    private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException, TemplateException {
+    private File buildTestFile(File outputDirectory, CustomClass modelClass) throws IOException, TemplateException {
         File completePath = outputDirectory;
         if(ensureExists(completePath)) {
             File outputFile = new File(completePath, modelClass.getTestClassName() + ".swift");
@@ -198,7 +199,11 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     // Helper Methods
     //
 
-    private Map<String, Object> buildFreemarkerModel(ModelClass modelClass) {
+    private Map<String, Object> buildFreemarkerModel(CustomClass modelClass) {
+        return buildFreemarkerModel(modelClass, null, null, null);
+    }
+
+    private Map<String, Object> buildFreemarkerModel(CustomClass modelClass, String classname, String prefix, String suffix) {
         Map<String, Object> model = new HashMap<>();
 
         model.put("date", new Date());
@@ -206,6 +211,11 @@ public class SwiftOrchestration implements LanguageOrchestrator {
         model.put("filename", modelClass.getFileName() + ".swift");
         model.put("properties", getProperties(modelClass));
         model.put("generator", new SwiftDataGenerator());
+
+        model.put("classname", null != classname ? classname : modelClass.getFileName());
+        model.put("prefix", null != prefix ? prefix : "");
+        model.put("suffix", null != suffix ? suffix : "");
+
 
         return model;
     }

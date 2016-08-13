@@ -28,7 +28,7 @@ public class RubyOrchestration implements LanguageOrchestrator {
 	LanguageUtility languageUtil = new RubyLanguageUtility();
 
 	@Override
-	public List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile, String classPrefix, String classSuffix) throws IOException {
+	public List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile) throws IOException {
 		throw new IOException("Not yet implemented");
 	}
 

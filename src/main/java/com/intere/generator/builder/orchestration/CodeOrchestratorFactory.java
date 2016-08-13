@@ -30,11 +30,9 @@ public class CodeOrchestratorFactory {
 	private String classSuffix;
 
 	public void beginOrchestration(String orchestrationFilePath, File outputDirectory) throws IOException {
-		CodeOrchestration orchestrator = new CodeOrchestration(orchestrationFilePath, outputDirectory);
+		CodeOrchestration orchestrator = new CodeOrchestration(orchestrationFilePath, outputDirectory, classPrefix, classSuffix);
 		orchestrator.setCustomTemplatePath(templateDirectory);
 		orchestrator.setCustomTemplateFile(templateFile);
-		orchestrator.setClassPrefix(classPrefix);
-		orchestrator.setClassSuffix(classSuffix);
 
 		switch (orchestrator.getTree().getLanguage()) {
 		case Java:

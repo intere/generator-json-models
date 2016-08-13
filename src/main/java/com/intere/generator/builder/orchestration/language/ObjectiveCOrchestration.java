@@ -27,7 +27,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	LanguageUtility languageUtil;
 
 	@Override
-	public List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile, String classPrefix, String classSuffix) throws IOException {
+	public List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile) throws IOException {
 		throw new IOException("Not Yet Implemented");
 	}
 

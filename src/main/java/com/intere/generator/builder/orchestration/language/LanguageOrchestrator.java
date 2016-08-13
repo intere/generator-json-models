@@ -13,12 +13,10 @@ public interface LanguageOrchestrator {
 	 * @param outputDirectory Where to put the Models
 	 * @param templateSourceDir The directory to look within to find the template path
 	 * @param templateFile The template file to use to generate the classes
-	 * @param classPrefix A prefix to be added to each generated classname
-	 * @param classSuffix A suffix to be added to each generated classname
 	 * @return A list of files that were generated.
 	 * @throws IOException
 	 */
-	List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile, String classPrefix, String classSuffix) throws IOException;
+	List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile) throws IOException;
 
 	/** 
 	 * Generates the models for this language.  

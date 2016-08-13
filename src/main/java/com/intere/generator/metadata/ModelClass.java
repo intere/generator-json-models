@@ -35,8 +35,8 @@ public class ModelClass implements Serializable {
 	private List<String> summaryProperties = new ArrayList<String>();
 
 	public boolean hasDate() {
-		for(ModelClassProperty prop : property) {
-			if(prop.getDataType() == OrchestrationDataType.DATE) {
+		for (ModelClassProperty prop : property) {
+			if (prop.getDataType() == OrchestrationDataType.DATE) {
 				return true;
 			}
 		}

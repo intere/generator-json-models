@@ -10,6 +10,6 @@
 
 import RealmSwift
 
-class ${model.className}: RealmModel {
+class ${model.customName}: RealmModel {
 
 }

@@ -20,8 +20,6 @@ public class CodeOrchestration {
 	private LanguageOrchestrator orchestrator;
 	private File customTemplatePath;
 	private String customTemplateFile;
-	private String classPrefix;
-	private String classSuffix;
 
 	/** Default Constructor, no initialization. */
 	public CodeOrchestration() {
@@ -34,8 +32,8 @@ public class CodeOrchestration {
 	 * @param outputDirectory
 	 * @throws IOException
 	 */
-	public CodeOrchestration(String orchestrationFilePath, File outputDirectory) throws IOException {
-		initialize(orchestrationFilePath, outputDirectory);
+	public CodeOrchestration(String orchestrationFilePath, File outputDirectory, String prefix, String suffix) throws IOException {
+		initialize(orchestrationFilePath, outputDirectory, prefix, suffix);
 	}
 	
 	/**
@@ -44,9 +42,9 @@ public class CodeOrchestration {
 	 * @param outputDirectory
 	 * @throws IOException
 	 */
-	public void initialize(String orchestrationFilePath, File outputDirectory) throws IOException {
+	public void initialize(String orchestrationFilePath, File outputDirectory, String prefix, String suffix) throws IOException {
 		this.outputDirectory = outputDirectory;
-		this.tree = new OrchestrationTree(orchestrationFilePath);
+		this.tree = new OrchestrationTree(orchestrationFilePath, prefix, suffix);
 	}
 	
 	/**
@@ -62,7 +60,7 @@ public class CodeOrchestration {
 		if(shouldGenerateCustomClasses()) {
 			File srcPath = new File(outputDirectory, "src");
 			if(ensureExists(srcPath)) {
-				orchestrator.generateCustomClasses(srcPath, tree, customTemplatePath, customTemplateFile, classPrefix, classSuffix);
+				orchestrator.generateCustomClasses(srcPath, tree, customTemplatePath, customTemplateFile);
 			}
 
 			return;
@@ -162,11 +160,4 @@ public class CodeOrchestration {
 		return tree.getMetadata().getGenerate().getModels();
 	}
 
-	public void setClassPrefix(String classPrefix) {
-		this.classPrefix = classPrefix;
-	}
-
-	public void setClassSuffix(String classSuffix) {
-		this.classSuffix = classSuffix;
-	}
 }
