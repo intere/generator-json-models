@@ -49,8 +49,6 @@ public class FreemarkerTest {
 
         String result = out.toString();
         assertNotNull(result);
-
-        System.out.println(result);
     }
 
     // Create the Data Model

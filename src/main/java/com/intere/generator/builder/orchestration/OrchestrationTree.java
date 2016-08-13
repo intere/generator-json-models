@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.intere.generator.metadata.CustomClass;
+import com.intere.generator.metadata.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
@@ -15,9 +15,6 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.intere.generator.Language;
-import com.intere.generator.metadata.Metadata;
-import com.intere.generator.metadata.MetadataClasses;
-import com.intere.generator.metadata.ModelClass;
 
 public class OrchestrationTree {
 	private static final Logger LOGGER = LogManager.getLogger(OrchestrationTree.class);
@@ -52,12 +49,44 @@ public class OrchestrationTree {
 		if(node.isArray()) {
 			node = node.get(0);
 		}
-		List<ModelClass> tmpModelClasses = OrchestrationUtils.readBuildClasses(metadata, clazz, node);
-		for(ModelClass model : tmpModelClasses) {
+
+		List<CustomClass> tmpModelClasses = OrchestrationUtils.readBuildClasses(metadata, clazz, node, prefix, suffix);
+		for(CustomClass model : tmpModelClasses) {
 			String customName = customClassName(model.getClassName());
-			modelClassMap.put(model.getClassName(), new CustomClass(model, customName));
+			modelClassMap.put(model.getClassName(), model);
 		}
+		wireAllObjectsTogether();
 		modelClasses.addAll(modelClassMap.values());
+	}
+
+	private void wireAllObjectsTogether() {
+		for(CustomClass clazz : modelClassMap.values()) {
+			for(ModelClassProperty property : clazz.getProperty()) {
+				wireProperties(property);
+			}
+		}
+	}
+
+	private void wireProperties(ModelClassProperty property) {
+		switch(property.getDataType()) {
+			case CLASS:
+				if(null == property.getParentModel()) {
+					property.setParentModel(modelClassMap.get(property.getType()));
+				}
+				break;
+
+			case ARRAY:
+				switch(property.getArraySubTypeProperty().getDataType()) {
+					case CLASS:
+						property.getArraySubTypeProperty().setParentModel(modelClassMap.get(property.getArraySubTypeProperty().getType()));
+						break;
+
+					case ARRAY:
+						wireProperties(property.getArraySubTypeProperty());
+						break;
+				}
+				break;
+		}
 	}
 
 	private String customClassName(String className) {

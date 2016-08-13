@@ -46,12 +46,12 @@ extension ${model.testClassName} {
             return
         }
 
-        guard let ${property.alias} = model.${property.alias} else {
+        guard let result = model.${property.alias} else {
             XCTFail("The ${property.alias} date is nil")
             return
         }
 
-        XCTAssertEqualWithAccuracy(date.timeIntervalSince1970, ${property.alias}.timeIntervalSince1970, accuracy: 0.01, "The ${property.alias} date is incorrect")
+        XCTAssertEqualWithAccuracy(date.timeIntervalSince1970, result.timeIntervalSince1970, accuracy: 0.01, "The ${property.alias} date is incorrect")
         <#break>
 
         <#case "ARRAY">

@@ -1,26 +1,8 @@
 {
     "purseTypes": [
         {
-            "title": "Featured"
-        },
-        {
             "subtitle": "food & drink",
             "title": "Pub & Grub"
-        },
-        {
-            "subtitle": "gear, lift tickets, etc.",
-            "title": "Swag"
-        },
-        {
-            "subtitle": "hotels & spas",
-            "title": "Lodge & Lounge"
-        },
-        {
-            "subtitle": "Beauty",
-            "title": "Health & Wellness"
-        },
-        {
-            "title": "Miscellaneous"
         }
     ],
     "skillLevels": [
@@ -29,108 +11,30 @@
             "image": "https://intere.servebeer.com/images/green-dot.png",
             "name": "green dot",
             "value": 0
-        },
-        {
-            "description": "I can ski comfortably on most groomed terrain.",
-            "image": "https://intere.servebeer.com/images/blue-square.png",
-            "name": "blue square",
-            "value": 1
-        },
-        {
-            "description": "I can handle most in-bounds terrain and conditions but may be challenged by the most difficult of them.",
-            "image": "https://intere.servebeer.com/images/black-diamond.png",
-            "name": "black diamond",
-            "value": 2
-        },
-        {
-            "description": "I can ski any terrain in any conditions comfortably",
-            "image": "https://intere.servebeer.com/images/double-black-diamond.png",
-            "name": "double black diamond",
-            "value": 3
         }
     ],
     "tournamentSizes": [
         {
             "name": "Small",
             "size": 50
-        },
-        {
-            "name": "Medium",
-            "size": 100
-        },
-        {
-            "name": "Large",
-            "size": 200
-        },
-        {
-            "name": "Unlimited",
-            "size": 2147483647
         }
     ],
     "tournamentStates": [
         {
             "name": "Scheduled",
             "value": 0
-        },
-        {
-            "name": "In Progress",
-            "value": 1
-        },
-        {
-            "name": "Archived",
-            "value": 2
         }
     ],
     "tournamentTypes": [
         {
             "name": "Highest Daily Descent",
             "value": 0
-        },
-        {
-            "name": "Highest Daily Ascent",
-            "value": 1
-        },
-        {
-            "name": "Most Runs in a Day",
-            "value": 2
-        },
-        {
-            "name": "Highest Altitude for the day",
-            "value": 3
-        },
-        {
-            "name": "First Descent of the day",
-            "value": 4
-        },
-        {
-            "name": "Longest Distance: single run of the day",
-            "value": 5
-        },
-        {
-            "name": "Highest Vertical: single run of the day",
-            "value": 6
-        },
-        {
-            "name": "Longest Distance: total descent for the day",
-            "value": 7
         }
     ],
     "userTypes": [
         {
             "name": "Skier",
             "value": 0
-        },
-        {
-            "name": "Snowboarder",
-            "value": 1
-        },
-        {
-            "name": "Telemarker",
-            "value": 2
-        },
-        {
-            "name": "Ski Biker",
-            "value": 3
         }
     ]
 }

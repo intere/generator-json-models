@@ -21,11 +21,7 @@ class ${model.className} {
         <#break>
 
         <#case "ARRAY">
-        <#if property.arraySubType == "CLASS">
-    var ${property.alias}: [${property.arraySubType}]?
-        <#else>
-    var ${property.alias}: [${property.arraySubType}]?
-        </#if>
+    var ${property.alias}: ${property.swiftArrayType}?
         <#break>
 
         <#default>

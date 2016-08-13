@@ -66,11 +66,11 @@ build() {
 }
 
 main() {
-  # build;
-  generateJava;
+  build;
+  # generateJava;
   # generateObjectiveC;
   # generateRuby;
-  # generateSwift;
+  generateSwift;
 }
 
 main;

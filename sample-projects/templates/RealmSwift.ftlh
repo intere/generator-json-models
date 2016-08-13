@@ -12,4 +12,13 @@ import RealmSwift
 
 class ${model.customName}: RealmModel {
 
+  <#list properties as property>
+    <#switch property.dataType>
+      <#case "ARRAY">
+      let ${property.alias} = ${property.getRealmArrayType()}()
+
+      <#break>
+    </#switch>
+  </#list>
+
 }

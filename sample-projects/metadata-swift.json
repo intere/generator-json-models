@@ -20,13 +20,6 @@
           "mapClassProperty": "name"
         }
       ],
-      "transientProperty": [
-        {
-          "className": "",
-          "name": "",
-          "type": ""
-        }
-      ],
       "listSummary": [
         {
           "className": "Contest",
@@ -43,6 +36,24 @@
       "jsonFile": "enumerations.json",
       "readonly": true,
       "urlPath": "/enumerations"
+    },
+    {
+      "className": "User",
+      "jsonFile": "users.json",
+      "readonly": false,
+      "urlPath": "/users"
+    },
+    {
+      "className": "Track",
+      "jsonFile": "track.json",
+      "readonly": false,
+      "urlPath": "/tracks"      
+    },
+    {
+      "className": "Vendor",
+      "jsonFile": "vendor.json",
+      "readonly": false,
+      "urlPath": "/vendors"
     }
   ],
   "generate": {

@@ -28,9 +28,9 @@ public class SwiftLanguageUtility extends AbstractLanguageUtility {
     @Override
     public Map<String, String> getPropertyMappings() {
         Map<String, String> mappings = new HashMap<>();
-        mappings.put("id", "theId");
-        mappings.put("description", "theDescription");
-        mappings.put("type", "theType");
+//        mappings.put("id", "theId");
+//        mappings.put("description", "theDescription");
+//        mappings.put("type", "theType");
         return mappings;
     }
 

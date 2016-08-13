@@ -1,0 +1,16 @@
+{
+    "address1": "78699 Main St.",
+    "address2": "address 2",
+    "category": "some category",
+    "city": "Winter Park",
+    "contactEmail": "email@domain.com",
+    "contactName": "Some Guy",
+    "contactTitle": "Owner",
+    "id": "5407271bc2e6c3f6da0f9ecb",
+    "logo": "http://www.rudisdeli.com/Portals/_default/skins/rudis/images/logo.png",
+    "name": "Rudi's Deli",
+    "phoneNumber": "303-478-5725",
+    "siteUrl": "http://www.rudisdeli.com/",
+    "state": "CO",
+    "zip": "80482"
+}
