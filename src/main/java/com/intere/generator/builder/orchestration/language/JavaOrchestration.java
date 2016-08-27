@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import com.intere.generator.builder.generation.utils.JavaDataGenerator;
+import com.intere.generator.builder.generation.utils.SwiftDataGenerator;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.OrchestrationDataType;
 import com.intere.generator.metadata.ModelClassImports;
@@ -61,7 +63,11 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	public List<File> generateModelUnitTests(File outputDirFile, OrchestrationTree tree) throws IOException {
 		List<File> generatedClasses = new ArrayList<>();
 		for(ModelClass modelClass : tree.getModelClasses()) {
-			generatedClasses.add(buildTestFile(outputDirFile, modelClass));
+			try {
+				generatedClasses.add(buildTestFile(outputDirFile, modelClass));
+			} catch (TemplateException ex) {
+				throw new IOException(ex);
+			}
 		}
 		
 		return generatedClasses;
@@ -155,15 +161,22 @@ public class JavaOrchestration implements LanguageOrchestrator {
 	 * @param modelClass
 	 * @return
 	 */
-	private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException {
+	private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException, TemplateException {
 		File completePath = new File(outputDirectory, modelClass.getNamespace().replaceAll("\\.",  File.separator));
 		if(ensureExists(completePath)) {
-			String fileContents = buildTestClass(modelClass);
 			File outputFile = new File(completePath, modelClass.getTestClassName() + ".java");
 			LOGGER.info("About to create Test Class: " + outputFile.getAbsolutePath());
-			FileOutputStream fout = new FileOutputStream(outputFile);
-			IOUtils.write(fileContents, fout);
-			fout.close();
+
+			Map<String, Object> model = new HashMap<>();
+			model.put("date", new Date());
+			model.put("model", modelClass);
+			model.put("filename", modelClass.getFileName() + ".java");
+			model.put("imports", determineImports(modelClass));
+			model.put("properties", getProperties(modelClass));
+			model.put("generator", new JavaDataGenerator());
+
+			template.generateFile(model, "JavaTestClass.ftlh", new FileWriter(outputFile));
+
 			return outputFile;
 		} else {
 			LOGGER.error("Could not create directory: " + completePath);
