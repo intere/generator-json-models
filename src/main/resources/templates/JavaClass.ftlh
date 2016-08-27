@@ -16,10 +16,24 @@ import ${import};
 class ${model.className} implements Serializable {
 
     <#list properties as property>
+    <#switch property.dataType>
+        <#case "CLASS">
     <#if property.isTransient>@JsonIgnore </#if>private ${property.type} ${property.alias};
+        <#break>
+
+        <#case "ARRAY">
+    <#if property.isTransient>@JsonIgnore </#if>private List${property.javaArrayType} ${property.alias} = new ArrayList${property.javaArrayType}();
+        <#break>
+
+        <#default>
+    <#if property.isTransient>@JsonIgnore </#if>private ${property.dataType.javaName} ${property.alias};
+        <#break>
+    </#switch>
     </#list>
 
     <#list properties as property>
+    <#switch property.dataType>
+            <#case "CLASS">
     /** Setter for ${property.name} property.  */
     public void set${property.methodName}(${property.type} ${property.alias}) {
         this.${property.alias} = ${property.alias};
@@ -29,6 +43,32 @@ class ${model.className} implements Serializable {
     public ${property.type} get${property.methodName}() {
         return this.${property.alias};
     }
+            <#break>
+
+            <#case "ARRAY">
+    /** Setter for ${property.name} property.  */
+    public void set${property.methodName}(List${property.javaArrayType} ${property.alias}) {
+        this.${property.alias} = ${property.alias};
+    }
+
+    /** Getter for ${property.name} property.  */
+    public List${property.javaArrayType} get${property.methodName}() {
+        return this.${property.alias};
+    }
+            <#break>
+
+            <#default>
+    /** Setter for ${property.name} property.  */
+    public void set${property.methodName}(${property.dataType.javaName} ${property.alias}) {
+        this.${property.alias} = ${property.alias};
+    }
+
+    /** Getter for ${property.name} property.  */
+    public ${property.dataType.javaName} get${property.methodName}() {
+        return this.${property.alias};
+    }
+            <#break>
+    </#switch>
     </#list>
 
     //

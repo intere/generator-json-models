@@ -33,10 +33,11 @@ generateJava() {
   ../run.sh --orchestrate ${CUR_DIR}/metadata-java.json \
     -o ${CUR_DIR}/tmp
 
-  rm -rf ${JAVA_DIR}/src/main/java ${JAVA_DIR}/src/test/java
+  rm -rf ${JAVA_DIR}/src
+  # rm -rf ${JAVA_DIR}/src/main/java ${JAVA_DIR}/src/test/java
   mkdir -p ${JAVA_DIR}/src/main/java/com/intere/test ${JAVA_DIR}/src/test/java/com/intere/test
-  cp -r ${CUR_DIR}/tmp/src ${JAVA_DIR}/src/main/java
-  cp -r ${CUR_DIR}/tmp/test ${JAVA_DIR}/src/test/java
+  cp -r ${CUR_DIR}/tmp/src/* ${JAVA_DIR}/src/main/java
+  cp -r ${CUR_DIR}/tmp/test/* ${JAVA_DIR}/src/test/java
 }
 
 generateObjectiveC() {
@@ -56,7 +57,7 @@ generateSwift() {
 
   cp ${CUR_DIR}/tmp/src/* swift/Generated/Generated/src/
   cp ${CUR_DIR}/tmp/test/* swift/Generated/GeneratedTests/test/
-  
+
 }
 
 build() {
@@ -67,10 +68,10 @@ build() {
 
 main() {
   build;
-  # generateJava;
+  generateJava;   # Testing
   # generateObjectiveC;
   # generateRuby;
-  generateSwift;
+  # generateSwift;  // Generated using templates, checks out
 }
 
 main;

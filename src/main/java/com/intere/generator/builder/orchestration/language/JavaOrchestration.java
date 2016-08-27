@@ -133,11 +133,6 @@ public class JavaOrchestration implements LanguageOrchestrator {
 			File outputFile = new File(completePath, modelClass.getFileName() + ".java");
 			LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
 
-//			String fileContents = buildModelClass(modelClass);
-//			FileOutputStream fout = new FileOutputStream(outputFile);
-//			IOUtils.write(fileContents, fout);
-//			fout.close();
-
 			Map<String, Object> model = new HashMap<>();
 			model.put("date", new Date());
 			model.put("model", modelClass);

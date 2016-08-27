@@ -82,4 +82,23 @@ public class LanguageModelClassProperty extends ModelClassProperty {
                 return "[" + getArraySubType() + "]";
         }
     }
+
+    public String getJavaArrayType() {
+        if(!getIsArray()) {
+            return "null";
+        }
+
+        switch(getArraySubTypeProperty().getDataType()) {
+            case ARRAY:
+                LanguageModelClassProperty prop = new LanguageModelClassProperty(getArraySubTypeProperty(), interpreter);
+                return "<" + prop.getJavaArrayType() + ">";
+
+            case CLASS:
+                CustomClass custom = (CustomClass)getArraySubTypeProperty().getParentModel();
+                return "<" + custom.getClassName() + ">";
+
+            default:
+                return "<" + getArraySubType() + ">";
+        }
+    }
 }

@@ -98,16 +98,6 @@ public class SwiftOrchestration implements LanguageOrchestrator {
 
     @Override
     public List<File> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException {
-//        List<File> generatedResources = new ArrayList<>();
-//        Map<File, String> resources = languageUtil.copyModelResources(sourcePath, tree);
-//        for(File f : resources.keySet()) {
-//            LOGGER.info("About to copy resource: " + f.getAbsolutePath());
-//            FileOutputStream fout = new FileOutputStream(f);
-//            IOUtils.write(resources.get(f), fout);
-//            fout.close();
-//            generatedResources.add(f);
-//        }
-//        return generatedResources;
         return null;
     }
 
@@ -218,32 +208,6 @@ public class SwiftOrchestration implements LanguageOrchestrator {
 
 
         return model;
-    }
-
-    private String buildTestClass(ModelClass modelClass) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(languageUtil.getTestBuilder().buildImplementationFileComment(modelClass));
-        builder.append(languageUtil.getTestBuilder().buildTestImports(modelClass));
-        builder.append(languageUtil.getTestBuilder().buildTestClassDeclaration(modelClass));
-        builder.append(languageUtil.getTestBuilder().buildTestSetupMethod(modelClass));
-        builder.append(languageUtil.getTestBuilder().buildTestMethods(modelClass));
-        builder.append(languageUtil.getTestBuilder().finishClass(modelClass));
-
-        return builder.toString();
-    }
-
-    private String buildModelClass(ModelClass modelClass) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(languageUtil.getModelBuilder().buildImplementationFileComment(modelClass));
-        builder.append(languageUtil.getModelBuilder().buildImports(modelClass));
-        builder.append(languageUtil.getModelBuilder().buildClassImplementation(modelClass));
-        builder.append(languageUtil.getModelBuilder().buildSerializationConstants(modelClass));
-        builder.append(languageUtil.getModelBuilder().buildPropertyDeclarations(modelClass));
-//        builder.append(languageUtil.getModelBuilder().buildGettersAndSetters(modelClass));
-//        builder.append(languageUtil.getModelBuilder().buildViewUtilityDefinitionMethods(modelClass));
-        builder.append(languageUtil.getModelBuilder().buildModelUtilityDeclarationMethods(modelClass));
-        builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
-        return builder.toString();
     }
 
 
