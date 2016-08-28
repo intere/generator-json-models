@@ -364,48 +364,4 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		fout.close();
 		return outputFile;
 	}
-
-	/**
-	 * Builds the header file for a given model class.
-	 * @param modelClass
-	 * @return
-	 */
-	private String buildClassDeclaration(ModelClass modelClass) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.getModelBuilder().buildHeaderFileComment(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildImports(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildClassDeclaration(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildPropertyDeclarations(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildModelUtilityDeclarationMethods(modelClass));
-		builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
-		return builder.toString();
-	}
-
-	/**
-	 * Builds the implementation file for a given model class.
-	 * @param modelClass
-	 * @return
-	 */
-	private String buildClassImplementation(ModelClass modelClass) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.getModelBuilder().buildImplementationFileComment(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildSerializationConstants(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildClassImplementation(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildViewUtilityDefinitionMethods(modelClass));
-		builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
-		
-		return builder.toString();
-	}
-	
-	private String buildTestClass(ModelClass modelClass) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.getTestBuilder().buildImplementationFileComment(modelClass));
-		builder.append(languageUtil.getTestBuilder().buildTestImports(modelClass));
-		builder.append(languageUtil.getTestBuilder().buildTestClassDeclaration(modelClass));
-		builder.append(languageUtil.getTestBuilder().buildTestSetupMethod(modelClass));
-		builder.append(languageUtil.getTestBuilder().buildTestMethods(modelClass));
-		builder.append(languageUtil.getTestBuilder().finishClass(modelClass));
-		
-		return builder.toString();
-	}
 }

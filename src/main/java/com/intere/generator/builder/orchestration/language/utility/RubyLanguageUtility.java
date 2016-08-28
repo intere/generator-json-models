@@ -17,37 +17,16 @@ import com.intere.generator.metadata.ModelClass;
 public class RubyLanguageUtility extends AbstractLanguageUtility {
 	@Autowired @Qualifier("RubyInterpreter")
 	JsonLanguageInterpreter interpreter;
-	
-	@Autowired @Qualifier("RubyModelBuilder")
-	ModelBuilder modelBuilder;
-	
-	@Autowired @Qualifier("RubyTestBuilder")
-	TestBuilder testBuilder;
-	
-	@Autowired @Qualifier("RubyViewBuilder")
-	ViewBuilder viewBuilder;
-	
-	@Autowired @Qualifier("RubyServiceBuilder")
-	ServiceBuilder serviceBuilder;
+
 
 	@Override
-	public ModelBuilder getModelBuilder() {
-		return modelBuilder;
-	}
-	
-	@Override
-	public TestBuilder getTestBuilder() {
-		return testBuilder;
-	}
-	
-	@Override
 	public ViewBuilder getViewBuilder() {
-		return viewBuilder;
+		return null;
 	}
 	
 	@Override
 	public ServiceBuilder getServiceBuilder() {
-		return serviceBuilder;
+		return null;
 	}
 
 	@Override

@@ -15,34 +15,16 @@ import org.springframework.stereotype.Service;
 import com.intere.generator.builder.orchestration.OrchestrationTree;
 
 @Service(value="JavaLanguage")
-public class JavaLanguageUtility extends AbstractLanguageUtility {	
-//	@Autowired @Qualifier("JavaModelBuilder")
-//	ModelBuilder modelBuilder;
-	@Autowired @Qualifier("JavaTestBuilder")
-	TestBuilder testBuilder;
-	@Autowired @Qualifier("JavaViewBuilder")
-	ViewBuilder viewBuilder;
-	@Autowired @Qualifier("JavaServiceBuilder")
-	ServiceBuilder serviceBuilder;
-	
+public class JavaLanguageUtility extends AbstractLanguageUtility {
+
 	@Override
-	public ModelBuilder getModelBuilder() {
+	public ViewBuilder getViewBuilder() {
 		return null;
 	}
 	
 	@Override
-	public TestBuilder getTestBuilder() {
-		return testBuilder;
-	}
-	
-	@Override
-	public ViewBuilder getViewBuilder() {
-		return viewBuilder;
-	}
-	
-	@Override
 	public ServiceBuilder getServiceBuilder() {
-		return serviceBuilder;
+		return null;
 	}
 
 	@Override

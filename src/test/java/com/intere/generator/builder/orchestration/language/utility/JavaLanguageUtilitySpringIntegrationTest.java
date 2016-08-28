@@ -22,26 +22,5 @@ public class JavaLanguageUtilitySpringIntegrationTest {
 	public void testServiceObjectExists() {
 		assertNotNull(javaUtil);
 	}
-	
-	@Test
-	public void testModelBuilderExists() {
-		assertNull(javaUtil.getModelBuilder());
-	}
-	
-	@Test
-	public void testTestBuilderExists() {
-		assertNotNull(javaUtil.getTestBuilder());
-	}
-	
-	@Test
-	@Ignore("Not Yet Implemented")
-	public void testViewBuilderExists() {
-		assertNotNull(javaUtil.getViewBuilder());
-	}
-	
-	@Test
-	public void testServiceBuilderExists() {
-		assertNotNull(javaUtil.getServiceBuilder());
-	}
 
 }
