@@ -10,7 +10,6 @@ import com.intere.generator.metadata.ModelClassProperty;
 import com.intere.generator.metadata.models.LanguageModelClassProperty;
 import com.intere.generator.templates.TemplateConfig;
 import freemarker.template.TemplateException;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +17,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-import java.util.function.BooleanSupplier;
 
 import static com.intere.generator.io.FileIOUtils.ensureExists;
 
