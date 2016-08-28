@@ -62,8 +62,12 @@ public class RubyOrchestration implements LanguageOrchestrator {
 	public List<File> generateModelUnitTests(File testPath, OrchestrationTree tree) throws IOException {
 		List<File> generatedSpecs = new ArrayList<>();
 		languageUtil.enforceFilenames(tree);
-		for(ModelClass modelClass : tree.getModelClasses()) {
-			generatedSpecs.add(buildSpecFiles(testPath, modelClass));
+		for(CustomClass modelClass : tree.getModelClasses()) {
+			try {
+				generatedSpecs.add(buildSpecFiles(testPath, modelClass));
+			} catch (TemplateException ex) {
+				throw new IOException(ex);
+			}
 		}
 		return generatedSpecs;
 	}
@@ -92,7 +96,6 @@ public class RubyOrchestration implements LanguageOrchestrator {
 		languageUtil.enforcePropertyMappings(tree);
 	}
 
-
 	private File buildModelClassFile(File outputDirectory, CustomClass modelClass) throws IOException, TemplateException {
 		File outputFile = new File(outputDirectory, modelClass.getFileName() + ".rb");
 		LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
@@ -103,12 +106,22 @@ public class RubyOrchestration implements LanguageOrchestrator {
 		return outputFile;
 	}
 
+	private File buildSpecFiles(File testPath, CustomClass modelClass) throws IOException, TemplateException {
+		File outputFile = new File(testPath, modelClass.getFileName() + "_spec.rb");
+		LOGGER.info("About to create Spec File: " + outputFile.getAbsolutePath());
+
+		Map<String, Object> model = buildFreemarkerModel(modelClass, modelClass.getClassName(), null, null);
+		template.generateFile(model, "RubyTestClass.ftlh", new FileWriter(outputFile));
+
+		return outputFile;
+	}
+
 	private Map<String, Object> buildFreemarkerModel(CustomClass modelClass, String classname, String prefix, String suffix) {
 		Map<String, Object> model = new HashMap<>();
 
 		model.put("date", new Date());
 		model.put("model", modelClass);
-		model.put("filename", modelClass.getFileName() + ".ruby");
+		model.put("filename", modelClass.getFileName() + ".rb");
 		model.put("properties", getProperties(modelClass));
 		model.put("generator", new SwiftDataGenerator());
 
@@ -117,16 +130,6 @@ public class RubyOrchestration implements LanguageOrchestrator {
 		model.put("suffix", null != suffix ? suffix : "");
 
 		return model;
-	}
-	
-	private File buildSpecFiles(File testPath, ModelClass modelClass) throws IOException {
-		String fileContents = buildSpecFile(modelClass);
-		File outputFile = new File(testPath, modelClass.getFileName() + "_spec.rb");
-		LOGGER.info("About to create Spec File: " + outputFile.getAbsolutePath());
-		FileOutputStream fout = new FileOutputStream(outputFile);
-		IOUtils.write(fileContents, fout);
-		fout.close();
-		return outputFile;
 	}
 
 	private String buildModelClass(ModelClass modelClass) {

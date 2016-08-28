@@ -30,7 +30,7 @@ class ${model.className}
             <#break>
         </#switch>
     end
-    
+
     </#list>
 
     def initialize(init_json)
