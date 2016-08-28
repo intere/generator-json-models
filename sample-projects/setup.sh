@@ -68,10 +68,10 @@ build() {
 
 main() {
   build;
-  generateJava;   # Testing
+  # generateJava;   # Generated using templates, checks out
   # generateObjectiveC;
-  # generateRuby;
-  # generateSwift;  // Generated using templates, checks out
+  generateRuby;     # In Progress
+  # generateSwift;  # Generated using templates, checks out
 }
 
 main;

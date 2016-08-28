@@ -170,7 +170,7 @@ public class JavaOrchestration implements LanguageOrchestrator {
 			Map<String, Object> model = new HashMap<>();
 			model.put("date", new Date());
 			model.put("model", modelClass);
-			model.put("filename", modelClass.getFileName() + ".java");
+			model.put("filename", modelClass.getTestClassName() + ".java");
 			model.put("imports", determineImports(modelClass));
 			model.put("properties", getProperties(modelClass));
 			model.put("generator", new JavaDataGenerator());
@@ -182,32 +182,6 @@ public class JavaOrchestration implements LanguageOrchestrator {
 			LOGGER.error("Could not create directory: " + completePath);
 		}
 		return null;
-	}
-
-	private String buildTestClass(ModelClass modelClass) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.getTestBuilder().buildNamespace(modelClass));
-		builder.append(languageUtil.getTestBuilder().buildImplementationFileComment(modelClass));
-		builder.append(languageUtil.getTestBuilder().buildTestImports(modelClass));
-		builder.append(languageUtil.getTestBuilder().buildTestClassDeclaration(modelClass));
-		builder.append(languageUtil.getTestBuilder().buildTestSetupMethod(modelClass));
-		builder.append(languageUtil.getTestBuilder().buildTestMethods(modelClass));
-		builder.append(languageUtil.getTestBuilder().finishClass(modelClass));
-		
-		return builder.toString();
-	}
-
-	private String buildModelClass(ModelClass modelClass) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(languageUtil.getModelBuilder().buildNamespace(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildImplementationFileComment(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildImports(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildClassDeclaration(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildPropertyDeclarations(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildGettersAndSetters(modelClass));
-		builder.append(languageUtil.getModelBuilder().buildViewUtilityDefinitionMethods(modelClass));
-		builder.append(languageUtil.getModelBuilder().finishClass(modelClass));
-		return builder.toString();
 	}
 
 	@Override

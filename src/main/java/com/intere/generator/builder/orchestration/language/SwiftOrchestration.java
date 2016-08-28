@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.function.BooleanSupplier;
 
 import static com.intere.generator.io.FileIOUtils.ensureExists;
 
@@ -127,7 +128,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
         if(ensureExists(completePath)) {
             LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
 
-            Map<String, Object> model = buildFreemarkerModel(modelClass, filename, prefix, suffix);
+            Map<String, Object> model = buildFreemarkerModel(modelClass, filename, prefix, suffix, buildFilename(modelClass, prefix, suffix , true));
 
             template.generateFile(model, customTemplateFilename, new FileWriter(outputFile));
 
@@ -152,7 +153,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
         if(ensureExists(completePath)) {
             LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
 
-            Map<String, Object> model = buildFreemarkerModel(modelClass);
+            Map<String, Object> model = buildFreemarkerModel(modelClass, buildFilename(modelClass, null, null, false));
 
             template.generateFile(model, "SwiftClass.ftlh", new FileWriter(outputFile));
 
@@ -175,7 +176,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
             File outputFile = new File(completePath, modelClass.getTestClassName() + ".swift");
             LOGGER.info("About to create Test Class: " + outputFile.getAbsolutePath());
 
-            Map<String, Object> model = buildFreemarkerModel(modelClass);
+            Map<String, Object> model = buildFreemarkerModel(modelClass, buildFilename(modelClass, null, null, true));
             template.generateFile(model, "SwiftTestClass.ftlh", new FileWriter(outputFile));
 
             return outputFile;
@@ -189,25 +190,40 @@ public class SwiftOrchestration implements LanguageOrchestrator {
     // Helper Methods
     //
 
-    private Map<String, Object> buildFreemarkerModel(CustomClass modelClass) {
-        return buildFreemarkerModel(modelClass, null, null, null);
+    private Map<String, Object> buildFreemarkerModel(CustomClass modelClass, String filename) {
+        return buildFreemarkerModel(modelClass, null, null, null, filename);
     }
 
-    private Map<String, Object> buildFreemarkerModel(CustomClass modelClass, String classname, String prefix, String suffix) {
+    private Map<String, Object> buildFreemarkerModel(CustomClass modelClass, String classname, String prefix, String suffix, String filename) {
         Map<String, Object> model = new HashMap<>();
 
         model.put("date", new Date());
         model.put("model", modelClass);
-        model.put("filename", modelClass.getFileName() + ".swift");
         model.put("properties", getProperties(modelClass));
         model.put("generator", new SwiftDataGenerator());
 
         model.put("classname", null != classname ? classname : modelClass.getFileName());
+        model.put("filename", modelClass.getFileName() + ".swift");
         model.put("prefix", null != prefix ? prefix : "");
         model.put("suffix", null != suffix ? suffix : "");
 
-
         return model;
+    }
+
+    private String buildFilename(CustomClass modelClass, String prefix, String suffix, boolean isTest) {
+        String filename = modelClass.getFileName();
+
+        if(null != prefix && !prefix.isEmpty()) {
+            filename = prefix + filename;
+        }
+        if(null != suffix && !suffix.isEmpty()) {
+            filename = filename + suffix;
+        }
+        if(isTest) {
+            filename += "Test";
+        }
+
+        return filename;
     }
 
 
