@@ -1,0 +1,19 @@
+[
+    {
+        "accountCreationDate": 1455373016147,
+        "admin": true,
+        "age": 35,
+        "email": "intere@alum.rpi.edu",
+        "emailUser": true,
+        "facebookId": "17508335",
+        "facebookUser": true,
+        "id": "5300e4f2aec0858466a69b3e",
+        "lastLoggedIn": 1455373016147,
+        "name": "Eric Internicola",
+        "prototype": true,
+        "skillLevel": 3,
+        "type": 0,
+        "username": "intere",
+        "weightInKg": 0
+    }
+]

@@ -7,257 +7,114 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3615896A1AADE75800FFE84C /* ContestResultsSponsorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589551AADE75800FFE84C /* ContestResultsSponsorView.m */; };
-		3615896B1AADE75800FFE84C /* ContestResultsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589571AADE75800FFE84C /* ContestResultsView.m */; };
-		3615896C1AADE75800FFE84C /* ContestSponsorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589591AADE75800FFE84C /* ContestSponsorView.m */; };
-		3615896D1AADE75800FFE84C /* ContestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615895B1AADE75800FFE84C /* ContestView.m */; };
-		3615896E1AADE75800FFE84C /* EnumerationPurseTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615895D1AADE75800FFE84C /* EnumerationPurseTypesView.m */; };
-		3615896F1AADE75800FFE84C /* EnumerationSkillLevelsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3615895F1AADE75800FFE84C /* EnumerationSkillLevelsView.m */; };
-		361589701AADE75800FFE84C /* EnumerationTournamentSizesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589611AADE75800FFE84C /* EnumerationTournamentSizesView.m */; };
-		361589711AADE75800FFE84C /* EnumerationTournamentStatesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589631AADE75800FFE84C /* EnumerationTournamentStatesView.m */; };
-		361589721AADE75800FFE84C /* EnumerationTournamentTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589651AADE75800FFE84C /* EnumerationTournamentTypesView.m */; };
-		361589731AADE75800FFE84C /* EnumerationUserTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589671AADE75800FFE84C /* EnumerationUserTypesView.m */; };
-		361589741AADE75800FFE84C /* EnumerationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 361589691AADE75800FFE84C /* EnumerationView.m */; };
-		361FB5751AAF2DF6009F9F03 /* UIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 361FB5721AAF2DF6009F9F03 /* UIHelper.m */; };
-		361FB5761AAF2DF6009F9F03 /* UITheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 361FB5741AAF2DF6009F9F03 /* UITheme.m */; };
-		3665CA171AA7CFDD00EE4255 /* Contest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA001AA7CFDD00EE4255 /* Contest.m */; };
-		3665CA181AA7CFDD00EE4255 /* ContestResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA021AA7CFDD00EE4255 /* ContestResults.m */; };
-		3665CA191AA7CFDD00EE4255 /* ContestResultsSponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA041AA7CFDD00EE4255 /* ContestResultsSponsor.m */; };
-		3665CA1A1AA7CFDD00EE4255 /* ContestSponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA061AA7CFDD00EE4255 /* ContestSponsor.m */; };
-		3665CA1B1AA7CFDD00EE4255 /* Enumeration.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA081AA7CFDD00EE4255 /* Enumeration.m */; };
-		3665CA1C1AA7CFDD00EE4255 /* EnumerationPurseTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA0A1AA7CFDD00EE4255 /* EnumerationPurseTypes.m */; };
-		3665CA1D1AA7CFDD00EE4255 /* EnumerationSkillLevels.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA0C1AA7CFDD00EE4255 /* EnumerationSkillLevels.m */; };
-		3665CA1E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA0E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m */; };
-		3665CA1F1AA7CFDD00EE4255 /* EnumerationTournamentStates.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA101AA7CFDD00EE4255 /* EnumerationTournamentStates.m */; };
-		3665CA201AA7CFDD00EE4255 /* EnumerationTournamentTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA121AA7CFDD00EE4255 /* EnumerationTournamentTypes.m */; };
-		3665CA211AA7CFDD00EE4255 /* EnumerationUserTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA141AA7CFDD00EE4255 /* EnumerationUserTypes.m */; };
-		3665CA221AA7CFDD00EE4255 /* Serializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA161AA7CFDD00EE4255 /* Serializer.m */; };
-		3665CA491AA7F52500EE4255 /* ContestResultsSponsorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA3E1AA7F52500EE4255 /* ContestResultsSponsorTest.m */; };
-		3665CA4A1AA7F52500EE4255 /* ContestResultsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA3F1AA7F52500EE4255 /* ContestResultsTest.m */; };
-		3665CA4B1AA7F52500EE4255 /* ContestSponsorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA401AA7F52500EE4255 /* ContestSponsorTest.m */; };
-		3665CA4C1AA7F52500EE4255 /* ContestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA411AA7F52500EE4255 /* ContestTest.m */; };
-		3665CA4D1AA7F52500EE4255 /* EnumerationPurseTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA421AA7F52500EE4255 /* EnumerationPurseTypesTest.m */; };
-		3665CA4E1AA7F52500EE4255 /* EnumerationSkillLevelsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA431AA7F52500EE4255 /* EnumerationSkillLevelsTest.m */; };
-		3665CA4F1AA7F52500EE4255 /* EnumerationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA441AA7F52500EE4255 /* EnumerationTest.m */; };
-		3665CA501AA7F52500EE4255 /* EnumerationTournamentSizesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA451AA7F52500EE4255 /* EnumerationTournamentSizesTest.m */; };
-		3665CA511AA7F52500EE4255 /* EnumerationTournamentStatesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA461AA7F52500EE4255 /* EnumerationTournamentStatesTest.m */; };
-		3665CA521AA7F52500EE4255 /* EnumerationTournamentTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA471AA7F52500EE4255 /* EnumerationTournamentTypesTest.m */; };
-		3665CA531AA7F52500EE4255 /* EnumerationUserTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA481AA7F52500EE4255 /* EnumerationUserTypesTest.m */; };
-		3665CA561AA8A19300EE4255 /* SerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3665CA551AA8A19300EE4255 /* SerializerTest.m */; };
-		367668F01AB076520012B7FF /* ContestResultsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668DB1AB076520012B7FF /* ContestResultsService.m */; };
-		367668F11AB076520012B7FF /* ContestResultsSponsorService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668DD1AB076520012B7FF /* ContestResultsSponsorService.m */; };
-		367668F21AB076520012B7FF /* ContestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668DF1AB076520012B7FF /* ContestService.m */; };
-		367668F31AB076520012B7FF /* ContestSponsorService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E11AB076520012B7FF /* ContestSponsorService.m */; };
-		367668F41AB076520012B7FF /* EnumerationPurseTypesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E31AB076520012B7FF /* EnumerationPurseTypesService.m */; };
-		367668F51AB076520012B7FF /* EnumerationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E51AB076520012B7FF /* EnumerationService.m */; };
-		367668F61AB076520012B7FF /* EnumerationSkillLevelsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E71AB076520012B7FF /* EnumerationSkillLevelsService.m */; };
-		367668F71AB076520012B7FF /* EnumerationTournamentSizesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668E91AB076520012B7FF /* EnumerationTournamentSizesService.m */; };
-		367668F81AB076520012B7FF /* EnumerationTournamentStatesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668EB1AB076520012B7FF /* EnumerationTournamentStatesService.m */; };
-		367668F91AB076520012B7FF /* EnumerationTournamentTypesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668ED1AB076520012B7FF /* EnumerationTournamentTypesService.m */; };
-		367668FA1AB076520012B7FF /* EnumerationUserTypesService.m in Sources */ = {isa = PBXBuildFile; fileRef = 367668EF1AB076520012B7FF /* EnumerationUserTypesService.m */; };
-		368FA33A1A9E077D0037193C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 368FA3391A9E077D0037193C /* main.m */; };
-		368FA33D1A9E077D0037193C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 368FA33C1A9E077D0037193C /* AppDelegate.m */; };
-		368FA3401A9E077D0037193C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 368FA33F1A9E077D0037193C /* ViewController.m */; };
-		368FA3431A9E077D0037193C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 368FA3411A9E077D0037193C /* Main.storyboard */; };
-		368FA3451A9E077D0037193C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 368FA3441A9E077D0037193C /* Images.xcassets */; };
-		368FA3481A9E077D0037193C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368FA3461A9E077D0037193C /* LaunchScreen.xib */; };
-		36B6E2C51AC21AE10085EF90 /* ContestResultsSponsorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2B01AC21AE10085EF90 /* ContestResultsSponsorViewController.m */; };
-		36B6E2C61AC21AE10085EF90 /* ContestResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2B21AC21AE10085EF90 /* ContestResultsViewController.m */; };
-		36B6E2C71AC21AE10085EF90 /* ContestSponsorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2B41AC21AE10085EF90 /* ContestSponsorViewController.m */; };
-		36B6E2C81AC21AE10085EF90 /* ContestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2B61AC21AE10085EF90 /* ContestViewController.m */; };
-		36B6E2C91AC21AE10085EF90 /* EnumerationPurseTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2B81AC21AE10085EF90 /* EnumerationPurseTypesViewController.m */; };
-		36B6E2CA1AC21AE10085EF90 /* EnumerationSkillLevelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2BA1AC21AE10085EF90 /* EnumerationSkillLevelsViewController.m */; };
-		36B6E2CB1AC21AE10085EF90 /* EnumerationTournamentSizesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2BC1AC21AE10085EF90 /* EnumerationTournamentSizesViewController.m */; };
-		36B6E2CC1AC21AE10085EF90 /* EnumerationTournamentStatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2BE1AC21AE10085EF90 /* EnumerationTournamentStatesViewController.m */; };
-		36B6E2CD1AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2C01AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m */; };
-		36B6E2CE1AC21AE10085EF90 /* EnumerationUserTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2C21AC21AE10085EF90 /* EnumerationUserTypesViewController.m */; };
-		36B6E2CF1AC21AE10085EF90 /* EnumerationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2C41AC21AE10085EF90 /* EnumerationViewController.m */; };
-		36B6E2D31AC269C20085EF90 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B6E2D21AC269C20085EF90 /* MyTableViewController.m */; };
-		36BAAC9A1AC4546100A19071 /* ContestResultsSponsorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC851AC4546100A19071 /* ContestResultsSponsorTableViewController.m */; };
-		36BAAC9B1AC4546100A19071 /* ContestResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC871AC4546100A19071 /* ContestResultsTableViewController.m */; };
-		36BAAC9C1AC4546100A19071 /* ContestSponsorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC891AC4546100A19071 /* ContestSponsorTableViewController.m */; };
-		36BAAC9D1AC4546100A19071 /* ContestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC8B1AC4546100A19071 /* ContestTableViewController.m */; };
-		36BAAC9E1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC8D1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m */; };
-		36BAAC9F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC8F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m */; };
-		36BAACA01AC4546100A19071 /* EnumerationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC911AC4546100A19071 /* EnumerationTableViewController.m */; };
-		36BAACA11AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC931AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m */; };
-		36BAACA21AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC951AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m */; };
-		36BAACA31AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC971AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m */; };
-		36BAACA41AC4546100A19071 /* EnumerationUserTypesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BAAC991AC4546100A19071 /* EnumerationUserTypesTableViewController.m */; };
-		36BDAD041AB1CCB200201F7E /* contests.json in Resources */ = {isa = PBXBuildFile; fileRef = 36BDAD031AB1CCB200201F7E /* contests.json */; };
-		36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD061AB1CD8500201F7E /* MockDataService.m */; };
-		36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */; };
+		9378DF431D73354E0083DA8E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF421D73354E0083DA8E /* main.m */; };
+		9378DF461D73354E0083DA8E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF451D73354E0083DA8E /* AppDelegate.m */; };
+		9378DF491D73354E0083DA8E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF481D73354E0083DA8E /* ViewController.m */; };
+		9378DF4C1D73354E0083DA8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9378DF4A1D73354E0083DA8E /* Main.storyboard */; };
+		9378DF4E1D73354E0083DA8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9378DF4D1D73354E0083DA8E /* Assets.xcassets */; };
+		9378DF511D73354E0083DA8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9378DF4F1D73354E0083DA8E /* LaunchScreen.storyboard */; };
+		9378DF5C1D73354E0083DA8E /* GeneratedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF5B1D73354E0083DA8E /* GeneratedTests.m */; };
+		9378DF9C1D7335A50083DA8E /* ContestResultsSponsorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF901D7335A50083DA8E /* ContestResultsSponsorTest.m */; };
+		9378DF9D1D7335A50083DA8E /* ContestResultsSummaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF911D7335A50083DA8E /* ContestResultsSummaryTest.m */; };
+		9378DF9E1D7335A50083DA8E /* ContestResultsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF921D7335A50083DA8E /* ContestResultsTest.m */; };
+		9378DF9F1D7335A50083DA8E /* ContestSponsorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF931D7335A50083DA8E /* ContestSponsorTest.m */; };
+		9378DFA01D7335A50083DA8E /* ContestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF941D7335A50083DA8E /* ContestTest.m */; };
+		9378DFA11D7335A50083DA8E /* EnumerationPurseTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF951D7335A50083DA8E /* EnumerationPurseTypesTest.m */; };
+		9378DFA21D7335A50083DA8E /* EnumerationSkillLevelsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF961D7335A50083DA8E /* EnumerationSkillLevelsTest.m */; };
+		9378DFA31D7335A50083DA8E /* EnumerationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF971D7335A50083DA8E /* EnumerationTest.m */; };
+		9378DFA41D7335A50083DA8E /* EnumerationTournamentSizesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF981D7335A50083DA8E /* EnumerationTournamentSizesTest.m */; };
+		9378DFA51D7335A50083DA8E /* EnumerationTournamentStatesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF991D7335A50083DA8E /* EnumerationTournamentStatesTest.m */; };
+		9378DFA61D7335A50083DA8E /* EnumerationTournamentTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF9A1D7335A50083DA8E /* EnumerationTournamentTypesTest.m */; };
+		9378DFA71D7335A50083DA8E /* EnumerationUserTypesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DF9B1D7335A50083DA8E /* EnumerationUserTypesTest.m */; };
+		9378DFC31D7336F80083DA8E /* Contest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFAA1D7336F80083DA8E /* Contest.m */; };
+		9378DFC41D7336F80083DA8E /* ContestResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFAC1D7336F80083DA8E /* ContestResults.m */; };
+		9378DFC51D7336F80083DA8E /* ContestResultsSponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFAE1D7336F80083DA8E /* ContestResultsSponsor.m */; };
+		9378DFC61D7336F80083DA8E /* ContestResultsSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFB01D7336F80083DA8E /* ContestResultsSummary.m */; };
+		9378DFC71D7336F80083DA8E /* ContestSponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFB21D7336F80083DA8E /* ContestSponsor.m */; };
+		9378DFC81D7336F80083DA8E /* Enumeration.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFB41D7336F80083DA8E /* Enumeration.m */; };
+		9378DFC91D7336F80083DA8E /* EnumerationPurseTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFB61D7336F80083DA8E /* EnumerationPurseTypes.m */; };
+		9378DFCA1D7336F80083DA8E /* EnumerationSkillLevels.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFB81D7336F80083DA8E /* EnumerationSkillLevels.m */; };
+		9378DFCB1D7336F80083DA8E /* EnumerationTournamentSizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFBA1D7336F80083DA8E /* EnumerationTournamentSizes.m */; };
+		9378DFCC1D7336F80083DA8E /* EnumerationTournamentStates.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFBC1D7336F80083DA8E /* EnumerationTournamentStates.m */; };
+		9378DFCD1D7336F80083DA8E /* EnumerationTournamentTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFBE1D7336F80083DA8E /* EnumerationTournamentTypes.m */; };
+		9378DFCE1D7336F80083DA8E /* EnumerationUserTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFC01D7336F80083DA8E /* EnumerationUserTypes.m */; };
+		9378DFCF1D7336F80083DA8E /* Serializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9378DFC21D7336F80083DA8E /* Serializer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		368FA34E1A9E077D0037193C /* PBXContainerItemProxy */ = {
+		9378DF581D73354E0083DA8E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 368FA32C1A9E077D0037193C /* Project object */;
+			containerPortal = 9378DF361D73354E0083DA8E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 368FA3331A9E077D0037193C;
+			remoteGlobalIDString = 9378DF3D1D73354E0083DA8E;
 			remoteInfo = Generated;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		361589541AADE75800FFE84C /* ContestResultsSponsorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsorView.h; sourceTree = "<group>"; };
-		361589551AADE75800FFE84C /* ContestResultsSponsorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorView.m; sourceTree = "<group>"; };
-		361589561AADE75800FFE84C /* ContestResultsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsView.h; sourceTree = "<group>"; };
-		361589571AADE75800FFE84C /* ContestResultsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsView.m; sourceTree = "<group>"; };
-		361589581AADE75800FFE84C /* ContestSponsorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsorView.h; sourceTree = "<group>"; };
-		361589591AADE75800FFE84C /* ContestSponsorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorView.m; sourceTree = "<group>"; };
-		3615895A1AADE75800FFE84C /* ContestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestView.h; sourceTree = "<group>"; };
-		3615895B1AADE75800FFE84C /* ContestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestView.m; sourceTree = "<group>"; };
-		3615895C1AADE75800FFE84C /* EnumerationPurseTypesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypesView.h; sourceTree = "<group>"; };
-		3615895D1AADE75800FFE84C /* EnumerationPurseTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesView.m; sourceTree = "<group>"; };
-		3615895E1AADE75800FFE84C /* EnumerationSkillLevelsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevelsView.h; sourceTree = "<group>"; };
-		3615895F1AADE75800FFE84C /* EnumerationSkillLevelsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsView.m; sourceTree = "<group>"; };
-		361589601AADE75800FFE84C /* EnumerationTournamentSizesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizesView.h; sourceTree = "<group>"; };
-		361589611AADE75800FFE84C /* EnumerationTournamentSizesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesView.m; sourceTree = "<group>"; };
-		361589621AADE75800FFE84C /* EnumerationTournamentStatesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStatesView.h; sourceTree = "<group>"; };
-		361589631AADE75800FFE84C /* EnumerationTournamentStatesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesView.m; sourceTree = "<group>"; };
-		361589641AADE75800FFE84C /* EnumerationTournamentTypesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypesView.h; sourceTree = "<group>"; };
-		361589651AADE75800FFE84C /* EnumerationTournamentTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesView.m; sourceTree = "<group>"; };
-		361589661AADE75800FFE84C /* EnumerationUserTypesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypesView.h; sourceTree = "<group>"; };
-		361589671AADE75800FFE84C /* EnumerationUserTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesView.m; sourceTree = "<group>"; };
-		361589681AADE75800FFE84C /* EnumerationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationView.h; sourceTree = "<group>"; };
-		361589691AADE75800FFE84C /* EnumerationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationView.m; sourceTree = "<group>"; };
-		361FB5711AAF2DF6009F9F03 /* UIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIHelper.h; sourceTree = "<group>"; };
-		361FB5721AAF2DF6009F9F03 /* UIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIHelper.m; sourceTree = "<group>"; };
-		361FB5731AAF2DF6009F9F03 /* UITheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITheme.h; sourceTree = "<group>"; };
-		361FB5741AAF2DF6009F9F03 /* UITheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITheme.m; sourceTree = "<group>"; };
-		3665C9FF1AA7CFDD00EE4255 /* Contest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contest.h; sourceTree = "<group>"; };
-		3665CA001AA7CFDD00EE4255 /* Contest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contest.m; sourceTree = "<group>"; };
-		3665CA011AA7CFDD00EE4255 /* ContestResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResults.h; sourceTree = "<group>"; };
-		3665CA021AA7CFDD00EE4255 /* ContestResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResults.m; sourceTree = "<group>"; };
-		3665CA031AA7CFDD00EE4255 /* ContestResultsSponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsor.h; sourceTree = "<group>"; };
-		3665CA041AA7CFDD00EE4255 /* ContestResultsSponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsor.m; sourceTree = "<group>"; };
-		3665CA051AA7CFDD00EE4255 /* ContestSponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsor.h; sourceTree = "<group>"; };
-		3665CA061AA7CFDD00EE4255 /* ContestSponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsor.m; sourceTree = "<group>"; };
-		3665CA071AA7CFDD00EE4255 /* Enumeration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enumeration.h; sourceTree = "<group>"; };
-		3665CA081AA7CFDD00EE4255 /* Enumeration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enumeration.m; sourceTree = "<group>"; };
-		3665CA091AA7CFDD00EE4255 /* EnumerationPurseTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypes.h; sourceTree = "<group>"; };
-		3665CA0A1AA7CFDD00EE4255 /* EnumerationPurseTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypes.m; sourceTree = "<group>"; };
-		3665CA0B1AA7CFDD00EE4255 /* EnumerationSkillLevels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevels.h; sourceTree = "<group>"; };
-		3665CA0C1AA7CFDD00EE4255 /* EnumerationSkillLevels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevels.m; sourceTree = "<group>"; };
-		3665CA0D1AA7CFDD00EE4255 /* EnumerationTournamentSizes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizes.h; sourceTree = "<group>"; };
-		3665CA0E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizes.m; sourceTree = "<group>"; };
-		3665CA0F1AA7CFDD00EE4255 /* EnumerationTournamentStates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStates.h; sourceTree = "<group>"; };
-		3665CA101AA7CFDD00EE4255 /* EnumerationTournamentStates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStates.m; sourceTree = "<group>"; };
-		3665CA111AA7CFDD00EE4255 /* EnumerationTournamentTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypes.h; sourceTree = "<group>"; };
-		3665CA121AA7CFDD00EE4255 /* EnumerationTournamentTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypes.m; sourceTree = "<group>"; };
-		3665CA131AA7CFDD00EE4255 /* EnumerationUserTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypes.h; sourceTree = "<group>"; };
-		3665CA141AA7CFDD00EE4255 /* EnumerationUserTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypes.m; sourceTree = "<group>"; };
-		3665CA151AA7CFDD00EE4255 /* Serializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serializer.h; sourceTree = "<group>"; };
-		3665CA161AA7CFDD00EE4255 /* Serializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Serializer.m; sourceTree = "<group>"; };
-		3665CA3E1AA7F52500EE4255 /* ContestResultsSponsorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorTest.m; sourceTree = "<group>"; };
-		3665CA3F1AA7F52500EE4255 /* ContestResultsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsTest.m; sourceTree = "<group>"; };
-		3665CA401AA7F52500EE4255 /* ContestSponsorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorTest.m; sourceTree = "<group>"; };
-		3665CA411AA7F52500EE4255 /* ContestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestTest.m; sourceTree = "<group>"; };
-		3665CA421AA7F52500EE4255 /* EnumerationPurseTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesTest.m; sourceTree = "<group>"; };
-		3665CA431AA7F52500EE4255 /* EnumerationSkillLevelsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsTest.m; sourceTree = "<group>"; };
-		3665CA441AA7F52500EE4255 /* EnumerationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTest.m; sourceTree = "<group>"; };
-		3665CA451AA7F52500EE4255 /* EnumerationTournamentSizesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesTest.m; sourceTree = "<group>"; };
-		3665CA461AA7F52500EE4255 /* EnumerationTournamentStatesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesTest.m; sourceTree = "<group>"; };
-		3665CA471AA7F52500EE4255 /* EnumerationTournamentTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesTest.m; sourceTree = "<group>"; };
-		3665CA481AA7F52500EE4255 /* EnumerationUserTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesTest.m; sourceTree = "<group>"; };
-		3665CA541AA8000900EE4255 /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
-		3665CA551AA8A19300EE4255 /* SerializerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerializerTest.m; sourceTree = "<group>"; };
-		367668DA1AB076520012B7FF /* ContestResultsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsService.h; sourceTree = "<group>"; };
-		367668DB1AB076520012B7FF /* ContestResultsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsService.m; sourceTree = "<group>"; };
-		367668DC1AB076520012B7FF /* ContestResultsSponsorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsorService.h; sourceTree = "<group>"; };
-		367668DD1AB076520012B7FF /* ContestResultsSponsorService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorService.m; sourceTree = "<group>"; };
-		367668DE1AB076520012B7FF /* ContestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestService.h; sourceTree = "<group>"; };
-		367668DF1AB076520012B7FF /* ContestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestService.m; sourceTree = "<group>"; };
-		367668E01AB076520012B7FF /* ContestSponsorService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsorService.h; sourceTree = "<group>"; };
-		367668E11AB076520012B7FF /* ContestSponsorService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorService.m; sourceTree = "<group>"; };
-		367668E21AB076520012B7FF /* EnumerationPurseTypesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypesService.h; sourceTree = "<group>"; };
-		367668E31AB076520012B7FF /* EnumerationPurseTypesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesService.m; sourceTree = "<group>"; };
-		367668E41AB076520012B7FF /* EnumerationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationService.h; sourceTree = "<group>"; };
-		367668E51AB076520012B7FF /* EnumerationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationService.m; sourceTree = "<group>"; };
-		367668E61AB076520012B7FF /* EnumerationSkillLevelsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevelsService.h; sourceTree = "<group>"; };
-		367668E71AB076520012B7FF /* EnumerationSkillLevelsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsService.m; sourceTree = "<group>"; };
-		367668E81AB076520012B7FF /* EnumerationTournamentSizesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizesService.h; sourceTree = "<group>"; };
-		367668E91AB076520012B7FF /* EnumerationTournamentSizesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesService.m; sourceTree = "<group>"; };
-		367668EA1AB076520012B7FF /* EnumerationTournamentStatesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStatesService.h; sourceTree = "<group>"; };
-		367668EB1AB076520012B7FF /* EnumerationTournamentStatesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesService.m; sourceTree = "<group>"; };
-		367668EC1AB076520012B7FF /* EnumerationTournamentTypesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypesService.h; sourceTree = "<group>"; };
-		367668ED1AB076520012B7FF /* EnumerationTournamentTypesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesService.m; sourceTree = "<group>"; };
-		367668EE1AB076520012B7FF /* EnumerationUserTypesService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypesService.h; sourceTree = "<group>"; };
-		367668EF1AB076520012B7FF /* EnumerationUserTypesService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesService.m; sourceTree = "<group>"; };
-		368FA3341A9E077D0037193C /* Generated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Generated.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		368FA3381A9E077D0037193C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		368FA3391A9E077D0037193C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		368FA33B1A9E077D0037193C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		368FA33C1A9E077D0037193C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		368FA33E1A9E077D0037193C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		368FA33F1A9E077D0037193C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		368FA3421A9E077D0037193C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		368FA3441A9E077D0037193C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		368FA3471A9E077D0037193C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		368FA34D1A9E077D0037193C /* GeneratedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeneratedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		368FA3521A9E077D0037193C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		36B6E2AF1AC21AE10085EF90 /* ContestResultsSponsorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsorViewController.h; sourceTree = "<group>"; };
-		36B6E2B01AC21AE10085EF90 /* ContestResultsSponsorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorViewController.m; sourceTree = "<group>"; };
-		36B6E2B11AC21AE10085EF90 /* ContestResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsViewController.h; sourceTree = "<group>"; };
-		36B6E2B21AC21AE10085EF90 /* ContestResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsViewController.m; sourceTree = "<group>"; };
-		36B6E2B31AC21AE10085EF90 /* ContestSponsorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsorViewController.h; sourceTree = "<group>"; };
-		36B6E2B41AC21AE10085EF90 /* ContestSponsorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorViewController.m; sourceTree = "<group>"; };
-		36B6E2B51AC21AE10085EF90 /* ContestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestViewController.h; sourceTree = "<group>"; };
-		36B6E2B61AC21AE10085EF90 /* ContestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestViewController.m; sourceTree = "<group>"; };
-		36B6E2B71AC21AE10085EF90 /* EnumerationPurseTypesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypesViewController.h; sourceTree = "<group>"; };
-		36B6E2B81AC21AE10085EF90 /* EnumerationPurseTypesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesViewController.m; sourceTree = "<group>"; };
-		36B6E2B91AC21AE10085EF90 /* EnumerationSkillLevelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevelsViewController.h; sourceTree = "<group>"; };
-		36B6E2BA1AC21AE10085EF90 /* EnumerationSkillLevelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsViewController.m; sourceTree = "<group>"; };
-		36B6E2BB1AC21AE10085EF90 /* EnumerationTournamentSizesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizesViewController.h; sourceTree = "<group>"; };
-		36B6E2BC1AC21AE10085EF90 /* EnumerationTournamentSizesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesViewController.m; sourceTree = "<group>"; };
-		36B6E2BD1AC21AE10085EF90 /* EnumerationTournamentStatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStatesViewController.h; sourceTree = "<group>"; };
-		36B6E2BE1AC21AE10085EF90 /* EnumerationTournamentStatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesViewController.m; sourceTree = "<group>"; };
-		36B6E2BF1AC21AE10085EF90 /* EnumerationTournamentTypesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypesViewController.h; sourceTree = "<group>"; };
-		36B6E2C01AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesViewController.m; sourceTree = "<group>"; };
-		36B6E2C11AC21AE10085EF90 /* EnumerationUserTypesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypesViewController.h; sourceTree = "<group>"; };
-		36B6E2C21AC21AE10085EF90 /* EnumerationUserTypesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesViewController.m; sourceTree = "<group>"; };
-		36B6E2C31AC21AE10085EF90 /* EnumerationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationViewController.h; sourceTree = "<group>"; };
-		36B6E2C41AC21AE10085EF90 /* EnumerationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationViewController.m; sourceTree = "<group>"; };
-		36B6E2D11AC269C20085EF90 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
-		36B6E2D21AC269C20085EF90 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
-		36BAAC841AC4546100A19071 /* ContestResultsSponsorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsorTableViewController.h; sourceTree = "<group>"; };
-		36BAAC851AC4546100A19071 /* ContestResultsSponsorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorTableViewController.m; sourceTree = "<group>"; };
-		36BAAC861AC4546100A19071 /* ContestResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsTableViewController.h; sourceTree = "<group>"; };
-		36BAAC871AC4546100A19071 /* ContestResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsTableViewController.m; sourceTree = "<group>"; };
-		36BAAC881AC4546100A19071 /* ContestSponsorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsorTableViewController.h; sourceTree = "<group>"; };
-		36BAAC891AC4546100A19071 /* ContestSponsorTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorTableViewController.m; sourceTree = "<group>"; };
-		36BAAC8A1AC4546100A19071 /* ContestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestTableViewController.h; sourceTree = "<group>"; };
-		36BAAC8B1AC4546100A19071 /* ContestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestTableViewController.m; sourceTree = "<group>"; };
-		36BAAC8C1AC4546100A19071 /* EnumerationPurseTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypesTableViewController.h; sourceTree = "<group>"; };
-		36BAAC8D1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesTableViewController.m; sourceTree = "<group>"; };
-		36BAAC8E1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevelsTableViewController.h; sourceTree = "<group>"; };
-		36BAAC8F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsTableViewController.m; sourceTree = "<group>"; };
-		36BAAC901AC4546100A19071 /* EnumerationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTableViewController.h; sourceTree = "<group>"; };
-		36BAAC911AC4546100A19071 /* EnumerationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTableViewController.m; sourceTree = "<group>"; };
-		36BAAC921AC4546100A19071 /* EnumerationTournamentSizesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizesTableViewController.h; sourceTree = "<group>"; };
-		36BAAC931AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesTableViewController.m; sourceTree = "<group>"; };
-		36BAAC941AC4546100A19071 /* EnumerationTournamentStatesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStatesTableViewController.h; sourceTree = "<group>"; };
-		36BAAC951AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesTableViewController.m; sourceTree = "<group>"; };
-		36BAAC961AC4546100A19071 /* EnumerationTournamentTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypesTableViewController.h; sourceTree = "<group>"; };
-		36BAAC971AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesTableViewController.m; sourceTree = "<group>"; };
-		36BAAC981AC4546100A19071 /* EnumerationUserTypesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypesTableViewController.h; sourceTree = "<group>"; };
-		36BAAC991AC4546100A19071 /* EnumerationUserTypesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesTableViewController.m; sourceTree = "<group>"; };
-		36BDAD031AB1CCB200201F7E /* contests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = contests.json; sourceTree = "<group>"; };
-		36BDAD051AB1CD8500201F7E /* MockDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockDataService.h; sourceTree = "<group>"; };
-		36BDAD061AB1CD8500201F7E /* MockDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockDataService.m; sourceTree = "<group>"; };
-		36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockDataServiceTest.m; sourceTree = "<group>"; };
+		9378DF3E1D73354E0083DA8E /* Generated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Generated.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9378DF421D73354E0083DA8E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9378DF441D73354E0083DA8E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9378DF451D73354E0083DA8E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9378DF471D73354E0083DA8E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		9378DF481D73354E0083DA8E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9378DF4B1D73354E0083DA8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9378DF4D1D73354E0083DA8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9378DF501D73354E0083DA8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9378DF521D73354E0083DA8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9378DF571D73354E0083DA8E /* GeneratedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeneratedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9378DF5B1D73354E0083DA8E /* GeneratedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratedTests.m; sourceTree = "<group>"; };
+		9378DF5D1D73354E0083DA8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9378DF8E1D7335990083DA8E /* Log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		9378DF901D7335A50083DA8E /* ContestResultsSponsorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsorTest.m; sourceTree = "<group>"; };
+		9378DF911D7335A50083DA8E /* ContestResultsSummaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSummaryTest.m; sourceTree = "<group>"; };
+		9378DF921D7335A50083DA8E /* ContestResultsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsTest.m; sourceTree = "<group>"; };
+		9378DF931D7335A50083DA8E /* ContestSponsorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsorTest.m; sourceTree = "<group>"; };
+		9378DF941D7335A50083DA8E /* ContestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestTest.m; sourceTree = "<group>"; };
+		9378DF951D7335A50083DA8E /* EnumerationPurseTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypesTest.m; sourceTree = "<group>"; };
+		9378DF961D7335A50083DA8E /* EnumerationSkillLevelsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevelsTest.m; sourceTree = "<group>"; };
+		9378DF971D7335A50083DA8E /* EnumerationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTest.m; sourceTree = "<group>"; };
+		9378DF981D7335A50083DA8E /* EnumerationTournamentSizesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizesTest.m; sourceTree = "<group>"; };
+		9378DF991D7335A50083DA8E /* EnumerationTournamentStatesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStatesTest.m; sourceTree = "<group>"; };
+		9378DF9A1D7335A50083DA8E /* EnumerationTournamentTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypesTest.m; sourceTree = "<group>"; };
+		9378DF9B1D7335A50083DA8E /* EnumerationUserTypesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypesTest.m; sourceTree = "<group>"; };
+		9378DFA91D7336F80083DA8E /* Contest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contest.h; sourceTree = "<group>"; };
+		9378DFAA1D7336F80083DA8E /* Contest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contest.m; sourceTree = "<group>"; };
+		9378DFAB1D7336F80083DA8E /* ContestResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResults.h; sourceTree = "<group>"; };
+		9378DFAC1D7336F80083DA8E /* ContestResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResults.m; sourceTree = "<group>"; };
+		9378DFAD1D7336F80083DA8E /* ContestResultsSponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSponsor.h; sourceTree = "<group>"; };
+		9378DFAE1D7336F80083DA8E /* ContestResultsSponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSponsor.m; sourceTree = "<group>"; };
+		9378DFAF1D7336F80083DA8E /* ContestResultsSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestResultsSummary.h; sourceTree = "<group>"; };
+		9378DFB01D7336F80083DA8E /* ContestResultsSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestResultsSummary.m; sourceTree = "<group>"; };
+		9378DFB11D7336F80083DA8E /* ContestSponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContestSponsor.h; sourceTree = "<group>"; };
+		9378DFB21D7336F80083DA8E /* ContestSponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContestSponsor.m; sourceTree = "<group>"; };
+		9378DFB31D7336F80083DA8E /* Enumeration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enumeration.h; sourceTree = "<group>"; };
+		9378DFB41D7336F80083DA8E /* Enumeration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enumeration.m; sourceTree = "<group>"; };
+		9378DFB51D7336F80083DA8E /* EnumerationPurseTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationPurseTypes.h; sourceTree = "<group>"; };
+		9378DFB61D7336F80083DA8E /* EnumerationPurseTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationPurseTypes.m; sourceTree = "<group>"; };
+		9378DFB71D7336F80083DA8E /* EnumerationSkillLevels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationSkillLevels.h; sourceTree = "<group>"; };
+		9378DFB81D7336F80083DA8E /* EnumerationSkillLevels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationSkillLevels.m; sourceTree = "<group>"; };
+		9378DFB91D7336F80083DA8E /* EnumerationTournamentSizes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentSizes.h; sourceTree = "<group>"; };
+		9378DFBA1D7336F80083DA8E /* EnumerationTournamentSizes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentSizes.m; sourceTree = "<group>"; };
+		9378DFBB1D7336F80083DA8E /* EnumerationTournamentStates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentStates.h; sourceTree = "<group>"; };
+		9378DFBC1D7336F80083DA8E /* EnumerationTournamentStates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentStates.m; sourceTree = "<group>"; };
+		9378DFBD1D7336F80083DA8E /* EnumerationTournamentTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationTournamentTypes.h; sourceTree = "<group>"; };
+		9378DFBE1D7336F80083DA8E /* EnumerationTournamentTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationTournamentTypes.m; sourceTree = "<group>"; };
+		9378DFBF1D7336F80083DA8E /* EnumerationUserTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnumerationUserTypes.h; sourceTree = "<group>"; };
+		9378DFC01D7336F80083DA8E /* EnumerationUserTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnumerationUserTypes.m; sourceTree = "<group>"; };
+		9378DFC11D7336F80083DA8E /* Serializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serializer.h; sourceTree = "<group>"; };
+		9378DFC21D7336F80083DA8E /* Serializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Serializer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		368FA3311A9E077D0037193C /* Frameworks */ = {
+		9378DF3B1D73354E0083DA8E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		368FA34A1A9E077D0037193C /* Frameworks */ = {
+		9378DF541D73354E0083DA8E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -267,289 +124,122 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		361589521AADE70800FFE84C /* views */ = {
+		9378DF351D73354E0083DA8E = {
 			isa = PBXGroup;
 			children = (
-				361589531AADE71300FFE84C /* generated */,
-				36B6E2D11AC269C20085EF90 /* MyTableViewController.h */,
-				36B6E2D21AC269C20085EF90 /* MyTableViewController.m */,
-			);
-			name = views;
-			sourceTree = "<group>";
-		};
-		361589531AADE71300FFE84C /* generated */ = {
-			isa = PBXGroup;
-			children = (
-				36BAAC841AC4546100A19071 /* ContestResultsSponsorTableViewController.h */,
-				36BAAC851AC4546100A19071 /* ContestResultsSponsorTableViewController.m */,
-				36BAAC861AC4546100A19071 /* ContestResultsTableViewController.h */,
-				36BAAC871AC4546100A19071 /* ContestResultsTableViewController.m */,
-				36BAAC881AC4546100A19071 /* ContestSponsorTableViewController.h */,
-				36BAAC891AC4546100A19071 /* ContestSponsorTableViewController.m */,
-				36BAAC8A1AC4546100A19071 /* ContestTableViewController.h */,
-				36BAAC8B1AC4546100A19071 /* ContestTableViewController.m */,
-				36BAAC8C1AC4546100A19071 /* EnumerationPurseTypesTableViewController.h */,
-				36BAAC8D1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m */,
-				36BAAC8E1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.h */,
-				36BAAC8F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m */,
-				36BAAC901AC4546100A19071 /* EnumerationTableViewController.h */,
-				36BAAC911AC4546100A19071 /* EnumerationTableViewController.m */,
-				36BAAC921AC4546100A19071 /* EnumerationTournamentSizesTableViewController.h */,
-				36BAAC931AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m */,
-				36BAAC941AC4546100A19071 /* EnumerationTournamentStatesTableViewController.h */,
-				36BAAC951AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m */,
-				36BAAC961AC4546100A19071 /* EnumerationTournamentTypesTableViewController.h */,
-				36BAAC971AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m */,
-				36BAAC981AC4546100A19071 /* EnumerationUserTypesTableViewController.h */,
-				36BAAC991AC4546100A19071 /* EnumerationUserTypesTableViewController.m */,
-				36B6E2AF1AC21AE10085EF90 /* ContestResultsSponsorViewController.h */,
-				36B6E2B01AC21AE10085EF90 /* ContestResultsSponsorViewController.m */,
-				36B6E2B11AC21AE10085EF90 /* ContestResultsViewController.h */,
-				36B6E2B21AC21AE10085EF90 /* ContestResultsViewController.m */,
-				36B6E2B31AC21AE10085EF90 /* ContestSponsorViewController.h */,
-				36B6E2B41AC21AE10085EF90 /* ContestSponsorViewController.m */,
-				36B6E2B51AC21AE10085EF90 /* ContestViewController.h */,
-				36B6E2B61AC21AE10085EF90 /* ContestViewController.m */,
-				36B6E2B71AC21AE10085EF90 /* EnumerationPurseTypesViewController.h */,
-				36B6E2B81AC21AE10085EF90 /* EnumerationPurseTypesViewController.m */,
-				36B6E2B91AC21AE10085EF90 /* EnumerationSkillLevelsViewController.h */,
-				36B6E2BA1AC21AE10085EF90 /* EnumerationSkillLevelsViewController.m */,
-				36B6E2BB1AC21AE10085EF90 /* EnumerationTournamentSizesViewController.h */,
-				36B6E2BC1AC21AE10085EF90 /* EnumerationTournamentSizesViewController.m */,
-				36B6E2BD1AC21AE10085EF90 /* EnumerationTournamentStatesViewController.h */,
-				36B6E2BE1AC21AE10085EF90 /* EnumerationTournamentStatesViewController.m */,
-				36B6E2BF1AC21AE10085EF90 /* EnumerationTournamentTypesViewController.h */,
-				36B6E2C01AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m */,
-				36B6E2C11AC21AE10085EF90 /* EnumerationUserTypesViewController.h */,
-				36B6E2C21AC21AE10085EF90 /* EnumerationUserTypesViewController.m */,
-				36B6E2C31AC21AE10085EF90 /* EnumerationViewController.h */,
-				36B6E2C41AC21AE10085EF90 /* EnumerationViewController.m */,
-				361FB5711AAF2DF6009F9F03 /* UIHelper.h */,
-				361FB5721AAF2DF6009F9F03 /* UIHelper.m */,
-				361FB5731AAF2DF6009F9F03 /* UITheme.h */,
-				361FB5741AAF2DF6009F9F03 /* UITheme.m */,
-				361589541AADE75800FFE84C /* ContestResultsSponsorView.h */,
-				361589551AADE75800FFE84C /* ContestResultsSponsorView.m */,
-				361589561AADE75800FFE84C /* ContestResultsView.h */,
-				361589571AADE75800FFE84C /* ContestResultsView.m */,
-				361589581AADE75800FFE84C /* ContestSponsorView.h */,
-				361589591AADE75800FFE84C /* ContestSponsorView.m */,
-				3615895A1AADE75800FFE84C /* ContestView.h */,
-				3615895B1AADE75800FFE84C /* ContestView.m */,
-				3615895C1AADE75800FFE84C /* EnumerationPurseTypesView.h */,
-				3615895D1AADE75800FFE84C /* EnumerationPurseTypesView.m */,
-				3615895E1AADE75800FFE84C /* EnumerationSkillLevelsView.h */,
-				3615895F1AADE75800FFE84C /* EnumerationSkillLevelsView.m */,
-				361589601AADE75800FFE84C /* EnumerationTournamentSizesView.h */,
-				361589611AADE75800FFE84C /* EnumerationTournamentSizesView.m */,
-				361589621AADE75800FFE84C /* EnumerationTournamentStatesView.h */,
-				361589631AADE75800FFE84C /* EnumerationTournamentStatesView.m */,
-				361589641AADE75800FFE84C /* EnumerationTournamentTypesView.h */,
-				361589651AADE75800FFE84C /* EnumerationTournamentTypesView.m */,
-				361589661AADE75800FFE84C /* EnumerationUserTypesView.h */,
-				361589671AADE75800FFE84C /* EnumerationUserTypesView.m */,
-				361589681AADE75800FFE84C /* EnumerationView.h */,
-				361589691AADE75800FFE84C /* EnumerationView.m */,
-			);
-			name = generated;
-			sourceTree = "<group>";
-		};
-		3665C9FD1AA7CFC800EE4255 /* models */ = {
-			isa = PBXGroup;
-			children = (
-				3665C9FE1AA7CFD000EE4255 /* generated */,
-			);
-			name = models;
-			sourceTree = "<group>";
-		};
-		3665C9FE1AA7CFD000EE4255 /* generated */ = {
-			isa = PBXGroup;
-			children = (
-				3665C9FF1AA7CFDD00EE4255 /* Contest.h */,
-				3665CA001AA7CFDD00EE4255 /* Contest.m */,
-				3665CA011AA7CFDD00EE4255 /* ContestResults.h */,
-				3665CA021AA7CFDD00EE4255 /* ContestResults.m */,
-				3665CA031AA7CFDD00EE4255 /* ContestResultsSponsor.h */,
-				3665CA041AA7CFDD00EE4255 /* ContestResultsSponsor.m */,
-				3665CA051AA7CFDD00EE4255 /* ContestSponsor.h */,
-				3665CA061AA7CFDD00EE4255 /* ContestSponsor.m */,
-				3665CA071AA7CFDD00EE4255 /* Enumeration.h */,
-				3665CA081AA7CFDD00EE4255 /* Enumeration.m */,
-				3665CA091AA7CFDD00EE4255 /* EnumerationPurseTypes.h */,
-				3665CA0A1AA7CFDD00EE4255 /* EnumerationPurseTypes.m */,
-				3665CA0B1AA7CFDD00EE4255 /* EnumerationSkillLevels.h */,
-				3665CA0C1AA7CFDD00EE4255 /* EnumerationSkillLevels.m */,
-				3665CA0D1AA7CFDD00EE4255 /* EnumerationTournamentSizes.h */,
-				3665CA0E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m */,
-				3665CA0F1AA7CFDD00EE4255 /* EnumerationTournamentStates.h */,
-				3665CA101AA7CFDD00EE4255 /* EnumerationTournamentStates.m */,
-				3665CA111AA7CFDD00EE4255 /* EnumerationTournamentTypes.h */,
-				3665CA121AA7CFDD00EE4255 /* EnumerationTournamentTypes.m */,
-				3665CA131AA7CFDD00EE4255 /* EnumerationUserTypes.h */,
-				3665CA141AA7CFDD00EE4255 /* EnumerationUserTypes.m */,
-				3665CA151AA7CFDD00EE4255 /* Serializer.h */,
-				3665CA161AA7CFDD00EE4255 /* Serializer.m */,
-				3665CA541AA8000900EE4255 /* Log.h */,
-			);
-			name = generated;
-			sourceTree = "<group>";
-		};
-		3665CA231AA7D00600EE4255 /* models */ = {
-			isa = PBXGroup;
-			children = (
-				3665CA241AA7D00C00EE4255 /* generated */,
-			);
-			name = models;
-			sourceTree = "<group>";
-		};
-		3665CA241AA7D00C00EE4255 /* generated */ = {
-			isa = PBXGroup;
-			children = (
-				3665CA3E1AA7F52500EE4255 /* ContestResultsSponsorTest.m */,
-				3665CA3F1AA7F52500EE4255 /* ContestResultsTest.m */,
-				3665CA401AA7F52500EE4255 /* ContestSponsorTest.m */,
-				3665CA411AA7F52500EE4255 /* ContestTest.m */,
-				3665CA421AA7F52500EE4255 /* EnumerationPurseTypesTest.m */,
-				3665CA431AA7F52500EE4255 /* EnumerationSkillLevelsTest.m */,
-				3665CA441AA7F52500EE4255 /* EnumerationTest.m */,
-				3665CA451AA7F52500EE4255 /* EnumerationTournamentSizesTest.m */,
-				3665CA461AA7F52500EE4255 /* EnumerationTournamentStatesTest.m */,
-				3665CA471AA7F52500EE4255 /* EnumerationTournamentTypesTest.m */,
-				3665CA481AA7F52500EE4255 /* EnumerationUserTypesTest.m */,
-				3665CA551AA8A19300EE4255 /* SerializerTest.m */,
-			);
-			name = generated;
-			sourceTree = "<group>";
-		};
-		367668D81AB076330012B7FF /* services */ = {
-			isa = PBXGroup;
-			children = (
-				367668D91AB076390012B7FF /* generated */,
-				36BDAD051AB1CD8500201F7E /* MockDataService.h */,
-				36BDAD061AB1CD8500201F7E /* MockDataService.m */,
-			);
-			name = services;
-			sourceTree = "<group>";
-		};
-		367668D91AB076390012B7FF /* generated */ = {
-			isa = PBXGroup;
-			children = (
-				367668DA1AB076520012B7FF /* ContestResultsService.h */,
-				367668DB1AB076520012B7FF /* ContestResultsService.m */,
-				367668DC1AB076520012B7FF /* ContestResultsSponsorService.h */,
-				367668DD1AB076520012B7FF /* ContestResultsSponsorService.m */,
-				367668DE1AB076520012B7FF /* ContestService.h */,
-				367668DF1AB076520012B7FF /* ContestService.m */,
-				367668E01AB076520012B7FF /* ContestSponsorService.h */,
-				367668E11AB076520012B7FF /* ContestSponsorService.m */,
-				367668E21AB076520012B7FF /* EnumerationPurseTypesService.h */,
-				367668E31AB076520012B7FF /* EnumerationPurseTypesService.m */,
-				367668E41AB076520012B7FF /* EnumerationService.h */,
-				367668E51AB076520012B7FF /* EnumerationService.m */,
-				367668E61AB076520012B7FF /* EnumerationSkillLevelsService.h */,
-				367668E71AB076520012B7FF /* EnumerationSkillLevelsService.m */,
-				367668E81AB076520012B7FF /* EnumerationTournamentSizesService.h */,
-				367668E91AB076520012B7FF /* EnumerationTournamentSizesService.m */,
-				367668EA1AB076520012B7FF /* EnumerationTournamentStatesService.h */,
-				367668EB1AB076520012B7FF /* EnumerationTournamentStatesService.m */,
-				367668EC1AB076520012B7FF /* EnumerationTournamentTypesService.h */,
-				367668ED1AB076520012B7FF /* EnumerationTournamentTypesService.m */,
-				367668EE1AB076520012B7FF /* EnumerationUserTypesService.h */,
-				367668EF1AB076520012B7FF /* EnumerationUserTypesService.m */,
-			);
-			name = generated;
-			sourceTree = "<group>";
-		};
-		368FA32B1A9E077D0037193C = {
-			isa = PBXGroup;
-			children = (
-				368FA3361A9E077D0037193C /* Generated */,
-				368FA3501A9E077D0037193C /* GeneratedTests */,
-				368FA3351A9E077D0037193C /* Products */,
+				9378DF401D73354E0083DA8E /* Generated */,
+				9378DF5A1D73354E0083DA8E /* GeneratedTests */,
+				9378DF3F1D73354E0083DA8E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		368FA3351A9E077D0037193C /* Products */ = {
+		9378DF3F1D73354E0083DA8E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				368FA3341A9E077D0037193C /* Generated.app */,
-				368FA34D1A9E077D0037193C /* GeneratedTests.xctest */,
+				9378DF3E1D73354E0083DA8E /* Generated.app */,
+				9378DF571D73354E0083DA8E /* GeneratedTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		368FA3361A9E077D0037193C /* Generated */ = {
+		9378DF401D73354E0083DA8E /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				36BDAD021AB1CC5F00201F7E /* Sample Data */,
-				367668D81AB076330012B7FF /* services */,
-				361589521AADE70800FFE84C /* views */,
-				3665C9FD1AA7CFC800EE4255 /* models */,
-				368FA33B1A9E077D0037193C /* AppDelegate.h */,
-				368FA33C1A9E077D0037193C /* AppDelegate.m */,
-				368FA33E1A9E077D0037193C /* ViewController.h */,
-				368FA33F1A9E077D0037193C /* ViewController.m */,
-				368FA3411A9E077D0037193C /* Main.storyboard */,
-				368FA3441A9E077D0037193C /* Images.xcassets */,
-				368FA3461A9E077D0037193C /* LaunchScreen.xib */,
-				368FA3371A9E077D0037193C /* Supporting Files */,
+				9378DFA81D7336F80083DA8E /* src */,
+				9378DF441D73354E0083DA8E /* AppDelegate.h */,
+				9378DF451D73354E0083DA8E /* AppDelegate.m */,
+				9378DF471D73354E0083DA8E /* ViewController.h */,
+				9378DF481D73354E0083DA8E /* ViewController.m */,
+				9378DF4A1D73354E0083DA8E /* Main.storyboard */,
+				9378DF4D1D73354E0083DA8E /* Assets.xcassets */,
+				9378DF4F1D73354E0083DA8E /* LaunchScreen.storyboard */,
+				9378DF521D73354E0083DA8E /* Info.plist */,
+				9378DF411D73354E0083DA8E /* Supporting Files */,
+				9378DF8E1D7335990083DA8E /* Log.h */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
 		};
-		368FA3371A9E077D0037193C /* Supporting Files */ = {
+		9378DF411D73354E0083DA8E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				368FA3381A9E077D0037193C /* Info.plist */,
-				368FA3391A9E077D0037193C /* main.m */,
+				9378DF421D73354E0083DA8E /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		368FA3501A9E077D0037193C /* GeneratedTests */ = {
+		9378DF5A1D73354E0083DA8E /* GeneratedTests */ = {
 			isa = PBXGroup;
 			children = (
-				36BDAD081AB1CFA900201F7E /* services */,
-				3665CA231AA7D00600EE4255 /* models */,
-				368FA3511A9E077D0037193C /* Supporting Files */,
+				9378DF8F1D7335A50083DA8E /* test */,
+				9378DF5B1D73354E0083DA8E /* GeneratedTests.m */,
+				9378DF5D1D73354E0083DA8E /* Info.plist */,
 			);
 			path = GeneratedTests;
 			sourceTree = "<group>";
 		};
-		368FA3511A9E077D0037193C /* Supporting Files */ = {
+		9378DF8F1D7335A50083DA8E /* test */ = {
 			isa = PBXGroup;
 			children = (
-				368FA3521A9E077D0037193C /* Info.plist */,
+				9378DF901D7335A50083DA8E /* ContestResultsSponsorTest.m */,
+				9378DF911D7335A50083DA8E /* ContestResultsSummaryTest.m */,
+				9378DF921D7335A50083DA8E /* ContestResultsTest.m */,
+				9378DF931D7335A50083DA8E /* ContestSponsorTest.m */,
+				9378DF941D7335A50083DA8E /* ContestTest.m */,
+				9378DF951D7335A50083DA8E /* EnumerationPurseTypesTest.m */,
+				9378DF961D7335A50083DA8E /* EnumerationSkillLevelsTest.m */,
+				9378DF971D7335A50083DA8E /* EnumerationTest.m */,
+				9378DF981D7335A50083DA8E /* EnumerationTournamentSizesTest.m */,
+				9378DF991D7335A50083DA8E /* EnumerationTournamentStatesTest.m */,
+				9378DF9A1D7335A50083DA8E /* EnumerationTournamentTypesTest.m */,
+				9378DF9B1D7335A50083DA8E /* EnumerationUserTypesTest.m */,
 			);
-			name = "Supporting Files";
+			path = test;
 			sourceTree = "<group>";
 		};
-		36BDAD021AB1CC5F00201F7E /* Sample Data */ = {
+		9378DFA81D7336F80083DA8E /* src */ = {
 			isa = PBXGroup;
 			children = (
-				36BDAD031AB1CCB200201F7E /* contests.json */,
+				9378DFA91D7336F80083DA8E /* Contest.h */,
+				9378DFAA1D7336F80083DA8E /* Contest.m */,
+				9378DFAB1D7336F80083DA8E /* ContestResults.h */,
+				9378DFAC1D7336F80083DA8E /* ContestResults.m */,
+				9378DFAD1D7336F80083DA8E /* ContestResultsSponsor.h */,
+				9378DFAE1D7336F80083DA8E /* ContestResultsSponsor.m */,
+				9378DFAF1D7336F80083DA8E /* ContestResultsSummary.h */,
+				9378DFB01D7336F80083DA8E /* ContestResultsSummary.m */,
+				9378DFB11D7336F80083DA8E /* ContestSponsor.h */,
+				9378DFB21D7336F80083DA8E /* ContestSponsor.m */,
+				9378DFB31D7336F80083DA8E /* Enumeration.h */,
+				9378DFB41D7336F80083DA8E /* Enumeration.m */,
+				9378DFB51D7336F80083DA8E /* EnumerationPurseTypes.h */,
+				9378DFB61D7336F80083DA8E /* EnumerationPurseTypes.m */,
+				9378DFB71D7336F80083DA8E /* EnumerationSkillLevels.h */,
+				9378DFB81D7336F80083DA8E /* EnumerationSkillLevels.m */,
+				9378DFB91D7336F80083DA8E /* EnumerationTournamentSizes.h */,
+				9378DFBA1D7336F80083DA8E /* EnumerationTournamentSizes.m */,
+				9378DFBB1D7336F80083DA8E /* EnumerationTournamentStates.h */,
+				9378DFBC1D7336F80083DA8E /* EnumerationTournamentStates.m */,
+				9378DFBD1D7336F80083DA8E /* EnumerationTournamentTypes.h */,
+				9378DFBE1D7336F80083DA8E /* EnumerationTournamentTypes.m */,
+				9378DFBF1D7336F80083DA8E /* EnumerationUserTypes.h */,
+				9378DFC01D7336F80083DA8E /* EnumerationUserTypes.m */,
+				9378DFC11D7336F80083DA8E /* Serializer.h */,
+				9378DFC21D7336F80083DA8E /* Serializer.m */,
 			);
-			name = "Sample Data";
-			sourceTree = "<group>";
-		};
-		36BDAD081AB1CFA900201F7E /* services */ = {
-			isa = PBXGroup;
-			children = (
-				36BDAD091AB1CFBC00201F7E /* MockDataServiceTest.m */,
-			);
-			name = services;
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		368FA3331A9E077D0037193C /* Generated */ = {
+		9378DF3D1D73354E0083DA8E /* Generated */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 368FA3571A9E077D0037193C /* Build configuration list for PBXNativeTarget "Generated" */;
+			buildConfigurationList = 9378DF601D73354E0083DA8E /* Build configuration list for PBXNativeTarget "Generated" */;
 			buildPhases = (
-				368FA3301A9E077D0037193C /* Sources */,
-				368FA3311A9E077D0037193C /* Frameworks */,
-				368FA3321A9E077D0037193C /* Resources */,
+				9378DF3A1D73354E0083DA8E /* Sources */,
+				9378DF3B1D73354E0083DA8E /* Frameworks */,
+				9378DF3C1D73354E0083DA8E /* Resources */,
 			);
 			buildRules = (
 			);
@@ -557,46 +247,46 @@
 			);
 			name = Generated;
 			productName = Generated;
-			productReference = 368FA3341A9E077D0037193C /* Generated.app */;
+			productReference = 9378DF3E1D73354E0083DA8E /* Generated.app */;
 			productType = "com.apple.product-type.application";
 		};
-		368FA34C1A9E077D0037193C /* GeneratedTests */ = {
+		9378DF561D73354E0083DA8E /* GeneratedTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 368FA35A1A9E077D0037193C /* Build configuration list for PBXNativeTarget "GeneratedTests" */;
+			buildConfigurationList = 9378DF631D73354E0083DA8E /* Build configuration list for PBXNativeTarget "GeneratedTests" */;
 			buildPhases = (
-				368FA3491A9E077D0037193C /* Sources */,
-				368FA34A1A9E077D0037193C /* Frameworks */,
-				368FA34B1A9E077D0037193C /* Resources */,
+				9378DF531D73354E0083DA8E /* Sources */,
+				9378DF541D73354E0083DA8E /* Frameworks */,
+				9378DF551D73354E0083DA8E /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				368FA34F1A9E077D0037193C /* PBXTargetDependency */,
+				9378DF591D73354E0083DA8E /* PBXTargetDependency */,
 			);
 			name = GeneratedTests;
 			productName = GeneratedTests;
-			productReference = 368FA34D1A9E077D0037193C /* GeneratedTests.xctest */;
+			productReference = 9378DF571D73354E0083DA8E /* GeneratedTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		368FA32C1A9E077D0037193C /* Project object */ = {
+		9378DF361D73354E0083DA8E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = intere;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = iColasoft;
 				TargetAttributes = {
-					368FA3331A9E077D0037193C = {
-						CreatedOnToolsVersion = 6.1.1;
+					9378DF3D1D73354E0083DA8E = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
-					368FA34C1A9E077D0037193C = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 368FA3331A9E077D0037193C;
+					9378DF561D73354E0083DA8E = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 9378DF3D1D73354E0083DA8E;
 					};
 				};
 			};
-			buildConfigurationList = 368FA32F1A9E077D0037193C /* Build configuration list for PBXProject "Generated" */;
+			buildConfigurationList = 9378DF391D73354E0083DA8E /* Build configuration list for PBXProject "Generated" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -604,30 +294,29 @@
 				en,
 				Base,
 			);
-			mainGroup = 368FA32B1A9E077D0037193C;
-			productRefGroup = 368FA3351A9E077D0037193C /* Products */;
+			mainGroup = 9378DF351D73354E0083DA8E;
+			productRefGroup = 9378DF3F1D73354E0083DA8E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				368FA3331A9E077D0037193C /* Generated */,
-				368FA34C1A9E077D0037193C /* GeneratedTests */,
+				9378DF3D1D73354E0083DA8E /* Generated */,
+				9378DF561D73354E0083DA8E /* GeneratedTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		368FA3321A9E077D0037193C /* Resources */ = {
+		9378DF3C1D73354E0083DA8E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36BDAD041AB1CCB200201F7E /* contests.json in Resources */,
-				368FA3431A9E077D0037193C /* Main.storyboard in Resources */,
-				368FA3481A9E077D0037193C /* LaunchScreen.xib in Resources */,
-				368FA3451A9E077D0037193C /* Images.xcassets in Resources */,
+				9378DF511D73354E0083DA8E /* LaunchScreen.storyboard in Resources */,
+				9378DF4E1D73354E0083DA8E /* Assets.xcassets in Resources */,
+				9378DF4C1D73354E0083DA8E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		368FA34B1A9E077D0037193C /* Resources */ = {
+		9378DF551D73354E0083DA8E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -637,130 +326,84 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		368FA3301A9E077D0037193C /* Sources */ = {
+		9378DF3A1D73354E0083DA8E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3665CA1A1AA7CFDD00EE4255 /* ContestSponsor.m in Sources */,
-				36BAAC9B1AC4546100A19071 /* ContestResultsTableViewController.m in Sources */,
-				36BDAD071AB1CD8500201F7E /* MockDataService.m in Sources */,
-				367668F71AB076520012B7FF /* EnumerationTournamentSizesService.m in Sources */,
-				36B6E2D31AC269C20085EF90 /* MyTableViewController.m in Sources */,
-				3665CA1E1AA7CFDD00EE4255 /* EnumerationTournamentSizes.m in Sources */,
-				3665CA171AA7CFDD00EE4255 /* Contest.m in Sources */,
-				3665CA181AA7CFDD00EE4255 /* ContestResults.m in Sources */,
-				368FA3401A9E077D0037193C /* ViewController.m in Sources */,
-				361589731AADE75800FFE84C /* EnumerationUserTypesView.m in Sources */,
-				368FA33D1A9E077D0037193C /* AppDelegate.m in Sources */,
-				361589721AADE75800FFE84C /* EnumerationTournamentTypesView.m in Sources */,
-				3615896D1AADE75800FFE84C /* ContestView.m in Sources */,
-				367668F91AB076520012B7FF /* EnumerationTournamentTypesService.m in Sources */,
-				36BAAC9F1AC4546100A19071 /* EnumerationSkillLevelsTableViewController.m in Sources */,
-				36BAACA11AC4546100A19071 /* EnumerationTournamentSizesTableViewController.m in Sources */,
-				3665CA221AA7CFDD00EE4255 /* Serializer.m in Sources */,
-				3615896A1AADE75800FFE84C /* ContestResultsSponsorView.m in Sources */,
-				36B6E2CD1AC21AE10085EF90 /* EnumerationTournamentTypesViewController.m in Sources */,
-				3665CA191AA7CFDD00EE4255 /* ContestResultsSponsor.m in Sources */,
-				36BAACA31AC4546100A19071 /* EnumerationTournamentTypesTableViewController.m in Sources */,
-				36B6E2C91AC21AE10085EF90 /* EnumerationPurseTypesViewController.m in Sources */,
-				36BAACA01AC4546100A19071 /* EnumerationTableViewController.m in Sources */,
-				361589701AADE75800FFE84C /* EnumerationTournamentSizesView.m in Sources */,
-				3665CA201AA7CFDD00EE4255 /* EnumerationTournamentTypes.m in Sources */,
-				36B6E2CB1AC21AE10085EF90 /* EnumerationTournamentSizesViewController.m in Sources */,
-				3615896C1AADE75800FFE84C /* ContestSponsorView.m in Sources */,
-				367668FA1AB076520012B7FF /* EnumerationUserTypesService.m in Sources */,
-				367668F41AB076520012B7FF /* EnumerationPurseTypesService.m in Sources */,
-				36B6E2CA1AC21AE10085EF90 /* EnumerationSkillLevelsViewController.m in Sources */,
-				3615896F1AADE75800FFE84C /* EnumerationSkillLevelsView.m in Sources */,
-				367668F51AB076520012B7FF /* EnumerationService.m in Sources */,
-				368FA33A1A9E077D0037193C /* main.m in Sources */,
-				361FB5751AAF2DF6009F9F03 /* UIHelper.m in Sources */,
-				3665CA1F1AA7CFDD00EE4255 /* EnumerationTournamentStates.m in Sources */,
-				3615896B1AADE75800FFE84C /* ContestResultsView.m in Sources */,
-				36B6E2CC1AC21AE10085EF90 /* EnumerationTournamentStatesViewController.m in Sources */,
-				36B6E2C71AC21AE10085EF90 /* ContestSponsorViewController.m in Sources */,
-				3665CA1C1AA7CFDD00EE4255 /* EnumerationPurseTypes.m in Sources */,
-				3615896E1AADE75800FFE84C /* EnumerationPurseTypesView.m in Sources */,
-				36B6E2C81AC21AE10085EF90 /* ContestViewController.m in Sources */,
-				36BAAC9A1AC4546100A19071 /* ContestResultsSponsorTableViewController.m in Sources */,
-				367668F21AB076520012B7FF /* ContestService.m in Sources */,
-				367668F31AB076520012B7FF /* ContestSponsorService.m in Sources */,
-				3665CA1D1AA7CFDD00EE4255 /* EnumerationSkillLevels.m in Sources */,
-				36BAACA41AC4546100A19071 /* EnumerationUserTypesTableViewController.m in Sources */,
-				3665CA211AA7CFDD00EE4255 /* EnumerationUserTypes.m in Sources */,
-				36BAACA21AC4546100A19071 /* EnumerationTournamentStatesTableViewController.m in Sources */,
-				361589711AADE75800FFE84C /* EnumerationTournamentStatesView.m in Sources */,
-				36B6E2CF1AC21AE10085EF90 /* EnumerationViewController.m in Sources */,
-				361FB5761AAF2DF6009F9F03 /* UITheme.m in Sources */,
-				361589741AADE75800FFE84C /* EnumerationView.m in Sources */,
-				367668F01AB076520012B7FF /* ContestResultsService.m in Sources */,
-				36B6E2C51AC21AE10085EF90 /* ContestResultsSponsorViewController.m in Sources */,
-				367668F81AB076520012B7FF /* EnumerationTournamentStatesService.m in Sources */,
-				36BAAC9E1AC4546100A19071 /* EnumerationPurseTypesTableViewController.m in Sources */,
-				36B6E2C61AC21AE10085EF90 /* ContestResultsViewController.m in Sources */,
-				36BAAC9C1AC4546100A19071 /* ContestSponsorTableViewController.m in Sources */,
-				367668F11AB076520012B7FF /* ContestResultsSponsorService.m in Sources */,
-				367668F61AB076520012B7FF /* EnumerationSkillLevelsService.m in Sources */,
-				3665CA1B1AA7CFDD00EE4255 /* Enumeration.m in Sources */,
-				36BAAC9D1AC4546100A19071 /* ContestTableViewController.m in Sources */,
-				36B6E2CE1AC21AE10085EF90 /* EnumerationUserTypesViewController.m in Sources */,
+				9378DFC31D7336F80083DA8E /* Contest.m in Sources */,
+				9378DFCF1D7336F80083DA8E /* Serializer.m in Sources */,
+				9378DFC41D7336F80083DA8E /* ContestResults.m in Sources */,
+				9378DFC61D7336F80083DA8E /* ContestResultsSummary.m in Sources */,
+				9378DFCC1D7336F80083DA8E /* EnumerationTournamentStates.m in Sources */,
+				9378DFCE1D7336F80083DA8E /* EnumerationUserTypes.m in Sources */,
+				9378DFC81D7336F80083DA8E /* Enumeration.m in Sources */,
+				9378DF491D73354E0083DA8E /* ViewController.m in Sources */,
+				9378DF461D73354E0083DA8E /* AppDelegate.m in Sources */,
+				9378DFC51D7336F80083DA8E /* ContestResultsSponsor.m in Sources */,
+				9378DFCD1D7336F80083DA8E /* EnumerationTournamentTypes.m in Sources */,
+				9378DF431D73354E0083DA8E /* main.m in Sources */,
+				9378DFC71D7336F80083DA8E /* ContestSponsor.m in Sources */,
+				9378DFCB1D7336F80083DA8E /* EnumerationTournamentSizes.m in Sources */,
+				9378DFCA1D7336F80083DA8E /* EnumerationSkillLevels.m in Sources */,
+				9378DFC91D7336F80083DA8E /* EnumerationPurseTypes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		368FA3491A9E077D0037193C /* Sources */ = {
+		9378DF531D73354E0083DA8E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3665CA4A1AA7F52500EE4255 /* ContestResultsTest.m in Sources */,
-				3665CA491AA7F52500EE4255 /* ContestResultsSponsorTest.m in Sources */,
-				3665CA4C1AA7F52500EE4255 /* ContestTest.m in Sources */,
-				3665CA501AA7F52500EE4255 /* EnumerationTournamentSizesTest.m in Sources */,
-				3665CA531AA7F52500EE4255 /* EnumerationUserTypesTest.m in Sources */,
-				3665CA511AA7F52500EE4255 /* EnumerationTournamentStatesTest.m in Sources */,
-				3665CA4F1AA7F52500EE4255 /* EnumerationTest.m in Sources */,
-				3665CA521AA7F52500EE4255 /* EnumerationTournamentTypesTest.m in Sources */,
-				36BDAD0A1AB1CFBC00201F7E /* MockDataServiceTest.m in Sources */,
-				3665CA4E1AA7F52500EE4255 /* EnumerationSkillLevelsTest.m in Sources */,
-				3665CA561AA8A19300EE4255 /* SerializerTest.m in Sources */,
-				3665CA4B1AA7F52500EE4255 /* ContestSponsorTest.m in Sources */,
-				3665CA4D1AA7F52500EE4255 /* EnumerationPurseTypesTest.m in Sources */,
+				9378DFA21D7335A50083DA8E /* EnumerationSkillLevelsTest.m in Sources */,
+				9378DF9C1D7335A50083DA8E /* ContestResultsSponsorTest.m in Sources */,
+				9378DF9E1D7335A50083DA8E /* ContestResultsTest.m in Sources */,
+				9378DFA01D7335A50083DA8E /* ContestTest.m in Sources */,
+				9378DFA51D7335A50083DA8E /* EnumerationTournamentStatesTest.m in Sources */,
+				9378DF9D1D7335A50083DA8E /* ContestResultsSummaryTest.m in Sources */,
+				9378DFA31D7335A50083DA8E /* EnumerationTest.m in Sources */,
+				9378DFA41D7335A50083DA8E /* EnumerationTournamentSizesTest.m in Sources */,
+				9378DFA61D7335A50083DA8E /* EnumerationTournamentTypesTest.m in Sources */,
+				9378DFA11D7335A50083DA8E /* EnumerationPurseTypesTest.m in Sources */,
+				9378DF5C1D73354E0083DA8E /* GeneratedTests.m in Sources */,
+				9378DF9F1D7335A50083DA8E /* ContestSponsorTest.m in Sources */,
+				9378DFA71D7335A50083DA8E /* EnumerationUserTypesTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		368FA34F1A9E077D0037193C /* PBXTargetDependency */ = {
+		9378DF591D73354E0083DA8E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 368FA3331A9E077D0037193C /* Generated */;
-			targetProxy = 368FA34E1A9E077D0037193C /* PBXContainerItemProxy */;
+			target = 9378DF3D1D73354E0083DA8E /* Generated */;
+			targetProxy = 9378DF581D73354E0083DA8E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		368FA3411A9E077D0037193C /* Main.storyboard */ = {
+		9378DF4A1D73354E0083DA8E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				368FA3421A9E077D0037193C /* Base */,
+				9378DF4B1D73354E0083DA8E /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		368FA3461A9E077D0037193C /* LaunchScreen.xib */ = {
+		9378DF4F1D73354E0083DA8E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				368FA3471A9E077D0037193C /* Base */,
+				9378DF501D73354E0083DA8E /* Base */,
 			);
-			name = LaunchScreen.xib;
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		368FA3551A9E077D0037193C /* Debug */ = {
+		9378DF5E1D73354E0083DA8E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -776,32 +419,36 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		368FA3561A9E077D0037193C /* Release */ = {
+		9378DF5F1D73354E0083DA8E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -816,72 +463,67 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		368FA3581A9E077D0037193C /* Debug */ = {
+		9378DF611D73354E0083DA8E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Generated/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.icolasoft.Generated;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		368FA3591A9E077D0037193C /* Release */ = {
+		9378DF621D73354E0083DA8E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Generated/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.icolasoft.Generated;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
-		368FA35B1A9E077D0037193C /* Debug */ = {
+		9378DF641D73354E0083DA8E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = GeneratedTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.icolasoft.GeneratedTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Generated.app/Generated";
 			};
 			name = Debug;
 		};
-		368FA35C1A9E077D0037193C /* Release */ = {
+		9378DF651D73354E0083DA8E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = GeneratedTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.icolasoft.GeneratedTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Generated.app/Generated";
 			};
@@ -890,34 +532,32 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		368FA32F1A9E077D0037193C /* Build configuration list for PBXProject "Generated" */ = {
+		9378DF391D73354E0083DA8E /* Build configuration list for PBXProject "Generated" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				368FA3551A9E077D0037193C /* Debug */,
-				368FA3561A9E077D0037193C /* Release */,
+				9378DF5E1D73354E0083DA8E /* Debug */,
+				9378DF5F1D73354E0083DA8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		368FA3571A9E077D0037193C /* Build configuration list for PBXNativeTarget "Generated" */ = {
+		9378DF601D73354E0083DA8E /* Build configuration list for PBXNativeTarget "Generated" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				368FA3581A9E077D0037193C /* Debug */,
-				368FA3591A9E077D0037193C /* Release */,
+				9378DF611D73354E0083DA8E /* Debug */,
+				9378DF621D73354E0083DA8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		368FA35A1A9E077D0037193C /* Build configuration list for PBXNativeTarget "GeneratedTests" */ = {
+		9378DF631D73354E0083DA8E /* Build configuration list for PBXNativeTarget "GeneratedTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				368FA35B1A9E077D0037193C /* Debug */,
-				368FA35C1A9E077D0037193C /* Release */,
+				9378DF641D73354E0083DA8E /* Debug */,
+				9378DF651D73354E0083DA8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 368FA32C1A9E077D0037193C /* Project object */;
+	rootObject = 9378DF361D73354E0083DA8E /* Project object */;
 }

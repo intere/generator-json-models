@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.intere.generator.builder.interpreter.models.SwiftModelInterpreter;
 import com.intere.generator.builder.orchestration.language.*;
+import com.intere.generator.metadata.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.JsonNode;
@@ -21,14 +22,6 @@ import com.intere.generator.builder.interpreter.models.JavaModelInterpreter;
 import com.intere.generator.builder.interpreter.models.ObjectiveCModelInterpreter;
 import com.intere.generator.builder.interpreter.models.RubyModelInterpreter;
 import com.intere.generator.deserializer.JsonNodeUtils;
-import com.intere.generator.metadata.Metadata;
-import com.intere.generator.metadata.MetadataClasses;
-import com.intere.generator.metadata.MetadataClassesImports;
-import com.intere.generator.metadata.MetadataClassesListSummary;
-import com.intere.generator.metadata.MetadataClassesTransientProperty;
-import com.intere.generator.metadata.ModelClass;
-import com.intere.generator.metadata.ModelClassImports;
-import com.intere.generator.metadata.ModelClassProperty;
 import org.springframework.util.Assert;
 
 public class OrchestrationUtils {
@@ -40,10 +33,11 @@ public class OrchestrationUtils {
 	 * @param metadata The {@link Metadata} object.
 	 * @param clazz The {@link MetadataClasses} object.
 	 * @param node The {@link JsonNode} object (the JSON Model that ultimately drives the bulk of the code creation).
-	 * @return A Collection of {@link ModelClass} objects.
+	 * @param prefix
+	 *@param suffix @return A Collection of {@link ModelClass} objects.
 	 */
-	public static List<ModelClass> readBuildClasses(Metadata metadata, MetadataClasses clazz, JsonNode node) {
-		return createAndPopulateModelClass(metadata, clazz, clazz.getClassName(), node, clazz.getUrlPath());
+	public static List<CustomClass> readBuildClasses(Metadata metadata, MetadataClasses clazz, JsonNode node, String prefix, String suffix) {
+		return createAndPopulateModelClass(metadata, clazz, clazz.getClassName(), node, clazz.getUrlPath(), prefix, suffix);
 	}
 	
 	/**
@@ -72,8 +66,8 @@ public class OrchestrationUtils {
 		}
 	}
 
-	private static Collection<ModelClass> getSubClasses(JsonLanguageInterpreter interpreter, Metadata metadata, MetadataClasses clazz, JsonNode node, String className) {
-		List<ModelClass> modelClasses = new ArrayList<>();
+	private static Collection<CustomClass> getSubClasses(JsonLanguageInterpreter interpreter, Metadata metadata, MetadataClasses clazz, JsonNode node, String className, String prefix, String suffix) {
+		List<CustomClass> modelClasses = new ArrayList<>();
 		
 		Iterator<String> iter = node.getFieldNames();
 		while(iter.hasNext()) {
@@ -81,9 +75,9 @@ public class OrchestrationUtils {
 			JsonNode child = node.get(name);
 			String childClassName = interpreter.buildSubClassName(className, name);
 			if(isObject(child)) {
-				modelClasses.addAll(createAndPopulateModelClass(metadata, clazz, childClassName, child, null));
+				modelClasses.addAll(createAndPopulateModelClass(metadata, clazz, childClassName, child, null, prefix, suffix));
 			} else if(isArrayOfObjects(child)) {
-				modelClasses.addAll(createAndPopulateModelClass(metadata, clazz, childClassName, child.iterator().next(), null));
+				modelClasses.addAll(createAndPopulateModelClass(metadata, clazz, childClassName, child.iterator().next(), null, prefix, suffix));
 			}
 		}
 		
@@ -102,15 +96,15 @@ public class OrchestrationUtils {
 			configureNodeType(interpreter, className, name, child, property);
 			properties.add(property);
 
-			Assert.notNull(property.getIsPrimitive());
-			Assert.notNull(property.getIsArray());
-//			Assert.notNull(property.getAlias());
-			Assert.notNull(property.getName());
-			Assert.notNull(property.getIsKey());
-			Assert.notNull(property.getIsReadonly());
-			Assert.notNull(property.getIsTransient());
-			Assert.notNull(property.getIsVisible());
-			Assert.notNull(property.getType());
+			assert null != property.getIsPrimitive();
+			assert null != property.getIsArray();
+			assert null != property.getAlias();
+			assert null != property.getName();
+			assert null != property.getIsKey();
+			assert null != property.getIsReadonly();
+			assert null != property.getIsTransient();
+			assert null != property.getIsVisible();
+			assert null != property.getType();
 
 		}		
 		return properties;
@@ -176,6 +170,7 @@ public class OrchestrationUtils {
 		property.setIsPrimitive(isPrimitive(property));
 		property.setDataType(OrchestrationDataType.fromModelProperty(property));
 		property.setValue(child.getTextValue());
+		property.setAlias(interpreter.cleanVariableName(name));
 		if(property.getDataType() == OrchestrationDataType.ARRAY) {
 			property.setArraySubTypeProperty(getArraySubtypeProperty(interpreter, className, name, child.get(0)));
 		}
@@ -228,9 +223,9 @@ public class OrchestrationUtils {
 	 * @param restUrl
 	 * @return
 	 */
-	private static List<ModelClass> createAndPopulateModelClass(Metadata metadata, MetadataClasses clazz, String className, JsonNode node, String restUrl) {
+	private static List<CustomClass> createAndPopulateModelClass(Metadata metadata, MetadataClasses clazz, String className, JsonNode node, String restUrl, String prefix, String suffix) {
 		JsonLanguageInterpreter interpreter = getInterpreterFromMetadata(metadata);
-		List<ModelClass> modelClasses = new ArrayList<>();
+		List<CustomClass> modelClasses = new ArrayList<>();
 		ModelClass model = new ModelClass();
 		model.setClassName(className);
 		model.setHasSubClasses(hasSubClasses(node));
@@ -248,9 +243,9 @@ public class OrchestrationUtils {
 		model.setListControllerName(interpreter.buildClassName(className) + "TableViewController");
 		model.setServiceClassName(interpreter.buildClassName(className) + "Service");
 		model.setRestServiceClassName(interpreter.buildClassName(className) + "RestService");
-		modelClasses.add(model);
+		modelClasses.add(new CustomClass(model, customClassName(className, prefix, suffix)));
 		if(model.getHasSubClasses()) {
-			modelClasses.addAll(getSubClasses(interpreter, metadata, clazz, node, model.getClassName()));
+			modelClasses.addAll(getSubClasses(interpreter, metadata, clazz, node, model.getClassName(), prefix, suffix));
 		}
 		
 		return modelClasses;
@@ -299,6 +294,22 @@ public class OrchestrationUtils {
 			}
 		}
 		return false;
+	}
+
+	private static String customClassName(String className, String prefix, String suffix) {
+		String customName = className;
+		if(null != prefix && !prefix.isEmpty()) {
+			customName = prefix + customName;
+		}
+		if(null != suffix && !suffix.isEmpty()) {
+			customName = customName + suffix;
+		}
+
+		if(!className.equals(customName)) {
+			return customName;
+		}
+
+		return null;
 	}
 
 }

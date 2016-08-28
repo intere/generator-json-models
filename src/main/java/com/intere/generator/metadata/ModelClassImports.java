@@ -15,6 +15,7 @@ import java.io.Serializable;
 public class ModelClassImports implements Serializable {
 	private String importName;
 	private String targetClassName;
+	private String importNamespaceAndName;
 
 	/**
 	 * Setter for importName property
@@ -42,6 +43,14 @@ public class ModelClassImports implements Serializable {
 	*/
 	public String getTargetClassName() {
 		return this.targetClassName;
+	}
+
+	public String getImportNamespaceAndName() {
+		return importNamespaceAndName;
+	}
+
+	public void setImportNamespaceAndName(String importNamespaceAndName) {
+		this.importNamespaceAndName = importNamespaceAndName;
 	}
 
 	@Override

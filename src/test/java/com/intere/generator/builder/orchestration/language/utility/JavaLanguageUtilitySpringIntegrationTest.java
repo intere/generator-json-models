@@ -1,6 +1,6 @@
 package com.intere.generator.builder.orchestration.language.utility;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,27 +21,6 @@ public class JavaLanguageUtilitySpringIntegrationTest {
 	@Test
 	public void testServiceObjectExists() {
 		assertNotNull(javaUtil);
-	}
-	
-	@Test
-	public void testModelBuilderExists() {
-		assertNotNull(javaUtil.getModelBuilder());
-	}
-	
-	@Test
-	public void testTestBuilderExists() {
-		assertNotNull(javaUtil.getTestBuilder());
-	}
-	
-	@Test
-	@Ignore("Not Yet Implemented")
-	public void testViewBuilderExists() {
-		assertNotNull(javaUtil.getViewBuilder());
-	}
-	
-	@Test
-	public void testServiceBuilderExists() {
-		assertNotNull(javaUtil.getServiceBuilder());
 	}
 
 }

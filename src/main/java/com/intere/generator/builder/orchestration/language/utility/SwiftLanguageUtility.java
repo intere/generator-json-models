@@ -16,32 +16,10 @@ import java.util.Map;
 @Service("SwiftLanguage")
 public class SwiftLanguageUtility extends AbstractLanguageUtility {
 
-    @Autowired @Qualifier("SwiftModelBuilder")
-    ModelBuilder modelBuilder;
-    @Autowired @Qualifier("SwiftTestBuilder")
-    TestBuilder testBuilder;
-    @Autowired @Qualifier("SwiftViewBuilder")
-    ViewBuilder viewBuilder;
-    @Autowired @Qualifier("SwiftServiceBuilder")
-    ServiceBuilder serviceBuilder;
-
     @Override
     public Map<String, String> getPropertyMappings() {
         Map<String, String> mappings = new HashMap<>();
-        mappings.put("id", "theId");
-        mappings.put("description", "theDescription");
-        mappings.put("type", "theType");
         return mappings;
-    }
-
-    @Override
-    public ModelBuilder getModelBuilder() {
-        return modelBuilder;
-    }
-
-    @Override
-    public TestBuilder getTestBuilder() {
-        return testBuilder;
     }
 
     @Override
@@ -51,7 +29,7 @@ public class SwiftLanguageUtility extends AbstractLanguageUtility {
 
     @Override
     public ServiceBuilder getServiceBuilder() {
-        return serviceBuilder;
+        return null;
     }
 
     @Override

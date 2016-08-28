@@ -1,0 +1,62 @@
+{
+    "asc": 123.0958648664687,
+    "date": 1450208379999,
+    "desc": 128.0844466690828,
+    "description": "Track created on 2015-12-15 19:39:40 +0000",
+    "dirty": false,
+    "dist": 123.456,
+    "dur": 0,
+    "filename": "abc123",
+    "geoJson": {
+        "coordinates": [
+            [
+                39.89039103038598,
+                -105.7669140772016
+            ],
+            [
+                39.88627497110505,
+                -105.7626245544346
+            ]
+        ],
+        "type": "Polygon"
+    },
+    "id": "56706f3ac9e77c000191557c",
+    "key_points": [
+        {
+            "dir": 1,
+            "dist": 931.300895939751,
+            "duration": 676,
+            "idx_end": 640,
+            "idx_start": 0,
+            "max_elev": 2786.233493352132,
+            "max_speed": 7.010000228881836,
+            "min_elev": 2759.570642471313,
+            "runs": 0,
+            "vAscent": 0.0,
+            "vAscentDist": 0.0,
+            "vDescent": 0.0,
+            "vDescentDist": 0.0,
+            "v_delta": -4.988581802614135
+        }
+    ],
+    "max_alt": 12345,
+    "max_speed": 123.456,
+    "metadataId": "abc123",
+    "min_alt": 123.456,
+    "name": "spirit lift",
+    "owner": "5300e4f2aec0858466a69b3e",
+    "points": [
+        {
+            "alt": 2770.030763930238,
+            "dist": 123456,
+            "h_acc": 5.0,
+            "lat": 39.88894158978005,
+            "lon": -105.765569703752,
+            "speed": 0.0,
+            "time": 1450208379999,
+            "v_acc": 3.0
+        }
+    ],
+    "runs": 1,
+    "summary": "Summary information goes here"
+}

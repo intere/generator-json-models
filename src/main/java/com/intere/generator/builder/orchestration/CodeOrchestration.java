@@ -4,7 +4,6 @@ import static com.intere.generator.io.FileIOUtils.ensureExists;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
 
 import com.intere.generator.builder.orchestration.language.LanguageOrchestrator;
 
@@ -19,7 +18,9 @@ public class CodeOrchestration {
 	private File outputDirectory;
 	private OrchestrationTree tree;
 	private LanguageOrchestrator orchestrator;
-	
+	private File customTemplatePath;
+	private String customTemplateFile;
+
 	/** Default Constructor, no initialization. */
 	public CodeOrchestration() {
 		super();
@@ -31,8 +32,8 @@ public class CodeOrchestration {
 	 * @param outputDirectory
 	 * @throws IOException
 	 */
-	public CodeOrchestration(String orchestrationFilePath, File outputDirectory) throws IOException {
-		initialize(orchestrationFilePath, outputDirectory);
+	public CodeOrchestration(String orchestrationFilePath, File outputDirectory, String prefix, String suffix) throws IOException {
+		initialize(orchestrationFilePath, outputDirectory, prefix, suffix);
 	}
 	
 	/**
@@ -41,9 +42,9 @@ public class CodeOrchestration {
 	 * @param outputDirectory
 	 * @throws IOException
 	 */
-	public void initialize(String orchestrationFilePath, File outputDirectory) throws IOException {
+	public void initialize(String orchestrationFilePath, File outputDirectory, String prefix, String suffix) throws IOException {
 		this.outputDirectory = outputDirectory;
-		this.tree = new OrchestrationTree(orchestrationFilePath);
+		this.tree = new OrchestrationTree(orchestrationFilePath, prefix, suffix);
 	}
 	
 	/**
@@ -55,8 +56,17 @@ public class CodeOrchestration {
 			throw new IllegalStateException("We don't have a code orchestrator yet, please set this before calling generateCode()");
 		}
 		orchestrator.review(tree);
+
+		if(shouldGenerateCustomClasses()) {
+			File srcPath = new File(outputDirectory, "src");
+			if(ensureExists(srcPath)) {
+				orchestrator.generateCustomClasses(srcPath, tree, customTemplatePath, customTemplateFile);
+			}
+
+			return;
+		}
 		
-		if(shouldGeenerateModels()) {
+		if(shouldGenerateModels()) {
 			File srcPath = new File(outputDirectory, "src");
 			if(ensureExists(srcPath)) {
 				orchestrator.generateModels(srcPath, tree);
@@ -109,6 +119,26 @@ public class CodeOrchestration {
 	public OrchestrationTree getTree() {
 		return tree;
 	}
+
+	public File getCustomTemplatePath() {
+		return customTemplatePath;
+	}
+
+	public void setCustomTemplatePath(File customTemplatePath) {
+		this.customTemplatePath = customTemplatePath;
+	}
+
+	public String getCustomTemplateFile() {
+		return customTemplateFile;
+	}
+
+	public void setCustomTemplateFile(String customTemplateFile) {
+		this.customTemplateFile = customTemplateFile;
+	}
+
+	private boolean shouldGenerateCustomClasses() {
+		return null != tree && null != customTemplatePath && null != customTemplateFile;
+	}
 	
 	private boolean shouldGenerateRestServices() {
 		return tree.getMetadata().getGenerate().getRestServices();
@@ -126,7 +156,8 @@ public class CodeOrchestration {
 		return tree.getMetadata().getGenerate().getTests();
 	}
 
-	private boolean shouldGeenerateModels() {
+	private boolean shouldGenerateModels() {
 		return tree.getMetadata().getGenerate().getModels();
 	}
+
 }

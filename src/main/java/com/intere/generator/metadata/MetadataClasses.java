@@ -15,6 +15,7 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class MetadataClasses implements Serializable {
+	private String customName;
 	private String className;
 	private String jsonFile;
 	private String key;
@@ -24,6 +25,14 @@ public class MetadataClasses implements Serializable {
 	private List<MetadataClassesTransientProperty> transientProperty = new ArrayList<MetadataClassesTransientProperty>();
 	private List<MetadataClassesImports> imports = new ArrayList<MetadataClassesImports>();
 	private List<MetadataClassesListSummary> listSummary = new ArrayList<MetadataClassesListSummary>();
+
+	public String getCustomName() {
+		return customName;
+	}
+
+	public void setCustomName(String customName) {
+		this.customName = customName;
+	}
 
 	/**
 	 * Setter for className property

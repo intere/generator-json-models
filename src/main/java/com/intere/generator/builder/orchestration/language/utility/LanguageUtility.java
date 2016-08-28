@@ -14,12 +14,7 @@ import com.intere.generator.metadata.ModelClassProperty;
  *
  */
 public interface LanguageUtility {
-	
-	/** Gets you the Model Builder for this class.  */
-	ModelBuilder getModelBuilder();
-	
-	/** Gets you the Test Builder for this class.  */
-	TestBuilder getTestBuilder();
+
 	
 	/** Gets you the View Builder for this class. */
 	ViewBuilder getViewBuilder();

@@ -83,10 +83,11 @@ public abstract class AbstractLanguageUtility implements LanguageUtility {
 		
 		for(ModelClass clazz : tree.getModelClasses()) {
 			for(ModelClassProperty prop : clazz.getProperty()) {
-				if(propertyMapping.containsKey(prop.getName())) {
-					prop.setAlias(propertyMapping.get(prop.getName()));
-				} else {
+				if(null == prop.getAlias()) {
 					prop.setAlias(prop.getName());
+				}
+				if(propertyMapping.containsKey(prop.getAlias())) {
+					prop.setAlias(propertyMapping.get(prop.getAlias()));
 				}
 			}
 		}

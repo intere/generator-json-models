@@ -12,12 +12,6 @@ import java.util.Map;
 
 @Service(value="ObjectiveCLanguage")
 public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
-	@Autowired @Qualifier("ObjectiveCModelBuilder")
-	ModelBuilder modelBuilder;
-	
-	@Autowired @Qualifier("ObjectiveCTestBuilder")
-	TestBuilder testBuilder;
-	
 	@Autowired @Qualifier("ObjectiveCViewBuilder")
 	ViewBuilder viewBuilder;
 	
@@ -29,17 +23,7 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 	
 	@Autowired @Qualifier("ObjectiveCListViewControllerGenerator")
 	ListViewControllerBuilder listViewControllerBuilder;
-	
-	@Override
-	public ModelBuilder getModelBuilder() {
-		return modelBuilder;
-	}
-	
-	@Override
-	public TestBuilder getTestBuilder() {
-		return testBuilder;
-	}
-	
+
 	@Override
 	public ViewBuilder getViewBuilder() {
 		return viewBuilder;
@@ -65,7 +49,7 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 		Map<File, String> resources = new HashMap<>();
 		resources.put(new File(sourcePath, "Serializer.h"), readResource("/Serializer.h"));
 		resources.put(new File(sourcePath, "Serializer.m"), readResourceAndReplaceHeaders("/Serializer.m"));
-		resources.put(new File(sourcePath, "Log.h"), readResourceAndReplaceHeaders("/Log.h"));
+//		resources.put(new File(sourcePath, "Log.h"), readResourceAndReplaceHeaders("/Log.h"));
 		return resources;
 	}
 

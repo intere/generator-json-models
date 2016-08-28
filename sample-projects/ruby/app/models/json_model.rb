@@ -2,7 +2,7 @@
 #
 #  json_model.rb
 #
-#  Released with JSON Model Generator 0.0.4 on Tue Mar 24 07:59:17 MDT 2015
+#  Released with JSON Model Generator 0.0.4 on Sun Aug 28 07:49:37 MDT 2016
 #    https://github.com/intere/generator-json-models
 #
 #    The generator tool is licensed under the LGPL: http://www.gnu.org/licenses/lgpl-3.0.html#content
