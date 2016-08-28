@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import com.intere.generator.App;
 import com.intere.generator.builder.generation.utils.SwiftDataGenerator;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.builder.orchestration.language.utility.RubyLanguageUtility;
@@ -124,6 +125,7 @@ public class RubyOrchestration implements LanguageOrchestrator {
 		model.put("filename", modelClass.getFileName() + ".rb");
 		model.put("properties", getProperties(modelClass));
 		model.put("generator", new SwiftDataGenerator());
+		model.put("version", App.getVersion());
 
 		model.put("classname", null != classname ? classname : modelClass.getFileName());
 		model.put("prefix", null != prefix ? prefix : "");

@@ -21,7 +21,7 @@ import com.intere.generator.io.FileIOUtils;
  *
  */
 public class App {
-	private static final String GENERATOR_VERSION = "0.0.4";
+	private static final String GENERATOR_VERSION = "0.0.5";
 	private static ApplicationContext context;
 	private static CodeOrchestratorFactory factory;
 

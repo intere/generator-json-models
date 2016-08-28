@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import com.intere.generator.App;
 import com.intere.generator.builder.generation.utils.SwiftDataGenerator;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
 import com.intere.generator.metadata.CustomClass;
@@ -141,6 +142,7 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 		model.put("properties", getProperties(modelClass));
 		model.put("generator", new SwiftDataGenerator());
 		model.put("interpreter", interpreter);
+		model.put("version", App.getVersion());
 
 		model.put("classname", null != classname ? classname : modelClass.getFileName());
 		model.put("filename", filename + "." + extension);
