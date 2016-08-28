@@ -73,10 +73,10 @@ build() {
 
 main() {
   build;
-  # generateJava;   # Generated using templates, checks out
-  generateObjectiveC;  # In Progress
-  # generateRuby;     # Generated using templates, checks out
-  # generateSwift;  # Generated using templates, checks out
+  generateJava;   # Generated using templates, checks out
+  generateRuby;     # Generated using templates, checks out
+  generateSwift;  # Generated using templates, checks out
+  generateObjectiveC;  # Generated using templates, checks out
 }
 
 main;
