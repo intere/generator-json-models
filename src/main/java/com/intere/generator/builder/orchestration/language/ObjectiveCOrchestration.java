@@ -2,11 +2,17 @@ package com.intere.generator.builder.orchestration.language;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.intere.generator.builder.generation.utils.SwiftDataGenerator;
+import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
+import com.intere.generator.metadata.CustomClass;
+import com.intere.generator.metadata.ModelClassProperty;
+import com.intere.generator.metadata.models.LanguageModelClassProperty;
+import com.intere.generator.templates.TemplateConfig;
+import freemarker.template.TemplateException;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,6 +32,12 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	@Autowired @Qualifier("ObjectiveCLanguage")
 	LanguageUtility languageUtil;
 
+	@Autowired @Qualifier("ObjectiveCInterpreter")
+	JsonLanguageInterpreter interpreter;
+
+	@Autowired
+	TemplateConfig template;
+
 	@Override
 	public List<File> generateCustomClasses(File outputDirectory, OrchestrationTree tree, File templateSourceDir, String templateFile) throws IOException {
 		throw new IOException("Not Yet Implemented");
@@ -34,9 +46,13 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	@Override
 	public List<File> generateModels(File outputDirectory, OrchestrationTree tree) throws IOException {
 		List<File> generatedClasses = new ArrayList<>();
-		for(ModelClass modelClass : tree.getModelClasses()) {
-			generatedClasses.add(buildModelHeaderFile(outputDirectory, modelClass));
-			generatedClasses.add(buildModelImplementationFile(outputDirectory, modelClass));
+		for(CustomClass modelClass : tree.getModelClasses()) {
+			try {
+				generatedClasses.add(buildModelHeaderFile(outputDirectory, modelClass));
+				generatedClasses.add(buildModelImplementationFile(outputDirectory, modelClass));
+			} catch (TemplateException ex) {
+				throw new IOException(ex);
+			}
 		}
 		return generatedClasses;
 	}
@@ -112,6 +128,30 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	public void review(OrchestrationTree tree) {
 		languageUtil.enforcePropertyMappings(tree);
 	}
+
+	private Map<String, Object> buildFreemarkerModel(CustomClass modelClass, String classname, String filename, String extension) {
+		Map<String, Object> model = new HashMap<>();
+
+		model.put("date", new Date());
+		model.put("model", modelClass);
+		model.put("properties", getProperties(modelClass));
+		model.put("generator", new SwiftDataGenerator());
+		model.put("interpreter", interpreter);
+
+		model.put("classname", null != classname ? classname : modelClass.getFileName());
+		model.put("filename", filename + "." + extension);
+
+		return model;
+	}
+
+	private List<LanguageModelClassProperty> getProperties(ModelClass modelClass) {
+		List<LanguageModelClassProperty> list = new ArrayList<>();
+		for(ModelClassProperty prop : modelClass.getProperty()) {
+			list.add(new LanguageModelClassProperty(prop, interpreter));
+		}
+
+		return list;
+	}
 	
 	/**
 	 * Builds the Service Class Header File (in the provided output directory).
@@ -162,10 +202,14 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	 * @return
 	 * @throws IOException
 	 */
-	private File buildModelImplementationFile(File outputDirectory, ModelClass modelClass) throws IOException {
-		String fileContents = buildClassImplementation(modelClass);
+	private File buildModelImplementationFile(File outputDirectory, CustomClass modelClass) throws IOException, TemplateException {
 		File outputFile = new File(outputDirectory, modelClass.getFileName() + ".m");
-		return writeFile(outputFile, fileContents);
+		LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
+
+		Map<String, Object> model = buildFreemarkerModel(modelClass, modelClass.getClassName(), modelClass.getFileName(), "m");
+		template.generateFile(model, "ObjcImplementation.ftlh", new FileWriter(outputFile));
+
+		return outputFile;
 	}
 
 	/**
@@ -175,10 +219,15 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	 * @return
 	 * @throws IOException
 	 */
-	private File buildModelHeaderFile(File outputDirectory, ModelClass modelClass) throws IOException {
-		String fileContents = buildClassDeclaration(modelClass);
+	private File buildModelHeaderFile(File outputDirectory, CustomClass modelClass) throws IOException, TemplateException {
 		File outputFile = new File(outputDirectory, modelClass.getFileName() + ".h");
-		return writeFile(outputFile, fileContents);
+		LOGGER.info("About to create Model Class: " + outputFile.getAbsolutePath());
+
+		Map<String, Object> model = buildFreemarkerModel(modelClass, modelClass.getClassName(), modelClass.getFileName(), "h");
+		template.generateFile(model, "ObjcHeader.ftlh", new FileWriter(outputFile));
+
+		return outputFile;
+
 	}
 	
 	private File buildViewHeaderFile(File viewPath, ModelClass modelClass) throws IOException {

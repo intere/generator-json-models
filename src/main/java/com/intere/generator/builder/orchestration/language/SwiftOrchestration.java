@@ -200,7 +200,7 @@ public class SwiftOrchestration implements LanguageOrchestrator {
         model.put("generator", new SwiftDataGenerator());
 
         model.put("classname", null != classname ? classname : modelClass.getFileName());
-        model.put("filename", modelClass.getFileName() + ".swift");
+        model.put("filename", filename + ".swift");
         model.put("prefix", null != prefix ? prefix : "");
         model.put("suffix", null != suffix ? suffix : "");
 

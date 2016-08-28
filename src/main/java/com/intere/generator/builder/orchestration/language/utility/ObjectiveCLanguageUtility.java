@@ -65,7 +65,7 @@ public class ObjectiveCLanguageUtility extends AbstractLanguageUtility {
 		Map<File, String> resources = new HashMap<>();
 		resources.put(new File(sourcePath, "Serializer.h"), readResource("/Serializer.h"));
 		resources.put(new File(sourcePath, "Serializer.m"), readResourceAndReplaceHeaders("/Serializer.m"));
-		resources.put(new File(sourcePath, "Log.h"), readResourceAndReplaceHeaders("/Log.h"));
+//		resources.put(new File(sourcePath, "Log.h"), readResourceAndReplaceHeaders("/Log.h"));
 		return resources;
 	}
 

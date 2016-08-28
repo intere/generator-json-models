@@ -158,16 +158,6 @@ public class RubyOrchestration implements LanguageOrchestrator {
 
 	@Override
 	public List<File> copyModelResources(File sourcePath, OrchestrationTree tree) throws IOException {
-//		List<File> generatedResources = new ArrayList<>();
-//		Map<File, String> resources = languageUtil.copyModelResources(sourcePath, tree);
-//		for(File f : resources.keySet()) {
-//			LOGGER.info("About to copy resource: " + f.getAbsolutePath());
-//			FileOutputStream fout = new FileOutputStream(f);
-//			IOUtils.write(resources.get(f), fout);
-//			fout.close();
-//			generatedResources.add(f);
-//		}
-//		return generatedResources;
 		return null;
 	}
 	

@@ -44,10 +44,15 @@ generateObjectiveC() {
   nukeTmp;
   ../run.sh --orchestrate ${CUR_DIR}/metadata-objc.json \
     -o ${CUR_DIR}/tmp
-  cp ${CUR_DIR}/tmp/src/* objc/Generated/Generated/
-  cp ${CUR_DIR}/tmp/views/* objc/Generated/Generated/
-  cp ${CUR_DIR}/tmp/services/* objc/Generated/Generated/
-  cp ${CUR_DIR}/tmp/test/* objc/Generated/GeneratedTests/
+
+    echo "cp ${CUR_DIR}/tmp/src/* objc/Generated/Generated/src"
+    cp ${CUR_DIR}/tmp/src/* objc/Generated/Generated/src
+    # echo "cp ${CUR_DIR}/tmp/views/* objc/Generated/Generated/views"
+    # cp ${CUR_DIR}/tmp/views/* objc/Generated/Generated/views
+    # echo "cp ${CUR_DIR}/tmp/services/* objc/Generated/Generated/services"
+    # cp ${CUR_DIR}/tmp/services/* objc/Generated/Generated/services
+    echo "cp ${CUR_DIR}/tmp/test/* objc/Generated/GeneratedTests/test"
+    cp ${CUR_DIR}/tmp/test/* objc/Generated/GeneratedTests/test
 }
 
 generateSwift() {
@@ -69,8 +74,8 @@ build() {
 main() {
   build;
   # generateJava;   # Generated using templates, checks out
-  # generateObjectiveC;
-  generateRuby;     # In Progress
+  generateObjectiveC;  # In Progress
+  # generateRuby;     # Generated using templates, checks out
   # generateSwift;  # Generated using templates, checks out
 }
 
