@@ -1,6 +1,8 @@
 package com.intere.generator.builder.generation.utils;
 
 import com.intere.generator.metadata.ModelClassProperty;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.ui.Model;
 
 import java.util.Date;
 
@@ -76,6 +78,14 @@ public class SwiftDataGenerator implements DataGenerator {
             default:
                 throw new IllegalArgumentException("Invalid property type: " + property.getDataType().name());
         }
+    }
+
+    public String data(ModelClassProperty property, boolean escaped) {
+        String result = data(property);
+        if (escaped) {
+            return result.replaceAll("\"", "\\\\\"");
+        }
+        return result;
     }
 
     //

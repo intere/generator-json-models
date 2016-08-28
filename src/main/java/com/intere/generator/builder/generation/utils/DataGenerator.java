@@ -21,4 +21,12 @@ interface DataGenerator {
      * @return A String that contains the data.
      */
     String data(ModelClassProperty property);
+
+    /**
+     * Generates data based on the data type (and escaped if you want it escaped).
+     * @param property
+     * @param escaped
+     * @return
+     */
+    String data(ModelClassProperty property, boolean escaped);
 }

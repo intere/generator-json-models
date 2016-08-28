@@ -88,8 +88,12 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	@Override
 	public List<File> generateModelUnitTests(File outputDirFile, OrchestrationTree tree) throws IOException {
 		List<File> generatedClasses = new ArrayList<>();
-		for(ModelClass modelClass : tree.getModelClasses()) {
-			generatedClasses.add(buildTestFile(outputDirFile, modelClass));
+		for(CustomClass modelClass : tree.getModelClasses()) {
+			try {
+				generatedClasses.add(buildTestFile(outputDirFile, modelClass));
+			} catch (TemplateException ex) {
+				throw new IOException(ex);
+			}
 		}
 		return generatedClasses;
 	}
@@ -185,13 +189,13 @@ public class ObjectiveCOrchestration implements LanguageOrchestrator {
 	 * @param modelClass
 	 * @return
 	 */
-	private File buildTestFile(File outputDirectory, ModelClass modelClass) throws IOException {
-		String fileContents = buildTestClass(modelClass);
+	private File buildTestFile(File outputDirectory, CustomClass modelClass) throws IOException, TemplateException {
 		File outputFile = new File(outputDirectory, modelClass.getTestClassName() + ".m");
 		LOGGER.info("About to create Test Class: " + outputFile.getAbsolutePath());
-		FileOutputStream fout = new FileOutputStream(outputFile);
-		IOUtils.write(fileContents, fout);
-		fout.close();
+
+		Map<String, Object> model = buildFreemarkerModel(modelClass, modelClass.getClassName(), modelClass.getFileName(), "m");
+		template.generateFile(model, "ObjcTestClass.ftlh", new FileWriter(outputFile));
+
 		return outputFile;
 	}
 
