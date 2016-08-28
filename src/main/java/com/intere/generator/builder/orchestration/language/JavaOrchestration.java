@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+import com.intere.generator.App;
 import com.intere.generator.builder.generation.utils.JavaDataGenerator;
 import com.intere.generator.builder.generation.utils.SwiftDataGenerator;
 import com.intere.generator.builder.interpreter.JsonLanguageInterpreter;
@@ -145,6 +146,7 @@ public class JavaOrchestration implements LanguageOrchestrator {
 			model.put("filename", modelClass.getFileName() + ".java");
 			model.put("imports", determineImports(modelClass));
 			model.put("properties", getProperties(modelClass));
+			model.put("version", App.getVersion());
 
 			template.generateFile(model, "JavaClass.ftlh", new FileWriter(outputFile));
 
@@ -174,6 +176,7 @@ public class JavaOrchestration implements LanguageOrchestrator {
 			model.put("imports", determineImports(modelClass));
 			model.put("properties", getProperties(modelClass));
 			model.put("generator", new JavaDataGenerator());
+			model.put("version", App.getVersion());
 
 			template.generateFile(model, "JavaTestClass.ftlh", new FileWriter(outputFile));
 

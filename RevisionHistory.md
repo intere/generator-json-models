@@ -2,10 +2,12 @@
 
 ## v0.0.5
 - Added "Custom Template" capabilities (for swift) that allow you to specify your own templates.  Currently, the documentation is the crappy source code.
-- Ripped out code generation mechanism for Java Models to use a Freemarker Template
 - Ripped out code generation mechanism for Swift Models and Swift Tests to use a Freemarker Template
-- Setup Sample projects to demonstrate source code generation (and validate that we can serialize / deserialze the data)
-- Swift (2.0) Support
+- Ripped out code generation mechanism for Ruby Models and Specs to use a Freemarker Template
+- Ripped out code generation mechanism for Objective-C Models and Tests to use a Freemarker Template
+- Ripped out code generation mechanism for Java Models and Tests to use a Freemarker Template
+- Setup Sample projects to demonstrate source code generation (and validate that we can serialize / deserialize the data)
+- Swift (2.2) Support
 
 ## v0.0.4
 - Rebuilt the interface using a "metadata.json" file that allows us to add additional metadata about json files we're generating code for.  Support for things like "transient properties",
