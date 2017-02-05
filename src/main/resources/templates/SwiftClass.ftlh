@@ -40,8 +40,8 @@ extension ${model.className} {
     Serializes this ${model.className} to a Dictionary.
     - Returns: A Map which represents this object as a serialized object
     */
-    func toMap() -> [String: AnyObject] {
-        var dict = [String: AnyObject]()
+    func toMap() -> [String: Any] {
+        var dict = [String: Any]()
 
         <#list properties as property>
         <#if !property.isTransient>
@@ -58,7 +58,7 @@ extension ${model.className} {
 
             <#case "ARRAY">
             <#if property.arraySubTypeProperty.dataType == "CLASS">
-        dict["${property.name}"] =  ${property.arraySubType}.toMapArray(${property.alias})
+        dict["${property.name}"] =  ${property.arraySubType}.toMapArray(models: ${property.alias})
             <#else>
         dict["${property.name}"] = ${property.alias}
             </#if>
@@ -79,11 +79,11 @@ extension ${model.className} {
     - Parameter models: An array of ${model.className} Objects to be converted to an array of dictionaries.
     - Returns: An array of Dictionaries
     */
-    class func toMapArray(models: [${model.className}]?) -> [[String: AnyObject]]? {
+    class func toMapArray(models: [${model.className}]?) -> [[String: Any]]? {
         guard let models = models else {
             return nil
         }
-        var maps = [[String: AnyObject]]()
+        var maps = [[String: Any]]()
 
         for model in models {
             maps.append(model.toMap())
@@ -96,10 +96,10 @@ extension ${model.className} {
     Converts this model to JSON Data.
     - Returns: Optional JSON Data (returns nil if there's a problem serializing the map).
     */
-    func toJsonData() -> NSData? {
+    func toJsonData() -> Data? {
         let dict = toMap()
         do {
-            return try NSJSONSerialization.dataWithJSONObject(dict, options: .PrettyPrinted)
+            return try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
         } catch {
             print("Error serializing this model to JSON: \(dict)")
         }
@@ -110,12 +110,14 @@ extension ${model.className} {
 	/**
 	Converts the provided array of models to JSON Data.
 	- Parameter array: Array of ${model.className} objects to be serialized.
-	- Returns: NSData that contains the serialized objects, or nil if there's a problem serializing them.
+	- Returns: Data that contains the serialized objects, or nil if there's a problem serializing them.
 	*/
-	class func toJsonData(array: [${model.className}]) -> NSData? {
-		let mapArray = toMapArray(array) as! AnyObject
+	class func toJsonData(array: [${model.className}]) -> Data? {
+      guard let mapArray = toMapArray(models: array) else {
+          return nil
+      }
 		do {
-			return try NSJSONSerialization.dataWithJSONObject(mapArray, options: .PrettyPrinted)
+			return try JSONSerialization.data(withJSONObject: mapArray, options: .prettyPrinted)
 		} catch {
 			print("Error serializing array of models to JSON: \(mapArray)")
 		}
@@ -131,20 +133,20 @@ extension ${model.className} {
 	        return nil
         }
 
-        return NSString(data: data, encoding: NSUTF8StringEncoding) as? String
+        return NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String
 	}
 
     /**
     Converts the provided array of models to a JSON String.
     - Parameter array: Array of ${model.className} objects to be serialized
-    - Returns: Optional String (nil if there's a problem serializing to NSData or converting to a UTF-8 String).
+    - Returns: Optional String (nil if there's a problem serializing to Data or converting to a UTF-8 String).
     */
     class func toJsonString(array: [${model.className}]) -> String? {
-        guard let data = toJsonData(array) else {
+        guard let data = toJsonData(array: array) else {
             return nil
         }
 
-        return NSString(data: data, encoding: NSUTF8StringEncoding) as? String
+        return NSString(data: data, encoding: String.Encoding.utf8.rawValue) as? String
     }
 
 }
@@ -158,7 +160,7 @@ extension ${model.className} {
     - Parameter map: The Map to read the data from.
     - Returns: A ${model.className} object (assuming the map you provided is non-nil)
     */
-    class func fromMap(map: [String:AnyObject]?) -> ${model.className}? {
+    class func fromMap(map: [String:Any]?) -> ${model.className}? {
         guard let map = map else {
             return nil
         }
@@ -168,7 +170,7 @@ extension ${model.className} {
         <#if !property.isTransient>
             <#switch property.dataType>
                 <#case "CLASS">
-        model.${property.alias} = ${property.type}.fromMap(map["${property.name}"] as? [String: AnyObject])
+        model.${property.alias} = ${property.type}.fromMap(map["${property.name}"] as? [String: Any])
                 <#break>
 
                 <#case "DATE">
@@ -177,7 +179,7 @@ extension ${model.className} {
 
                 <#case "ARRAY">
                 <#if property.arraySubTypeProperty.dataType == "CLASS">
-        model.${property.alias} = ${property.arraySubType}.fromArrayOfMaps(map["${property.name}"] as? [[String: AnyObject]])
+        model.${property.alias} = ${property.arraySubType}.fromArrayOfMaps(mapArray: map["${property.name}"] as? [[String: Any]])
                 <#else>
         model.${property.alias} = map["${property.name}"] as? [${property.arraySubType}]
                 </#if>
@@ -197,7 +199,7 @@ extension ${model.className} {
     - Parameter mapArray: An array of Maps, assumes that each map is a serialized ${model.className}.
     - Returns: An array of ${model.className} objects (should be 1 to 1).
     */
-    class func fromArrayOfMaps(mapArray: [[String:AnyObject]]?) -> [${model.className}]? {
+    class func fromArrayOfMaps(mapArray: [[String: Any]]?) -> [${model.className}]? {
         guard let mapArray = mapArray else {
             return nil
         }
@@ -205,7 +207,7 @@ extension ${model.className} {
         var modelArray = [${model.className}]()
 
         for map in mapArray {
-            guard let model = fromMap(map) else {
+            guard let model = fromMap(map: map) else {
                 continue
             }
             modelArray.append(model)
@@ -216,22 +218,22 @@ extension ${model.className} {
 
     /**
     Gives you back a collection of ${model.className} objects for the provided JSON Serialized Data.  This method handles both a single object (map) and an array of objects (array of maps).
-    - Parameter data: The NSData (optional) to pull the objects from.
+    - Parameter data: The Data (optional) to pull the objects from.
     - Returns: An array of ${model.className} objects that were deserialized from the provided data.
     */
-    class func fromData(data: NSData?) -> [${model.className}]? {
+    class func fromData(data: Data?) -> [${model.className}]? {
         guard let data = data else {
             return []
         }
 
         do {
-            let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+            let jsonData = try JSONSerialization.jsonObject(with: data as Data, options: .allowFragments)
 
             // If we have an array of dictionaries:
-            if let jsonArray = jsonData as? [[String:AnyObject]] {
-                return fromArrayOfMaps(jsonArray)
-            } else if let jsonMap = jsonData as? [String:AnyObject] {
-                if let model = fromMap(jsonMap) {
+            if let jsonArray = jsonData as? [[String: Any]] {
+                return fromArrayOfMaps(mapArray: jsonArray)
+            } else if let jsonMap = jsonData as? [String: Any] {
+                if let model = fromMap(map: jsonMap) {
                     return [model]
                 }
             } else {
@@ -250,8 +252,8 @@ extension ${model.className} {
 	 - Returns: An Array of ${model.className} objects.
 	*/
 	class func fromJson(json: String) -> [${model.className}]? {
-		let data = (json as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-		return fromData(data)
+		let data = (json as NSString).data(using: String.Encoding.utf8.rawValue)
+		return fromData(data: data)
 	}
 
 }
