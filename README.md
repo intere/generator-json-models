@@ -19,7 +19,7 @@ Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1295722
 
 ### TODO
 * Update Documentation
-* Complete Freeemarker Template changeover
+* ~~Complete Freeemarker Template changeover~~
 * Update / Document the Freemarker template / variables
 
 ### Roadmap (high level)
@@ -32,6 +32,7 @@ Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1295722
 ## Background
 I was / am in the process of building a full stack application that has an Objective-C
 front end.  It became apparent that it was a lot of work to create JSON serializing / deserializing classes in Objective-C (not difficult, just tedious).  I wanted to build a tool that would save me a lot of time by reading a JSON file and generating an Objective-C class that was capable of the following:
+
 1.  Representing that JSON as a model
 2.  Serializing / Deserializing that JSON into the model (including collections)
 3.  Support nested classes (not a feature of ObjC, so I've created a class naming mechanism to work around this)

@@ -23,44 +23,44 @@ import com.intere.generator.metadata.ModelClassProperty;
 public enum OrchestrationDataType {
 	/** It's really just a string, but starts with one of the following: "image:", "image16x9:", or "image4x3:" */
 	IMAGE("Image", "String", "NSString", "String", "UIImageView"),
-	
+
 	/** Probably a string, could be a number, but determined to be a Date. */
 	DATE("Date", "Date", "NSDate", "NSDate", "UIDatePicker"),
-	
+
 	/** A String that's not greater than 25 characters.  */
 	STRING("String", "String", "NSString", "String", "UITextField"),
-	
+
 	/** A String that's longer than 25 characters.  */
 	TEXT("Text", "String", "NSString", "String", "UITextView"),
-	
+
 	/** An Integer. */
 	LONG("Long", "Long", "NSInteger", "Int", "UITextField"),
-	
+
 	/** A Decimal number */
 	DOUBLE("Double", "Double", "double", "Double", "UITextField"),
-	
+
 	/** True / False */
 	BOOLEAN("Boolean", "Boolean", "BOOL", "Bool", "UISwitch"),
-	
+
 	/** A collection of other objects, strings, numbers, etc. */
 	ARRAY("Array", "List", "NSArray", "Array", "UIButton"),
-	
+
 	/** An abstract data type, a "child class" */
 	CLASS(null, null, null, null, "UIButton"),
-	
+
 	/** Type could not be determined, hopefully we don't have too many of these. */
 	UNKNOWN("Unknown", "String", "NSString", "String", null);
-	
+
 	private static final Logger LOGGER = LogManager.getLogger(OrchestrationDataType.class);
 	private String internalName;
 	private String javaName;
 	private String objcName;
 	private String swiftName;
 	private String objcViewName;
-	
+
 	/** Default Constructor.  */
 	private OrchestrationDataType() {}
-	
+
 	/** Constructor that set the internal name. */
 	private OrchestrationDataType(String internalName, String javaName, String objcName, String swiftName, String objcViewName) {
 		this.internalName = internalName;
@@ -69,15 +69,15 @@ public enum OrchestrationDataType {
 		this.swiftName = swiftName;
 		this.objcViewName = objcViewName;
 	}
-	
+
 	public String getInternalName() {
 		return internalName;
 	}
-	
+
 	public boolean hasInternalName() {
 		return null != internalName;
 	}
-	
+
 	/**
 	 * Gets you an {@link OrchestrationDataType} by its internal name.
 	 * @param internalName
@@ -105,7 +105,7 @@ public enum OrchestrationDataType {
 		if(null == typeName) {
 			return null;
 		}
-		
+
 		OrchestrationDataType type = OrchestrationDataType.fromInternalName(typeName);
 		if(null == type) {
 			type = OrchestrationDataType.fromName(typeName);
@@ -113,11 +113,14 @@ public enum OrchestrationDataType {
 		if(null == type) {
 			type = UNKNOWN;
 		}
-		
+
 		return type;
 	}
-	
+
 	public static OrchestrationDataType fromJsonNode(JsonNode node) {
+		if(node == null) {
+			return UNKNOWN;
+		}
 		if(isImage(node)) {
 			return IMAGE;
 		} else if(isDate(node)) {
@@ -142,7 +145,7 @@ public enum OrchestrationDataType {
 			return UNKNOWN;
 		}
 	}
-	
+
 	@SuppressWarnings("unused")
 	public static OrchestrationDataType fromModelProperty(ModelClassProperty prop) {
 		if(prop.getIsArray()) {
@@ -155,7 +158,7 @@ public enum OrchestrationDataType {
 		else if(null != dt) {
 			return dt;
 		}
-		
+
 		return UNKNOWN;
 	}
 

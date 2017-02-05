@@ -4,10 +4,7 @@ import static com.intere.generator.deserializer.JsonNodeUtils.isArray;
 import static com.intere.generator.deserializer.JsonNodeUtils.isArrayOfObjects;
 import static com.intere.generator.deserializer.JsonNodeUtils.isObject;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import com.intere.generator.builder.interpreter.models.SwiftModelInterpreter;
 import com.intere.generator.builder.orchestration.language.*;
@@ -169,14 +166,21 @@ public class OrchestrationUtils {
 		property.setIsArray(isArray(child));
 		property.setIsPrimitive(isPrimitive(property));
 		property.setDataType(OrchestrationDataType.fromModelProperty(property));
-		property.setValue(child.getTextValue());
+		if(child != null) {
+			property.setValue(child.getTextValue());
+		}
 		property.setAlias(interpreter.cleanVariableName(name));
 		if(property.getDataType() == OrchestrationDataType.ARRAY) {
 			property.setArraySubTypeProperty(getArraySubtypeProperty(interpreter, className, name, child.get(0)));
 		}
 		
 		if(isArray(child)) {
-			property.setArraySubType(getNodeType(interpreter, child.iterator().next(), className, name));
+			try {
+				property.setArraySubType(getNodeType(interpreter, child.iterator().next(), className, name));
+			} catch(NoSuchElementException ex) {
+				LOGGER.error("Failed to determine the array subtype for the property: " + name);
+				property.setArraySubType(OrchestrationDataType.STRING.getInternalName());
+			}
 		}
 	}
 	
