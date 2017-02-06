@@ -30,6 +30,18 @@ class ${model.className} {
     </#switch>
     </#list>
 
+    // MARK: - Initializers
+
+    init() {
+    }
+
+    init(map: [String: Any]) {
+        copy(fromMap: map)
+    }
+
+    init(from${model.className} other: ${model.className}) {
+        copy(fromMap: other.asMap)
+    }
 }
 
 // MARK: - Serialization
@@ -40,7 +52,7 @@ extension ${model.className} {
     Serializes this ${model.className} to a Dictionary.
     - Returns: A Map which represents this object as a serialized object
     */
-    func toMap() -> [String: Any] {
+    var asMap: [String: Any] {
         var dict = [String: Any]()
 
         <#list properties as property>
@@ -48,7 +60,7 @@ extension ${model.className} {
         <#switch property.dataType>
             <#case "CLASS">
         if let ${property.alias} = ${property.alias} {
-            dict["${property.name}"] = ${property.alias}.toMap()
+            dict["${property.name}"] = ${property.alias}.asMap
         }
             <#break>
 
@@ -86,7 +98,7 @@ extension ${model.className} {
         var maps = [[String: Any]]()
 
         for model in models {
-            maps.append(model.toMap())
+            maps.append(model.asMap)
         }
 
         return maps
@@ -97,7 +109,7 @@ extension ${model.className} {
     - Returns: Optional JSON Data (returns nil if there's a problem serializing the map).
     */
     func toJsonData() -> Data? {
-        let dict = toMap()
+        let dict = asMap
         do {
             return try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
         } catch {
@@ -166,32 +178,36 @@ extension ${model.className} {
         }
 
         let model = ${model.className}()
+        model.copy(fromMap: map)
+        return model
+    }
+
+    fileprivate func copy(fromMap map: [String: Any]) {
         <#list properties as property>
         <#if !property.isTransient>
             <#switch property.dataType>
                 <#case "CLASS">
-        model.${property.alias} = ${property.type}.fromMap(map["${property.name}"] as? [String: Any])
+        ${property.alias} = ${property.type}.fromMap(map["${property.name}"] as? [String: Any])
                 <#break>
 
                 <#case "DATE">
-        model.${property.alias} = ${model.className}.fromEpochDateInt(map["${property.name}"] as? Int)
+        ${property.alias} = ${model.className}.fromEpochDateInt(map["${property.name}"] as? Int)
                 <#break>
 
                 <#case "ARRAY">
                 <#if property.arraySubTypeProperty.dataType == "CLASS">
-        model.${property.alias} = ${property.arraySubType}.fromArrayOfMaps(mapArray: map["${property.name}"] as? [[String: Any]])
+        ${property.alias} = ${property.arraySubType}.fromArrayOfMaps(mapArray: map["${property.name}"] as? [[String: Any]])
                 <#else>
-        model.${property.alias} = map["${property.name}"] as? [${property.arraySubType}]
+        ${property.alias} = map["${property.name}"] as? [${property.arraySubType}]
                 </#if>
                 <#break>
 
                 <#default>
-        model.${property.alias} = map["${property.name}"] as? ${property.dataType.swiftName}
+        ${property.alias} = map["${property.name}"] as? ${property.dataType.swiftName}
                 <#break>
             </#switch>
         </#if>
         </#list>
-        return model
     }
 
     /**
@@ -259,7 +275,7 @@ extension ${model.className} {
 }
 
 <#if model.hasDate()>
-// MARK: - Date Methods
+// MARK: - Date Helpers
 
 extension ${model.className} {
 
